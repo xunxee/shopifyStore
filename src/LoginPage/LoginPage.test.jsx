@@ -6,6 +6,6 @@ describe('LoginPage', () => {
   it('renders the LoginFormContainer', () => {
     const { container } = render(<LoginPage />);
 
-    expect(container).toHaveTextContent("Don't have an account?");
+    expect(container).toHaveTextContent('X');
   });
 });

@@ -4,8 +4,8 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
-import LoginPage from './Login/LoginPage';
-import NotFoundPage from './NotFoundPage';
+import LoginPage from './LoginPage/LoginPage';
+import NotFoundPage from './NotFoundPage/NotFoundPage';
 
 export default function App() {
   return (
