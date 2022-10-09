@@ -7,17 +7,16 @@ const Container = styled.div({
   height: '420px',
   backgroundColor: '#000000',
   color: '#EAEAEA',
-  // '& p': {},
 });
 
 export default function LoginPage() {
   return (
     <Container>
-      <button type='button'>X</button>
+      <button type="button">X</button>
       <div>Login</div>
       <LoginFormContainer />
-      <p>Don't have an account?</p>
-      <button type='button'>Sign Up</button>
+      <p>Don&apos;t have an account?</p>
+      <button type="button">Sign Up</button>
     </Container>
   );
 }

@@ -2,21 +2,21 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
-    'airbnb'
+    'airbnb',
   ],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: [
-    'react'
+    'react',
   ],
   globals: {
     Atomics: 'readonly',
@@ -24,8 +24,8 @@ module.exports = {
     actor: 'readonly',
     Feature: 'readonly',
     Scenario: 'readonly',
-    context: 'readonly',
-    given: 'readonly'
+    context: 'readonly', // context 사용시 설정
+    given: 'readonly', // given 사용시 설정
   },
   rules: {
     indent: ['error', 2],
@@ -50,9 +50,9 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'linebreak-style': 'off',
-    'no-proto': 'off',
 
     'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off'
-  }
-}
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off',
+  },
+};

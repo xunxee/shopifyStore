@@ -4,9 +4,11 @@ import LoginFormContainer from './LoginFormContainer';
 
 describe('LoginFormContainer', () => {
   it('renders the LoginFormContainer', () => {
-    const { getByPlaceholderText } = render(<LoginFormContainer />);
+    const { queryByPlaceholderText } = render((
+      <LoginFormContainer />
+    ));
 
-    getByPlaceholderText('Email');
-    getByPlaceholderText('Password');
+    expect(queryByPlaceholderText('Email')).not.toBeNull();
+    expect(queryByPlaceholderText('Password')).not.toBeNull();
   });
 });

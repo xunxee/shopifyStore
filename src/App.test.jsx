@@ -1,11 +1,22 @@
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
 describe('App', () => {
-  it('renders Test', () => {
-    const { container } = render(<App />);
+  function renderApp({ path }) {
+    return render((
+      <MemoryRouter initialEntries={[path]}>
+        <App />
+      </MemoryRouter>
+    ));
+  }
 
-    expect(container).toHaveTextContent('Test');
+  context('with path /', () => {
+    it('renders the home page', () => {
+      const { container } = renderApp({ path: '/' });
+
+      expect(container).toHaveTextContent('HomePage');
+    });
   });
 });

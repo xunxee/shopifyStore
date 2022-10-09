@@ -4,12 +4,12 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          node: 'current'
-        }
-      }
+          node: 'current',
+        },
+      },
     ],
     ['@babel/preset-react', {
-      runtime: 'automatic'
-    }]
-  ]
-}
+      runtime: 'automatic',
+    }],
+  ],
+};
