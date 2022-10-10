@@ -6,7 +6,7 @@ const { actions, reducer } = createSlice({
     isLogin: true,
   },
   reducers: {
-    setIsLoginState(state) {
+    setIsLogin(state) {
       const { isLogin } = state;
       return {
         ...state,
@@ -23,7 +23,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  setIsLoginState,
+  setIsLogin,
   setTemporary,
 } = actions;
 
