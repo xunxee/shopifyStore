@@ -3,14 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const { actions, reducer } = createSlice({
   name: 'application',
   initialState: {
-    isLoginState: true,
+    isLogin: true,
   },
   reducers: {
     setIsLoginState(state) {
-      const { isLoginState } = state;
+      const { isLogin } = state;
       return {
         ...state,
-        isLoginState: !isLoginState,
+        isLogin: !isLogin,
       };
     },
 

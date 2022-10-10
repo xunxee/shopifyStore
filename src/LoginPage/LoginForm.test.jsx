@@ -5,25 +5,50 @@ import LoginForm from './LoginForm';
 describe('LoginForm', () => {
   const handleClick = jest.fn();
 
-  function renderLoginForm() {
+  function renderLoginForm({ isLogin }) {
     return render((
       <LoginForm
         onClick={handleClick}
+        isLogin={isLogin}
       />
     ));
   }
 
-  it('renders the LoginForm', () => {
-    const { container } = renderLoginForm();
+  context('with logged in', () => {
+    it('renders the login fileds', () => {
+      const {
+        queryByPlaceholderText,
+        container,
+        getByText,
+      } = renderLoginForm({ isLogin: true });
 
-    expect(container).toHaveTextContent('have an account?');
+      expect(queryByPlaceholderText('First')).toBeNull();
+      expect(queryByPlaceholderText('Last')).toBeNull();
+
+      expect(container).toHaveTextContent('have an account?');
+
+      fireEvent.click(getByText('Sign Up'));
+
+      expect(handleClick).toBeCalled();
+    });
   });
 
-  it('clicks Sing up button', () => {
-    const { getByText } = renderLoginForm();
+  context('without logged in', () => {
+    it('renders the sign up fileds', () => {
+      const {
+        queryByPlaceholderText,
+        container,
+        getByText,
+      } = renderLoginForm({ isLogin: false });
 
-    fireEvent.click(getByText('Sign Up'));
+      expect(queryByPlaceholderText('First Name')).not.toBeNull();
+      expect(queryByPlaceholderText('Last Name')).not.toBeNull();
 
-    expect(handleClick).toBeCalled();
+      expect(container).toHaveTextContent('Passwords must be longer than 7');
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(handleClick).toBeCalled();
+    });
   });
 });

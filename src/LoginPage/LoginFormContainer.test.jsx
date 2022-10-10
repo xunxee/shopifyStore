@@ -7,14 +7,16 @@ import LoginFormContainer from './LoginFormContainer';
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
-  context('When the value of isLoginState is true', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        isLoginState: true,
-      }));
-    });
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      isLogin: given.isLogin,
+    }));
+  });
 
-    it('renders LoginForm', () => {
+  context('with logged in', () => {
+    given('isLogin', () => true);
+
+    it('renders the login fileds', () => {
       const { container } = render((
         <LoginFormContainer />
       ));
@@ -23,14 +25,10 @@ describe('LoginFormContainer', () => {
     });
   });
 
-  context('When the value of isLoginState is false', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        isLoginState: false,
-      }));
-    });
+  context('without logged in', () => {
+    given('isLogin', () => false);
 
-    it('renders SignUpForm', () => {
+    it('renders the sign up fileds', () => {
       const { container } = render((
         <LoginFormContainer />
       ));
