@@ -15,11 +15,16 @@ export default function LoginFormContainer() {
     dispatch(setIsLogin());
   }, []);
 
+  const handleChange = useCallback(({ name, value }) => {
+    dispatch(changeLoginFileds());
+  }, [name, value]);
+
   return (
     <div>
       <LoginForm
-        onClick={handleClickLoginState}
         isLogin={isLogin}
+        onClick={handleClickLoginState}
+        onChange={handleChange}
       />
     </div>
   );

@@ -4,12 +4,14 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleClick = jest.fn();
+  const handleChange = jest.fn();
 
   function renderLoginForm({ isLogin }) {
     return render((
       <LoginForm
-        onClick={handleClick}
         isLogin={isLogin}
+        onClick={handleClick}
+        onChange={handleChange}
       />
     ));
   }
@@ -30,6 +32,20 @@ describe('LoginForm', () => {
       fireEvent.click(getByText('Sign Up'));
 
       expect(handleClick).toBeCalled();
+    });
+
+    it('listens change events', () => {
+      const { getByPlaceholderText } = renderLoginForm({
+        isLogin: true,
+      });
+
+      const input = getByPlaceholderText('Email');
+      const value = { value: 'test@test.com' };
+      const name = 'email';
+
+      fireEvent.change(input, { target: { value } });
+
+      expect(handleChange).toBeCalledWith({ name, value });
     });
   });
 
