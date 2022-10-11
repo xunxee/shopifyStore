@@ -4,20 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginForm from './LoginForm';
 
-import { setIsLogin } from '../slice';
+import { setIsLogin } from './slice';
 
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const isLogin = useSelector((selector) => selector.isLogin);
+  const { isLogin } = useSelector((selector) => selector);
 
   const handleClickLoginState = useCallback(() => {
     dispatch(setIsLogin());
-  }, []);
+  }, [dispatch]);
 
   const handleChange = useCallback(({ name, value }) => {
-    dispatch(changeLoginFileds());
-  }, [name, value]);
+    dispatch(changeLoginFields());
+  }, [dispatch]);
 
   return (
     <div>

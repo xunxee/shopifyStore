@@ -1,14 +1,13 @@
 import { memo } from 'react';
 
 export default memo(({ isLogin, onClick, onChange }) => {
-  function handleChange(event) {
-    const { target: { name, value } } = event;
+  function handleChange({ target: { name, value } }) {
     onChange({ name, value });
   }
 
   return (
     <form>
-      {isLogin ? null : (
+      {isLogin && (
         <>
           <input
             name="first"
@@ -35,15 +34,14 @@ export default memo(({ isLogin, onClick, onChange }) => {
         autoComplete="off"
         onChange={handleChange}
       />
-      {isLogin ? (
-        <button type="submit">Log In</button>)
-        : (<button type="submit">Sign Up</button>)}
-
-      {isLogin ? (<p>Don&apos;t have an account?</p>) : (
-        <p>
-          Passwords must be longer than 7 chars and include numbers
-        </p>
-      )}
+      <button type="submit">
+        {isLogin ? 'Log In' : 'Sign up'}
+      </button>
+      <p>
+        {isLogin
+          ? 'Don&apos;t have an account?'
+          : 'Passwords must be longer than 7 chars and include numbers'}
+      </p>
       <button
         type="button"
         onClick={onClick}

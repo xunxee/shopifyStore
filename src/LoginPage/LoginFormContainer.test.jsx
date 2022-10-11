@@ -16,7 +16,7 @@ describe('LoginFormContainer', () => {
   context('with logged in', () => {
     given('isLogin', () => true);
 
-    it('renders the login fileds', () => {
+    it('renders the login fields', () => {
       const { container } = render((
         <LoginFormContainer />
       ));
@@ -28,7 +28,7 @@ describe('LoginFormContainer', () => {
   context('without logged in', () => {
     given('isLogin', () => false);
 
-    it('renders the sign up fileds', () => {
+    it('renders the sign up fields', () => {
       const { container } = render((
         <LoginFormContainer />
       ));

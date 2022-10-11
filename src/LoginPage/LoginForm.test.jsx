@@ -17,7 +17,7 @@ describe('LoginForm', () => {
   }
 
   context('with logged in', () => {
-    it('renders the login fileds', () => {
+    it('renders the login fields', () => {
       const {
         queryByPlaceholderText,
         container,
@@ -40,7 +40,7 @@ describe('LoginForm', () => {
       });
 
       const input = getByPlaceholderText('Email');
-      const value = { value: 'test@test.com' };
+      const value = 'test@test.com';
       const name = 'email';
 
       fireEvent.change(input, { target: { value } });
@@ -50,7 +50,7 @@ describe('LoginForm', () => {
   });
 
   context('without logged in', () => {
-    it('renders the sign up fileds', () => {
+    it('renders the sign up fields', () => {
       const {
         queryByPlaceholderText,
         container,
