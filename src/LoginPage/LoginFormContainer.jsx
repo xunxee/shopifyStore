@@ -16,7 +16,7 @@ export default function LoginFormContainer() {
   }, [dispatch]);
 
   const handleChange = useCallback(({ name, value }) => {
-    dispatch(changeLoginFields());
+    // dispatch(changeLoginFields());
   }, [dispatch]);
 
   return (

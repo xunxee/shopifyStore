@@ -22,8 +22,6 @@ const { actions, reducer } = createSlice({
   },
 });
 
-console.log(reducer);
-
 export const {
   setIsLogin,
   setTemporary,

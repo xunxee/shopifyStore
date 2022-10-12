@@ -9,7 +9,9 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
-      isLogin: given.isLogin,
+      login: {
+        isLogin: given.isLogin,
+      },
     }));
   });
 

@@ -7,7 +7,7 @@ export default memo(({ isLogin, onClick, onChange }) => {
 
   return (
     <form>
-      {isLogin && (
+      {isLogin || (
         <>
           <input
             name="first"

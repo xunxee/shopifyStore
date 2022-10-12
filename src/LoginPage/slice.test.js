@@ -1,6 +1,6 @@
 import reducer, {
   setIsLogin,
-} from './LoginPage/slice';
+} from './slice';
 
 describe('reducer', () => {
   describe('setIsLogin', () => {
