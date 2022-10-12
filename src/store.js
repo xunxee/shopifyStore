@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import rootReducer from './LoginPage/slice';
+import loginReducer from './LoginPage/slice';
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    login: loginReducer,
+  },
 });
 
 export default store;

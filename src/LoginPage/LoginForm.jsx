@@ -39,7 +39,7 @@ export default memo(({ isLogin, onClick, onChange }) => {
       </button>
       <p>
         {isLogin
-          ? 'Don&apos;t have an account?'
+          ? "Don't have an account?"
           : 'Passwords must be longer than 7 chars and include numbers'}
       </p>
       <button

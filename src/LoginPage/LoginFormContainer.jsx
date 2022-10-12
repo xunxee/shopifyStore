@@ -9,9 +9,9 @@ import { setIsLogin } from './slice';
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { isLogin } = useSelector((selector) => selector);
+  const { isLogin } = useSelector(({ login }) => login);
 
-  const handleClickLoginState = useCallback(() => {
+  const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
   }, [dispatch]);
 
@@ -23,7 +23,7 @@ export default function LoginFormContainer() {
     <div>
       <LoginForm
         isLogin={isLogin}
-        onClick={handleClickLoginState}
+        onClick={handleClickToggle}
         onChange={handleChange}
       />
     </div>
