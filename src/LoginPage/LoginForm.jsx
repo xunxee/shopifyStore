@@ -1,6 +1,15 @@
 import { memo } from 'react';
 
-export default memo(({ isLogin, onClick, onChange }) => {
+export default memo(({
+  isLogin,
+  fields,
+  onClick,
+  onChange,
+}) => {
+  const {
+    email, password, firstName, lastName,
+  } = fields;
+
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
   }
@@ -10,14 +19,18 @@ export default memo(({ isLogin, onClick, onChange }) => {
       {isLogin || (
         <>
           <input
-            name="first"
+            name="firstName"
             type="text"
             placeholder="First Name"
+            value={firstName}
+            onChange={handleChange}
           />
           <input
-            name="last"
+            name="lastName"
             type="text"
             placeholder="Last Name"
+            value={lastName}
+            onChange={handleChange}
           />
         </>
       )}
@@ -25,17 +38,19 @@ export default memo(({ isLogin, onClick, onChange }) => {
         name="email"
         type="email"
         placeholder="Email"
+        value={email}
         onChange={handleChange}
       />
       <input
         name="password"
         type="password"
         placeholder="Password"
+        value={password}
         autoComplete="off"
         onChange={handleChange}
       />
       <button type="submit">
-        {isLogin ? 'Log In' : 'Sign up'}
+        {isLogin ? 'Log In' : 'Sign Up'}
       </button>
       <p>
         {isLogin

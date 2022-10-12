@@ -6,10 +6,15 @@ describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
 
-  function renderLoginForm({ isLogin }) {
+  function renderLoginForm({
+    isLogin, email, password, firstName, lastName,
+  } = {}) {
     return render((
       <LoginForm
         isLogin={isLogin}
+        fields={{
+          email, password, firstName, lastName,
+        }}
         onClick={handleClick}
         onChange={handleChange}
       />
@@ -34,18 +39,18 @@ describe('LoginForm', () => {
       expect(handleClick).toBeCalled();
     });
 
-    it('listens change events', () => {
+    it('listens change events for "Log In"', () => {
       const { getByPlaceholderText } = renderLoginForm({
         isLogin: true,
       });
 
-      const input = getByPlaceholderText('Email');
-      const value = 'test@test.com';
-      const name = 'email';
+      fireEvent.change(getByPlaceholderText('Email'), {
+        target: { value: 'new email' },
+      });
 
-      fireEvent.change(input, { target: { value } });
-
-      expect(handleChange).toBeCalledWith({ name, value });
+      expect(handleChange).toBeCalledWith({
+        name: 'email', value: 'new email',
+      });
     });
   });
 
@@ -65,6 +70,20 @@ describe('LoginForm', () => {
       fireEvent.click(getByText('Log In'));
 
       expect(handleClick).toBeCalled();
+    });
+
+    it('listens change events for "Sign UP"', () => {
+      const { getByPlaceholderText } = renderLoginForm({
+        isLogin: false,
+      });
+
+      fireEvent.change(getByPlaceholderText('First Name'), {
+        target: { value: 'gunhee' },
+      });
+
+      expect(handleChange).toBeCalledWith({
+        name: 'firstName', value: 'gunhee',
+      });
     });
   });
 });

@@ -1,9 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const { actions, reducer } = createSlice({
-  name: 'application',
+  name: 'login',
   initialState: {
     isLogin: true,
+    loginFields: {
+      email: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+    },
   },
   reducers: {
     setIsLogin(state) {
@@ -14,9 +20,14 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    setTemporary(state) {
+    changeLoginFields(state, { payload: { name, value } }) {
+      const { loginFields } = state;
       return {
         ...state,
+        loginFields: {
+          ...loginFields,
+          [name]: value,
+        },
       };
     },
   },
@@ -24,7 +35,7 @@ const { actions, reducer } = createSlice({
 
 export const {
   setIsLogin,
-  setTemporary,
+  changeLoginFields,
 } = actions;
 
 export default reducer;

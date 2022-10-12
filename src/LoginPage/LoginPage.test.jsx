@@ -9,6 +9,12 @@ describe('LoginPage', () => {
   useSelector.mockImplementation((selector) => selector({
     login: {
       isLogin: true,
+      loginFields: {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+      },
     },
   }));
 
