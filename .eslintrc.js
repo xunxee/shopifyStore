@@ -2,21 +2,21 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true
+    jest: true,
   },
   extends: [
     'plugin:react/recommended',
-    'airbnb'
+    'airbnb',
   ],
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 12,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   plugins: [
-    'react'
+    'react',
   ],
   globals: {
     Atomics: 'readonly',
@@ -25,7 +25,7 @@ module.exports = {
     Feature: 'readonly',
     Scenario: 'readonly',
     context: 'readonly',
-    given: 'readonly'
+    given: 'readonly',
   },
   rules: {
     indent: ['error', 2],
@@ -53,6 +53,6 @@ module.exports = {
     'no-proto': 'off',
 
     'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off'
-  }
-}
+    'react/react-in-jsx-scope': 'off',
+  },
+};

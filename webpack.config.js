@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/index.jsx'),
@@ -7,19 +7,19 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
-      }
-    ]
+        use: 'babel-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   devServer: {
     historyApiFallback: {
-      index: 'index.html'
-    }
-  }
+      index: 'index.html',
+    },
+  },
   // devServer: {
   //   historyApiFallback: true,
   // },
-}
+};
