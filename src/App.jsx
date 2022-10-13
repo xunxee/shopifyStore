@@ -6,6 +6,7 @@ import {
 import HomePage from './HomePage';
 import LoginPage from './LoginPage/LoginPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
+import FooterPage from './Footer/FooterPage';
 
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <div>Footer</div>
+      <FooterPage />
     </>
   );
 }

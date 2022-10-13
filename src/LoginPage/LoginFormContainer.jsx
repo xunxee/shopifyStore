@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { get } from '../utils';
 import LoginForm from './LoginForm';
 
 import {
@@ -12,13 +13,15 @@ import {
 export default function LoginFormContainer() {
   const dispatch = useDispatch();
 
-  const { isLogin } = useSelector(({ login }) => login);
-  const {
-    email,
-    password,
-    firstName,
-    lastName,
-  } = useSelector(({ login: { loginFields } }) => loginFields);
+  const isLogin = useSelector(get({
+    page: 'login',
+    key: 'isLogin',
+  }));
+
+  const loginFields = useSelector(get({
+    page: 'login',
+    key: 'loginFields',
+  }));
 
   const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
@@ -32,9 +35,7 @@ export default function LoginFormContainer() {
     <div>
       <LoginForm
         isLogin={isLogin}
-        fields={{
-          email, password, firstName, lastName,
-        }}
+        fields={{ loginFields }}
         onClick={handleClickToggle}
         onChange={handleChange}
       />
