@@ -24,7 +24,7 @@ describe('App', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
 
-      expect(container).toHaveTextContent('Not Found Page!');
+      expect(container).toHaveTextContent('Not Found');
     });
   });
 });
