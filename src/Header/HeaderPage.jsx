@@ -6,6 +6,7 @@ export default function HeaderPage() {
     <>
       <FontAwesomeIcon icon={faChair} size="2x" color="red" />
       <div>Header!</div>
+      <div>Logo</div>
     </>
   );
 }
