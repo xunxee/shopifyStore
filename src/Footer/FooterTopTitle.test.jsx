@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import LogoContainer from './LogoContainer';
+import FooterTopTitle from './FooterTopTitle';
 
-describe('LogoContainer', () => {
+describe('FooterTopTitle', () => {
   it('renders the title', () => {
-    const { container } = render(<LogoContainer />);
+    const { container } = render(<FooterTopTitle />);
 
     expect(container).toHaveTextContent('Shopify Store');
   });
