@@ -2,14 +2,12 @@ import { memo } from 'react';
 
 export default memo(({
   isLogin,
-  fields,
+  fields: {
+    email, password, firstName, lastName,
+  },
   onClick,
   onChange,
 }) => {
-  const {
-    email, password, firstName, lastName,
-  } = fields;
-
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
   }
