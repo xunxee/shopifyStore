@@ -6,6 +6,6 @@ describe('NotFoundPage', () => {
   it('renders the NotFoundPage', () => {
     const { container } = render(<NotFoundPage />);
 
-    expect(container).toHaveTextContent('Not Found Page!');
+    expect(container).toHaveTextContent('Not Found');
   });
 });

@@ -19,4 +19,12 @@ describe('App', () => {
       expect(container).toHaveTextContent('HomePage');
     });
   });
+
+  context('with invaild path', () => {
+    it('renders the not found page', () => {
+      const { container } = renderApp({ path: '/xxx' });
+
+      expect(container).toHaveTextContent('Not Found');
+    });
+  });
 });
