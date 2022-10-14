@@ -9,5 +9,6 @@ describe('HeaderPage', () => {
     ));
 
     expect(container).toHaveTextContent('Header!');
+    expect(container).toHaveTextContent('Logo');
   });
 });
