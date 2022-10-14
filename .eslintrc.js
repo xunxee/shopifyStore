@@ -24,10 +24,11 @@ module.exports = {
     actor: 'readonly',
     Feature: 'readonly',
     Scenario: 'readonly',
-    context: 'readonly',
-    given: 'readonly',
+    context: 'readonly', // context 사용시 설정
+    given: 'readonly', // given 사용시 설정
   },
   rules: {
+    'react/jsx-uses-react': 'off',
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
     curly: 'error',
@@ -50,7 +51,6 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'linebreak-style': 'off',
-    'no-proto': 'off',
 
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
