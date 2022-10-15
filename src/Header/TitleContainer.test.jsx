@@ -6,7 +6,7 @@ describe('TitleContainer', () => {
   it('renders the title logo', () => {
     const { queryByTitle } = render(<TitleContainer />);
 
-    expect(queryByTitle('chair'));
+    expect(queryByTitle('chair')).not.toBeNull();
   });
 
   it('renders the title list', () => {
