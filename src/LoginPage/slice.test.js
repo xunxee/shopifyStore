@@ -1,9 +1,23 @@
 import reducer, {
+  setIsModal,
   setIsLogin,
   changeLoginFields,
 } from './slice';
 
 describe('reducer', () => {
+  describe('setIsModal', () => {
+    it('changes isModal', () => {
+      const initialState = { isModal: true };
+
+      const { isModal } = reducer(
+        initialState,
+        setIsModal(),
+      );
+
+      expect(isModal).toBe(false);
+    });
+  });
+
   describe('setIsLogin', () => {
     it('changes isLogin', () => {
       const initialState = {

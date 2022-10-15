@@ -7,6 +7,12 @@ const Container = styled.div({
   height: '420px',
   backgroundColor: '#000000',
   color: '#EAEAEA',
+  position: 'absolute',
+  zIndex: '30',
+  margin: '0',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
 });
 
 export default function LoginPage() {

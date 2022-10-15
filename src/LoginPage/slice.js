@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
+    isModal: false,
     isLogin: true,
     loginFields: {
       email: '',
@@ -12,6 +13,14 @@ const { actions, reducer } = createSlice({
     },
   },
   reducers: {
+    setIsModal(state) {
+      const { isModal } = state;
+      return {
+        ...state,
+        isModal: !isModal,
+      };
+    },
+
     setIsLogin(state) {
       const { isLogin } = state;
       return {
@@ -34,6 +43,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
+  setIsModal,
   setIsLogin,
   changeLoginFields,
 } = actions;
