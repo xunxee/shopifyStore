@@ -12,6 +12,10 @@ describe('TitleContainer', () => {
   it('renders the title list', () => {
     const { container } = render(<TitleContainer />);
 
-    expect(container).toHaveTextContent('New Arrivals');
+    const texts = ['All', 'New Arrivals', 'Featured'];
+
+    texts.forEach((text) => {
+      expect(container).toHaveTextContent(text);
+    });
   });
 });
