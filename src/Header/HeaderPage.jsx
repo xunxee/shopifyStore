@@ -1,12 +1,14 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChair } from '@fortawesome/free-solid-svg-icons';
+import TitleContainer from './TitleContainer';
+import SearchBarContainer from './SearchBarContainer';
+import PurchaseContainer from './PurchaseContainer';
 
 export default function HeaderPage() {
   return (
     <>
-      <FontAwesomeIcon icon={faChair} size="2x" color="red" />
-      <div>Header!</div>
-      <div>Logo</div>
+      <button type="button">hello</button>
+      <TitleContainer />
+      <SearchBarContainer />
+      <PurchaseContainer />
     </>
   );
 }
