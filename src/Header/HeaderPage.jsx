@@ -12,7 +12,10 @@ import LoginPage from '../LoginPage/LoginPage';
 import { get } from '../utils';
 
 const Container = styled.div({
-  backgroundColor: 'blue',
+  width: '1440px',
+  height: '74px',
+  color: '#EAEAEA',
+  backgroundColor: '#000000',
 });
 
 export default function HeaderPage() {

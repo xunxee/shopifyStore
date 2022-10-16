@@ -13,7 +13,7 @@ export default function TitleContainer() {
         title="chair"
         icon={faChair}
         size="2x"
-        color="red"
+        color="#EAEAEA"
       />
       <ul>
         <li>All</li>

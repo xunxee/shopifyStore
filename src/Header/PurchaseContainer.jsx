@@ -16,13 +16,13 @@ export default function PurchaseContainer({ onClick }) {
         title="shoppingCart"
         icon={faCartShopping}
         size="2x"
-        color="red"
+        color="#EAEAEA"
       />
       <FontAwesomeIcon
         title="circleUser"
         icon={faCircleUser}
         size="2x"
-        color="red"
+        color="#EAEAEA"
         onClick={onClick}
       />
     </Container>
