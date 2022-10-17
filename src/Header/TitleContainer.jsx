@@ -4,6 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
+  display: 'flex',
+  flexBasis: '33%',
+  backgroundColor: 'blue',
+});
+
+const ListContainer = styled.div({
+  display: 'flex',
+  alignItems: 'center',
+  listStyle: 'none',
 });
 
 export default function TitleContainer() {
@@ -15,11 +24,11 @@ export default function TitleContainer() {
         size="2x"
         color="#EAEAEA"
       />
-      <ul>
+      <ListContainer>
         <li>All</li>
         <li>New Arrivals</li>
         <li>Featured</li>
-      </ul>
+      </ListContainer>
     </Container>
   );
 }

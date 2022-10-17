@@ -1,20 +1,39 @@
 import reducer, {
-  setIsModal,
+  setIsModalOpen,
   setIsLogin,
   changeLoginFields,
 } from './slice';
 
 describe('reducer', () => {
-  describe('setIsModal', () => {
-    it('changes isModal', () => {
-      const initialState = { isModal: true };
+  context('when previous state is undefined', () => {
+    const initialState = {
+      isModalOpen: false,
+      isLogin: true,
+      loginFields: {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+      },
+    };
 
-      const { isModal } = reducer(
+    it('returns initialState', () => {
+      const state = reducer(undefined, { type: 'action' });
+
+      expect(state).toEqual(initialState);
+    });
+  });
+
+  describe('setIsModalOpen', () => {
+    it('changes isModalOpen', () => {
+      const initialState = { isModalOpen: true };
+
+      const { isModalOpen } = reducer(
         initialState,
-        setIsModal(),
+        setIsModalOpen(),
       );
 
-      expect(isModal).toBe(false);
+      expect(isModalOpen).toBe(false);
     });
   });
 

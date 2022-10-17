@@ -4,7 +4,6 @@ import LoginFormContainer from './LoginFormContainer';
 
 const Container = styled.div({
   position: 'absolute',
-  // zIndex: '30',
   margin: '0',
   top: '50%',
   left: '50%',

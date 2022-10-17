@@ -7,6 +7,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
+  flexBasis: '33%',
+  '& button': {
+    backgroundColor: 'transparent',
+    border: '0',
+    outline: '0',
+  },
 });
 
 export default function PurchaseContainer({ onClick }) {
@@ -18,13 +24,18 @@ export default function PurchaseContainer({ onClick }) {
         size="2x"
         color="#EAEAEA"
       />
-      <FontAwesomeIcon
-        title="circleUser"
-        icon={faCircleUser}
-        size="2x"
-        color="#EAEAEA"
+      <button
+        type="button"
         onClick={onClick}
-      />
+      >
+        <FontAwesomeIcon
+          title="circleUser"
+          icon={faCircleUser}
+          size="2x"
+          color="#EAEAEA"
+
+        />
+      </button>
     </Container>
   );
 }

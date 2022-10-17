@@ -2,8 +2,6 @@ import { css } from '@emotion/react';
 
 import emotionReset from 'emotion-reset';
 
-console.log(css);
-
 export default css`
     ${emotionReset}
 

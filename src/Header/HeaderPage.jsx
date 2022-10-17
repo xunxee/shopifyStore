@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setIsModal } from '../LoginPage/slice';
+import { useCallback } from 'react';
+import { setIsModalOpen } from '../LoginPage/slice';
 
 import TitleContainer from './TitleContainer';
 import SearchBarContainer from './SearchBarContainer';
@@ -12,8 +13,12 @@ import LoginPage from '../LoginPage/LoginPage';
 import { get } from '../utils';
 
 const Container = styled.div({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
   width: '1440px',
   height: '74px',
+  padding: '0px 24px',
   color: '#EAEAEA',
   backgroundColor: '#000000',
 });
@@ -21,18 +26,18 @@ const Container = styled.div({
 export default function HeaderPage() {
   const dispatch = useDispatch();
 
-  const isModal = useSelector(get({
+  const isModalOpen = useSelector(get({
     page: 'login',
-    key: 'isModal',
+    key: 'isModalOpen',
   }));
 
-  function handleToggle() {
-    dispatch(setIsModal());
-  }
+  const handleToggle = useCallback(() => {
+    dispatch(setIsModalOpen());
+  }, [dispatch]);
 
   return (
     <Container>
-      {isModal && <LoginPage />}
+      {isModalOpen && <LoginPage />}
       <TitleContainer />
       <SearchBarContainer />
       <PurchaseContainer onClick={handleToggle} />
