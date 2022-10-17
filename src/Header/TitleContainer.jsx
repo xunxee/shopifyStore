@@ -6,13 +6,17 @@ import { faChair } from '@fortawesome/free-solid-svg-icons';
 const Container = styled.div({
   display: 'flex',
   flexBasis: '33%',
-  backgroundColor: 'blue',
 });
 
 const ListContainer = styled.div({
   display: 'flex',
   alignItems: 'center',
   listStyle: 'none',
+  '& li': {
+    color: '#888888',
+    marginLeft: '24px',
+    fontSize: '18px',
+  },
 });
 
 export default function TitleContainer() {

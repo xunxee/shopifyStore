@@ -16,7 +16,6 @@ const Container = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  width: '1440px',
   height: '74px',
   padding: '0px 24px',
   color: '#EAEAEA',
