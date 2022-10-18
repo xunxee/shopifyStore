@@ -1,3 +1,5 @@
+import styled from '@emotion/styled';
+
 import {
   Routes,
   Route,
@@ -9,9 +11,14 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import FooterPage from './Footer/FooterPage';
 import HeaderPage from './Header/HeaderPage';
 
+const Container = styled.div({
+  minWidth: '950px',
+  minHeight: '100vh',
+});
+
 export default function App() {
   return (
-    <>
+    <Container>
       <HeaderPage />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -19,6 +26,6 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <FooterPage />
-    </>
+    </Container>
   );
 }

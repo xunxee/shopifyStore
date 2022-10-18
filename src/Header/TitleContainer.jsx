@@ -17,6 +17,10 @@ const ListContainer = styled.div({
     marginLeft: '24px',
     fontSize: '18px',
   },
+  '& li: hover': {
+    color: '#FFFFFF',
+    transition: 'color 300ms ease-in-out',
+  },
 });
 
 export default function TitleContainer() {
