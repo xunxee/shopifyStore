@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useRef, useEffect } from 'react';
+
 import LoginFormContainer from './LoginFormContainer';
 
 const Container = styled.div({
@@ -14,9 +16,28 @@ const Container = styled.div({
   transform: 'translate(-50%, -50%)',
 });
 
-export default function LoginPage() {
+export default function LoginPage({
+  onClick,
+  refUserIcon,
+}) {
+  const refLogin = useRef();
+
+  function listener({ target }) {
+    if (refUserIcon.current.contains(target)) { return; }
+    if (!refLogin.current.contains(target)) {
+      onClick();
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('mousedown', listener);
+    return () => {
+      document.removeEventListener('mousedown', listener);
+    };
+  }, []);
+
   return (
-    <Container>
+    <Container ref={refLogin}>
       <button type="button">X</button>
       <div>Logo</div>
       <LoginFormContainer />

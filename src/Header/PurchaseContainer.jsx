@@ -18,7 +18,10 @@ const Container = styled.div({
   },
 });
 
-export default function PurchaseContainer({ onClick }) {
+export default function PurchaseContainer({
+  onClick,
+  refUserIcon,
+}) {
   return (
     <Container>
       <FontAwesomeIcon
@@ -30,13 +33,13 @@ export default function PurchaseContainer({ onClick }) {
       <button
         type="button"
         onClick={onClick}
+        ref={refUserIcon}
       >
         <FontAwesomeIcon
           title="circleUser"
           icon={faCircleUser}
           size="2x"
           color="#EAEAEA"
-
         />
       </button>
     </Container>
