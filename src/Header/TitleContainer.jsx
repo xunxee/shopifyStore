@@ -5,12 +5,12 @@ import { faChair } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
   display: 'flex',
-  flexBasis: '33%',
+  alignItems: 'center',
 });
 
 const ListContainer = styled.div({
   display: 'flex',
-  alignItems: 'center',
+  justifyContent: 'flex-start',
   listStyle: 'none',
   '& li': {
     color: '#888888',

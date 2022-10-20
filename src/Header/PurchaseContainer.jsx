@@ -9,7 +9,6 @@ import {
 const Container = styled.div({
   display: 'flex',
   justifyContent: 'flex-end',
-  flexBasis: '33%',
   '& button': {
     marginLeft: '20px',
     border: '0',

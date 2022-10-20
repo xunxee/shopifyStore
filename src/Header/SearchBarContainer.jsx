@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
-  position: 'relative',
-  flexBasis: '33%',
+  position: 'absolute',
+  left: '50%',
+  width: '33%',
+  margin: '0',
+  transform: 'translate(-50%)',
   '& input': {
     width: '100%',
     height: '40px',

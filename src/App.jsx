@@ -14,6 +14,7 @@ import HeaderPage from './Header/HeaderPage';
 const Container = styled.div({
   minWidth: '950px',
   minHeight: '100vh',
+  paddingTop: '74px',
 });
 
 export default function App() {
