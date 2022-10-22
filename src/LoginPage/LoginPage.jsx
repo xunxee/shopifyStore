@@ -24,9 +24,8 @@ export default function LoginPage({
 
   function listener({ target }) {
     if (refUserIcon.current.contains(target)) { return; }
-    if (!refLogin.current.contains(target)) {
-      onClick();
-    }
+    if (refLogin.current.contains(target)) { return; }
+    onClick();
   }
 
   useEffect(() => {
