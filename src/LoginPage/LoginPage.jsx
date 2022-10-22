@@ -5,15 +5,15 @@ import { useRef, useEffect } from 'react';
 import LoginFormContainer from './LoginFormContainer';
 
 const Container = styled.div({
-  position: 'absolute',
-  margin: '0',
+  position: 'fixed',
   top: '50%',
   left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: '418px',
   height: '420px',
+  margin: '0',
   color: '#EAEAEA',
   backgroundColor: '#000000',
-  transform: 'translate(-50%, -50%)',
 });
 
 export default function LoginPage({
