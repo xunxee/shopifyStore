@@ -4,6 +4,16 @@ import { useRef, useEffect } from 'react';
 
 import LoginFormContainer from './LoginFormContainer';
 
+const DeleteAll = styled.div({
+  position: 'fixed',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '100%',
+  height: '100%',
+  backdropFilter: 'blur(0.8px)',
+});
+
 const Container = styled.div({
   position: 'fixed',
   top: '50%',
@@ -18,12 +28,10 @@ const Container = styled.div({
 
 export default function LoginPage({
   onClick,
-  refUserIcon,
 }) {
   const refLogin = useRef();
 
   function listener({ target }) {
-    if (refUserIcon.current.contains(target)) { return; }
     if (refLogin.current.contains(target)) { return; }
     onClick();
   }
@@ -36,10 +44,12 @@ export default function LoginPage({
   }, []);
 
   return (
-    <Container ref={refLogin}>
-      <button type="button">X</button>
-      <div>Logo</div>
-      <LoginFormContainer />
-    </Container>
+    <DeleteAll>
+      <Container ref={refLogin}>
+        <button type="button">X</button>
+        <div>Logo</div>
+        <LoginFormContainer />
+      </Container>
+    </DeleteAll>
   );
 }
