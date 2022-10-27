@@ -49,7 +49,14 @@ export const {
 } = actions;
 
 export function requestLogin() {
-  //
+  return async (dispatch, getState) => {
+    const { loginFields: { email, password } } = getState();
+    try {
+      await postLogin({ email, password });
+    } catch (error) {
+      // todo
+    }
+  };
 }
 
 export function requestSignup() {

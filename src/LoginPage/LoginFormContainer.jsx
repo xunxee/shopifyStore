@@ -33,10 +33,10 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
-  function handleSubmit() {
-    return isLogin
-      ? dispatch(requestLogin()) : dispatch(requestSignup());
-  }
+  const handleSubmit = useCallback(() => (
+    isLogin
+      ? dispatch(requestLogin()) : dispatch(requestSignup())
+  ));
 
   return (
     <div>
