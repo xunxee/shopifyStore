@@ -52,6 +52,16 @@ describe('LoginFormContainer', () => {
         payload: { name: 'email', value: 'new email' },
       });
     });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
   context('without logged in', () => {
@@ -63,6 +73,16 @@ describe('LoginFormContainer', () => {
       ));
 
       expect(container).toHaveTextContent('Passwords must be longer than 7');
+    });
+
+    it('renders "Sing Up" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Sign Up'));
+
+      expect(dispatch).toBeCalled();
     });
   });
 });

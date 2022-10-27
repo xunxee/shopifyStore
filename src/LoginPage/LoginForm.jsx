@@ -7,6 +7,7 @@ export default memo(({
   },
   onClick,
   onChange,
+  onSubmit,
 }) => {
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
@@ -47,7 +48,10 @@ export default memo(({
         autoComplete="off"
         onChange={handleChange}
       />
-      <button type="submit">
+      <button
+        type="button"
+        onClick={onSubmit}
+      >
         {isLogin ? 'Log In' : 'Sign Up'}
       </button>
       <p>

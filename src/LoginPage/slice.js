@@ -48,4 +48,12 @@ export const {
   changeLoginFields,
 } = actions;
 
+export function requestLogin() {
+  //
+}
+
+export function requestSignup() {
+  //
+}
+
 export default reducer;

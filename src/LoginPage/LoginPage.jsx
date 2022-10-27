@@ -26,9 +26,7 @@ const Container = styled.div({
   backgroundColor: '#000000',
 });
 
-export default function LoginPage({
-  onClick,
-}) {
+export default function LoginPage({ onClick }) {
   const refLogin = useRef();
 
   function listener({ target }) {

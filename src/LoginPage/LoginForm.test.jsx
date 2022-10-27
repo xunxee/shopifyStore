@@ -5,6 +5,13 @@ import LoginForm from './LoginForm';
 describe('LoginForm', () => {
   const handleClick = jest.fn();
   const handleChange = jest.fn();
+  const handleSubmit = jest.fn();
+
+  beforeEach(() => {
+    handleClick.mockClear();
+    handleChange.mockClear();
+    handleSubmit.mockClear();
+  });
 
   function renderLoginForm({
     isLogin, email, password, firstName, lastName,
@@ -17,6 +24,7 @@ describe('LoginForm', () => {
         }}
         onClick={handleClick}
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     ));
   }
@@ -26,7 +34,7 @@ describe('LoginForm', () => {
       const {
         queryByPlaceholderText,
         container,
-        getByText,
+        queryByText,
       } = renderLoginForm({ isLogin: true });
 
       expect(queryByPlaceholderText('First')).toBeNull();
@@ -34,7 +42,7 @@ describe('LoginForm', () => {
 
       expect(container).toHaveTextContent('have an account?');
 
-      fireEvent.click(getByText('Sign Up'));
+      fireEvent.click(queryByText('Sign Up'));
 
       expect(handleClick).toBeCalled();
     });
@@ -51,6 +59,14 @@ describe('LoginForm', () => {
       expect(handleChange).toBeCalledWith({
         name: 'email', value: 'new email',
       });
+    });
+
+    it('renders "Log In" button', () => {
+      const { queryByText } = renderLoginForm({ isLogin: true });
+
+      fireEvent.click(queryByText('Log In'));
+
+      expect(handleSubmit).toBeCalled();
     });
   });
 
@@ -84,6 +100,14 @@ describe('LoginForm', () => {
       expect(handleChange).toBeCalledWith({
         name: 'firstName', value: 'gunhee',
       });
+    });
+
+    it('renders "Sign Up" button', () => {
+      const { queryByText } = renderLoginForm({ isLogin: false });
+
+      fireEvent.click(queryByText('Sign Up'));
+
+      expect(handleSubmit).toBeCalled();
     });
   });
 });

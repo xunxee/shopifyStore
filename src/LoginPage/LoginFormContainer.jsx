@@ -8,6 +8,8 @@ import LoginForm from './LoginForm';
 import {
   setIsLogin,
   changeLoginFields,
+  requestLogin,
+  requestSignup,
 } from './slice';
 
 export default function LoginFormContainer() {
@@ -31,6 +33,11 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
+  function handleSubmit() {
+    return isLogin
+      ? dispatch(requestLogin()) : dispatch(requestSignup());
+  }
+
   return (
     <div>
       <LoginForm
@@ -38,6 +45,7 @@ export default function LoginFormContainer() {
         fields={{ loginFields }}
         onClick={handleClickToggle}
         onChange={handleChange}
+        onSubmit={handleSubmit}
       />
     </div>
   );

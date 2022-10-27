@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useCallback, useRef } from 'react';
+import { useCallback } from 'react';
 
 import { setIsModalOpen } from '../LoginPage/slice';
 
@@ -40,21 +40,17 @@ export default function HeaderPage() {
     dispatch(setIsModalOpen());
   }, [dispatch]);
 
-  const refUserIcon = useRef();
-
   return (
     <Container>
       {isModalOpen && (
         <LoginPage
           onClick={handleToggle}
-          refUserIcon={refUserIcon}
         />
       )}
       <TitleContainer />
       <SearchBarContainer />
       <PurchaseContainer
         onClick={handleToggle}
-        refUserIcon={refUserIcon}
       />
     </Container>
   );
