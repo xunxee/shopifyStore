@@ -3,12 +3,10 @@ import { render, fireEvent } from '@testing-library/react';
 import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
-  const handleClick = jest.fn();
   const handleChange = jest.fn();
   const handleSubmit = jest.fn();
 
   beforeEach(() => {
-    handleClick.mockClear();
     handleChange.mockClear();
     handleSubmit.mockClear();
   });
@@ -22,7 +20,6 @@ describe('LoginForm', () => {
         fields={{
           email, password, firstName, lastName,
         }}
-        onClick={handleClick}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
@@ -34,17 +31,12 @@ describe('LoginForm', () => {
       const {
         queryByPlaceholderText,
         container,
-        queryByText,
       } = renderLoginForm({ isLogin: true });
 
       expect(queryByPlaceholderText('First')).toBeNull();
       expect(queryByPlaceholderText('Last')).toBeNull();
 
       expect(container).toHaveTextContent('have an account?');
-
-      fireEvent.click(queryByText('Sign Up'));
-
-      expect(handleClick).toBeCalled();
     });
 
     it('listens change events for "Log In"', () => {
@@ -75,17 +67,12 @@ describe('LoginForm', () => {
       const {
         queryByPlaceholderText,
         container,
-        getByText,
       } = renderLoginForm({ isLogin: false });
 
       expect(queryByPlaceholderText('First Name')).not.toBeNull();
       expect(queryByPlaceholderText('Last Name')).not.toBeNull();
 
       expect(container).toHaveTextContent('Passwords must be longer than 7');
-
-      fireEvent.click(getByText('Log In'));
-
-      expect(handleClick).toBeCalled();
     });
 
     it('listens change events for "Sign UP"', () => {

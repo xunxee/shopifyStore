@@ -62,6 +62,18 @@ describe('LoginFormContainer', () => {
 
       expect(dispatch).toBeCalled();
     });
+
+    it('renders "Sign Up" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Sign Up'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'login/setIsLogin',
+      });
+    });
   });
 
   context('without logged in', () => {
@@ -83,6 +95,18 @@ describe('LoginFormContainer', () => {
       fireEvent.click(getByText('Sign Up'));
 
       expect(dispatch).toBeCalled();
+    });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'login/setIsLogin',
+      });
     });
   });
 });

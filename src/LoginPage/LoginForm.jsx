@@ -5,7 +5,6 @@ export default memo(({
   fields: {
     email, password, firstName, lastName,
   },
-  onClick,
   onChange,
   onSubmit,
 }) => {
@@ -14,7 +13,7 @@ export default memo(({
   }
 
   return (
-    <form>
+    <form onSubmit={onSubmit}>
       {isLogin || (
         <>
           <input
@@ -49,8 +48,7 @@ export default memo(({
         onChange={handleChange}
       />
       <button
-        type="button"
-        onClick={onSubmit}
+        type="submit"
       >
         {isLogin ? 'Log In' : 'Sign Up'}
       </button>
@@ -59,12 +57,6 @@ export default memo(({
           ? "Don't have an account?"
           : 'Passwords must be longer than 7 chars and include numbers'}
       </p>
-      <button
-        type="button"
-        onClick={onClick}
-      >
-        {isLogin ? 'Sign Up' : 'Log In' }
-      </button>
     </form>
   );
 });

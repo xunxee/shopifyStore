@@ -33,20 +33,27 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
-  const handleSubmit = useCallback(() => (
-    isLogin
-      ? dispatch(requestLogin()) : dispatch(requestSignup())
-  ));
+  const handleSubmit = useCallback((e) => {
+    e.preventDefault();
+
+    if (isLogin) dispatch(requestLogin());
+    dispatch(requestSignup());
+  }, [dispatch]);
 
   return (
     <div>
       <LoginForm
         isLogin={isLogin}
         fields={{ loginFields }}
-        onClick={handleClickToggle}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />
+      <button
+        type="button"
+        onClick={handleClickToggle}
+      >
+        {isLogin ? 'Sign Up' : 'Log In' }
+      </button>
     </div>
   );
 }
