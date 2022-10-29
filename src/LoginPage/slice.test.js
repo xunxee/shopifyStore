@@ -1,8 +1,19 @@
+import thunk from 'redux-thunk';
+
+import { configureStore } from 'redux-mock-store';
+
 import reducer, {
   setIsModalOpen,
   setIsLogin,
   changeLoginFields,
+  requestLogin,
+  setAccessToken,
 } from './slice';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+jest.mock('../services/api');
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -97,6 +108,26 @@ describe('reducer', () => {
 
         expect(firstName).toBe('gunhee');
       });
+    });
+  });
+});
+
+describe('actions', () => {
+  let store;
+
+  describe('requestLogin', () => {
+    beforeEach(() => {
+      store = mockStore({
+        loginFields: { email: '', password: '' },
+      });
+    });
+
+    it('dispatchs setAccessToken', async () => {
+      await store.dispatch(requestLogin());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setAccessToken({}));
     });
   });
 });

@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+import { postLogin } from '../services/api';
+
 const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
@@ -10,7 +12,9 @@ const { actions, reducer } = createSlice({
       password: '',
       firstName: '',
       lastName: '',
+      error: '',
     },
+    accessToken: '',
   },
   reducers: {
     setIsModalOpen(state) {
@@ -39,6 +43,10 @@ const { actions, reducer } = createSlice({
         },
       };
     },
+
+    setAccessToken() {
+      //
+    },
   },
 });
 
@@ -46,15 +54,19 @@ export const {
   setIsModalOpen,
   setIsLogin,
   changeLoginFields,
+  setAccessToken,
 } = actions;
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    const { loginFields: { email, password } } = getState();
+    const { login: { loginFields: { email, password } } } = getState();
+
     try {
-      await postLogin({ email, password });
+      const data = await postLogin({ email, password });
+
+      const { refreshToken } = data;
     } catch (error) {
-      // todo
+      console.log(error);
     }
   };
 }

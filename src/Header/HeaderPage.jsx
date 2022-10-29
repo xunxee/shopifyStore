@@ -13,9 +13,6 @@ import LoginPage from '../LoginPage/LoginPage';
 
 import { get } from '../utils';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
-console.log(API_KEY);
-
 const Container = styled.div({
   display: 'flex',
   justifyContent: 'space-between',
