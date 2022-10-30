@@ -38,12 +38,13 @@ export async function postLogin({ email, password }) {
     throw new Error(data.error.message);
   }
 
-  const { refreshToken } = data;
+  const { refreshToken, localId } = data;
 
-  const { uid } = postRefreshToken(refreshToken);
+  console.log(`refreshToken: ${refreshToken}`);
+  console.log(`localId: ${localId}`);
 
   return {
-    refreshToken, uid,
+    refreshToken, localId,
   };
 }
 
