@@ -2,7 +2,7 @@ import {
   postLogin,
 } from './api';
 
-import REFRESHTOKEN from '../../fixtures/refreshToken';
+import LOGINTOKENS from '../../fixtures/loginTokens';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -13,16 +13,16 @@ describe('api', () => {
 
   describe('postLogin', () => {
     beforeEach(() => {
-      mockFetch(REFRESHTOKEN);
+      mockFetch(LOGINTOKENS);
     });
 
-    it('returns refreshToken and localId', async () => {
+    it('returns loginTokens', async () => {
       const data = await postLogin({
         email: '',
         password: '',
       });
 
-      expect(data).toEqual(REFRESHTOKEN);
+      expect(data).toEqual(LOGINTOKENS);
     });
   });
 });

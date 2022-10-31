@@ -14,7 +14,10 @@ const { actions, reducer } = createSlice({
       lastName: '',
       error: '',
     },
-    accessToken: '',
+    refreshToken: '',
+    accountInfo: {
+      localId: '',
+    },
   },
   reducers: {
     setIsModalOpen(state) {
@@ -44,8 +47,11 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    setAccessToken() {
-      //
+    setRefreshToken(state, { payload: refreshToken }) {
+      return {
+        ...state,
+        refreshToken,
+      };
     },
   },
 });
@@ -54,19 +60,26 @@ export const {
   setIsModalOpen,
   setIsLogin,
   changeLoginFields,
-  setAccessToken,
+  setRefreshToken,
 } = actions;
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    const { login: { loginFields: { email, password } } } = getState();
+    const {
+      login: {
+        loginFields: { email, password },
+      },
+    } = getState();
 
     try {
       const data = await postLogin({ email, password });
 
-      const { refreshToken } = data;
+      const { refreshToken, uid } = data;
+
+      dispatch(setRefreshToken(refreshToken));
+      // dispatch(setAccountInfo(uid));
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 }

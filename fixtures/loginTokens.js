@@ -1,6 +1,6 @@
-const refreshToken = {
+const loginTokens = {
   refreshToken: 'refreshToken',
   localId: 'localId',
 };
 
-export default refreshToken;
+export default loginTokens;

@@ -1,13 +1,13 @@
 import thunk from 'redux-thunk';
 
-import { configureStore } from 'redux-mock-store';
+import configureStore from 'redux-mock-store';
 
 import reducer, {
   setIsModalOpen,
   setIsLogin,
   changeLoginFields,
   requestLogin,
-  setAccessToken,
+  setRefreshToken,
 } from './slice';
 
 const middlewares = [thunk];
@@ -25,6 +25,11 @@ describe('reducer', () => {
         password: '',
         firstName: '',
         lastName: '',
+        error: '',
+      },
+      refreshToken: '',
+      accountInfo: {
+        localId: '',
       },
     };
 
@@ -110,6 +115,21 @@ describe('reducer', () => {
       });
     });
   });
+
+  describe('setRefreshToken', () => {
+    it('changes refresh token', () => {
+      const initialState = {
+        refreshToken: '',
+      };
+
+      const state = reducer(
+        initialState,
+        setRefreshToken('TOKEN'),
+      );
+
+      expect(state.refreshToken).toBe('TOKEN');
+    });
+  });
 });
 
 describe('actions', () => {
@@ -118,16 +138,18 @@ describe('actions', () => {
   describe('requestLogin', () => {
     beforeEach(() => {
       store = mockStore({
-        loginFields: { email: '', password: '' },
+        login: {
+          loginFields: { email: '', password: '' },
+        },
       });
     });
 
-    it('dispatchs setAccessToken', async () => {
+    it('dispatchs setRefreshToken', async () => {
       await store.dispatch(requestLogin());
 
       const actions = store.getActions();
 
-      expect(actions[0]).toEqual(setAccessToken({}));
+      expect(actions[0]).toEqual(setRefreshToken());
     });
   });
 });

@@ -56,7 +56,7 @@ describe('LoginForm', () => {
     it('renders "Log In" button', () => {
       const { queryByText } = renderLoginForm({ isLogin: true });
 
-      fireEvent.click(queryByText('Log In'));
+      fireEvent.submit(queryByText('Log In'));
 
       expect(handleSubmit).toBeCalled();
     });
@@ -92,7 +92,7 @@ describe('LoginForm', () => {
     it('renders "Sign Up" button', () => {
       const { queryByText } = renderLoginForm({ isLogin: false });
 
-      fireEvent.click(queryByText('Sign Up'));
+      fireEvent.submit(queryByText('Sign Up'));
 
       expect(handleSubmit).toBeCalled();
     });

@@ -40,9 +40,6 @@ export async function postLogin({ email, password }) {
 
   const { refreshToken, localId } = data;
 
-  console.log(`refreshToken: ${refreshToken}`);
-  console.log(`localId: ${localId}`);
-
   return {
     refreshToken, localId,
   };
