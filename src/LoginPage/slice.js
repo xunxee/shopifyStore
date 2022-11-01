@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { postLogin } from '../services/api';
 
+import { saveItem } from '../services/storage';
+
 const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
@@ -74,7 +76,9 @@ export function requestLogin() {
     try {
       const data = await postLogin({ email, password });
 
-      const { refreshToken, uid } = data;
+      const { refreshToken, localId: uid } = data;
+
+      saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
       // dispatch(setAccountInfo(uid));
