@@ -18,7 +18,7 @@ const { actions, reducer } = createSlice({
     },
     refreshToken: '',
     accountInfo: {
-      localId: '',
+      uid: '',
     },
   },
   reducers: {
@@ -55,6 +55,17 @@ const { actions, reducer } = createSlice({
         refreshToken,
       };
     },
+
+    setAccountInfo(state, { payload: uid }) {
+      const { accountInfo } = state;
+      return {
+        ...state,
+        accountInfo: {
+          ...accountInfo,
+          uid,
+        },
+      };
+    },
   },
 });
 
@@ -63,6 +74,7 @@ export const {
   setIsLogin,
   changeLoginFields,
   setRefreshToken,
+  setAccountInfo,
 } = actions;
 
 export function requestLogin() {
@@ -81,9 +93,9 @@ export function requestLogin() {
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
-      // dispatch(setAccountInfo(uid));
+      dispatch(setAccountInfo(uid));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
 }

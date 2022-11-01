@@ -8,6 +8,7 @@ import reducer, {
   changeLoginFields,
   requestLogin,
   setRefreshToken,
+  setAccountInfo,
 } from './slice';
 
 const middlewares = [thunk];
@@ -29,7 +30,7 @@ describe('reducer', () => {
       },
       refreshToken: '',
       accountInfo: {
-        localId: '',
+        uid: '',
       },
     };
 
@@ -128,6 +129,23 @@ describe('reducer', () => {
       );
 
       expect(state.refreshToken).toBe('TOKEN');
+    });
+  });
+
+  describe('setAccountInfo', () => {
+    it('changes accountInfo', () => {
+      const initialState = {
+        accountInfo: {
+          uid: '',
+        },
+      };
+
+      const state = reducer(
+        initialState,
+        setAccountInfo('UID'),
+      );
+
+      expect(state.accountInfo.uid).toBe('UID');
     });
   });
 });
