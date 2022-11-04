@@ -21,7 +21,6 @@ const Container = styled.div({
   transform: 'translate(-50%, -50%)',
   width: '418px',
   height: '420px',
-  margin: '0',
   color: '#EAEAEA',
   backgroundColor: '#000000',
 });

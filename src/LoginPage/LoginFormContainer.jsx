@@ -36,7 +36,11 @@ export default function LoginFormContainer() {
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
 
-    if (isLogin) dispatch(requestLogin());
+    if (isLogin) {
+      dispatch(requestLogin());
+      return;
+    }
+
     dispatch(requestSignup());
   }, [dispatch]);
 
@@ -44,7 +48,7 @@ export default function LoginFormContainer() {
     <div>
       <LoginForm
         isLogin={isLogin}
-        fields={{ loginFields }}
+        fields={loginFields}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />

@@ -3,7 +3,7 @@ import { memo } from 'react';
 export default memo(({
   isLogin,
   fields: {
-    email, password, firstName, lastName,
+    email, password, firstName, lastName, error,
   },
   onChange,
   onSubmit,
@@ -14,6 +14,7 @@ export default memo(({
 
   return (
     <form onSubmit={onSubmit}>
+      {error && <p>{error}</p>}
       {isLogin || (
         <>
           <input

@@ -94,8 +94,16 @@ export function requestLogin() {
 
       dispatch(setRefreshToken(refreshToken));
       dispatch(setAccountInfo(uid));
+      dispatch(setIsModalOpen());
     } catch (error) {
-      console.log(error);
+      const message = {
+        EMAIL_NOT_FOUND: 'Cannot find an account',
+        INVALID_PASSWORD: 'Cannot find an password',
+      };
+
+      dispatch(changeLoginFields(
+        { name: 'error', value: message[error.message] },
+      ));
     }
   };
 }
