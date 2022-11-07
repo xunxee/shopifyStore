@@ -42,7 +42,10 @@ export default function LoginPage({ onClick }) {
 
   return (
     <DeleteAll>
-      <Container ref={refLogin}>
+      <Container
+        data-testid="LoginPage"
+        ref={refLogin}
+      >
         <button type="button">X</button>
         <div>Logo</div>
         <LoginFormContainer />
