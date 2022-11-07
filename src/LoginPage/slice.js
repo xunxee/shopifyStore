@@ -86,9 +86,9 @@ export function requestLogin() {
     } = getState();
 
     try {
-      const data = await postLogin({ email, password });
-
-      const { refreshToken, localId: uid } = data;
+      const { refreshToken, localId: uid } = await postLogin(
+        { email, password },
+      );
 
       saveItem('refreshToken', refreshToken);
 
