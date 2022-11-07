@@ -12,13 +12,13 @@ describe('LoginForm', () => {
   });
 
   function renderLoginForm({
-    isLogin, email, password, firstName, lastName,
+    isLogin, email, password, firstName, lastName, error,
   } = {}) {
     return render((
       <LoginForm
         isLogin={isLogin}
         fields={{
-          email, password, firstName, lastName,
+          email, password, firstName, lastName, error,
         }}
         onChange={handleChange}
         onSubmit={handleSubmit}
@@ -29,10 +29,12 @@ describe('LoginForm', () => {
   context('with logged in', () => {
     it('renders the login fields', () => {
       const {
+        getByText,
         queryByPlaceholderText,
         container,
-      } = renderLoginForm({ isLogin: true });
+      } = renderLoginForm({ isLogin: true, error: 'not found' });
 
+      expect(getByText('not found')).not.toBeNull();
       expect(queryByPlaceholderText('First')).toBeNull();
       expect(queryByPlaceholderText('Last')).toBeNull();
 
