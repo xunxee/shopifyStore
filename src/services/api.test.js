@@ -1,5 +1,6 @@
 import {
   postLogin,
+  TODO,
 } from './api';
 
 import LOGINTOKENS from '../../fixtures/loginTokens';
@@ -34,6 +35,14 @@ describe('api', () => {
           await postLogin(LOGIN_FIELDS);
         }).rejects.toThrowError(new Error('INVALID_PASSWORD'));
       });
+    });
+  });
+
+  describe('TODO', () => {
+    it('returnns TODO', () => {
+      const value = TODO();
+
+      expect(value).toBe('TODO');
     });
   });
 });
