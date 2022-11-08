@@ -11,6 +11,8 @@ import reducer, {
   setAccountInfo,
 } from './slice';
 
+import { postLogin } from '../services/api';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -154,20 +156,57 @@ describe('actions', () => {
   let store;
 
   describe('requestLogin', () => {
-    beforeEach(() => {
-      store = mockStore({
-        login: {
-          loginFields: { email: '', password: '' },
-        },
+    context('when login is successful', () => {
+      beforeEach(() => {
+        store = mockStore({
+          login: {
+            loginFields: {
+              email: 'tester@example.com',
+              password: 'tester',
+              error: '',
+            },
+          },
+        });
+
+        postLogin.mockResolvedValue({});
+      });
+
+      it('dispatchs setRefreshToken', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRefreshToken());
       });
     });
 
-    it('dispatchs setRefreshToken', async () => {
-      await store.dispatch(requestLogin());
+    context('when login fails', () => {
+      beforeEach(() => {
+        store = mockStore({
+          login: {
+            loginFields: {
+              email: 'tester@example.com',
+              password: 'tes',
+              error: '',
+            },
+          },
+        });
 
-      const actions = store.getActions();
+        postLogin.mockRejectedValue(
+          new Error('INVALID_PASSWORD'),
+        );
+      });
 
-      expect(actions[0]).toEqual(setRefreshToken());
+      it('dispatchs changeLoginFields', async () => {
+        await store.dispatch(requestLogin());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(changeLoginFields({
+          name: 'error',
+          value: 'Cannot find an password',
+        }));
+      });
     });
   });
 });

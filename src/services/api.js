@@ -44,7 +44,3 @@ export async function postLogin({ email, password }) {
     refreshToken, localId,
   };
 }
-
-export async function postSignup() {
-  // const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
-}

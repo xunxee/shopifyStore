@@ -1,6 +1,4 @@
-export async function postLogin() {
-  return {};
-}
+export const postLogin = jest.fn();
 
 export async function TODO() {
   // TODO
