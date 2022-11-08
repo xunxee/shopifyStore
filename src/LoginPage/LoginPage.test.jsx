@@ -27,19 +27,19 @@ describe('LoginPage', () => {
   describe('addEventListener', () => {
     const handleClick = jest.fn();
 
-    let events = {};
+    global.events = {};
 
     beforeEach(() => {
       handleClick.mockClear();
 
-      events = {};
+      global.events = {};
 
       document.addEventListener = jest.fn((event, callback) => {
-        events[event] = callback;
+        global.events[event] = callback;
       });
 
       document.removeEventListener = jest.fn((event) => {
-        delete events[event];
+        delete global.events[event];
       });
     });
 
@@ -51,7 +51,7 @@ describe('LoginPage', () => {
           />
         ));
 
-        events.mousedown({ target: getByTestId('LoginPage') });
+        global.events.mousedown({ target: getByTestId('LoginPage') });
 
         expect(handleClick).toBeCalledTimes(0);
       });
@@ -69,7 +69,7 @@ describe('LoginPage', () => {
           'outsideTheModal',
         );
 
-        events.mousedown({ target: $outside[0] });
+        global.events.mousedown({ target: $outside[0] });
 
         expect(handleClick).toBeCalledTimes(1);
       });
