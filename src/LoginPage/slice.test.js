@@ -3,7 +3,8 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import reducer, {
-  setIsModalOpen,
+  setIsLoginModalOpen,
+  setIsLogoutModalOpen,
   setIsLogin,
   changeLoginFields,
   requestLogin,
@@ -21,7 +22,8 @@ jest.mock('../services/api');
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
-      isModalOpen: false,
+      isLoginModalOpen: false,
+      isLogoutModalOpen: false,
       isLogin: true,
       loginFields: {
         email: '',
@@ -43,16 +45,29 @@ describe('reducer', () => {
     });
   });
 
-  describe('setIsModalOpen', () => {
-    it('changes isModalOpen', () => {
-      const initialState = { isModalOpen: true };
+  describe('setIsLoginModalOpen', () => {
+    it('changes isLoginModalOpen', () => {
+      const initialState = { isLoginModalOpen: true };
 
-      const { isModalOpen } = reducer(
+      const { isLoginModalOpen } = reducer(
         initialState,
-        setIsModalOpen(),
+        setIsLoginModalOpen(),
       );
 
-      expect(isModalOpen).toBe(false);
+      expect(isLoginModalOpen).toBe(false);
+    });
+  });
+
+  describe('setIsLogoutModalOpen', () => {
+    it('changes isLogoutModalOpen', () => {
+      const initialState = { isLogoutModalOpen: true };
+
+      const { isLogoutModalOpen } = reducer(
+        initialState,
+        setIsLogoutModalOpen(),
+      );
+
+      expect(isLogoutModalOpen).toBe(false);
     });
   });
 
@@ -204,7 +219,7 @@ describe('actions', () => {
 
         expect(actions[0]).toEqual(changeLoginFields({
           name: 'error',
-          value: 'Cannot find an password',
+          value: 'Check your ID or password',
         }));
       });
     });

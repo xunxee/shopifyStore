@@ -7,7 +7,8 @@ import { saveItem } from '../services/storage';
 const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
-    isModalOpen: false,
+    isLoginModalOpen: false,
+    isLogoutModalOpen: false,
     isLogin: true,
     loginFields: {
       email: '',
@@ -22,11 +23,19 @@ const { actions, reducer } = createSlice({
     },
   },
   reducers: {
-    setIsModalOpen(state) {
-      const { isModalOpen } = state;
+    setIsLoginModalOpen(state) {
+      const { isLoginModalOpen } = state;
       return {
         ...state,
-        isModalOpen: !isModalOpen,
+        isLoginModalOpen: !isLoginModalOpen,
+      };
+    },
+
+    setIsLogoutModalOpen(state) {
+      const { isLogoutModalOpen } = state;
+      return {
+        ...state,
+        isLogoutModalOpen: !isLogoutModalOpen,
       };
     },
 
@@ -70,7 +79,8 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  setIsModalOpen,
+  setIsLoginModalOpen,
+  setIsLogoutModalOpen,
   setIsLogin,
   changeLoginFields,
   setRefreshToken,
@@ -94,15 +104,10 @@ export function requestLogin() {
 
       dispatch(setRefreshToken(refreshToken));
       dispatch(setAccountInfo(uid));
-      dispatch(setIsModalOpen());
+      dispatch(setIsLoginModalOpen());
     } catch (error) {
-      const message = {
-        EMAIL_NOT_FOUND: 'Cannot find an account',
-        INVALID_PASSWORD: 'Cannot find an password',
-      };
-
       dispatch(changeLoginFields(
-        { name: 'error', value: message[error.message] },
+        { name: 'error', value: 'Check your ID or password' },
       ));
     }
   };

@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsModalOpen } from '../LoginPage/slice';
+import { setIsLoginModalOpen } from '../LoginPage/slice';
 
 import HeaderPage from './HeaderPage';
 
@@ -46,56 +46,57 @@ describe('HeaderPage', () => {
       { name: 'circleUser' },
     ));
 
-    expect(dispatch).toBeCalledWith(setIsModalOpen());
+    expect(dispatch).toBeCalledWith(setIsLoginModalOpen());
   });
-
-  context('when modal is open', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        login: {
-          isModalOpen: true,
-          loginFields: {
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            error: '',
+  describe('login modal', () => {
+    context('when login modal is open', () => {
+      beforeEach(() => {
+        useSelector.mockImplementation((selector) => selector({
+          login: {
+            isLoginModalOpen: true,
+            loginFields: {
+              email: '',
+              password: '',
+              firstName: '',
+              lastName: '',
+              error: '',
+            },
           },
-        },
-      }));
+        }));
+      });
+
+      it('renders LoginPage', () => {
+        const { queryByPlaceholderText } = render((
+          <HeaderPage />
+        ));
+
+        expect(queryByPlaceholderText('Email')).not.toBeNull();
+      });
     });
 
-    it('renders LoginPage', () => {
-      const { queryByPlaceholderText } = render((
-        <HeaderPage />
-      ));
-
-      expect(queryByPlaceholderText('Email')).not.toBeNull();
-    });
-  });
-
-  context('when modal is closed', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        login: {
-          isModalOpen: false,
-          loginFields: {
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            error: '',
+    context('when login modal is closed', () => {
+      beforeEach(() => {
+        useSelector.mockImplementation((selector) => selector({
+          login: {
+            isLoginModalOpen: false,
+            loginFields: {
+              email: '',
+              password: '',
+              firstName: '',
+              lastName: '',
+              error: '',
+            },
           },
-        },
-      }));
-    });
+        }));
+      });
 
-    it('unable to render loginPage', () => {
-      const { queryByPlaceholderText } = render((
-        <HeaderPage />
-      ));
+      it('unable to render LoginPage', () => {
+        const { queryByPlaceholderText } = render((
+          <HeaderPage />
+        ));
 
-      expect(queryByPlaceholderText('Email')).toBeNull();
+        expect(queryByPlaceholderText('Email')).toBeNull();
+      });
     });
   });
 });

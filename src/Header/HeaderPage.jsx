@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
-import { setIsModalOpen } from '../LoginPage/slice';
+import { setIsLoginModalOpen } from '../LoginPage/slice';
 
 import TitleContainer from './TitleContainer';
 import SearchBarContainer from './SearchBarContainer';
@@ -31,18 +31,18 @@ const Container = styled.div({
 export default function HeaderPage() {
   const dispatch = useDispatch();
 
-  const isModalOpen = useSelector(get({
+  const isLoginModalOpen = useSelector(get({
     page: 'login',
-    key: 'isModalOpen',
+    key: 'isLoginModalOpen',
   }));
 
   const handleToggle = useCallback(() => {
-    dispatch(setIsModalOpen());
+    dispatch(setIsLoginModalOpen());
   }, [dispatch]);
 
   return (
     <Container>
-      {isModalOpen && (
+      {isLoginModalOpen && (
         <LoginPage
           onClick={handleToggle}
         />
