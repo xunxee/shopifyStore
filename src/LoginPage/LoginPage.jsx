@@ -6,16 +6,15 @@ import LoginFormContainer from './LoginFormContainer';
 
 const DeleteAll = styled.div({
   position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  top: 0,
+  left: 0,
   width: '100%',
   height: '100%',
   backdropFilter: 'blur(0.8px)',
 });
 
 const Container = styled.div({
-  position: 'fixed',
+  position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
@@ -29,19 +28,20 @@ export default function LoginPage({ onClick }) {
   const refLogin = useRef();
 
   function listener({ target }) {
-    if (refLogin.current.contains(target)) { return; }
+    if (refLogin.current.contains(target)) return;
     onClick();
   }
 
   useEffect(() => {
     document.addEventListener('mousedown', listener);
+
     return () => {
       document.removeEventListener('mousedown', listener);
     };
   }, []);
 
   return (
-    <DeleteAll>
+    <DeleteAll data-testid="outsideTheModal">
       <Container
         data-testid="LoginPage"
         ref={refLogin}

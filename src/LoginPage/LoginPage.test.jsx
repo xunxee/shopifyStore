@@ -27,31 +27,37 @@ describe('LoginPage', () => {
   describe('addEventListener', () => {
     const handleClick = jest.fn();
 
-    global.events = {};
-
     beforeEach(() => {
       handleClick.mockClear();
-
-      global.events = {};
-
-      document.addEventListener = jest.fn((event, callback) => {
-        global.events[event] = callback;
-      });
-
-      document.removeEventListener = jest.fn((event) => {
-        delete global.events[event];
-      });
     });
 
-    context('when click the modal', () => {
+    jest.spyOn(EventTarget.prototype, 'addEventListener');
+
+    const mockEvents = () => {
+      const events = {};
+
+      EventTarget.prototype.addEventListener = jest.fn(
+        (event, callback) => { events[event] = callback; },
+      );
+
+      EventTarget.prototype.removeEventListener = jest.fn(
+        (event) => { delete events[event]; },
+      );
+
+      return events;
+    };
+
+    context('when click inside the modal', () => {
       it("doesn't run onClick function", () => {
+        const events = mockEvents();
+
         const { getByTestId } = render((
           <LoginPage
             onClick={handleClick}
           />
         ));
 
-        global.events.mousedown({ target: getByTestId('LoginPage') });
+        events.mousedown({ target: getByTestId('LoginPage') });
 
         expect(handleClick).toBeCalledTimes(0);
       });
@@ -59,17 +65,17 @@ describe('LoginPage', () => {
 
     context('when click outside the modal', () => {
       it('run onClick function', () => {
-        render((
+        const events = mockEvents();
+
+        const { getByTestId } = render((
           <LoginPage
             onClick={handleClick}
           />
         ));
 
-        const $outside = document.getElementsByClassName(
-          'outsideTheModal',
-        );
-
-        global.events.mousedown({ target: $outside[0] });
+        events.mousedown({
+          target: getByTestId('outsideTheModal'),
+        });
 
         expect(handleClick).toBeCalledTimes(1);
       });

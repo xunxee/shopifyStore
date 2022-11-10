@@ -49,7 +49,7 @@ describe('HeaderPage', () => {
     expect(dispatch).toBeCalledWith(setIsModalOpen());
   });
 
-  context('when isModalOpen is true', () => {
+  context('when modal is open', () => {
     beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         login: {
@@ -71,6 +71,31 @@ describe('HeaderPage', () => {
       ));
 
       expect(queryByPlaceholderText('Email')).not.toBeNull();
+    });
+  });
+
+  context('when modal is closed', () => {
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        login: {
+          isModalOpen: false,
+          loginFields: {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            error: '',
+          },
+        },
+      }));
+    });
+
+    it('unable to render loginPage', () => {
+      const { queryByPlaceholderText } = render((
+        <HeaderPage />
+      ));
+
+      expect(queryByPlaceholderText('Email')).toBeNull();
     });
   });
 });
