@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
-import { setIsLoginModalOpen } from '../LoginPage/slice';
+import {
+  setIsLoginModalOpen,
+} from '../LoginPage/slice';
 
 import TitleContainer from './TitleContainer';
 import SearchBarContainer from './SearchBarContainer';
@@ -28,8 +30,22 @@ const Container = styled.div({
   backgroundColor: '#000000',
 });
 
+function LogoutPage() {
+  return (
+    <>
+      <div>LogoutPage</div>
+      <div>Log out</div>
+    </>
+  );
+}
+
 export default function HeaderPage() {
   const dispatch = useDispatch();
+
+  const refreshToken = useSelector(get({
+    page: 'login',
+    key: 'refreshToken',
+  }));
 
   const isLoginModalOpen = useSelector(get({
     page: 'login',
@@ -38,12 +54,17 @@ export default function HeaderPage() {
 
   const handleToggle = useCallback(() => {
     dispatch(setIsLoginModalOpen());
-  }, [dispatch]);
+  }, [dispatch, refreshToken]);
 
   return (
     <Container>
-      {isLoginModalOpen && (
+      {(!refreshToken && isLoginModalOpen) && (
         <LoginPage
+          onClick={handleToggle}
+        />
+      )}
+      {(refreshToken && isLoginModalOpen) && (
+        <LogoutPage
           onClick={handleToggle}
         />
       )}

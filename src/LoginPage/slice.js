@@ -8,7 +8,6 @@ const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
     isLoginModalOpen: false,
-    isLogoutModalOpen: false,
     isLogin: true,
     loginFields: {
       email: '',
@@ -28,14 +27,6 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         isLoginModalOpen: !isLoginModalOpen,
-      };
-    },
-
-    setIsLogoutModalOpen(state) {
-      const { isLogoutModalOpen } = state;
-      return {
-        ...state,
-        isLogoutModalOpen: !isLogoutModalOpen,
       };
     },
 
@@ -80,7 +71,6 @@ const { actions, reducer } = createSlice({
 
 export const {
   setIsLoginModalOpen,
-  setIsLogoutModalOpen,
   setIsLogin,
   changeLoginFields,
   setRefreshToken,
@@ -99,7 +89,6 @@ export function requestLogin() {
       const { refreshToken, localId: uid } = await postLogin(
         { email, password },
       );
-
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));

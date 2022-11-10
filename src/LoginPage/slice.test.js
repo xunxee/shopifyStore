@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 
 import reducer, {
   setIsLoginModalOpen,
-  setIsLogoutModalOpen,
   setIsLogin,
   changeLoginFields,
   requestLogin,
@@ -23,7 +22,6 @@ describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
       isLoginModalOpen: false,
-      isLogoutModalOpen: false,
       isLogin: true,
       loginFields: {
         email: '',
@@ -55,19 +53,6 @@ describe('reducer', () => {
       );
 
       expect(isLoginModalOpen).toBe(false);
-    });
-  });
-
-  describe('setIsLogoutModalOpen', () => {
-    it('changes isLogoutModalOpen', () => {
-      const initialState = { isLogoutModalOpen: true };
-
-      const { isLogoutModalOpen } = reducer(
-        initialState,
-        setIsLogoutModalOpen(),
-      );
-
-      expect(isLogoutModalOpen).toBe(false);
     });
   });
 

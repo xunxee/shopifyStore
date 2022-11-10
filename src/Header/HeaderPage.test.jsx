@@ -48,8 +48,9 @@ describe('HeaderPage', () => {
 
     expect(dispatch).toBeCalledWith(setIsLoginModalOpen());
   });
-  describe('login modal', () => {
-    context('when login modal is open', () => {
+
+  describe('modal', () => {
+    context('when logged in', () => {
       beforeEach(() => {
         useSelector.mockImplementation((selector) => selector({
           login: {
@@ -61,6 +62,7 @@ describe('HeaderPage', () => {
               lastName: '',
               error: '',
             },
+            refreshToken: '',
           },
         }));
       });
@@ -74,11 +76,11 @@ describe('HeaderPage', () => {
       });
     });
 
-    context('when login modal is closed', () => {
+    context('when logged out', () => {
       beforeEach(() => {
         useSelector.mockImplementation((selector) => selector({
           login: {
-            isLoginModalOpen: false,
+            isLoginModalOpen: true,
             loginFields: {
               email: '',
               password: '',
@@ -86,16 +88,17 @@ describe('HeaderPage', () => {
               lastName: '',
               error: '',
             },
+            refreshToken: 'REFRESH_TOKEN',
           },
         }));
       });
 
-      it('unable to render LoginPage', () => {
-        const { queryByPlaceholderText } = render((
+      it('renders LogoutPage', () => {
+        const { queryByText } = render((
           <HeaderPage />
         ));
 
-        expect(queryByPlaceholderText('Email')).toBeNull();
+        expect(queryByText('Log out')).not.toBeNull();
       });
     });
   });
