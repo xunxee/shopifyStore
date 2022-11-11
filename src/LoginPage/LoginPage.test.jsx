@@ -57,7 +57,9 @@ describe('LoginPage', () => {
           />
         ));
 
-        events.mousedown({ target: getByTestId('LoginPage') });
+        events.mousedown({
+          target: getByTestId('LoginPage'),
+        });
 
         expect(handleClick).toBeCalledTimes(0);
       });
