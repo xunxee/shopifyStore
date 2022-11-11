@@ -29,6 +29,31 @@ export async function postLogin({ email, password }) {
   };
 }
 
-export function TODO() {
-  return 'TODO';
+export async function postSignUp({ email, password }) {
+  const url = 'https://identitytoolkit.googleapis.com/'
+  + `v1/accounts:signUp?key=${API_KEY}}`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      email,
+      password,
+      returnSecureToken: true,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (data.error) {
+    throw new Error(data.error.message);
+  }
+
+  const { refreshToken, localId } = data;
+
+  return {
+    refreshToken, localId,
+  };
 }

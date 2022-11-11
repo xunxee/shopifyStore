@@ -1,5 +1,3 @@
 export const postLogin = jest.fn();
 
-export async function TODO() {
-  // TODO
-}
+export const postSignUp = jest.fn();

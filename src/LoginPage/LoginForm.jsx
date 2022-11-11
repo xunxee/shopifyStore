@@ -18,17 +18,17 @@ export default memo(({
       {isLogin || (
         <>
           <input
-            name="firstName"
+            name="lastName"
             type="text"
-            placeholder="First Name"
-            value={firstName}
+            placeholder="성(Last Name)"
+            value={lastName}
             onChange={handleChange}
           />
           <input
-            name="lastName"
+            name="firstName"
             type="text"
-            placeholder="Last Name"
-            value={lastName}
+            placeholder="이름(First Name)"
+            value={firstName}
             onChange={handleChange}
           />
         </>

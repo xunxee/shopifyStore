@@ -71,8 +71,8 @@ describe('LoginForm', () => {
         container,
       } = renderLoginForm({ isLogin: false });
 
-      expect(queryByPlaceholderText('First Name')).not.toBeNull();
-      expect(queryByPlaceholderText('Last Name')).not.toBeNull();
+      expect(queryByPlaceholderText('성(Last Name)')).not.toBeNull();
+      expect(queryByPlaceholderText('이름(First Name)')).not.toBeNull();
 
       expect(container).toHaveTextContent('Passwords must be longer than 7');
     });
@@ -82,12 +82,12 @@ describe('LoginForm', () => {
         isLogin: false,
       });
 
-      fireEvent.change(getByPlaceholderText('First Name'), {
-        target: { value: 'gunhee' },
+      fireEvent.change(getByPlaceholderText('성(Last Name)'), {
+        target: { value: '정' },
       });
 
       expect(handleChange).toBeCalledWith({
-        name: 'firstName', value: 'gunhee',
+        name: 'lastName', value: '정',
       });
     });
 
