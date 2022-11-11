@@ -8,6 +8,7 @@ import reducer, {
   changeLoginFields,
   requestLogin,
   setRefreshToken,
+  logout,
   setAccountInfo,
 } from './slice';
 
@@ -131,6 +132,21 @@ describe('reducer', () => {
       );
 
       expect(state.refreshToken).toBe('TOKEN');
+    });
+  });
+
+  describe('logout', () => {
+    it('clears refresh token', () => {
+      const initialState = {
+        refreshToken: 'REFRESH_TOKEN',
+      };
+
+      const state = reducer(
+        initialState,
+        logout(),
+      );
+
+      expect(state.refreshToken).toBe('');
     });
   });
 

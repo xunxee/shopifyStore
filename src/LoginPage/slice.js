@@ -56,6 +56,13 @@ const { actions, reducer } = createSlice({
       };
     },
 
+    logout(state) {
+      return {
+        ...state,
+        refreshToken: '',
+      };
+    },
+
     setAccountInfo(state, { payload: uid }) {
       const { accountInfo } = state;
       return {
@@ -74,6 +81,7 @@ export const {
   setIsLogin,
   changeLoginFields,
   setRefreshToken,
+  logout,
   setAccountInfo,
 } = actions;
 
