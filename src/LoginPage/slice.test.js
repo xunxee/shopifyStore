@@ -213,7 +213,7 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setRefreshToken());
+        expect(actions[1]).toEqual(setRefreshToken());
       });
     });
 
@@ -239,7 +239,7 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(changeLoginFields({
+        expect(actions[1]).toEqual(changeLoginFields({
           name: 'error',
           value: 'Check your ID or password',
         }));

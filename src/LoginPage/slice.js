@@ -97,6 +97,10 @@ export const {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
+    dispatch(changeLoginFields({
+      name: 'error', value: 'Loading......',
+    }));
+
     const {
       login: {
         loginFields: { email, password },
@@ -113,9 +117,9 @@ export function requestLogin() {
       dispatch(setAccountInfo(uid));
       dispatch(setIsLoginModalOpen());
     } catch (error) {
-      dispatch(changeLoginFields(
-        { name: 'error', value: 'Check your ID or password' },
-      ));
+      dispatch(changeLoginFields({
+        name: 'error', value: 'Check your ID or password',
+      }));
     }
   };
 }

@@ -6,7 +6,7 @@ import { useRef, useEffect } from 'react';
 
 import {
   logout,
-  changeLoginFields,
+  clearLoginFields,
 } from './slice';
 
 const DeleteAll = styled.div({
@@ -41,7 +41,7 @@ export default function LogoutPage({ onClick }) {
 
   function handleClickLogout() {
     dispatch(logout());
-    dispatch(changeLoginFields({
+    dispatch(clearLoginFields({
       name: 'password',
       value: '',
     }));
