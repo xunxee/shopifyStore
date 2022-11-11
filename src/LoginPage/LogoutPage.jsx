@@ -44,6 +44,12 @@ export default function LogoutPage({ onClick }) {
         data-testid="LogoutPage"
         ref={refLogout}
       >
+        <button
+          type="button"
+          onClick={onClick}
+        >
+          X
+        </button>
         <div>LogoutPage</div>
         <button type="button">
           Log out
