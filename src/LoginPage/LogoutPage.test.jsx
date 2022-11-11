@@ -1,16 +1,27 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+
+import { useDispatch } from 'react-redux';
 
 import LogoutPage from './LogoutPage';
 
 jest.mock('react-redux');
 
 describe('LogoutPage', () => {
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
   it('renders "Log out" button', () => {
     const { queryByText } = render((
       <LogoutPage />
     ));
 
-    expect(queryByText('Log out')).not.toBeNull();
+    fireEvent.click(queryByText('Log out'));
+
+    expect(dispatch).toBeCalledWith({
+      payload: undefined,
+      type: 'login/logout',
+    });
   });
 
   describe('addEventListener', () => {

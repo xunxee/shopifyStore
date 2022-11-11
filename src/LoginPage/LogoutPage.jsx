@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 
+import { useDispatch } from 'react-redux';
+
 import { useRef, useEffect } from 'react';
+
+import { logout } from './slice';
 
 const DeleteAll = styled.div({
   position: 'fixed',
@@ -23,11 +27,17 @@ const Container = styled.div({
 });
 
 export default function LogoutPage({ onClick }) {
+  const dispatch = useDispatch();
+
   const refLogout = useRef();
 
   function listener({ target }) {
     if (refLogout.current.contains(target)) return;
     onClick();
+  }
+
+  function handleClickLogout() {
+    dispatch(logout());
   }
 
   useEffect(() => {
@@ -51,7 +61,10 @@ export default function LogoutPage({ onClick }) {
           X
         </button>
         <div>LogoutPage</div>
-        <button type="button">
+        <button
+          type="button"
+          onClick={handleClickLogout}
+        >
           Log out
         </button>
       </Container>
