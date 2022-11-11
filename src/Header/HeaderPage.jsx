@@ -12,6 +12,7 @@ import TitleContainer from './TitleContainer';
 import SearchBarContainer from './SearchBarContainer';
 import PurchaseContainer from './PurchaseContainer';
 import LoginPage from '../LoginPage/LoginPage';
+import LogoutPage from '../LoginPage/LogoutPage';
 
 import { get } from '../utils';
 
@@ -29,15 +30,6 @@ const Container = styled.div({
   color: '#EAEAEA',
   backgroundColor: '#000000',
 });
-
-function LogoutPage() {
-  return (
-    <>
-      <div>LogoutPage</div>
-      <div>Log out</div>
-    </>
-  );
-}
 
 export default function HeaderPage() {
   const dispatch = useDispatch();
