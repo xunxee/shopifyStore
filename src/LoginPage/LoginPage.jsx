@@ -46,7 +46,12 @@ export default function LoginPage({ onClick }) {
         data-testid="LoginPage"
         ref={refLogin}
       >
-        <button type="button">X</button>
+        <button
+          type="button"
+          onClick={onClick}
+        >
+          X
+        </button>
         <div>Logo</div>
         <LoginFormContainer />
       </Container>
