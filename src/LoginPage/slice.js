@@ -4,18 +4,20 @@ import { postLogin } from '../services/api';
 
 import { saveItem } from '../services/storage';
 
+const initialLoginFields = {
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: '',
+  error: '',
+};
+
 const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
     isLoginModalOpen: false,
     isLogin: true,
-    loginFields: {
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: '',
-      error: '',
-    },
+    loginFields: initialLoginFields,
     refreshToken: '',
     accountInfo: {
       uid: '',
@@ -46,6 +48,13 @@ const { actions, reducer } = createSlice({
           ...loginFields,
           [name]: value,
         },
+      };
+    },
+
+    clearLoginFields(state) {
+      return {
+        ...state,
+        loginFields: initialLoginFields,
       };
     },
 
@@ -80,6 +89,7 @@ export const {
   setIsLoginModalOpen,
   setIsLogin,
   changeLoginFields,
+  clearLoginFields,
   setRefreshToken,
   logout,
   setAccountInfo,

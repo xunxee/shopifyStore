@@ -6,6 +6,7 @@ import reducer, {
   setIsLoginModalOpen,
   setIsLogin,
   changeLoginFields,
+  clearLoginFields,
   requestLogin,
   setRefreshToken,
   logout,
@@ -117,6 +118,26 @@ describe('reducer', () => {
 
         expect(firstName).toBe('gunhee');
       });
+    });
+  });
+
+  describe('clearLoginFields', () => {
+    it('clears LoginFields', () => {
+      const initialState = {
+        loginFields: {
+          email: 'tester@example.com',
+          password: 'tester',
+          firstName: '',
+          lastName: '',
+        },
+      };
+
+      const { loginFields: { email } } = reducer(
+        initialState,
+        clearLoginFields(),
+      );
+
+      expect(email).toBe('');
     });
   });
 

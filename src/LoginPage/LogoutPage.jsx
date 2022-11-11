@@ -4,7 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import { useRef, useEffect } from 'react';
 
-import { logout } from './slice';
+import {
+  logout,
+  changeLoginFields,
+} from './slice';
 
 const DeleteAll = styled.div({
   position: 'fixed',
@@ -38,6 +41,10 @@ export default function LogoutPage({ onClick }) {
 
   function handleClickLogout() {
     dispatch(logout());
+    dispatch(changeLoginFields({
+      name: 'password',
+      value: '',
+    }));
   }
 
   useEffect(() => {
