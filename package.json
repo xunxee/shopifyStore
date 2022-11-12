@@ -62,7 +62,8 @@
     "test:e2e": "codeceptjs run --steps",
     "test": "npm run coverage && start-server-and-test start http://localhost:8080 test:e2e",
     "lint": "eslint --ext js,jsx .",
-    "ci": "start-server-and-test start http://localhost:8080 test:e2e"
+    "ci": "start-server-and-test start http://localhost:8080 test:e2e",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
