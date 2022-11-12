@@ -50,7 +50,8 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "webpack serve --mode development"
+    "start": "webpack serve --mode development",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
