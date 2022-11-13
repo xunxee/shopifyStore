@@ -1,5 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
   setIsLoginModalOpen,
   logout,
@@ -53,23 +55,23 @@ describe('HeaderPage', () => {
   });
 
   describe('modal', () => {
-    context('when logged in', () => {
-      beforeEach(() => {
-        useSelector.mockImplementation((selector) => selector({
-          login: {
-            isLoginModalOpen: true,
-            loginFields: {
-              email: '',
-              password: '',
-              firstName: '',
-              lastName: '',
-              error: '',
-            },
-            refreshToken: '',
+    beforeEach(() => {
+      useSelector.mockImplementation((selector) => selector({
+        login: {
+          isLoginModalOpen: true,
+          loginFields: {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            error: '',
           },
-        }));
-      });
+          refreshToken: given.refreshToken,
+        },
+      }));
+    });
 
+    context('when logged in', () => {
       it('renders LoginPage', () => {
         const { queryByPlaceholderText } = render((
           <HeaderPage />
@@ -80,21 +82,7 @@ describe('HeaderPage', () => {
     });
 
     context('when logged out', () => {
-      beforeEach(() => {
-        useSelector.mockImplementation((selector) => selector({
-          login: {
-            isLoginModalOpen: true,
-            loginFields: {
-              email: '',
-              password: '',
-              firstName: '',
-              lastName: '',
-              error: '',
-            },
-            refreshToken: 'REFRESH_TOKEN',
-          },
-        }));
-      });
+      given('refreshToken', () => 'REFRESH_TOKEN');
 
       it('renders LogoutPage', () => {
         const { queryByText } = render((
