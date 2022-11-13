@@ -4,14 +4,21 @@ import { useRef, useEffect } from 'react';
 
 import LoginFormContainer from './LoginFormContainer';
 
-const DeleteAll = styled.div({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  backdropFilter: 'blur(0.8px)',
-});
+const DeleteAll = styled.div(
+  {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backdropFilter: 'blur(0.8px)',
+  },
+  ({ 'data-testid': name }) => (
+    name === 'outsideTheModal'
+      ? { backdropFilter: 'blur(0.8px)' }
+      : { backdropFilter: 'blur(0px)' }
+  ),
+);
 
 const Container = styled.div(
   {
@@ -75,24 +82,26 @@ export default function LoginPage({
         </DeleteAll>
       )}
       {refreshToken && (
-        <Container
-          data-testid="LogoutPage"
-          ref={refLogin}
-        >
-          <button
-            type="button"
-            onClick={onClickToggle}
+        <DeleteAll>
+          <Container
+            data-testid="LogoutPage"
+            ref={refLogin}
           >
-            X
-          </button>
-          <div>LogoutPage</div>
-          <button
-            type="button"
-            onClick={onClickLogout}
-          >
-            Log out
-          </button>
-        </Container>
+            <button
+              type="button"
+              onClick={onClickToggle}
+            >
+              X
+            </button>
+            <div>LogoutPage</div>
+            <button
+              type="button"
+              onClick={onClickLogout}
+            >
+              Log out
+            </button>
+          </Container>
+        </DeleteAll>
       )}
     </>
   );
