@@ -1,5 +1,6 @@
-import { render } from '@testing-library/react';
 import { useSelector } from 'react-redux';
+
+import { render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
 
@@ -71,7 +72,7 @@ describe('LoginPage', () => {
 
         const { getByTestId } = render((
           <LoginPage
-            onClick={handleClick}
+            onClickToggle={handleClick}
           />
         ));
 

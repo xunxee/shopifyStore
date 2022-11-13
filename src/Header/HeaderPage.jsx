@@ -6,13 +6,14 @@ import { useCallback } from 'react';
 
 import {
   setIsLoginModalOpen,
+  logout,
+  clearLoginFields,
 } from '../LoginPage/slice';
 
 import TitleContainer from './TitleContainer';
 import SearchBarContainer from './SearchBarContainer';
 import PurchaseContainer from './PurchaseContainer';
 import LoginPage from '../LoginPage/LoginPage';
-import LogoutPage from '../LoginPage/LogoutPage';
 
 import { get } from '../utils';
 
@@ -46,18 +47,23 @@ export default function HeaderPage() {
 
   const handleToggle = useCallback(() => {
     dispatch(setIsLoginModalOpen());
-  }, [dispatch, refreshToken]);
+  }, [dispatch]);
+
+  const handleLogout = useCallback(() => {
+    dispatch(logout());
+    dispatch(clearLoginFields({
+      name: 'password',
+      value: '',
+    }));
+  }, [dispatch]);
 
   return (
     <Container>
-      {(!refreshToken && isLoginModalOpen) && (
+      {isLoginModalOpen && (
         <LoginPage
-          onClick={handleToggle}
-        />
-      )}
-      {(refreshToken && isLoginModalOpen) && (
-        <LogoutPage
-          onClick={handleToggle}
+          refreshToken={refreshToken}
+          onClickToggle={handleToggle}
+          onClickLogout={handleLogout}
         />
       )}
       <TitleContainer />

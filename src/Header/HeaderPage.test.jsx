@@ -1,6 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsLoginModalOpen } from '../LoginPage/slice';
+import {
+  setIsLoginModalOpen,
+  logout,
+} from '../LoginPage/slice';
 
 import HeaderPage from './HeaderPage';
 
@@ -98,7 +101,9 @@ describe('HeaderPage', () => {
           <HeaderPage />
         ));
 
-        expect(queryByText('Log out')).not.toBeNull();
+        fireEvent.click(queryByText('Log out'));
+
+        expect(dispatch).toBeCalledWith(logout());
       });
     });
   });
