@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 
 import reducer, {
-  setIsLoginModalOpen,
+  setIsAccountModalOpen,
   setIsLogin,
   changeLoginFields,
   clearLoginFields,
@@ -23,7 +23,7 @@ jest.mock('../services/api');
 describe('reducer', () => {
   context('when previous state is undefined', () => {
     const initialState = {
-      isLoginModalOpen: false,
+      isAccountModalOpen: false,
       isLogin: true,
       loginFields: {
         email: '',
@@ -45,16 +45,16 @@ describe('reducer', () => {
     });
   });
 
-  describe('setIsLoginModalOpen', () => {
-    it('changes isLoginModalOpen', () => {
-      const initialState = { isLoginModalOpen: true };
+  describe('setIsAccountModalOpen', () => {
+    it('changes isAccountModalOpen', () => {
+      const initialState = { isAccountModalOpen: true };
 
-      const { isLoginModalOpen } = reducer(
+      const { isAccountModalOpen } = reducer(
         initialState,
-        setIsLoginModalOpen(),
+        setIsAccountModalOpen(),
       );
 
-      expect(isLoginModalOpen).toBe(false);
+      expect(isAccountModalOpen).toBe(false);
     });
   });
 

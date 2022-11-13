@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 
 import {
-  setIsLoginModalOpen,
+  setIsAccountModalOpen,
   logout,
   clearLoginFields,
 } from '../LoginPage/slice';
@@ -40,13 +40,13 @@ export default function HeaderPage() {
     key: 'refreshToken',
   }));
 
-  const isLoginModalOpen = useSelector(get({
+  const isAccountModalOpen = useSelector(get({
     page: 'login',
-    key: 'isLoginModalOpen',
+    key: 'isAccountModalOpen',
   }));
 
   const handleToggle = useCallback(() => {
-    dispatch(setIsLoginModalOpen());
+    dispatch(setIsAccountModalOpen());
   }, [dispatch]);
 
   const handleLogout = useCallback(() => {
@@ -59,7 +59,7 @@ export default function HeaderPage() {
 
   return (
     <Container>
-      {isLoginModalOpen && (
+      {isAccountModalOpen && (
         <LoginPage
           refreshToken={refreshToken}
           onClickToggle={handleToggle}

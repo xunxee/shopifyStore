@@ -15,7 +15,7 @@ const initialLoginFields = {
 const { actions, reducer } = createSlice({
   name: 'login',
   initialState: {
-    isLoginModalOpen: false,
+    isAccountModalOpen: false,
     isLogin: true,
     loginFields: initialLoginFields,
     refreshToken: '',
@@ -24,11 +24,11 @@ const { actions, reducer } = createSlice({
     },
   },
   reducers: {
-    setIsLoginModalOpen(state) {
-      const { isLoginModalOpen } = state;
+    setIsAccountModalOpen(state) {
+      const { isAccountModalOpen } = state;
       return {
         ...state,
-        isLoginModalOpen: !isLoginModalOpen,
+        isAccountModalOpen: !isAccountModalOpen,
       };
     },
 
@@ -86,7 +86,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  setIsLoginModalOpen,
+  setIsAccountModalOpen,
   setIsLogin,
   changeLoginFields,
   clearLoginFields,
@@ -115,7 +115,7 @@ export function requestLogin() {
 
       dispatch(setRefreshToken(refreshToken));
       dispatch(setAccountInfo(uid));
-      dispatch(setIsLoginModalOpen());
+      dispatch(setIsAccountModalOpen());
     } catch (error) {
       dispatch(changeLoginFields({
         name: 'error', value: 'Check your ID or password',

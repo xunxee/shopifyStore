@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  setIsLoginModalOpen,
+  setIsAccountModalOpen,
   logout,
 } from '../LoginPage/slice';
 
@@ -51,14 +51,14 @@ describe('HeaderPage', () => {
       { name: 'circleUser' },
     ));
 
-    expect(dispatch).toBeCalledWith(setIsLoginModalOpen());
+    expect(dispatch).toBeCalledWith(setIsAccountModalOpen());
   });
 
   describe('modal', () => {
     beforeEach(() => {
       useSelector.mockImplementation((selector) => selector({
         login: {
-          isLoginModalOpen: true,
+          isAccountModalOpen: true,
           loginFields: {
             email: '',
             password: '',
