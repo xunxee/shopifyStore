@@ -5,11 +5,25 @@ import { postLogin } from '../services/api';
 import { saveItem } from '../services/storage';
 
 const initialLoginFields = {
-  email: '',
-  password: '',
-  firstName: '',
-  lastName: '',
-  error: '',
+  email: {
+    value: '',
+    checkMessage: '',
+  },
+  password: {
+    value: '',
+    checkMessage: '',
+  },
+  firstName: {
+    value: '',
+    checkMessage: '',
+  },
+  lastName: {
+    value: '',
+    checkMessage: '',
+  },
+  error: {
+    value: '',
+  },
 };
 
 const { actions, reducer } = createSlice({
@@ -42,11 +56,15 @@ const { actions, reducer } = createSlice({
 
     changeLoginFields(state, { payload: { name, value } }) {
       const { loginFields } = state;
+
       return {
         ...state,
         loginFields: {
           ...loginFields,
-          [name]: value,
+          [name]: {
+            value,
+            checkMessage: loginFields[name].checkMessage,
+          },
         },
       };
     },
@@ -103,7 +121,10 @@ export function requestLogin() {
 
     const {
       login: {
-        loginFields: { email, password },
+        loginFields: {
+          email: { value: email },
+          password: { value: password },
+        },
       },
     } = getState();
 

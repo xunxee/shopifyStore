@@ -26,11 +26,25 @@ describe('reducer', () => {
       isAccountModalOpen: false,
       isLogin: true,
       loginFields: {
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
-        error: '',
+        email: {
+          value: '',
+          checkMessage: '',
+        },
+        password: {
+          value: '',
+          checkMessage: '',
+        },
+        firstName: {
+          value: '',
+          checkMessage: '',
+        },
+        lastName: {
+          value: '',
+          checkMessage: '',
+        },
+        error: {
+          value: '',
+        },
       },
       refreshToken: '',
       accountInfo: {
@@ -78,8 +92,8 @@ describe('reducer', () => {
       it('changes only email field', () => {
         const initialState = {
           loginFields: {
-            email: 'email',
-            password: 'password',
+            email: { value: 'email' },
+            password: { value: 'password' },
             firstName: '',
             lastName: '',
           },
@@ -93,7 +107,7 @@ describe('reducer', () => {
           }),
         );
 
-        expect(email).toBe('new email');
+        expect(email.value).toBe('new email');
       });
     });
 
@@ -103,7 +117,9 @@ describe('reducer', () => {
           loginFields: {
             email: '',
             password: '',
-            firstName: 'firstName',
+            firstName: {
+              value: 'firstName',
+            },
             lastName: '',
           },
         };
@@ -116,7 +132,7 @@ describe('reducer', () => {
           }),
         );
 
-        expect(firstName).toBe('gunhee');
+        expect(firstName.value).toBe('gunhee');
       });
     });
   });
@@ -125,8 +141,12 @@ describe('reducer', () => {
     it('clears LoginFields', () => {
       const initialState = {
         loginFields: {
-          email: 'tester@example.com',
-          password: 'tester',
+          email: {
+            value: 'tester@example.com',
+          },
+          password: {
+            value: 'tester',
+          },
           firstName: '',
           lastName: '',
         },
@@ -137,7 +157,7 @@ describe('reducer', () => {
         clearLoginFields(),
       );
 
-      expect(email).toBe('');
+      expect(email.value).toBe('');
     });
   });
 

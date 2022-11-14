@@ -10,7 +10,11 @@ const Container = styled.form({
 export default memo(({
   isLogin,
   fields: {
-    email, password, firstName, lastName, error,
+    email: { value: emailValue },
+    password: { value: passwordValue },
+    firstName: { value: firstNameValue },
+    lastName: { value: lastNameValue },
+    error: { value: errorValue },
   },
   onChange,
   onSubmit,
@@ -21,7 +25,7 @@ export default memo(({
 
   return (
     <>
-      {error && <p>{error}</p>}
+      {errorValue && <p>{errorValue}</p>}
       <Container onSubmit={onSubmit}>
         {isLogin || (
           <>
@@ -29,14 +33,14 @@ export default memo(({
               name="lastName"
               type="text"
               placeholder="성(Last Name)"
-              value={lastName}
+              value={lastNameValue}
               onChange={handleChange}
             />
             <input
               name="firstName"
               type="text"
               placeholder="이름(First Name)"
-              value={firstName}
+              value={firstNameValue}
               onChange={handleChange}
             />
           </>
@@ -45,14 +49,14 @@ export default memo(({
           name="email"
           type="email"
           placeholder="Email"
-          value={email}
+          value={emailValue}
           onChange={handleChange}
         />
         <input
           name="password"
           type="password"
           placeholder="Password"
-          value={password}
+          value={passwordValue}
           autoComplete="off"
           onChange={handleChange}
         />

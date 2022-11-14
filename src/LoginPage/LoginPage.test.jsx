@@ -11,10 +11,25 @@ describe('LoginPage', () => {
     login: {
       isLogin: true,
       loginFields: {
-        email: '',
-        password: '',
-        firstName: '',
-        lastName: '',
+        email: {
+          value: '',
+          checkMessage: '',
+        },
+        password: {
+          value: '',
+          checkMessage: '',
+        },
+        firstName: {
+          value: '',
+          checkMessage: '',
+        },
+        lastName: {
+          value: '',
+          checkMessage: '',
+        },
+        error: {
+          value: '',
+        },
       },
     },
   }));

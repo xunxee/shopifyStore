@@ -18,10 +18,25 @@ describe('LoginFormContainer', () => {
       login: {
         isLogin: given.isLogin,
         loginFields: {
-          email: '',
-          password: '',
-          firstName: '',
-          lastName: '',
+          email: {
+            value: '',
+            checkMessage: '',
+          },
+          password: {
+            value: '',
+            checkMessage: '',
+          },
+          firstName: {
+            value: '',
+            checkMessage: '',
+          },
+          lastName: {
+            value: '',
+            checkMessage: '',
+          },
+          error: {
+            value: '',
+          },
         },
       },
     }));
