@@ -20,7 +20,7 @@ const DeleteAll = styled.div(({ 'data-testid': name }) => {
     width: '100%',
     height: '100%',
 
-    ...(name === 'LoginPage'
+    ...(name === 'outsideTheModal'
       ? LoginPageLocation : LogoutPageLocation),
   };
 });
@@ -72,46 +72,33 @@ export default function LoginPage({
   }, []);
 
   return (
-    <>
-      {!refreshToken && (
-        <DeleteAll data-testid="outsideTheModal">
-          <Container
-            data-testid="LoginPage"
-            ref={refLogin}
-          >
-            <button
-              type="button"
-              onClick={onClickToggle}
-            >
-              X
-            </button>
-            <div>Logo</div>
-            <LoginFormContainer />
-          </Container>
-        </DeleteAll>
-      )}
-      {refreshToken && (
-        <DeleteAll>
-          <Container
-            data-testid="LogoutPage"
-            ref={refLogin}
-          >
-            <button
-              type="button"
-              onClick={onClickToggle}
-            >
-              X
-            </button>
-            <div>LogoutPage</div>
+    <DeleteAll
+      data-testid={refreshToken ? null : 'outsideTheModal'}
+    >
+      <Container
+        data-testid={refreshToken
+          ? 'LogoutPage' : 'LoginPage'}
+        ref={refLogin}
+      >
+        <button
+          type="button"
+          onClick={onClickToggle}
+        >
+          X
+        </button>
+        <div>{refreshToken ? 'Logo' : 'LogoutPage'}</div>
+        {
+          refreshToken ? (
             <button
               type="button"
               onClick={onClickLogout}
             >
               Log out
             </button>
-          </Container>
-        </DeleteAll>
-      )}
-    </>
+          )
+            : <LoginFormContainer />
+        }
+      </Container>
+    </DeleteAll>
   );
 }
