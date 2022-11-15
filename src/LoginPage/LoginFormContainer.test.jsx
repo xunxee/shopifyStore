@@ -20,23 +20,21 @@ describe('LoginFormContainer', () => {
         loginFields: {
           email: {
             value: '',
-            checkMessage: '',
+            invalidCheckMessage: '',
           },
           password: {
             value: '',
-            checkMessage: '',
+            invalidCheckMessage: '',
           },
           firstName: {
             value: '',
-            checkMessage: '',
+            invalidCheckMessage: '',
           },
           lastName: {
             value: '',
-            checkMessage: '',
+            invalidCheckMessage: '',
           },
-          error: {
-            value: '',
-          },
+          error: '',
         },
       },
     }));
@@ -122,6 +120,19 @@ describe('LoginFormContainer', () => {
       expect(dispatch).toBeCalledWith({
         type: 'login/setIsLogin',
       });
+    });
+
+    it('listens blur events', () => {
+      const { queryByPlaceholderText } = render((
+        <LoginFormContainer />
+      ));
+
+      const inputBox = queryByPlaceholderText('성(Last Name)');
+
+      inputBox.focus();
+      inputBox.blur();
+
+      expect(dispatch).toBeCalled();
     });
   });
 });

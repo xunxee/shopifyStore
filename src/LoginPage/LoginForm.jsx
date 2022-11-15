@@ -14,9 +14,10 @@ export default memo(({
     password: { value: passwordValue },
     firstName: { value: firstNameValue },
     lastName: { value: lastNameValue },
-    error: { value: errorValue },
+    error,
   },
   onChange,
+  onBlur,
   onSubmit,
 }) => {
   function handleChange({ target: { name, value } }) {
@@ -25,7 +26,7 @@ export default memo(({
 
   return (
     <>
-      {errorValue && <p>{errorValue}</p>}
+      {error && <p>{error}</p>}
       <Container onSubmit={onSubmit}>
         {isLogin || (
           <>
@@ -35,6 +36,8 @@ export default memo(({
               placeholder="성(Last Name)"
               value={lastNameValue}
               onChange={handleChange}
+              // onBlur={onBlur}
+              onBlur={onBlur}
             />
             <input
               name="firstName"

@@ -27,9 +27,7 @@ describe('LoginPage', () => {
           value: '',
           checkMessage: '',
         },
-        error: {
-          value: '',
-        },
+        error: '',
       },
     },
   }));

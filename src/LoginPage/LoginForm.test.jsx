@@ -4,10 +4,12 @@ import LoginForm from './LoginForm';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
+  const handleSignUpValid = jest.fn();
   const handleSubmit = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
+    handleSignUpValid.mockClear();
     handleSubmit.mockClear();
   });
 
@@ -17,7 +19,7 @@ describe('LoginForm', () => {
     passwordValue,
     firstNameValue,
     lastNameValue,
-    errorValue,
+    error,
   } = {}) {
     return render((
       <LoginForm
@@ -27,9 +29,10 @@ describe('LoginForm', () => {
           password: { value: passwordValue },
           firstName: { value: firstNameValue },
           lastName: { value: lastNameValue },
-          error: { value: errorValue },
+          error,
         }}
         onChange={handleChange}
+        onBlur={handleSignUpValid}
         onSubmit={handleSubmit}
       />
     ));
@@ -43,7 +46,7 @@ describe('LoginForm', () => {
         container,
       } = renderLoginForm({
         isLogin: true,
-        errorValue: 'not found',
+        error: 'not found',
       });
 
       expect(getByText('not found')).not.toBeNull();
@@ -101,6 +104,19 @@ describe('LoginForm', () => {
       expect(handleChange).toBeCalledWith({
         name: 'lastName', value: '정',
       });
+    });
+
+    it('listens blur events', () => {
+      const { queryByPlaceholderText } = renderLoginForm({
+        isLogin: false,
+      });
+
+      const inputBox = queryByPlaceholderText('성(Last Name)');
+
+      inputBox.focus();
+      inputBox.blur();
+
+      expect(handleSignUpValid).toBeCalled();
     });
 
     it('renders "Sign Up" button', () => {

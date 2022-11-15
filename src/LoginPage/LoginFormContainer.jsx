@@ -35,6 +35,10 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
+  const handleSignUpValid = useCallback(() => {
+    dispatch();
+  }, [dispatch]);
+
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
 
@@ -52,6 +56,7 @@ export default function LoginFormContainer() {
         isLogin={isLogin}
         fields={loginFields}
         onChange={handleChange}
+        onBlur={handleSignUpValid}
         onSubmit={handleSubmit}
       />
       <button
