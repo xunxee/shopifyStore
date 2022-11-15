@@ -4,43 +4,52 @@ import { useRef, useEffect } from 'react';
 
 import LoginFormContainer from './LoginFormContainer';
 
-const DeleteAll = styled.div(
-  {
+const DeleteAll = styled.div(({ 'data-testid': name }) => {
+  const LoginPageLocation = {
+    backdropFilter: 'blur(0.8px)',
+  };
+
+  const LogoutPageLocation = {
+    backdropFilter: 'blur(0px)',
+  };
+
+  return {
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
-    backdropFilter: 'blur(0.8px)',
-  },
-  ({ 'data-testid': name }) => (
-    name === 'outsideTheModal'
-      ? { backdropFilter: 'blur(0.8px)' }
-      : { backdropFilter: 'blur(0px)' }
-  ),
-);
 
-const Container = styled.div(
-  {
+    ...(name === 'LoginPage'
+      ? LoginPageLocation : LogoutPageLocation),
+  };
+});
+
+const Container = styled.div(({ 'data-testid': name }) => {
+  const LoginPageLocation = {
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '418px',
+    height: '420px',
+  };
+
+  const LogoutPageLocation = {
+    top: '74px',
+    right: 0,
+    width: '150px',
+    height: '100px',
+  };
+
+  return {
     position: 'absolute',
     color: '#EAEAEA',
     backgroundColor: '#000000',
-  },
-  ({ 'data-testid': name }) => (
-    name === 'LoginPage' ? ({
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      width: '418px',
-      height: '420px',
-    }) : ({
-      top: '74px',
-      right: 0,
-      width: '150px',
-      height: '100px',
-    })
-  ),
-);
+
+    ...(name === 'LoginPage'
+      ? LoginPageLocation : LogoutPageLocation),
+  };
+});
 
 export default function LoginPage({
   refreshToken,
