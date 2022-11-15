@@ -29,19 +29,19 @@ describe('reducer', () => {
       loginFields: {
         email: {
           value: '',
-          checkMessage: '',
+          invalidCheckMessage: '',
         },
         password: {
           value: '',
-          checkMessage: '',
+          invalidCheckMessage: '',
         },
         firstName: {
           value: '',
-          checkMessage: '',
+          invalidCheckMessage: '',
         },
         lastName: {
           value: '',
-          checkMessage: '',
+          invalidCheckMessage: '',
         },
         error: '',
       },

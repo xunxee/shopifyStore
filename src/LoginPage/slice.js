@@ -7,19 +7,19 @@ import { saveItem } from '../services/storage';
 const initialLoginFields = {
   email: {
     value: '',
-    checkMessage: '',
+    invalidCheckMessage: '',
   },
   password: {
     value: '',
-    checkMessage: '',
+    invalidCheckMessage: '',
   },
   firstName: {
     value: '',
-    checkMessage: '',
+    invalidCheckMessage: '',
   },
   lastName: {
     value: '',
-    checkMessage: '',
+    invalidCheckMessage: '',
   },
   error: '',
 };
@@ -61,7 +61,7 @@ const { actions, reducer } = createSlice({
           ...loginFields,
           [name]: {
             value,
-            checkMessage: loginFields[name].checkMessage,
+            invalidCheckMessage: loginFields[name].invalidCheckMessage,
           },
         },
       };
