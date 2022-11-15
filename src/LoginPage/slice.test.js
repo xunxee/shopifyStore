@@ -273,12 +273,12 @@ describe('actions', () => {
         );
       });
 
-      it('dispatchs changeLoginFields', async () => {
+      it('dispatchs changeLoginErrorMessage', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(changeLoginFields({
+        expect(actions[1]).toEqual(changeLoginErrorMessage({
           name: 'error',
           value: 'Check your ID or password',
         }));

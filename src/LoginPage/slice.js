@@ -129,7 +129,7 @@ export const {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    dispatch(changeLoginFields({
+    dispatch(changeLoginErrorMessage({
       name: 'error', value: 'Loading......',
     }));
 
@@ -152,7 +152,7 @@ export function requestLogin() {
       dispatch(setAccountInfo(uid));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
-      dispatch(changeLoginFields({
+      dispatch(changeLoginErrorMessage({
         name: 'error', value: 'Check your ID or password',
       }));
     }
