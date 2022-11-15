@@ -7,6 +7,7 @@ import LoginForm from './LoginForm';
 
 import {
   setIsLogin,
+  clearLoginFields,
   changeLoginFields,
   requestLogin,
   requestSignup,
@@ -27,6 +28,7 @@ export default function LoginFormContainer() {
 
   const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
+    dispatch(clearLoginFields());
   }, [dispatch]);
 
   const handleChange = useCallback(({ name, value }) => {
