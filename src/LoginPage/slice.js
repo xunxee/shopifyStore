@@ -21,9 +21,7 @@ const initialLoginFields = {
     value: '',
     checkMessage: '',
   },
-  error: {
-    value: '',
-  },
+  error: '',
 };
 
 const { actions, reducer } = createSlice({
@@ -69,6 +67,21 @@ const { actions, reducer } = createSlice({
       };
     },
 
+    changeLoginErrorMessage(
+      state,
+      { payload: { name, value } },
+    ) {
+      const { loginFields } = state;
+
+      return {
+        ...state,
+        loginFields: {
+          ...loginFields,
+          [name]: value,
+        },
+      };
+    },
+
     clearLoginFields(state) {
       return {
         ...state,
@@ -107,6 +120,7 @@ export const {
   setIsAccountModalOpen,
   setIsLogin,
   changeLoginFields,
+  changeLoginErrorMessage,
   clearLoginFields,
   setRefreshToken,
   logout,

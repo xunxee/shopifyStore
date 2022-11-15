@@ -6,6 +6,7 @@ import reducer, {
   setIsAccountModalOpen,
   setIsLogin,
   changeLoginFields,
+  changeLoginErrorMessage,
   clearLoginFields,
   requestLogin,
   setRefreshToken,
@@ -42,9 +43,7 @@ describe('reducer', () => {
           value: '',
           checkMessage: '',
         },
-        error: {
-          value: '',
-        },
+        error: '',
       },
       refreshToken: '',
       accountInfo: {
@@ -108,6 +107,26 @@ describe('reducer', () => {
         );
 
         expect(email.value).toBe('new email');
+      });
+    });
+
+    describe('changeLoginErrorMessage', () => {
+      it('changes login error message', () => {
+        const initialState = {
+          loginFields: {
+            error: '',
+          },
+        };
+
+        const { loginFields: { error } } = reducer(
+          initialState,
+          changeLoginErrorMessage({
+            name: 'error',
+            value: 'Check your ID or password',
+          }),
+        );
+
+        expect(error).toBe('Check your ID or password');
       });
     });
 
