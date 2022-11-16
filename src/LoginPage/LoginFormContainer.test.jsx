@@ -97,7 +97,9 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      expect(container).toHaveTextContent('Passwords must be longer than 7');
+      expect(container).toHaveTextContent(
+        'Passwords must be longer than 7',
+      );
     });
 
     it('renders "Sing Up" button', () => {
@@ -127,7 +129,9 @@ describe('LoginFormContainer', () => {
         <LoginFormContainer />
       ));
 
-      const inputBox = queryByPlaceholderText('성(Last Name)');
+      const inputBox = queryByPlaceholderText(
+        '성(Last Name)',
+      );
 
       inputBox.focus();
       inputBox.blur();

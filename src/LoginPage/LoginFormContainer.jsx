@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
+
 import LoginForm from './LoginForm';
 
 import {
@@ -11,6 +12,7 @@ import {
   changeLoginFields,
   requestLogin,
   requestSignup,
+  checkSignUpValid,
 } from './slice';
 
 export default function LoginFormContainer() {
@@ -35,8 +37,8 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
-  const handleSignUpValid = useCallback(() => {
-    dispatch();
+  const handleSignUpValid = useCallback((name) => {
+    dispatch(checkSignUpValid(name));
   }, [dispatch]);
 
   const handleSubmit = useCallback((e) => {

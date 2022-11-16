@@ -12,6 +12,8 @@ import reducer, {
   setRefreshToken,
   logout,
   setAccountInfo,
+  changeInvalidCheckMessage,
+  checkSignUpValid,
 } from './slice';
 
 import { postLogin } from '../services/api';
@@ -107,6 +109,31 @@ describe('reducer', () => {
         );
 
         expect(email.value).toBe('new email');
+      });
+    });
+
+    describe('changeInvalidCheckMessage', () => {
+      it('changes email invalidCheckMessage', () => {
+        const initialState = {
+          loginFields: {
+            lastName: {
+              value: '',
+              invalidCheckMessage: '',
+            },
+          },
+        };
+
+        const { loginFields: { lastName } } = reducer(
+          initialState,
+          changeInvalidCheckMessage({
+            name: 'lastName',
+            invalidCheckMessage:
+              'Last name is a required field.',
+          }),
+        );
+
+        expect(lastName.invalidCheckMessage)
+          .toBe('Last name is a required field.');
       });
     });
 
@@ -283,6 +310,79 @@ describe('actions', () => {
           value: 'Check your ID or password',
         }));
       });
+    });
+  });
+
+  describe('checkSignUpValid', () => {
+    describe('lastName', () => {
+      context(
+        'when the length of lastName value is 0',
+        () => {
+          beforeEach(() => {
+            store = mockStore({
+              login: {
+                loginFields: {
+                  lastName: {
+                    value: '',
+                    invalidCheckMessage: '',
+                  },
+                },
+              },
+            });
+          });
+
+          it(
+            'changes invalidCheckMessage of lastName',
+            () => {
+              store.dispatch(checkSignUpValid('lastName'));
+
+              const actinos = store.getActions();
+
+              expect(actinos[0]).toEqual(
+                changeInvalidCheckMessage({
+                  name: 'lastName',
+                  invalidCheckMessage:
+                    'lastName is a required field.',
+                }),
+              );
+            },
+          );
+        },
+      );
+      context(
+        'when the length of lastName value is 1',
+        () => {
+          beforeEach(() => {
+            store = mockStore({
+              login: {
+                loginFields: {
+                  lastName: {
+                    value: '정',
+                    invalidCheckMessage: '',
+                  },
+                },
+              },
+            });
+          });
+
+          it(
+            "doesn't changes invalidCheckMessage of lastName",
+            () => {
+              store.dispatch(checkSignUpValid('lastName'));
+
+              const actinos = store.getActions();
+
+              expect(actinos[0]).toEqual(
+                changeInvalidCheckMessage({
+                  name: 'lastName',
+                  invalidCheckMessage:
+                    '',
+                }),
+              );
+            },
+          );
+        },
+      );
     });
   });
 });

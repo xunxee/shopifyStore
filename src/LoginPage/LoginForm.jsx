@@ -24,6 +24,10 @@ export default memo(({
     onChange({ name, value });
   }
 
+  function handleSignUpValid({ target: { name } }) {
+    onBlur(name);
+  }
+
   return (
     <>
       {error && <p>{error}</p>}
@@ -36,8 +40,7 @@ export default memo(({
               placeholder="성(Last Name)"
               value={lastNameValue}
               onChange={handleChange}
-              // onBlur={onBlur}
-              onBlur={onBlur}
+              onBlur={handleSignUpValid}
             />
             <input
               name="firstName"

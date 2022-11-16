@@ -52,7 +52,10 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    changeLoginFields(state, { payload: { name, value } }) {
+    changeLoginFields(
+      state,
+      { payload: { name, value } },
+    ) {
       const { loginFields } = state;
 
       return {
@@ -61,7 +64,26 @@ const { actions, reducer } = createSlice({
           ...loginFields,
           [name]: {
             value,
-            invalidCheckMessage: loginFields[name].invalidCheckMessage,
+            invalidCheckMessage:
+              loginFields[name].invalidCheckMessage,
+          },
+        },
+      };
+    },
+
+    changeInvalidCheckMessage(
+      state,
+      { payload: { name, invalidCheckMessage } },
+    ) {
+      const { loginFields } = state;
+
+      return {
+        ...state,
+        loginFields: {
+          ...loginFields,
+          [name]: {
+            value: loginFields[name].value,
+            invalidCheckMessage,
           },
         },
       };
@@ -120,6 +142,7 @@ export const {
   setIsAccountModalOpen,
   setIsLogin,
   changeLoginFields,
+  changeInvalidCheckMessage,
   changeLoginErrorMessage,
   clearLoginFields,
   setRefreshToken,
@@ -161,6 +184,30 @@ export function requestLogin() {
 
 export function requestSignup() {
   //
+}
+
+export function checkSignUpValid(name) {
+  function validationCheckList(value) {
+    if (!value) return `${name} is a required field.`;
+
+    return '';
+  }
+
+  return (dispatch, getState) => {
+    const {
+      login: {
+        loginFields: {
+          [name]: { value },
+        },
+      },
+    } = getState();
+
+    const invalidCheckMessage = validationCheckList(value);
+
+    dispatch(changeInvalidCheckMessage(
+      { name, invalidCheckMessage },
+    ));
+  };
 }
 
 export default reducer;

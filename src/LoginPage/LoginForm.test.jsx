@@ -53,7 +53,8 @@ describe('LoginForm', () => {
       expect(queryByPlaceholderText('First')).toBeNull();
       expect(queryByPlaceholderText('Last')).toBeNull();
 
-      expect(container).toHaveTextContent('have an account?');
+      expect(container)
+        .toHaveTextContent('have an account?');
     });
 
     it('listens change events for "Log In"', () => {
@@ -71,7 +72,9 @@ describe('LoginForm', () => {
     });
 
     it('renders "Log In" button', () => {
-      const { queryByText } = renderLoginForm({ isLogin: true });
+      const { queryByText } = renderLoginForm(
+        { isLogin: true },
+      );
 
       fireEvent.submit(queryByText('Log In'));
 
@@ -86,10 +89,13 @@ describe('LoginForm', () => {
         container,
       } = renderLoginForm({ isLogin: false });
 
-      expect(queryByPlaceholderText('성(Last Name)')).not.toBeNull();
-      expect(queryByPlaceholderText('이름(First Name)')).not.toBeNull();
+      expect(queryByPlaceholderText('성(Last Name)'))
+        .not.toBeNull();
+      expect(queryByPlaceholderText('이름(First Name)'))
+        .not.toBeNull();
 
-      expect(container).toHaveTextContent('Passwords must be longer than 7');
+      expect(container)
+        .toHaveTextContent('Passwords must be longer than 7');
     });
 
     it('listens change events for "Sign UP"', () => {
@@ -106,25 +112,42 @@ describe('LoginForm', () => {
       });
     });
 
-    it('listens blur events', () => {
-      const { queryByPlaceholderText } = renderLoginForm({
-        isLogin: false,
-      });
-
-      const inputBox = queryByPlaceholderText('성(Last Name)');
-
-      inputBox.focus();
-      inputBox.blur();
-
-      expect(handleSignUpValid).toBeCalled();
-    });
-
     it('renders "Sign Up" button', () => {
-      const { queryByText } = renderLoginForm({ isLogin: false });
+      const { queryByText } = renderLoginForm(
+        { isLogin: false },
+      );
 
       fireEvent.submit(queryByText('Sign Up'));
 
       expect(handleSubmit).toBeCalled();
     });
+
+    it('listens blur events', () => {
+      const { queryByPlaceholderText } = renderLoginForm({
+        isLogin: false,
+        lastNameValue: '',
+      });
+
+      const inputBox = queryByPlaceholderText(
+        '성(Last Name)',
+      );
+
+      inputBox.focus();
+      inputBox.blur();
+
+      expect(handleSignUpValid).toBeCalledWith('lastName');
+    });
+
+    // describe('handleSignUpValid', () => {
+    //   context(
+    //     'when the value of name is lastName',
+    //     () => {
+    //       it('execute the lastName method', () => {
+
+    //         handleSignUpValid('lastName');
+    //       });
+    //     },
+    //   );
+    // });
   });
 });
