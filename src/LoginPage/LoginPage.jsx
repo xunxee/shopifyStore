@@ -4,28 +4,22 @@ import { useRef, useEffect } from 'react';
 
 import LoginFormContainer from './LoginFormContainer';
 
-const DeleteAll = styled.div(({ 'data-testid': name }) => {
-  const LoginPageLocation = {
+const DeleteAll = styled.div((
+  { 'data-testid': name },
+) => ({
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  ...(name === 'outsideTheModal' && {
     backdropFilter: 'blur(0.8px)',
-  };
+  }),
+}));
 
-  const LogoutPageLocation = {
-    backdropFilter: 'blur(0px)',
-  };
-
-  return {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-
-    ...(name === 'outsideTheModal'
-      ? LoginPageLocation : LogoutPageLocation),
-  };
-});
-
-const Container = styled.div(({ 'data-testid': name }) => {
+const Container = styled.div((
+  { 'data-testid': name },
+) => {
   const LoginPageLocation = {
     top: '50%',
     left: '50%',
