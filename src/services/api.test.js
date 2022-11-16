@@ -4,7 +4,7 @@ import {
 } from './api';
 
 import LOGINTOKENS from '../../fixtures/loginTokens';
-import LOGIN_FIELDS from '../../fixtures/loginFields';
+import POST_LOGIN_DATA from '../../fixtures/postLoginData';
 import LOGIN_FAILDATA from '../../fixtures/loginFailData';
 import SIGNUP_FAILDATA from '../../fixtures/signUpFailData';
 
@@ -22,7 +22,7 @@ describe('api', () => {
       });
 
       it('returns loginTokens', async () => {
-        const data = await postLogin(LOGIN_FIELDS);
+        const data = await postLogin(POST_LOGIN_DATA);
 
         expect(data).toEqual(LOGINTOKENS);
       });
@@ -35,7 +35,7 @@ describe('api', () => {
 
       it('throw an error', async () => {
         await expect(async () => {
-          await postLogin(LOGIN_FIELDS);
+          await postLogin(POST_LOGIN_DATA);
         }).rejects.toThrowError(new Error('INVALID_PASSWORD'));
       });
     });
@@ -48,7 +48,7 @@ describe('api', () => {
       });
 
       it('returns loginTokens', async () => {
-        const data = await postSignUp(LOGIN_FIELDS);
+        const data = await postSignUp(POST_LOGIN_DATA);
 
         expect(data).toEqual(LOGINTOKENS);
       });
