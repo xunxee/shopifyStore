@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
+import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
+
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
@@ -17,25 +19,7 @@ describe('LoginFormContainer', () => {
     useSelector.mockImplementation((selector) => selector({
       login: {
         isLogin: given.isLogin,
-        loginFields: {
-          email: {
-            value: '',
-            invalidCheckMessage: '',
-          },
-          password: {
-            value: '',
-            invalidCheckMessage: '',
-          },
-          firstName: {
-            value: '',
-            invalidCheckMessage: '',
-          },
-          lastName: {
-            value: '',
-            invalidCheckMessage: '',
-          },
-          error: '',
-        },
+        loginFields: INITIAL_LOGIN_FIELDS,
       },
     }));
   });

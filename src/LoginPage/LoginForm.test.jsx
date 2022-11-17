@@ -137,17 +137,5 @@ describe('LoginForm', () => {
 
       expect(handleSignUpValid).toBeCalledWith('lastName');
     });
-
-    // describe('handleSignUpValid', () => {
-    //   context(
-    //     'when the value of name is lastName',
-    //     () => {
-    //       it('execute the lastName method', () => {
-
-    //         handleSignUpValid('lastName');
-    //       });
-    //     },
-    //   );
-    // });
   });
 });

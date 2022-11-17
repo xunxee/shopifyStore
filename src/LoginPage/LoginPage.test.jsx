@@ -4,31 +4,15 @@ import { render } from '@testing-library/react';
 
 import LoginPage from './LoginPage';
 
+import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
+
 jest.mock('react-redux');
 
 describe('LoginPage', () => {
   useSelector.mockImplementation((selector) => selector({
     login: {
       isLogin: true,
-      loginFields: {
-        email: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        password: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        firstName: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        lastName: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        error: '',
-      },
+      loginFields: INITIAL_LOGIN_FIELDS,
     },
   }));
 

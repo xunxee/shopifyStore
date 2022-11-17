@@ -18,6 +18,8 @@ import reducer, {
 
 import { postLogin } from '../services/api';
 
+import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
+
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
@@ -28,25 +30,7 @@ describe('reducer', () => {
     const initialState = {
       isAccountModalOpen: false,
       isLogin: true,
-      loginFields: {
-        email: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        password: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        firstName: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        lastName: {
-          value: '',
-          invalidCheckMessage: '',
-        },
-        error: '',
-      },
+      loginFields: INITIAL_LOGIN_FIELDS,
       refreshToken: '',
       accountInfo: {
         uid: '',
