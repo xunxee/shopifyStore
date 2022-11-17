@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotenv = require('dotenv');
 
 module.exports = () => {
@@ -31,6 +31,11 @@ module.exports = () => {
     plugins: [
       new webpack.DefinePlugin({
         'process.env': JSON.stringify(process.env),
+      }),
+      // build 시 index.html 테플릿을 사용하여 html 파일을 생성
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, './public/index.html'),
+        publicPath: '/',
       }),
     ],
   };

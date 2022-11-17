@@ -326,7 +326,7 @@ describe('actions', () => {
                 changeInvalidCheckMessage({
                   name: 'lastName',
                   invalidCheckMessage:
-                    'lastName is a required field.',
+                    'last name is a required field.',
                 }),
               );
             },
@@ -361,6 +361,80 @@ describe('actions', () => {
                   name: 'lastName',
                   invalidCheckMessage:
                     '',
+                }),
+              );
+            },
+          );
+        },
+      );
+    });
+
+    describe('firstName', () => {
+      context(
+        'when the length of firstName value is 0',
+        () => {
+          beforeEach(() => {
+            store = mockStore({
+              login: {
+                loginFields: {
+                  firstName: {
+                    value: '',
+                    invalidCheckMessage: '',
+                  },
+                },
+              },
+            });
+          });
+
+          it(
+            'changes invalidCheckMessage of lastName',
+            () => {
+              store.dispatch(checkSignUpValid('firstName'));
+
+              const actinos = store.getActions();
+
+              expect(actinos[0]).toEqual(
+                changeInvalidCheckMessage({
+                  name: 'firstName',
+                  invalidCheckMessage:
+                    'first name is a required field.',
+                }),
+              );
+            },
+          );
+        },
+      );
+    });
+
+    describe('email', () => {
+      context(
+        'when the length of email value is 0',
+        () => {
+          beforeEach(() => {
+            store = mockStore({
+              login: {
+                loginFields: {
+                  email: {
+                    value: '',
+                    invalidCheckMessage: '',
+                  },
+                },
+              },
+            });
+          });
+
+          it(
+            'changes invalidCheckMessage of email',
+            () => {
+              store.dispatch(checkSignUpValid('email'));
+
+              const actinos = store.getActions();
+
+              expect(actinos[0]).toEqual(
+                changeInvalidCheckMessage({
+                  name: 'email',
+                  invalidCheckMessage:
+                    'email is a required field.',
                 }),
               );
             },

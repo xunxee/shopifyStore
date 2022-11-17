@@ -10,10 +10,22 @@ const Container = styled.form({
 export default memo(({
   isLogin,
   fields: {
-    email: { value: emailValue },
-    password: { value: passwordValue },
-    firstName: { value: firstNameValue },
-    lastName: { value: lastNameValue },
+    email: {
+      value: emailValue,
+      invalidCheckMessage: emailInvalidCheckMessage,
+    },
+    password: {
+      value: passwordValue,
+      invalidCheckMessage: passwordInvalidCheckMessage,
+    },
+    firstName: {
+      value: firstNameValue,
+      invalidCheckMessage: firstNameInvalidCheckMessage,
+    },
+    lastName: {
+      value: lastNameValue,
+      invalidCheckMessage: lastNameInvalidCheckMessage,
+    },
     error,
   },
   onChange,
@@ -42,6 +54,8 @@ export default memo(({
               onChange={handleChange}
               onBlur={handleSignUpValid}
             />
+            {lastNameInvalidCheckMessage
+              && <p>{lastNameInvalidCheckMessage}</p>}
             <input
               name="firstName"
               type="text"
@@ -49,6 +63,8 @@ export default memo(({
               value={firstNameValue}
               onChange={handleChange}
             />
+            {firstNameInvalidCheckMessage
+              && <p>{firstNameInvalidCheckMessage}</p>}
           </>
         )}
         <input
@@ -58,6 +74,8 @@ export default memo(({
           value={emailValue}
           onChange={handleChange}
         />
+        {emailInvalidCheckMessage
+              && <p>{emailInvalidCheckMessage}</p>}
         <input
           name="password"
           type="password"
@@ -66,6 +84,8 @@ export default memo(({
           autoComplete="off"
           onChange={handleChange}
         />
+        {passwordInvalidCheckMessage
+              && <p>{passwordInvalidCheckMessage}</p>}
         <button
           type="submit"
         >

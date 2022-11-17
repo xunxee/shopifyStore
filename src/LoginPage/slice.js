@@ -188,6 +188,14 @@ export function requestSignup() {
 
 export function checkSignUpValid(name) {
   function validationCheckList(value) {
+    if (!value && name === 'lastName') {
+      return 'last name is a required field.';
+    }
+
+    if (!value && name === 'firstName') {
+      return 'first name is a required field.';
+    }
+
     if (!value) return `${name} is a required field.`;
 
     return '';
