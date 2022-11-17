@@ -62,6 +62,7 @@ export default memo(({
               placeholder="이름(First Name)"
               value={firstNameValue}
               onChange={handleChange}
+              onBlur={handleSignUpValid}
             />
             {firstNameInvalidCheckMessage
               && <p>{firstNameInvalidCheckMessage}</p>}
@@ -73,9 +74,11 @@ export default memo(({
           placeholder="Email"
           value={emailValue}
           onChange={handleChange}
+          onBlur={isLogin ? null : handleSignUpValid}
         />
-        {emailInvalidCheckMessage
-              && <p>{emailInvalidCheckMessage}</p>}
+        {isLogin ? null
+          : emailInvalidCheckMessage
+          && <p>{emailInvalidCheckMessage}</p>}
         <input
           name="password"
           type="password"
@@ -83,9 +86,11 @@ export default memo(({
           value={passwordValue}
           autoComplete="off"
           onChange={handleChange}
+          onBlur={isLogin ? null : handleSignUpValid}
         />
-        {passwordInvalidCheckMessage
-              && <p>{passwordInvalidCheckMessage}</p>}
+        {isLogin ? null
+          : passwordInvalidCheckMessage
+          && <p>{passwordInvalidCheckMessage}</p>}
         <button
           type="submit"
         >

@@ -96,6 +96,20 @@ describe('LoginForm', () => {
 
       expect(handleSubmit).toBeCalled();
     });
+
+    describe('invalidCheckMessage', () => {
+      it("doesn't render", () => {
+        const { queryByText } = renderLoginForm({
+          isLogin: true,
+          emailValue: 'tester',
+          emailInvalidCheckMessage: '',
+        });
+
+        expect(queryByText(
+          'email is a required field.',
+        )).toBeNull();
+      });
+    });
   });
 
   context('when registering a member', () => {
@@ -154,128 +168,126 @@ describe('LoginForm', () => {
       expect(handleSignUpValid).toBeCalledWith('lastName');
     });
 
-    describe('invalidCheckMessage', () => {
-      describe('lastName input', () => {
-        context('when it have a value', () => {
-          it('invalidCheckMessage is not redered', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              lastNameValue: '정',
-              lastNameInvalidCheckMessage: '',
-            });
-
-            expect(queryByText(
-              'lastName is a required field.',
-            )).toBeNull();
+    describe('lastNameInvalidCheckMessage', () => {
+      context('when it have a value', () => {
+        it("doesn't render", () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            lastNameValue: '정',
+            lastNameInvalidCheckMessage: '',
           });
+
+          expect(queryByText(
+            'last name is a required field.',
+          )).toBeNull();
         });
+      });
 
-        context("when it does't have a value", () => {
-          it('renders invalidCheckMessage', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              lastNameValue: '',
-              lastNameInvalidCheckMessage:
-                'last name is a required field.',
-            });
-
-            expect(queryByText(
+      context("when it doesn't have a value", () => {
+        it('renders invalid message', () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            lastNameValue: '',
+            lastNameInvalidCheckMessage:
               'last name is a required field.',
-            )).not.toBeNull();
           });
+
+          expect(queryByText(
+            'last name is a required field.',
+          )).not.toBeNull();
+        });
+      });
+    });
+
+    describe('firstNameInvalidCheckMessage', () => {
+      context('when it have a value', () => {
+        it("doesn't render", () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            firstNameValue: '건희',
+            firstNameInvalidCheckMessage: '',
+          });
+
+          expect(queryByText(
+            'first name is a required field.',
+          )).toBeNull();
         });
       });
 
-      describe('firstName input', () => {
-        context('when it have a value', () => {
-          it('invalidCheckMessage is not redered', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              firstNameValue: '건희',
-              firstNameInvalidCheckMessage: '',
-            });
-
-            expect(queryByText(
+      context("when it doesn't have a value", () => {
+        it('renders invalid message', () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            firstNameValue: '',
+            firstNameInvalidCheckMessage:
               'first name is a required field.',
-            )).toBeNull();
           });
+
+          expect(queryByText(
+            'first name is a required field.',
+          )).not.toBeNull();
         });
+      });
+    });
 
-        context("when it does't have a value", () => {
-          it('renders invalidCheckMessage', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              firstNameValue: '',
-              firstNameInvalidCheckMessage:
-                'first name is a required field.',
-            });
+    describe('emailInvalidCheckMessage', () => {
+      context('when it have a value', () => {
+        it("doesn't render", () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            emailValue: 'tester@example.com',
+            emailInvalidCheckMessage: '',
+          });
 
-            expect(queryByText(
+          expect(queryByText(
+            'email is a required field.',
+          )).toBeNull();
+        });
+      });
+
+      context("when it doesn't have a value", () => {
+        it('renders invalid message', () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            emailValue: '',
+            emailInvalidCheckMessage:
               'first name is a required field.',
-            )).not.toBeNull();
           });
+
+          expect(queryByText(
+            'first name is a required field.',
+          )).not.toBeNull();
+        });
+      });
+    });
+
+    describe('passwordInvalidCheckMessage', () => {
+      context('when it have a value', () => {
+        it("doesn't render", () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            passwordValue: '',
+            passwordInvalidCheckMessage: 'tester',
+          });
+
+          expect(queryByText(
+            'password is a required field.',
+          )).toBeNull();
         });
       });
 
-      describe('email input', () => {
-        context('when it have a value', () => {
-          it('invalidCheckMessage is not redered', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              emailValue: 'tester@example.com',
-              emailInvalidCheckMessage: '',
-            });
-
-            expect(queryByText(
-              'email is a required field.',
-            )).toBeNull();
-          });
-        });
-
-        context("when it does't have a value", () => {
-          it('renders invalidCheckMessage', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              emailValue: '',
-              emailInvalidCheckMessage:
-                'email name is a required field.',
-            });
-
-            expect(queryByText(
-              'email name is a required field.',
-            )).not.toBeNull();
-          });
-        });
-      });
-
-      describe('password input', () => {
-        context('when it have a value', () => {
-          it('invalidCheckMessage is not redered', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              passwordValue: 'tester',
-              passwordInvalidCheckMessage: '',
-            });
-
-            expect(queryByText(
+      context("when it doesn't have a value", () => {
+        it('renders invalid message', () => {
+          const { queryByText } = renderLoginForm({
+            isLogin: false,
+            passwordValue: '',
+            passwordInvalidCheckMessage:
               'password is a required field.',
-            )).toBeNull();
           });
-        });
 
-        context("when it does't have a value", () => {
-          it('renders invalidCheckMessage', () => {
-            const { queryByText } = renderLoginForm({
-              isLogin: false,
-              passwordValue: '',
-              passwordInvalidCheckMessage:
-                'password is a required field.',
-            });
-
-            expect(queryByText(
-              'password is a required field.',
-            )).not.toBeNull();
-          });
+          expect(queryByText(
+            'password is a required field.',
+          )).not.toBeNull();
         });
       });
     });
