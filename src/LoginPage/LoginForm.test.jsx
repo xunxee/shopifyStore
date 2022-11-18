@@ -165,7 +165,9 @@ describe('LoginForm', () => {
       inputBox.focus();
       inputBox.blur();
 
-      expect(handleSignUpValid).toBeCalledWith('lastName');
+      expect(handleSignUpValid).toBeCalledWith({
+        name: 'lastName',
+      });
     });
 
     const inputs = [

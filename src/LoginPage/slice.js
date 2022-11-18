@@ -186,33 +186,27 @@ export function requestSignup() {
   //
 }
 
-export function checkSignUpValid(name) {
-  function validationCheckList(value) {
-    if (!value && name === 'lastName') {
+export function checkSignUpValid({ name, value }) {
+  function validationCheckList({ inputValue }) {
+    if (!inputValue && name === 'lastName') {
       return 'last name is a required field.';
     }
 
-    if (!value && name === 'firstName') {
+    if (!inputValue && name === 'firstName') {
       return 'first name is a required field.';
     }
 
-    if (!value) return `${name} is a required field.`;
+    if (!inputValue) {
+      return `${name} is a required field.`;
+    }
 
     return '';
   }
 
-  return (dispatch, getState) => {
-    const {
-      login: {
-        loginFields: {
-          [name]: { value },
-        },
-      },
-    } = getState();
-
-    const invalidCheckMessage = validationCheckList(
-      value,
-    );
+  return (dispatch) => {
+    const invalidCheckMessage = validationCheckList({
+      inputValue: value,
+    });
 
     dispatch(changeInvalidCheckMessage(
       { name, invalidCheckMessage },

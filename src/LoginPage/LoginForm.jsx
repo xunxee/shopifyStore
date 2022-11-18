@@ -37,7 +37,7 @@ export default memo(({
   }
 
   function handleSignUpValid({ target: { name } }) {
-    onBlur(name);
+    onBlur({ name });
   }
 
   return (

@@ -347,7 +347,10 @@ describe('actions', () => {
           it(
             'changes invalidCheckMessage of lastName',
             () => {
-              store.dispatch(checkSignUpValid('lastName'));
+              store.dispatch(checkSignUpValid({
+                name: 'lastName',
+                value: '',
+              }));
 
               const actinos = store.getActions();
 
@@ -376,7 +379,10 @@ describe('actions', () => {
           it(
             "doesn't changes invalidCheckMessage of lastName",
             () => {
-              store.dispatch(checkSignUpValid('lastName'));
+              store.dispatch(checkSignUpValid({
+                name: 'lastName',
+                value: '정',
+              }));
 
               const actinos = store.getActions();
 
@@ -406,7 +412,10 @@ describe('actions', () => {
           it(
             'changes invalidCheckMessage of lastName',
             () => {
-              store.dispatch(checkSignUpValid('firstName'));
+              store.dispatch(checkSignUpValid({
+                name: 'firstName',
+                value: '',
+              }));
 
               const actinos = store.getActions();
 
@@ -436,7 +445,10 @@ describe('actions', () => {
           it(
             'changes invalidCheckMessage of email',
             () => {
-              store.dispatch(checkSignUpValid('email'));
+              store.dispatch(checkSignUpValid({
+                name: 'email',
+                value: '',
+              }));
 
               const actinos = store.getActions();
 

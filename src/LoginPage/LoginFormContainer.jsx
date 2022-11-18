@@ -37,8 +37,10 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
-  const handleCheckSignUpValid = useCallback((name) => {
-    dispatch(checkSignUpValid(name));
+  const handleCheckSignUpValid = useCallback(({ name }) => {
+    const { [name]: { value } } = loginFields;
+
+    dispatch(checkSignUpValid({ name, value }));
   }, [dispatch]);
 
   const handleSubmit = useCallback((e) => {
