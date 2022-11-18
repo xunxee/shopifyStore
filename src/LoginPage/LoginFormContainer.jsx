@@ -11,7 +11,7 @@ import {
   clearLoginFields,
   changeLoginFields,
   requestLogin,
-  requestSignup,
+  requestSignUp,
   checkSignUpValid,
 } from './slice';
 
@@ -41,7 +41,7 @@ export default function LoginFormContainer() {
     const { [name]: { value } } = loginFields;
 
     dispatch(checkSignUpValid({ name, value }));
-  }, [dispatch]);
+  }, [dispatch, loginFields]);
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ export default function LoginFormContainer() {
       return;
     }
 
-    dispatch(requestSignup());
+    dispatch(requestSignUp());
   }, [dispatch]);
 
   return (

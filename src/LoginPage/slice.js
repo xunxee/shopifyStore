@@ -182,7 +182,7 @@ export function requestLogin() {
   };
 }
 
-export function requestSignup() {
+export function requestSignUp() {
   //
 }
 
@@ -198,6 +198,13 @@ export function checkSignUpValid({ name, value }) {
 
     if (!inputValue) {
       return `${name} is a required field.`;
+    }
+
+    const isEmailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+      .test(value);
+
+    if (name === 'email' && !isEmailCheck) {
+      return 'Email must start with a number or letter and include @.';
     }
 
     return '';

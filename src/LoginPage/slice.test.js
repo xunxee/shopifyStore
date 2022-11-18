@@ -352,9 +352,9 @@ describe('actions', () => {
                 value: '',
               }));
 
-              const actinos = store.getActions();
+              const actions = store.getActions();
 
-              expect(actinos[0]).toEqual(
+              expect(actions[0]).toEqual(
                 changeInvalidCheckMessage({
                   name: 'lastName',
                   invalidCheckMessage:
@@ -384,9 +384,9 @@ describe('actions', () => {
                 value: '정',
               }));
 
-              const actinos = store.getActions();
+              const actions = store.getActions();
 
-              expect(actinos[0]).toEqual(
+              expect(actions[0]).toEqual(
                 changeInvalidCheckMessage({
                   name: 'lastName',
                   invalidCheckMessage:
@@ -417,9 +417,9 @@ describe('actions', () => {
                 value: '',
               }));
 
-              const actinos = store.getActions();
+              const actions = store.getActions();
 
-              expect(actinos[0]).toEqual(
+              expect(actions[0]).toEqual(
                 changeInvalidCheckMessage({
                   name: 'firstName',
                   invalidCheckMessage:
@@ -433,36 +433,55 @@ describe('actions', () => {
     });
 
     describe('email', () => {
-      context(
-        'when the length of email value is 0',
-        () => {
-          beforeEach(() => {
-            store = mockStore({
-              login: makeLoginFields(),
-            });
+      context('when the length of email value is 0', () => {
+        beforeEach(() => {
+          store = mockStore({
+            login: makeLoginFields(),
           });
+        });
 
-          it(
-            'changes invalidCheckMessage of email',
-            () => {
-              store.dispatch(checkSignUpValid({
-                name: 'email',
-                value: '',
-              }));
+        it('changes invalidCheckMessage of email', () => {
+          store.dispatch(checkSignUpValid({
+            name: 'email',
+            value: '',
+          }));
 
-              const actinos = store.getActions();
+          const actions = store.getActions();
 
-              expect(actinos[0]).toEqual(
-                changeInvalidCheckMessage({
-                  name: 'email',
-                  invalidCheckMessage:
-                    'email is a required field.',
-                }),
-              );
-            },
+          expect(actions[0]).toEqual(
+            changeInvalidCheckMessage({
+              name: 'email',
+              invalidCheckMessage:
+                'email is a required field.',
+            }),
           );
-        },
-      );
+        });
+      });
+
+      context('when a invalid value', () => {
+        beforeEach(() => {
+          store = mockStore({
+            login: makeLoginFields(),
+          });
+        });
+
+        it('changes invalidCheckMessage of email', () => {
+          store.dispatch(checkSignUpValid({
+            name: 'email',
+            value: 'tester',
+          }));
+
+          const actions = store.getActions();
+
+          expect(actions[0]).toEqual(
+            changeInvalidCheckMessage({
+              name: 'email',
+              invalidCheckMessage:
+                'Email must start with a number or letter and include @.',
+            }),
+          );
+        });
+      });
     });
   });
 });
