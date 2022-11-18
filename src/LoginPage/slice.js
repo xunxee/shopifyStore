@@ -210,7 +210,9 @@ export function checkSignUpValid(name) {
       },
     } = getState();
 
-    const invalidCheckMessage = validationCheckList(value);
+    const invalidCheckMessage = validationCheckList(
+      value,
+    );
 
     dispatch(changeInvalidCheckMessage(
       { name, invalidCheckMessage },

@@ -298,20 +298,49 @@ describe('actions', () => {
   });
 
   describe('checkSignUpValid', () => {
+    function makeLoginFields({
+      emailValue,
+      emailInvalidCheckMessage,
+      passwordValue,
+      passwordInvalidCheckMessage,
+      firstNameValue,
+      firstNameInvalidCheckMessage,
+      lastNameValue,
+      lastNameInvalidCheckMessage,
+    } = {}) {
+      return ({
+        loginFields: {
+          email: {
+            value: emailValue || '',
+            invalidCheckMessage:
+              emailInvalidCheckMessage || '',
+          },
+          password: {
+            value: passwordValue || '',
+            invalidCheckMessage:
+              passwordInvalidCheckMessage || '',
+          },
+          firstName: {
+            value: firstNameValue || '',
+            invalidCheckMessage:
+              firstNameInvalidCheckMessage || '',
+          },
+          lastName: {
+            value: lastNameValue || '',
+            invalidCheckMessage:
+              lastNameInvalidCheckMessage || '',
+          },
+        },
+      });
+    }
+
     describe('lastName', () => {
       context(
         'when the length of lastName value is 0',
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: {
-                loginFields: {
-                  lastName: {
-                    value: '',
-                    invalidCheckMessage: '',
-                  },
-                },
-              },
+              login: makeLoginFields(),
             });
           });
 
@@ -338,14 +367,9 @@ describe('actions', () => {
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: {
-                loginFields: {
-                  lastName: {
-                    value: '정',
-                    invalidCheckMessage: '',
-                  },
-                },
-              },
+              login: makeLoginFields(
+                { lastNameValue: '정' },
+              ),
             });
           });
 
@@ -375,14 +399,7 @@ describe('actions', () => {
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: {
-                loginFields: {
-                  firstName: {
-                    value: '',
-                    invalidCheckMessage: '',
-                  },
-                },
-              },
+              login: makeLoginFields(),
             });
           });
 
@@ -412,14 +429,7 @@ describe('actions', () => {
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: {
-                loginFields: {
-                  email: {
-                    value: '',
-                    invalidCheckMessage: '',
-                  },
-                },
-              },
+              login: makeLoginFields(),
             });
           });
 
