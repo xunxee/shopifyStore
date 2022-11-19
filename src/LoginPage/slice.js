@@ -189,22 +189,33 @@ export function requestSignUp() {
 export function checkSignUpValid({ name, value }) {
   function validationCheckList({ inputValue }) {
     if (!inputValue && name === 'lastName') {
-      return 'last name is a required field.';
+      return 'Last Name은 필수 입력란입니다.';
     }
 
     if (!inputValue && name === 'firstName') {
-      return 'first name is a required field.';
+      return 'First Name은 필수 입력란입니다.';
     }
 
-    if (!inputValue) {
-      return `${name} is a required field.`;
+    if (!inputValue && name === 'email') {
+      return 'Email은 필수 입력란입니다.';
+    }
+
+    if (!inputValue && name === 'password') {
+      return 'Password는 필수 입력란입니다.';
     }
 
     const isEmailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
       .test(value);
 
     if (name === 'email' && !isEmailCheck) {
-      return 'Email must start with a number or letter and include @.';
+      return 'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.';
+    }
+
+    const isPasswordCheck = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/
+      .test(value);
+
+    if (name === 'password' && !isPasswordCheck) {
+      return 'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.';
     }
 
     return '';

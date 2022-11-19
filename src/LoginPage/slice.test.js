@@ -358,7 +358,7 @@ describe('actions', () => {
                 changeInvalidCheckMessage({
                   name: 'lastName',
                   invalidCheckMessage:
-                    'last name is a required field.',
+                    'Last Name은 필수 입력란입니다.',
                 }),
               );
             },
@@ -423,7 +423,7 @@ describe('actions', () => {
                 changeInvalidCheckMessage({
                   name: 'firstName',
                   invalidCheckMessage:
-                    'first name is a required field.',
+                    'First Name은 필수 입력란입니다.',
                 }),
               );
             },
@@ -452,7 +452,7 @@ describe('actions', () => {
             changeInvalidCheckMessage({
               name: 'email',
               invalidCheckMessage:
-                'email is a required field.',
+                'Email은 필수 입력란입니다.',
             }),
           );
         });
@@ -477,7 +477,59 @@ describe('actions', () => {
             changeInvalidCheckMessage({
               name: 'email',
               invalidCheckMessage:
-                'Email must start with a number or letter and include @.',
+                'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.',
+            }),
+          );
+        });
+      });
+    });
+
+    describe('password', () => {
+      context('when the length of password value is 0', () => {
+        beforeEach(() => {
+          store = mockStore({
+            login: makeLoginFields(),
+          });
+        });
+
+        it('changes invalidCheckMessage of password', () => {
+          store.dispatch(checkSignUpValid({
+            name: 'password',
+            value: '',
+          }));
+
+          const actions = store.getActions();
+
+          expect(actions[0]).toEqual(
+            changeInvalidCheckMessage({
+              name: 'password',
+              invalidCheckMessage:
+                'Password는 필수 입력란입니다.',
+            }),
+          );
+        });
+      });
+
+      context('when a invalid value', () => {
+        beforeEach(() => {
+          store = mockStore({
+            login: makeLoginFields(),
+          });
+        });
+
+        it('change invalidCheckMessage of password', () => {
+          store.dispatch(checkSignUpValid({
+            name: 'password',
+            value: 'tester',
+          }));
+
+          const actions = store.getActions();
+
+          expect(actions[0]).toEqual(
+            changeInvalidCheckMessage({
+              name: 'password',
+              invalidCheckMessage:
+                'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
             }),
           );
         });
