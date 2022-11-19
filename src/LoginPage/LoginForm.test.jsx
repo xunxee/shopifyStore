@@ -31,19 +31,23 @@ describe('LoginForm', () => {
         fields={{
           email: {
             value: emailValue,
-            invalidCheckMessage: emailInvalidCheckMessage,
+            invalidCheckMessage:
+              emailInvalidCheckMessage,
           },
           password: {
             value: passwordValue,
-            invalidCheckMessage: passwordInvalidCheckMessage,
+            invalidCheckMessage:
+              passwordInvalidCheckMessage,
           },
           firstName: {
             value: firstNameValue,
-            invalidCheckMessage: firstNameInvalidCheckMessage,
+            invalidCheckMessage:
+              firstNameInvalidCheckMessage,
           },
           lastName: {
             value: lastNameValue,
-            invalidCheckMessage: lastNameInvalidCheckMessage,
+            invalidCheckMessage:
+              lastNameInvalidCheckMessage,
           },
           error,
         }}

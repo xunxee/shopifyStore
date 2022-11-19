@@ -10,22 +10,10 @@ const Container = styled.form({
 export default memo(({
   isLogin,
   fields: {
-    email: {
-      value: emailValue,
-      invalidCheckMessage: emailInvalidCheckMessage,
-    },
-    password: {
-      value: passwordValue,
-      invalidCheckMessage: passwordInvalidCheckMessage,
-    },
-    firstName: {
-      value: firstNameValue,
-      invalidCheckMessage: firstNameInvalidCheckMessage,
-    },
-    lastName: {
-      value: lastNameValue,
-      invalidCheckMessage: lastNameInvalidCheckMessage,
-    },
+    email,
+    password,
+    firstName,
+    lastName,
     error,
   },
   onChange,
@@ -50,47 +38,47 @@ export default memo(({
               name="lastName"
               type="text"
               placeholder="성(Last Name)"
-              value={lastNameValue}
+              value={lastName.value}
               onChange={handleChange}
               onBlur={handleSignUpValid}
             />
-            {lastNameInvalidCheckMessage
-              && <p>{lastNameInvalidCheckMessage}</p>}
+            {lastName.invalidCheckMessage
+              && <p>{lastName.invalidCheckMessage}</p>}
             <input
               name="firstName"
               type="text"
               placeholder="이름(First Name)"
-              value={firstNameValue}
+              value={firstName.value}
               onChange={handleChange}
               onBlur={handleSignUpValid}
             />
-            {firstNameInvalidCheckMessage
-              && <p>{firstNameInvalidCheckMessage}</p>}
+            {firstName.invalidCheckMessage
+              && <p>{firstName.invalidCheckMessage}</p>}
           </>
         )}
         <input
           name="email"
           type="email"
           placeholder="Email"
-          value={emailValue}
+          value={email.value}
           onChange={handleChange}
           onBlur={isLogin ? null : handleSignUpValid}
         />
         {isLogin ? null
-          : emailInvalidCheckMessage
-          && <p>{emailInvalidCheckMessage}</p>}
+          : email.invalidCheckMessage
+          && <p>{email.invalidCheckMessage}</p>}
         <input
           name="password"
           type="password"
           placeholder="Password"
-          value={passwordValue}
+          value={password.value}
           autoComplete="off"
           onChange={handleChange}
           onBlur={isLogin ? null : handleSignUpValid}
         />
         {isLogin ? null
-          : passwordInvalidCheckMessage
-          && <p>{passwordInvalidCheckMessage}</p>}
+          : password.invalidCheckMessage
+          && <p>{password.invalidCheckMessage}</p>}
         <button
           type="submit"
         >
