@@ -188,20 +188,15 @@ export function requestSignUp() {
 
 export function checkSignUpValid({ name, value }) {
   function validationCheckList({ inputValue }) {
-    if (!inputValue && name === 'lastName') {
-      return 'Last Name은 필수 입력란입니다.';
-    }
+    if (!inputValue) {
+      const inputList = {
+        lastName: 'Last Name은',
+        firstName: 'First Name은',
+        email: 'Email은',
+        password: 'Password는',
+      };
 
-    if (!inputValue && name === 'firstName') {
-      return 'First Name은 필수 입력란입니다.';
-    }
-
-    if (!inputValue && name === 'email') {
-      return 'Email은 필수 입력란입니다.';
-    }
-
-    if (!inputValue && name === 'password') {
-      return 'Password는 필수 입력란입니다.';
+      return `${inputList[name]} 필수 입력란입니다.`;
     }
 
     const isEmailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
