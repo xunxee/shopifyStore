@@ -298,10 +298,114 @@ describe('actions', () => {
   });
 
   describe('checkSignUpValid', () => {
-    describe('lastName', () => {
-      context(
-        'when the length of lastName value is 0',
-        () => {
+    const profileInputs = [
+      {
+        name: 'lastName',
+        value: '정',
+        invalidCheckMessage:
+          'Last Name은 필수 입력란입니다.',
+      },
+      {
+        name: 'firstName',
+        value: '건희',
+        invalidCheckMessage:
+          'First Name은 필수 입력란입니다.',
+      },
+    ];
+
+    profileInputs.forEach((input) => {
+      describe(input.name, () => {
+        context(
+          `when the length of ${input.name} value is 0`,
+          () => {
+            beforeEach(() => {
+              store = mockStore({
+                login: {
+                  loginFields: INITIAL_LOGIN_FIELDS,
+                },
+              });
+            });
+
+            it(
+              'changes invalidCheckMessage of lastName',
+              () => {
+                store.dispatch(checkSignUpValid({
+                  name: `${input.name}`,
+                  value: '',
+                }));
+
+                const actions = store.getActions();
+
+                expect(actions[0]).toEqual(
+                  changeInvalidCheckMessage({
+                    name: `${input.name}`,
+                    invalidCheckMessage:
+                      `${input.invalidCheckMessage}`,
+                  }),
+                );
+              },
+            );
+          },
+        );
+        context(
+          `when the length of ${input.name} value is 1`,
+          () => {
+            beforeEach(() => {
+              store = mockStore({
+                login: {
+                  loginFields: INITIAL_LOGIN_FIELDS,
+                },
+              });
+            });
+
+            it(
+              `doesn't changes invalidCheckMessage of ${input.name}`,
+              () => {
+                store.dispatch(checkSignUpValid({
+                  name: `${input.name}`,
+                  value: `${input.value}`,
+                }));
+
+                const actions = store.getActions();
+
+                expect(actions[0]).toEqual(
+                  changeInvalidCheckMessage({
+                    name: `${input.name}`,
+                    invalidCheckMessage:
+                      '',
+                  }),
+                );
+              },
+            );
+          },
+        );
+      });
+    });
+
+    const loginInputs = [
+      {
+        name: 'email',
+        defaultMessage:
+          'Email은 필수 입력란입니다.',
+        invalidValue: 'tester',
+        inValidMessage:
+          'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.',
+        validValue: 'tester@example.com',
+      },
+      {
+        name: 'password',
+        defaultMessage:
+          'Password는 필수 입력란입니다.',
+        invalidValue: '123',
+        inValidMessage:
+          'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
+        validValue: 'Tester1234@',
+      },
+    ];
+
+    loginInputs.forEach((input) => {
+      describe(`${input.name}`, () => {
+        context(`when the length of ${input.name} value is 0`, () => {
           beforeEach(() => {
             store = mockStore({
               login: {
@@ -310,30 +414,25 @@ describe('actions', () => {
             });
           });
 
-          it(
-            'changes invalidCheckMessage of lastName',
-            () => {
-              store.dispatch(checkSignUpValid({
-                name: 'lastName',
-                value: '',
-              }));
+          it(`changes invalidCheckMessage of ${input.name}`, () => {
+            store.dispatch(checkSignUpValid({
+              name: `${input.name}`,
+              value: '',
+            }));
 
-              const actions = store.getActions();
+            const actions = store.getActions();
 
-              expect(actions[0]).toEqual(
-                changeInvalidCheckMessage({
-                  name: 'lastName',
-                  invalidCheckMessage:
-                    'Last Name은 필수 입력란입니다.',
-                }),
-              );
-            },
-          );
-        },
-      );
-      context(
-        'when the length of lastName value is 1',
-        () => {
+            expect(actions[0]).toEqual(
+              changeInvalidCheckMessage({
+                name: `${input.name}`,
+                invalidCheckMessage:
+                  `${input.defaultMessage}`,
+              }),
+            );
+          });
+        });
+
+        context('when a invalid value', () => {
           beforeEach(() => {
             store = mockStore({
               login: {
@@ -342,33 +441,25 @@ describe('actions', () => {
             });
           });
 
-          it(
-            "doesn't changes invalidCheckMessage of lastName",
-            () => {
-              store.dispatch(checkSignUpValid({
-                name: 'lastName',
-                value: '정',
-              }));
+          it(`changes invalidCheckMessage of ${input.name}`, () => {
+            store.dispatch(checkSignUpValid({
+              name: `${input.name}`,
+              value: `${input.invalidValue}`,
+            }));
 
-              const actions = store.getActions();
+            const actions = store.getActions();
 
-              expect(actions[0]).toEqual(
-                changeInvalidCheckMessage({
-                  name: 'lastName',
-                  invalidCheckMessage:
-                    '',
-                }),
-              );
-            },
-          );
-        },
-      );
-    });
+            expect(actions[0]).toEqual(
+              changeInvalidCheckMessage({
+                name: `${input.name}`,
+                invalidCheckMessage:
+                  `${input.inValidMessage}`,
+              }),
+            );
+          });
+        });
 
-    describe('firstName', () => {
-      context(
-        'when the length of firstName value is 0',
-        () => {
+        context('when a valid value', () => {
           beforeEach(() => {
             store = mockStore({
               login: {
@@ -377,137 +468,22 @@ describe('actions', () => {
             });
           });
 
-          it(
-            'changes invalidCheckMessage of lastName',
-            () => {
-              store.dispatch(checkSignUpValid({
-                name: 'firstName',
-                value: '',
-              }));
+          it(`changes invalidCheckMessage of ${input.name}`, () => {
+            store.dispatch(checkSignUpValid({
+              name: `${input.name}`,
+              value: `${input.validValue}`,
+            }));
 
-              const actions = store.getActions();
+            const actions = store.getActions();
 
-              expect(actions[0]).toEqual(
-                changeInvalidCheckMessage({
-                  name: 'firstName',
-                  invalidCheckMessage:
-                    'First Name은 필수 입력란입니다.',
-                }),
-              );
-            },
-          );
-        },
-      );
-    });
-
-    describe('email', () => {
-      context('when the length of email value is 0', () => {
-        beforeEach(() => {
-          store = mockStore({
-            login: {
-              loginFields: INITIAL_LOGIN_FIELDS,
-            },
+            expect(actions[0]).toEqual(
+              changeInvalidCheckMessage({
+                name: `${input.name}`,
+                invalidCheckMessage:
+                  '',
+              }),
+            );
           });
-        });
-
-        it('changes invalidCheckMessage of email', () => {
-          store.dispatch(checkSignUpValid({
-            name: 'email',
-            value: '',
-          }));
-
-          const actions = store.getActions();
-
-          expect(actions[0]).toEqual(
-            changeInvalidCheckMessage({
-              name: 'email',
-              invalidCheckMessage:
-                'Email은 필수 입력란입니다.',
-            }),
-          );
-        });
-      });
-
-      context('when a invalid value', () => {
-        beforeEach(() => {
-          store = mockStore({
-            login: {
-              loginFields: INITIAL_LOGIN_FIELDS,
-            },
-          });
-        });
-
-        it('changes invalidCheckMessage of email', () => {
-          store.dispatch(checkSignUpValid({
-            name: 'email',
-            value: 'tester',
-          }));
-
-          const actions = store.getActions();
-
-          expect(actions[0]).toEqual(
-            changeInvalidCheckMessage({
-              name: 'email',
-              invalidCheckMessage:
-                'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.',
-            }),
-          );
-        });
-      });
-    });
-
-    describe('password', () => {
-      context('when the length of password value is 0', () => {
-        beforeEach(() => {
-          store = mockStore({
-            login: {
-              loginFields: INITIAL_LOGIN_FIELDS,
-            },
-          });
-        });
-
-        it('changes invalidCheckMessage of password', () => {
-          store.dispatch(checkSignUpValid({
-            name: 'password',
-            value: '',
-          }));
-
-          const actions = store.getActions();
-
-          expect(actions[0]).toEqual(
-            changeInvalidCheckMessage({
-              name: 'password',
-              invalidCheckMessage:
-                'Password는 필수 입력란입니다.',
-            }),
-          );
-        });
-      });
-
-      context('when a invalid value', () => {
-        beforeEach(() => {
-          store = mockStore({
-            login: {
-              loginFields: INITIAL_LOGIN_FIELDS,
-            },
-          });
-        });
-
-        it('change invalidCheckMessage of password', () => {
-          store.dispatch(checkSignUpValid({
-            name: 'password',
-            value: 'tester',
-          }));
-
-          const actions = store.getActions();
-
-          expect(actions[0]).toEqual(
-            changeInvalidCheckMessage({
-              name: 'password',
-              invalidCheckMessage:
-                'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
-            }),
-          );
         });
       });
     });
