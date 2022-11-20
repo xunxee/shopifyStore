@@ -20,8 +20,8 @@ import { postLogin } from '../services/api';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 
-const middlewares = [thunk];
-const mockStore = configureStore(middlewares);
+const middleware = [thunk];
+const mockStore = configureStore(middleware);
 
 jest.mock('../services/api');
 
@@ -141,7 +141,7 @@ describe('reducer', () => {
       });
     });
 
-    context('when firtName is changed', () => {
+    context('when firstName is changed', () => {
       it('changes only firstName field', () => {
         const initialState = {
           loginFields: {
@@ -298,49 +298,15 @@ describe('actions', () => {
   });
 
   describe('checkSignUpValid', () => {
-    function makeLoginFields({
-      emailValue,
-      emailInvalidCheckMessage,
-      passwordValue,
-      passwordInvalidCheckMessage,
-      firstNameValue,
-      firstNameInvalidCheckMessage,
-      lastNameValue,
-      lastNameInvalidCheckMessage,
-    } = {}) {
-      return ({
-        loginFields: {
-          email: {
-            value: emailValue || '',
-            invalidCheckMessage:
-              emailInvalidCheckMessage || '',
-          },
-          password: {
-            value: passwordValue || '',
-            invalidCheckMessage:
-              passwordInvalidCheckMessage || '',
-          },
-          firstName: {
-            value: firstNameValue || '',
-            invalidCheckMessage:
-              firstNameInvalidCheckMessage || '',
-          },
-          lastName: {
-            value: lastNameValue || '',
-            invalidCheckMessage:
-              lastNameInvalidCheckMessage || '',
-          },
-        },
-      });
-    }
-
     describe('lastName', () => {
       context(
         'when the length of lastName value is 0',
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: makeLoginFields(),
+              login: {
+                loginFields: INITIAL_LOGIN_FIELDS,
+              },
             });
           });
 
@@ -370,9 +336,9 @@ describe('actions', () => {
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: makeLoginFields(
-                { lastNameValue: '정' },
-              ),
+              login: {
+                loginFields: INITIAL_LOGIN_FIELDS,
+              },
             });
           });
 
@@ -405,7 +371,9 @@ describe('actions', () => {
         () => {
           beforeEach(() => {
             store = mockStore({
-              login: makeLoginFields(),
+              login: {
+                loginFields: INITIAL_LOGIN_FIELDS,
+              },
             });
           });
 
@@ -436,7 +404,9 @@ describe('actions', () => {
       context('when the length of email value is 0', () => {
         beforeEach(() => {
           store = mockStore({
-            login: makeLoginFields(),
+            login: {
+              loginFields: INITIAL_LOGIN_FIELDS,
+            },
           });
         });
 
@@ -461,7 +431,9 @@ describe('actions', () => {
       context('when a invalid value', () => {
         beforeEach(() => {
           store = mockStore({
-            login: makeLoginFields(),
+            login: {
+              loginFields: INITIAL_LOGIN_FIELDS,
+            },
           });
         });
 
@@ -488,7 +460,9 @@ describe('actions', () => {
       context('when the length of password value is 0', () => {
         beforeEach(() => {
           store = mockStore({
-            login: makeLoginFields(),
+            login: {
+              loginFields: INITIAL_LOGIN_FIELDS,
+            },
           });
         });
 
@@ -513,7 +487,9 @@ describe('actions', () => {
       context('when a invalid value', () => {
         beforeEach(() => {
           store = mockStore({
-            login: makeLoginFields(),
+            login: {
+              loginFields: INITIAL_LOGIN_FIELDS,
+            },
           });
         });
 
