@@ -187,8 +187,8 @@ export function requestSignUp() {
 }
 
 export function checkSignUpValid({ name, value }) {
-  function validationCheckList({ inputValue }) {
-    if (!inputValue) {
+  function validationCheckList() {
+    if (!value) {
       const inputList = {
         lastName: 'Last Name은',
         firstName: 'First Name은',
@@ -199,27 +199,26 @@ export function checkSignUpValid({ name, value }) {
       return `${inputList[name]} 필수 입력란입니다.`;
     }
 
-    const isEmailCheck = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
-      .test(value);
+    const validChecks = {
+      email() {
+        return (
+          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+            .test(value) ? '' : 'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.'
+        );
+      },
+      password() {
+        return (
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/
+            .test(value) ? '' : 'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.'
+        );
+      },
+    };
 
-    if (name === 'email' && !isEmailCheck) {
-      return 'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.';
-    }
-
-    const isPasswordCheck = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/
-      .test(value);
-
-    if (name === 'password' && !isPasswordCheck) {
-      return 'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.';
-    }
-
-    return '';
+    return validChecks[name] ? validChecks[name]() : '';
   }
 
   return (dispatch) => {
-    const invalidCheckMessage = validationCheckList({
-      inputValue: value,
-    });
+    const invalidCheckMessage = validationCheckList();
 
     dispatch(changeInvalidCheckMessage(
       { name, invalidCheckMessage },
