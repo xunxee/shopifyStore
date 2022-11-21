@@ -307,7 +307,7 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(setRefreshToken());
+        expect(actions[1]).toEqual(setRefreshToken());
       });
     });
 
@@ -329,7 +329,7 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(changeLoginErrorMessage({
+        expect(actions[1]).toEqual(changeLoginErrorMessage({
           name: 'error',
           value: '이미 존재하는 아이디입니다.',
         }));
