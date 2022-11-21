@@ -4,14 +4,17 @@ import { Provider } from 'react-redux';
 
 import { BrowserRouter } from 'react-router-dom';
 
+import { Global } from '@emotion/react';
+
 import store from './store';
 import App from './App';
+import reset from './styles/reset';
 
-const app = ReactDOM.createRoot(document.getElementById('app'));
-app.render((
+ReactDOM.createRoot(document.getElementById('app')).render(
   <Provider store={store}>
     <BrowserRouter>
+      <Global styles={reset} />
       <App />
     </BrowserRouter>
-  </Provider>
-));
+  </Provider>,
+);
