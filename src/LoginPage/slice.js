@@ -4,6 +4,8 @@ import { postLogin } from '../services/api';
 
 import { saveItem } from '../services/storage';
 
+import INPUT_LIST from '../../fixtures/inputList';
+
 const initialLoginFields = {
   email: {
     value: '',
@@ -189,14 +191,7 @@ export function requestSignUp() {
 export function checkSignUpValid({ name, value }) {
   function validationCheckList() {
     if (!value) {
-      const inputList = {
-        lastName: 'Last Name은',
-        firstName: 'First Name은',
-        email: 'Email은',
-        password: 'Password는',
-      };
-
-      return `${inputList[name]} 필수 입력란입니다.`;
+      return `${INPUT_LIST[name]} 필수 입력란입니다.`;
     }
 
     const validChecks = {

@@ -2,6 +2,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import LoginForm from './LoginForm';
 
+import INPUT_LIST from '../../fixtures/inputList';
+
 describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSignUpValid = jest.fn();
@@ -13,42 +15,27 @@ describe('LoginForm', () => {
     handleSubmit.mockClear();
   });
 
+  const fieldState = {
+    value: '',
+    invalidCheckMessage: '',
+  };
+
   function renderLoginForm({
-    isLogin,
-    emailValue,
-    emailInvalidCheckMessage,
-    passwordValue,
-    passwordInvalidCheckMessage,
-    firstNameValue,
-    firstNameInvalidCheckMessage,
-    lastNameValue,
-    lastNameInvalidCheckMessage,
+    isLogin = true,
+    email = fieldState,
+    password = fieldState,
+    firstName = fieldState,
+    lastName = fieldState,
     error,
   } = {}) {
     return render((
       <LoginForm
         isLogin={isLogin}
         fields={{
-          email: {
-            value: emailValue,
-            invalidCheckMessage:
-              emailInvalidCheckMessage,
-          },
-          password: {
-            value: passwordValue,
-            invalidCheckMessage:
-              passwordInvalidCheckMessage,
-          },
-          firstName: {
-            value: firstNameValue,
-            invalidCheckMessage:
-              firstNameInvalidCheckMessage,
-          },
-          lastName: {
-            value: lastNameValue,
-            invalidCheckMessage:
-              lastNameInvalidCheckMessage,
-          },
+          email,
+          password,
+          firstName,
+          lastName,
           error,
         }}
         onChange={handleChange}
@@ -64,10 +51,7 @@ describe('LoginForm', () => {
         getByText,
         queryByPlaceholderText,
         container,
-      } = renderLoginForm({
-        isLogin: true,
-        error: 'not found',
-      });
+      } = renderLoginForm({ error: 'not found' });
 
       expect(getByText('not found')).not.toBeNull();
       expect(queryByPlaceholderText('First')).toBeNull();
@@ -92,9 +76,7 @@ describe('LoginForm', () => {
     });
 
     it('renders "Log In" button', () => {
-      const { queryByText } = renderLoginForm(
-        { isLogin: true },
-      );
+      const { queryByText } = renderLoginForm();
 
       fireEvent.submit(queryByText('Log In'));
 
@@ -104,9 +86,10 @@ describe('LoginForm', () => {
     describe('invalidCheckMessage', () => {
       it("doesn't render", () => {
         const { queryByText } = renderLoginForm({
-          isLogin: true,
-          emailValue: 'tester',
-          emailInvalidCheckMessage: '',
+          email: {
+            value: 'tester',
+            invalidCheckMessage: '',
+          },
         });
 
         expect(queryByText(
@@ -159,7 +142,6 @@ describe('LoginForm', () => {
     it('listens blur events', () => {
       const { queryByPlaceholderText } = renderLoginForm({
         isLogin: false,
-        lastNameValue: '',
       });
 
       const inputBox = queryByPlaceholderText(
@@ -177,19 +159,19 @@ describe('LoginForm', () => {
     const inputs = [
       {
         invalidCheckMessage: 'lastNameInvalidCheckMessage',
-        inputName: 'last name',
+        name: 'lastName',
       },
       {
         invalidCheckMessage: 'firstNameInvalidCheckMessage',
-        inputName: 'first name',
+        name: 'firstName',
       },
       {
         invalidCheckMessage: 'emailInvalidCheckMessage',
-        inputName: 'email',
+        name: 'email',
       },
       {
         invalidCheckMessage: 'passwordInvalidCheckMessage',
-        inputName: 'password',
+        name: 'password',
       },
     ];
 
@@ -199,11 +181,10 @@ describe('LoginForm', () => {
           it("doesn't render", () => {
             const { queryByText } = renderLoginForm({
               isLogin: false,
-              [input.invalidCheckMessage]: '',
             });
 
             expect(queryByText(
-              `${inputs.inputName} is a required field.`,
+              `${INPUT_LIST[input.name]} 필수 입력란입니다.`,
             )).toBeNull();
           });
         });
@@ -212,12 +193,15 @@ describe('LoginForm', () => {
           it('renders invalid message', () => {
             const { queryByText } = renderLoginForm({
               isLogin: false,
-              [input.invalidCheckMessage]:
-                `${inputs.inputName} is a required field.`,
+              [input.name]: {
+                value: '',
+                invalidCheckMessage:
+                  `${INPUT_LIST[input.name]} 필수 입력란입니다.`,
+              },
             });
 
             expect(queryByText(
-              `${inputs.inputName} is a required field.`,
+              `${INPUT_LIST[input.name]} 필수 입력란입니다.`,
             )).not.toBeNull();
           });
         });

@@ -20,8 +20,8 @@ import { postLogin } from '../services/api';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 
-const middleware = [thunk];
-const mockStore = configureStore(middleware);
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
 
 jest.mock('../services/api');
 
