@@ -14,9 +14,10 @@ import reducer, {
   setAccountInfo,
   changeInvalidCheckMessage,
   checkSignUpValid,
+  requestSignUp,
 } from './slice';
 
-import { postLogin } from '../services/api';
+import { postLogin, postSignUp } from '../services/api';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 
@@ -243,22 +244,18 @@ describe('actions', () => {
   let store;
 
   describe('requestLogin', () => {
-    context('when login is successful', () => {
+    context('when login successful', () => {
       beforeEach(() => {
         store = mockStore({
           login: {
-            loginFields: {
-              email: 'tester@example.com',
-              password: 'tester',
-              error: '',
-            },
+            loginFields: INITIAL_LOGIN_FIELDS,
           },
         });
 
         postLogin.mockResolvedValue({});
       });
 
-      it('dispatchs setRefreshToken', async () => {
+      it('dispatch setRefreshToken', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
@@ -271,11 +268,7 @@ describe('actions', () => {
       beforeEach(() => {
         store = mockStore({
           login: {
-            loginFields: {
-              email: 'tester@example.com',
-              password: 'tes',
-              error: '',
-            },
+            loginFields: INITIAL_LOGIN_FIELDS,
           },
         });
 
@@ -284,7 +277,7 @@ describe('actions', () => {
         );
       });
 
-      it('dispatchs changeLoginErrorMessage', async () => {
+      it('dispatch changeLoginErrorMessage', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
@@ -292,6 +285,53 @@ describe('actions', () => {
         expect(actions[1]).toEqual(changeLoginErrorMessage({
           name: 'error',
           value: 'Check your ID or password',
+        }));
+      });
+    });
+  });
+
+  describe('requestSignUp', () => {
+    context('when sign up successful', () => {
+      beforeEach(() => {
+        store = mockStore({
+          login: {
+            loginFields: INITIAL_LOGIN_FIELDS,
+          },
+        });
+
+        postSignUp.mockResolvedValue({});
+      });
+
+      it('dispatch setRefreshToken', async () => {
+        await store.dispatch(requestSignUp());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(setRefreshToken());
+      });
+    });
+
+    context('when sign up fails', () => {
+      beforeEach(() => {
+        store = mockStore({
+          login: {
+            loginFields: INITIAL_LOGIN_FIELDS,
+          },
+        });
+
+        postSignUp.mockRejectedValue(
+          new Error('EMAIL_EXISTS'),
+        );
+      });
+
+      it('dispatch changeLoginErrorMessage', async () => {
+        await store.dispatch(requestSignUp());
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(changeLoginErrorMessage({
+          name: 'error',
+          value: '이미 존재하는 아이디입니다.',
         }));
       });
     });

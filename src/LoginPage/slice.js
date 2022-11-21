@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { postLogin } from '../services/api';
+import { postLogin, postSignUp } from '../services/api';
 
 import { saveItem } from '../services/storage';
 
@@ -171,6 +171,7 @@ export function requestLogin() {
       const { refreshToken, localId: uid } = await postLogin(
         { email, password },
       );
+
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
@@ -185,7 +186,36 @@ export function requestLogin() {
 }
 
 export function requestSignUp() {
-  //
+  return async (dispatch, getState) => {
+    dispatch(changeLoginErrorMessage({
+      name: 'error', value: 'Loading......',
+    }));
+
+    const {
+      login: {
+        loginFields: {
+          email: { value: email },
+          password: { value: password },
+        },
+      },
+    } = getState();
+
+    try {
+      const { refreshToken, localId: uid } = await postSignUp(
+        { email, password },
+      );
+
+      saveItem('refreshToken', refreshToken);
+
+      dispatch(setRefreshToken(refreshToken));
+      dispatch(setAccountInfo(uid));
+      dispatch(setIsAccountModalOpen());
+    } catch (error) {
+      dispatch(changeLoginErrorMessage({
+        name: 'error', value: '이미 존재하는 아이디입니다.',
+      }));
+    }
+  };
 }
 
 export function checkSignUpValid({ name, value }) {

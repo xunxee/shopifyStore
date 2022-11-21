@@ -31,7 +31,7 @@ export async function postLogin({ email, password }) {
 
 export async function postSignUp({ email, password }) {
   const url = 'https://identitytoolkit.googleapis.com/'
-  + `v1/accounts:signUp?key=${API_KEY}}`;
+  + `v1/accounts:signUp?key=${API_KEY}`;
 
   const response = await fetch(url, {
     method: 'POST',

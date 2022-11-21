@@ -28,6 +28,28 @@ export default memo(({
     onBlur({ name });
   }
 
+  function checkDisabled() {
+    if (isLogin) return email.value && password.value;
+
+    const validChecks = {
+      email() {
+        return (
+          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+            .test(email.value)
+        );
+      },
+      password() {
+        return (
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/
+            .test(password.value)
+        );
+      },
+    };
+
+    return (lastName.value && firstName.value
+      && validChecks.email() && validChecks.password());
+  }
+
   return (
     <>
       {error && <p>{error}</p>}
@@ -81,6 +103,7 @@ export default memo(({
           && <p>{password.invalidCheckMessage}</p>}
         <button
           type="submit"
+          disabled={!checkDisabled()}
         >
           {isLogin ? 'Log In' : 'Sign Up'}
         </button>

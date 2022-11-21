@@ -4,28 +4,33 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import LoginFormContainer from './LoginFormContainer';
 
-import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
-
 jest.mock('react-redux');
 
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      login: {
-        isLogin: given.isLogin,
-        loginFields: INITIAL_LOGIN_FIELDS,
-      },
-    }));
-  });
-
   context('with logged in', () => {
     given('isLogin', () => true);
+
+    beforeEach(() => {
+      dispatch.mockClear();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        login: {
+          isLogin: given.isLogin,
+          loginFields: {
+            email: {
+              value: 'tester@example.com',
+            },
+            password: {
+              value: 'Tester123@',
+            },
+          },
+        },
+      }));
+    });
 
     it('renders the login fields', () => {
       const { container } = render((
@@ -59,22 +64,36 @@ describe('LoginFormContainer', () => {
 
       expect(dispatch).toBeCalled();
     });
-
-    it('renders "Sign Up" button', () => {
-      const { getByText } = render((
-        <LoginFormContainer />
-      ));
-
-      fireEvent.click(getByText('Sign Up'));
-
-      expect(dispatch).toBeCalledWith({
-        type: 'login/setIsLogin',
-      });
-    });
   });
 
   context('without logged in', () => {
     given('isLogin', () => false);
+
+    beforeEach(() => {
+      dispatch.mockClear();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        login: {
+          isLogin: given.isLogin,
+          loginFields: {
+            email: {
+              value: 'tester@example.com',
+            },
+            password: {
+              value: 'Tester123456@',
+            },
+            firstName: {
+              value: '건희',
+            },
+            lastName: {
+              value: '정',
+            },
+          },
+        },
+      }));
+    });
 
     it('renders the sign up fields', () => {
       const { container } = render((

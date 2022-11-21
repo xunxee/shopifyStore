@@ -52,7 +52,7 @@ export default function LoginFormContainer() {
     }
 
     dispatch(requestSignUp());
-  }, [dispatch]);
+  }, [dispatch, isLogin]);
 
   return (
     <div>
