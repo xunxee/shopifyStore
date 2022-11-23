@@ -19,13 +19,21 @@ import { get } from '../utils';
 
 const Container = styled.div({
   display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
+  justifyContent: 'center',
   position: 'fixed',
   top: '0',
   left: '0',
   width: '100%',
   minWidth: '950px',
+  backgroundColor: '#000000',
+});
+
+const NavBarLayout = styled.div({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: '100%',
+  maxWidth: '1920px',
   height: '74px',
   padding: '0 1.5rem',
   color: '#EAEAEA',
@@ -66,11 +74,13 @@ export default function HeaderPage() {
           onClickLogout={handleLogout}
         />
       )}
-      <TitleContainer />
-      <SearchBarContainer />
-      <PurchaseContainer
-        onClick={handleToggle}
-      />
+      <NavBarLayout>
+        <TitleContainer />
+        <SearchBarContainer />
+        <PurchaseContainer
+          onClick={handleToggle}
+        />
+      </NavBarLayout>
     </Container>
   );
 }
