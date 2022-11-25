@@ -1,16 +1,26 @@
+import { MemoryRouter } from 'react-router-dom';
+
 import { render } from '@testing-library/react';
 
 import TitleContainer from './TitleContainer';
 
 describe('TitleContainer', () => {
+  function renderTitleContainer() {
+    return render((
+      <MemoryRouter>
+        <TitleContainer />
+      </MemoryRouter>
+    ));
+  }
+
   it('renders the title logo', () => {
-    const { queryByTitle } = render(<TitleContainer />);
+    const { queryByTitle } = renderTitleContainer();
 
     expect(queryByTitle('chair')).not.toBeNull();
   });
 
   it('renders the title list', () => {
-    const { container } = render(<TitleContainer />);
+    const { container } = renderTitleContainer();
 
     const texts = ['All', 'New Arrivals', 'Featured'];
 

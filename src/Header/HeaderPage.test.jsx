@@ -1,3 +1,5 @@
+import { MemoryRouter } from 'react-router-dom';
+
 import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,35 +18,35 @@ describe('HeaderPage', () => {
 
   useDispatch.mockImplementation(() => dispatch);
 
-  it('renders the categories list', () => {
-    const { container } = render((
-      <HeaderPage />
+  function renderHeaderPage() {
+    return render((
+      <MemoryRouter>
+        <HeaderPage />
+      </MemoryRouter>
     ));
+  }
+
+  it('renders the categories list', () => {
+    const { container } = renderHeaderPage();
 
     expect(container).toHaveTextContent('New Arrivals');
   });
 
   it('renders the search bar', () => {
-    const { queryByPlaceholderText } = render((
-      <HeaderPage />
-    ));
+    const { queryByPlaceholderText } = renderHeaderPage();
 
     expect(queryByPlaceholderText('Search for products...'))
       .not.toBeNull();
   });
 
   it('renders the shopping cart', () => {
-    const { queryByTitle } = render((
-      <HeaderPage />
-    ));
+    const { queryByTitle } = renderHeaderPage();
 
     expect(queryByTitle('shoppingCart')).not.toBeNull();
   });
 
   it('renders "circleUser" icon', () => {
-    const { getByRole } = render((
-      <HeaderPage />
-    ));
+    const { getByRole } = renderHeaderPage();
 
     fireEvent.click(getByRole(
       'button',
@@ -73,11 +75,12 @@ describe('HeaderPage', () => {
 
     context('when logged in', () => {
       it('renders LoginPage', () => {
-        const { queryByPlaceholderText } = render((
-          <HeaderPage />
-        ));
+        const {
+          queryByPlaceholderText,
+        } = renderHeaderPage();
 
-        expect(queryByPlaceholderText('Email')).not.toBeNull();
+        expect(queryByPlaceholderText('Email'))
+          .not.toBeNull();
       });
     });
 
@@ -85,9 +88,7 @@ describe('HeaderPage', () => {
       given('refreshToken', () => 'REFRESH_TOKEN');
 
       it('renders LogoutPage', () => {
-        const { queryByText } = render((
-          <HeaderPage />
-        ));
+        const { queryByText } = renderHeaderPage();
 
         fireEvent.click(queryByText('Log out'));
 
