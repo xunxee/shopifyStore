@@ -6,7 +6,7 @@ describe('FooterPage', () => {
   it('renders the FooterTopContainer', () => {
     const { container } = render(<FooterPage />);
 
-    expect(container).toHaveTextContent('Shopify Store');
+    expect(container).toHaveTextContent('Shopify');
   });
 
   it('renders the FooterBottomContainer', () => {

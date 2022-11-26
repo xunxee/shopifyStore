@@ -6,6 +6,6 @@ describe('FooterTopInfo', () => {
   it('renders the Info', () => {
     const { container } = render(<FooterTopInfo />);
 
-    expect(container).toHaveTextContent('Github');
+    expect(container).toHaveTextContent('GitHub');
   });
 });

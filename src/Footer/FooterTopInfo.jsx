@@ -1,8 +1,24 @@
+import styled from '@emotion/styled';
+
+const Container = styled.div({
+  gridColumn: '11 / span 2',
+  '& button': {
+    border: '0',
+    fontSize: '16px',
+    color: '#FFFFFF',
+    backgroundColor: 'transparent',
+    cursor: 'pointer',
+  },
+});
+
 export default function FooterTopInfo() {
   return (
-    <div>
-      <p>Github</p>
-      <p>language</p>
-    </div>
+    <Container>
+      <button
+        type="button"
+      >
+        GitHub
+      </button>
+    </Container>
   );
 }

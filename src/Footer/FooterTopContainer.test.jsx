@@ -6,7 +6,7 @@ describe('FooterTopContainer', () => {
   it('renders the title', () => {
     const { container } = render(<FooterTopContainer />);
 
-    expect(container).toHaveTextContent('Shopify Store');
+    expect(container).toHaveTextContent('Shopify');
   });
 
   it('renders the list', () => {
@@ -18,6 +18,6 @@ describe('FooterTopContainer', () => {
   it('renders the info', () => {
     const { container } = render(<FooterTopContainer />);
 
-    expect(container).toHaveTextContent('Github');
+    expect(container).toHaveTextContent('GitHub');
   });
 });

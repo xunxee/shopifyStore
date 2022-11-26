@@ -6,6 +6,6 @@ describe('FooterTopTitle', () => {
   it('renders the title', () => {
     const { container } = render(<FooterTopTitle />);
 
-    expect(container).toHaveTextContent('Shopify Store');
+    expect(container).toHaveTextContent('Shopify');
   });
 });
