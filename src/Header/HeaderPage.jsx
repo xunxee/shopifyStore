@@ -18,8 +18,6 @@ import LoginPage from '../LoginPage/LoginPage';
 import { get } from '../utils';
 
 const Container = styled.div({
-  display: 'flex',
-  justifyContent: 'center',
   position: 'fixed',
   top: '0',
   left: '0',
@@ -30,12 +28,13 @@ const Container = styled.div({
 
 const NavBarLayout = styled.div({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'space-evenly',
   alignItems: 'center',
-  width: '100%',
+  width: '90%',
   maxWidth: '1920px',
   height: '74px',
-  padding: '0 1.5rem',
+  marginRight: 'auto',
+  marginLeft: 'auto',
   color: '#EAEAEA',
   backgroundColor: '#000000',
 });

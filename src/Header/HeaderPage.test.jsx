@@ -70,6 +70,9 @@ describe('HeaderPage', () => {
           },
           refreshToken: given.refreshToken,
         },
+        header: {
+          isLogoMouseOver: false,
+        },
       }));
     });
 
