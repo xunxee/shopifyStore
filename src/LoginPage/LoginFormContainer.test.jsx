@@ -9,26 +9,28 @@ jest.mock('react-redux');
 describe('LoginFormContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
-    dispatch.mockClear();
-
-    useDispatch.mockImplementation(() => dispatch);
-
-    useSelector.mockImplementation((selector) => selector({
-      login: {
-        isLogin: given.isLogin,
-        loginFields: {
-          email: '',
-          password: '',
-          firstName: '',
-          lastName: '',
-        },
-      },
-    }));
-  });
-
   context('with logged in', () => {
     given('isLogin', () => true);
+
+    beforeEach(() => {
+      dispatch.mockClear();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        login: {
+          isLogin: given.isLogin,
+          loginFields: {
+            email: {
+              value: 'tester@example.com',
+            },
+            password: {
+              value: 'Tester123@',
+            },
+          },
+        },
+      }));
+    });
 
     it('renders the login fields', () => {
       const { container } = render((
@@ -52,17 +54,92 @@ describe('LoginFormContainer', () => {
         payload: { name: 'email', value: 'new email' },
       });
     });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalled();
+    });
   });
 
   context('without logged in', () => {
     given('isLogin', () => false);
+
+    beforeEach(() => {
+      dispatch.mockClear();
+
+      useDispatch.mockImplementation(() => dispatch);
+
+      useSelector.mockImplementation((selector) => selector({
+        login: {
+          isLogin: given.isLogin,
+          loginFields: {
+            email: {
+              value: 'tester@example.com',
+            },
+            password: {
+              value: 'Tester123456@',
+            },
+            firstName: {
+              value: '건희',
+            },
+            lastName: {
+              value: '정',
+            },
+          },
+        },
+      }));
+    });
 
     it('renders the sign up fields', () => {
       const { container } = render((
         <LoginFormContainer />
       ));
 
-      expect(container).toHaveTextContent('Passwords must be longer than 7');
+      expect(container).toHaveTextContent(
+        'Passwords must be longer than 7',
+      );
+    });
+
+    it('renders "Sing Up" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Sign Up'));
+
+      expect(dispatch).toBeCalled();
+    });
+
+    it('renders "Log In" button', () => {
+      const { getByText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.click(getByText('Log In'));
+
+      expect(dispatch).toBeCalledWith({
+        type: 'login/setIsLogin',
+      });
+    });
+
+    it('listens blur events', () => {
+      const { queryByPlaceholderText } = render((
+        <LoginFormContainer />
+      ));
+
+      const inputBox = queryByPlaceholderText(
+        '성(Last Name)',
+      );
+
+      inputBox.focus();
+      inputBox.blur();
+
+      expect(dispatch).toBeCalled();
     });
   });
 });

@@ -6,6 +6,10 @@ function FooterBottomContainer() {
   );
 }
 
+const Container = styled.div({
+  zIndex: '2',
+});
+
 export default function FooterPage() {
   return (
     <>

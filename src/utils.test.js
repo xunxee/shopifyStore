@@ -1,4 +1,4 @@
-import { get } from './utils';
+import { get, TODO } from './utils';
 
 test('get', () => {
   const state = {
@@ -12,4 +12,10 @@ test('get', () => {
 
   expect(a(state)).toBe('gunhee');
   expect(b(state)).toBeUndefined();
+});
+
+test('TODO', () => {
+  const result = TODO();
+
+  expect(result).not.toBeNull();
 });
