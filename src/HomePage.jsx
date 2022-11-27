@@ -1,7 +1,13 @@
+import styled from '@emotion/styled';
+
+const Container = styled.div({
+  flex: '1',
+});
+
 export default function HomePage() {
   return (
-    <div>
+    <Container>
       <div>HomePage</div>
-    </div>
+    </Container>
   );
 }
