@@ -6,10 +6,10 @@ import {
 } from 'react-router-dom';
 
 import HomePage from './HomePage';
-import LoginPage from './LoginPage/LoginPage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import FooterPage from './Footer/FooterPage';
 import HeaderPage from './Header/HeaderPage';
+import ListPage from './List/ListPage';
 
 const Container = styled.div({
   minWidth: '950px',
@@ -23,7 +23,9 @@ export default function App() {
       <HeaderPage />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/search" element={<ListPage />} />
+        <Route path="/search/new" element={<ListPage />} />
+        <Route path="/search/featured" element={<ListPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <FooterPage />

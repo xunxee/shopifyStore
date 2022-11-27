@@ -18,16 +18,23 @@ import LoginPage from '../LoginPage/LoginPage';
 import { get } from '../utils';
 
 const Container = styled.div({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
   position: 'fixed',
   top: '0',
   left: '0',
   width: '100%',
   minWidth: '950px',
+  backgroundColor: '#000000',
+});
+
+const NavBarLayout = styled.div({
+  display: 'flex',
+  justifyContent: 'space-evenly',
+  alignItems: 'center',
+  width: '90%',
+  maxWidth: '1920px',
   height: '74px',
-  padding: '0 1.5rem',
+  marginRight: 'auto',
+  marginLeft: 'auto',
   color: '#EAEAEA',
   backgroundColor: '#000000',
 });
@@ -66,11 +73,13 @@ export default function HeaderPage() {
           onClickLogout={handleLogout}
         />
       )}
-      <TitleContainer />
-      <SearchBarContainer />
-      <PurchaseContainer
-        onClick={handleToggle}
-      />
+      <NavBarLayout>
+        <TitleContainer />
+        <SearchBarContainer />
+        <PurchaseContainer
+          onClick={handleToggle}
+        />
+      </NavBarLayout>
     </Container>
   );
 }
