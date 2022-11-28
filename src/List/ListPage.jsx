@@ -1,7 +1,13 @@
+import styled from '@emotion/styled';
+
+const Container = styled.div({
+  flex: '1',
+});
+
 export default function ListPage() {
   return (
-    <div>
+    <Container>
       <div>ListPage</div>
-    </div>
+    </Container>
   );
 }

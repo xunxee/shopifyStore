@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-import { Link } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
@@ -42,10 +40,22 @@ const Item = styled.li({
   },
 });
 
-export default function TitleContainer() {
+export default function TitleContainer({
+  onClickCategories,
+}) {
+  function handleClick(category) {
+    return (event) => {
+      event.preventDefault();
+      onClickCategories(category);
+    };
+  }
+
   return (
     <Container>
-      <Link to="/">
+      <a
+        href="/"
+        onClick={handleClick('home')}
+      >
         <Logo>
           <FontAwesomeIcon
             className="logo"
@@ -54,16 +64,31 @@ export default function TitleContainer() {
             color="#EAEAEA"
           />
         </Logo>
-      </Link>
+      </a>
       <List>
         <Item>
-          <Link to="/search">All</Link>
+          <a
+            href="/search"
+            onClick={handleClick('All')}
+          >
+            All
+          </a>
         </Item>
         <Item>
-          <Link to="/search/new">New Arrivals</Link>
+          <a
+            href="/search/new"
+            onClick={handleClick('new')}
+          >
+            New Arrivals
+          </a>
         </Item>
         <Item>
-          <Link to="/search/featured">Featured</Link>
+          <a
+            href="/search/featured"
+            onClick={handleClick('featured')}
+          >
+            Featured
+          </a>
         </Item>
       </List>
     </Container>

@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
@@ -40,7 +42,21 @@ const NavBarLayout = styled.div({
 });
 
 export default function HeaderPage() {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
+  const handleClickCategories = useCallback((category) => {
+    const list = {
+      home: '/',
+      All: '/search',
+      new: '/search/new',
+      featured: '/search/featured',
+    };
+
+    const url = list[category];
+    navigate(url);
+  }, [dispatch]);
 
   const refreshToken = useSelector(get({
     page: 'login',
@@ -74,7 +90,9 @@ export default function HeaderPage() {
         />
       )}
       <NavBarLayout>
-        <TitleContainer />
+        <TitleContainer
+          onClickCategories={handleClickCategories}
+        />
         <SearchBarContainer />
         <PurchaseContainer
           onClick={handleToggle}

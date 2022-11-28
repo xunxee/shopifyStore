@@ -26,8 +26,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/search" element={<ListPage />} />
-        <Route path="/search/new" element={<ListPage />} />
-        <Route path="/search/featured" element={<ListPage />} />
+        <Route path="/search/:category" element={<ListPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <FooterPage />
