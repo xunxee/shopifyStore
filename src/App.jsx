@@ -5,7 +5,7 @@ import {
   Route,
 } from 'react-router-dom';
 
-import HomePage from './HomePage';
+import HomePage from './HomePage/HomePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import FooterPage from './Footer/FooterPage';
 import HeaderPage from './Header/HeaderPage';

@@ -8,6 +8,6 @@ describe('ListPage', () => {
       <ListPage />
     ));
 
-    expect(queryByText('ListPage')).not.toBeNull();
+    expect(queryByText('All Categories')).not.toBeNull();
   });
 });
