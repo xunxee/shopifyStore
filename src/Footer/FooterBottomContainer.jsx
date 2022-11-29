@@ -10,27 +10,26 @@ const Container = styled.div({
   width: '90%',
   maxWidth: '1920px',
   height: '100px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
-  borderTop: '1px solid #999999',
+  margin: '0 auto',
+  borderTop: '1px solid #999',
   paddingTop: '1.5rem',
   paddingBottom: '2.5rem',
 });
 
 const RightsReserved = styled.div({
-  color: '#999999',
+  color: '#999',
 });
 
 const Creator = styled.div({
   display: 'flex',
   alignItems: 'flex-end',
-  color: '#FFFFFF',
+  color: '#FFF',
   '& span': {
     paddingRight: '5px',
   },
   '& button': {
     fontSize: '16px',
-    color: '#FFFFFF',
+    color: '#FFF',
     border: '0',
     backgroundColor: 'transparent',
     cursor: 'pointer',
