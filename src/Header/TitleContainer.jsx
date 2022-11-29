@@ -15,9 +15,9 @@ const Logo = styled.div({
   top: '-25%',
   left: 0,
   fontSize: '25px',
-  transitionDuration: '0.3s',
+  transition: '0.5s',
   ':hover': {
-    fontSize: '28px',
+    transform: 'scale(1.3)',
   },
 });
 
@@ -31,11 +31,11 @@ const Item = styled.li({
     marginLeft: '24px',
     fontSize: '18px',
     textDecoration: 'none',
-    color: '#888888',
+    color: '#888',
     cursor: 'pointer',
+    transition: 'color 300ms ease-in-out',
     '&:hover': {
-      color: '#FFFFFF',
-      transition: 'color 300ms ease-in-out',
+      color: '#FFF',
     },
   },
 });
