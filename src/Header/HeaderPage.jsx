@@ -45,17 +45,9 @@ export default function HeaderPage() {
 
   const dispatch = useDispatch();
 
-  const handleClickCategories = useCallback((category) => {
-    const list = {
-      home: '/',
-      All: '/search',
-      new: '/search/new',
-      featured: '/search/featured',
-    };
-
-    const url = list[category];
+  const handleClickCategories = useCallback((url) => {
     navigate(url);
-  }, [dispatch]);
+  }, [navigate]);
 
   const refreshToken = useSelector(get({
     page: 'login',

@@ -6,16 +6,16 @@ import { faChair } from '@fortawesome/free-solid-svg-icons';
 const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
-  position: 'relative',
   width: '100%',
 });
 
 const Logo = styled.div({
-  position: 'absolute',
-  top: '-25%',
-  left: 0,
   fontSize: '25px',
-  transition: '0.5s',
+  pointerEvents: 'none',
+});
+
+const LogoScale = styled.div({
+  transition: 'transform 0.5s ease-out',
   ':hover': {
     transform: 'scale(1.3)',
   },
@@ -23,7 +23,6 @@ const Logo = styled.div({
 
 const List = styled.ul({
   display: 'flex',
-  paddingLeft: '20px',
 });
 
 const Item = styled.li({
@@ -43,10 +42,10 @@ const Item = styled.li({
 export default function TitleContainer({
   onClickCategories,
 }) {
-  function handleClick(category) {
+  function handleClick() {
     return (event) => {
       event.preventDefault();
-      onClickCategories(category);
+      onClickCategories(event.currentTarget.pathname);
     };
   }
 
@@ -54,22 +53,24 @@ export default function TitleContainer({
     <Container>
       <a
         href="/"
-        onClick={handleClick('home')}
+        onClick={handleClick()}
       >
         <Logo>
-          <FontAwesomeIcon
-            className="logo"
-            title="chair"
-            icon={faChair}
-            color="#EAEAEA"
-          />
+          <LogoScale>
+            <FontAwesomeIcon
+              className="logo"
+              title="chair"
+              icon={faChair}
+              color="#EAEAEA"
+            />
+          </LogoScale>
         </Logo>
       </a>
       <List>
         <Item>
           <a
             href="/search"
-            onClick={handleClick('All')}
+            onClick={handleClick()}
           >
             All
           </a>
@@ -77,7 +78,7 @@ export default function TitleContainer({
         <Item>
           <a
             href="/search/new"
-            onClick={handleClick('new')}
+            onClick={handleClick()}
           >
             New Arrivals
           </a>
@@ -85,7 +86,7 @@ export default function TitleContainer({
         <Item>
           <a
             href="/search/featured"
-            onClick={handleClick('featured')}
+            onClick={handleClick()}
           >
             Featured
           </a>

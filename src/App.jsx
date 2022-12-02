@@ -24,9 +24,10 @@ export default function App() {
     <Container>
       <HeaderPage />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<ListPage />} />
-        <Route path="/search/:category" element={<ListPage />} />
+        <Route index element={<HomePage />} />
+        <Route path="search" element={<ListPage />}>
+          <Route path=":category" element={<ListPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <FooterPage />
