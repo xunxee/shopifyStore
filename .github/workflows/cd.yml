@@ -46,4 +46,4 @@ jobs:
         run: npm run test:e2e
         env:
           HEADLESS: true
-          VERCEL_URL: shopify-store-gunhee.vercel.app
+          VERCEL_URL: https://shopify-store-gunhee.vercel.app
