@@ -15,7 +15,7 @@ const Item = styled.div(({ column, rowStart, rowEnd }) => ({
     paddingBottom: '1.5rem',
     border: '0',
     fontSize: '16px',
-    color: '#FFFFFF',
+    color: '#FFF',
     backgroundColor: 'transparent',
     cursor: 'pointer',
   },
