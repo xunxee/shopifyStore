@@ -14,7 +14,7 @@ exports.config = {
   output: './output',
   helpers: {
     Puppeteer: {
-      url: 'http://localhost:8080',
+      url: process.env.VERCEL_URL || 'http://localhost:8080',
       show: true,
       windowSize: '1200x900',
     },
