@@ -11,6 +11,15 @@ import {
 
 import HeaderPage from './HeaderPage';
 
+const mockUsedNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate() {
+    return mockUsedNavigate;
+  },
+}));
+
 jest.mock('react-redux');
 
 describe('HeaderPage', () => {
@@ -54,6 +63,16 @@ describe('HeaderPage', () => {
     ));
 
     expect(dispatch).toBeCalledWith(setIsAccountModalOpen());
+  });
+
+  context('when click All', () => {
+    it('occurs handle event', () => {
+      const { getByText } = renderHeaderPage();
+
+      fireEvent.click(getByText('All'));
+
+      expect(mockUsedNavigate).toBeCalledWith('/search');
+    });
   });
 
   describe('modal', () => {

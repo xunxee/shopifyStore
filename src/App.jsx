@@ -5,13 +5,15 @@ import {
   Route,
 } from 'react-router-dom';
 
-import HomePage from './HomePage';
+import HomePage from './HomePage/HomePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
 import FooterPage from './Footer/FooterPage';
 import HeaderPage from './Header/HeaderPage';
 import ListPage from './List/ListPage';
 
 const Container = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
   minWidth: '950px',
   minHeight: '100vh',
   paddingTop: '74px',
@@ -22,10 +24,10 @@ export default function App() {
     <Container>
       <HeaderPage />
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/search" element={<ListPage />} />
-        <Route path="/search/new" element={<ListPage />} />
-        <Route path="/search/featured" element={<ListPage />} />
+        <Route index element={<HomePage />} />
+        <Route path="search" element={<ListPage />}>
+          <Route path=":category" element={<ListPage />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <FooterPage />

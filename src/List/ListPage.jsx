@@ -1,7 +1,17 @@
+import styled from '@emotion/styled';
+
+import ListContainer from './ListContainer';
+
+const Container = styled.div({
+  justifyContent: 'space-around',
+  minWidth: '950px',
+  backgroundColor: '#000',
+});
+
 export default function ListPage() {
   return (
-    <div>
-      <div>ListPage</div>
-    </div>
+    <Container>
+      <ListContainer />
+    </Container>
   );
 }

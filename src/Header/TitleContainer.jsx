@@ -1,31 +1,28 @@
 import styled from '@emotion/styled';
 
-import { Link } from 'react-router-dom';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
-  position: 'relative',
   width: '100%',
 });
 
 const Logo = styled.div({
-  position: 'absolute',
-  top: '-25%',
-  left: 0,
   fontSize: '25px',
-  transitionDuration: '0.3s',
+  pointerEvents: 'none',
+});
+
+const LogoScale = styled.div({
+  transition: 'transform 0.5s ease-out',
   ':hover': {
-    fontSize: '28px',
+    transform: 'scale(1.3)',
   },
 });
 
 const List = styled.ul({
   display: 'flex',
-  paddingLeft: '20px',
 });
 
 const Item = styled.li({
@@ -33,37 +30,66 @@ const Item = styled.li({
     marginLeft: '24px',
     fontSize: '18px',
     textDecoration: 'none',
-    color: '#888888',
+    color: '#888',
     cursor: 'pointer',
+    transition: 'color 300ms ease-in-out',
     '&:hover': {
-      color: '#FFFFFF',
-      transition: 'color 300ms ease-in-out',
+      color: '#FFF',
     },
   },
 });
 
-export default function TitleContainer() {
+export default function TitleContainer({
+  onClickCategories,
+}) {
+  function handleClick() {
+    return (event) => {
+      event.preventDefault();
+      onClickCategories(event.currentTarget.pathname);
+    };
+  }
+
   return (
     <Container>
-      <Link to="/">
+      <a
+        href="/"
+        onClick={handleClick()}
+      >
         <Logo>
-          <FontAwesomeIcon
-            className="logo"
-            title="chair"
-            icon={faChair}
-            color="#EAEAEA"
-          />
+          <LogoScale>
+            <FontAwesomeIcon
+              className="logo"
+              title="chair"
+              icon={faChair}
+              color="#EAEAEA"
+            />
+          </LogoScale>
         </Logo>
-      </Link>
+      </a>
       <List>
         <Item>
-          <Link to="/search">All</Link>
+          <a
+            href="/search"
+            onClick={handleClick()}
+          >
+            All
+          </a>
         </Item>
         <Item>
-          <Link to="/search/new">New Arrivals</Link>
+          <a
+            href="/search/new"
+            onClick={handleClick()}
+          >
+            New Arrivals
+          </a>
         </Item>
         <Item>
-          <Link to="/search/featured">Featured</Link>
+          <a
+            href="/search/featured"
+            onClick={handleClick()}
+          >
+            Featured
+          </a>
         </Item>
       </List>
     </Container>

@@ -5,10 +5,14 @@ import { render } from '@testing-library/react';
 import TitleContainer from './TitleContainer';
 
 describe('TitleContainer', () => {
+  const handleClick = jest.fn();
+
   function renderTitleContainer() {
     return render((
       <MemoryRouter>
-        <TitleContainer />
+        <TitleContainer
+          onClickCategories={handleClick}
+        />
       </MemoryRouter>
     ));
   }

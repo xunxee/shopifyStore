@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
@@ -23,12 +25,11 @@ const Container = styled.div({
   left: '0',
   width: '100%',
   minWidth: '950px',
-  backgroundColor: '#000000',
+  backgroundColor: '#000',
 });
 
 const NavBarLayout = styled.div({
   display: 'flex',
-  justifyContent: 'space-evenly',
   alignItems: 'center',
   width: '90%',
   maxWidth: '1920px',
@@ -36,11 +37,17 @@ const NavBarLayout = styled.div({
   marginRight: 'auto',
   marginLeft: 'auto',
   color: '#EAEAEA',
-  backgroundColor: '#000000',
+  backgroundColor: '#000',
 });
 
 export default function HeaderPage() {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
+
+  const handleClickCategories = useCallback((url) => {
+    navigate(url);
+  }, [navigate]);
 
   const refreshToken = useSelector(get({
     page: 'login',
@@ -74,7 +81,9 @@ export default function HeaderPage() {
         />
       )}
       <NavBarLayout>
-        <TitleContainer />
+        <TitleContainer
+          onClickCategories={handleClickCategories}
+        />
         <SearchBarContainer />
         <PurchaseContainer
           onClick={handleToggle}
