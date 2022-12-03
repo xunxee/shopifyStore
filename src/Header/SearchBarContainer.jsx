@@ -10,9 +10,9 @@ const Container = styled.div({
   '& input': {
     width: '100%',
     height: '40px',
-    border: '1px solid #333333',
-    backgroundColor: '#000000',
-    color: '#FFFFFF',
+    border: '1px solid #333',
+    backgroundColor: '#000',
+    color: '#FFF',
     fontSize: '15px',
     paddingLeft: '15px',
   },
