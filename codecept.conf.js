@@ -15,6 +15,7 @@ exports.config = {
   helpers: {
     Puppeteer: {
       url: process.env.VERCEL_URL || 'http://localhost:8080',
+      // url: 'https://shopify-store-xunxee.vercel.app',
       show: true,
       windowSize: '1200x900',
     },
