@@ -1,16 +1,21 @@
 import styled from '@emotion/styled';
 
-import LogoContainer from './LogoContainer';
+import FooterTopContainer from './FooterTopContainer';
+import FooterBottomContainer from './FooterBottomContainer';
 
 const Container = styled.div({
-  zIndex: '2',
+  width: '100%',
+  minWidth: '950px',
+  borderTop: '1px solid #999',
+  color: '#EAEAEA',
+  backgroundColor: '#000',
 });
 
 export default function FooterPage() {
   return (
     <Container>
-      <div>footer</div>
-      <LogoContainer />
+      <FooterTopContainer />
+      <FooterBottomContainer />
     </Container>
   );
 }

@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
+  width: '100%',
   display: 'flex',
   justifyContent: 'flex-end',
   '& button': {
@@ -14,18 +15,23 @@ const Container = styled.div({
     border: '0',
     outline: '0',
     backgroundColor: 'transparent',
+    cursor: 'pointer',
   },
 });
 
 export default function PurchaseContainer({ onClick }) {
   return (
     <Container>
-      <FontAwesomeIcon
-        title="shoppingCart"
-        icon={faCartShopping}
-        size="2x"
-        color="#EAEAEA"
-      />
+      <button
+        type="button"
+      >
+        <FontAwesomeIcon
+          title="shoppingCart"
+          icon={faCartShopping}
+          size="2x"
+          color="#EAEAEA"
+        />
+      </button>
       <button
         type="button"
         onClick={onClick}

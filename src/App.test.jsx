@@ -20,7 +20,7 @@ describe('App', () => {
     });
   });
 
-  context('with invaild path', () => {
+  context('with invalid path', () => {
     it('renders the not found page', () => {
       const { container } = renderApp({ path: '/xxx' });
 
