@@ -10,13 +10,11 @@ const Container = styled.div({
 const Item = styled.div(({ column, rowStart, rowEnd }) => ({
   gridColumn: `${column} / span 1`,
   gridRow: `${rowStart} / ${rowEnd}`,
+  paddingBottom: '2rem',
   '& button': {
-    padding: '0',
-    paddingBottom: '1.5rem',
-    border: '0',
+    all: 'unset',
     fontSize: '16px',
     color: '#FFF',
-    backgroundColor: 'transparent',
     cursor: 'pointer',
   },
 }));
