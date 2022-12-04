@@ -34,8 +34,7 @@ const NavBarLayout = styled.div({
   width: '90%',
   maxWidth: '1920px',
   height: '74px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
+  margin: '0 auto',
   color: '#EAEAEA',
   backgroundColor: '#000',
 });
