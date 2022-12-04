@@ -38,7 +38,7 @@ const Container = styled.div((
   return {
     position: 'absolute',
     color: '#EAEAEA',
-    backgroundColor: '#000000',
+    backgroundColor: '#000',
 
     ...(name === 'LoginPage'
       ? LoginPageLocation : LogoutPageLocation),
