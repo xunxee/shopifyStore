@@ -67,11 +67,11 @@ export default function TitleContainer({
       </a>
       <List>
         {[
-          { path: '/search', title: 'All' },
-          { path: '/search/new', title: 'New Arrivals' },
-          { path: '/search/featured', title: 'Featured' },
+          { id: 1, path: '/search', title: 'All' },
+          { id: 2, path: '/search/new', title: 'New Arrivals' },
+          { id: 3, path: '/search/featured', title: 'Featured' },
         ].map((item) => (
-          <Item>
+          <Item key={item.id}>
             <a
               href={item.path}
               onClick={handleClick()}
