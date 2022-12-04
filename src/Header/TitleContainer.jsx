@@ -11,7 +11,6 @@ const Container = styled.div({
 
 const Logo = styled.div({
   fontSize: '25px',
-  pointerEvents: 'none',
 });
 
 const LogoScale = styled.div({
