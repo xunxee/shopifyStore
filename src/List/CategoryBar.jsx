@@ -1,20 +1,19 @@
 import styled from '@emotion/styled';
 
+import LIST_CATEGORIES_STYLE from '../../fixtures/listCategoriesStyle';
+
 const Container = styled.div({
   width: '15%',
 });
 
+const { layout, items } = LIST_CATEGORIES_STYLE;
+
 const Layout = styled.ul({
-  marginTop: '2rem',
-  fontSize: '20px',
-  fontWeight: '700',
+  ...layout,
 });
 
 const Item = styled.li({
-  marginTop: '1.5rem',
-  fontSize: '17px',
-  fontWeight: '500',
-  cursor: 'pointer',
+  ...items,
 });
 
 export default function CategoryBar() {
