@@ -8,6 +8,7 @@ describe('CategoryBar', () => {
       <RelevanceBar />
     ));
 
-    expect(container).toHaveTextContent('Relevance');
+    expect(container).toHaveTextContent('Sort');
+    expect(container).toHaveTextContent('Material');
   });
 });
