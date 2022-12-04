@@ -6,10 +6,10 @@ import ItemPage from './ItemPage';
 
 const Container = styled.div({
   display: 'flex',
+  minWidth: '950px',
   maxWidth: '1300px',
   minHeight: 'calc(100vh - 110px)',
-  marginRight: 'auto',
-  marginLeft: 'auto',
+  margin: '0 auto',
   backgroundColor: 'green',
 });
 
