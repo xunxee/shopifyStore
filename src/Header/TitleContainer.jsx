@@ -11,7 +11,6 @@ const Container = styled.div({
 
 const Logo = styled.div({
   fontSize: '25px',
-  pointerEvents: 'none',
 });
 
 const LogoScale = styled.div({
@@ -67,30 +66,20 @@ export default function TitleContainer({
         </Logo>
       </a>
       <List>
-        <Item>
-          <a
-            href="/search"
-            onClick={handleClick()}
-          >
-            All
-          </a>
-        </Item>
-        <Item>
-          <a
-            href="/search/new"
-            onClick={handleClick()}
-          >
-            New Arrivals
-          </a>
-        </Item>
-        <Item>
-          <a
-            href="/search/featured"
-            onClick={handleClick()}
-          >
-            Featured
-          </a>
-        </Item>
+        {[
+          { path: '/search', title: 'All' },
+          { path: '/search/new', title: 'New Arrivals' },
+          { path: '/search/featured', title: 'Featured' },
+        ].map((item) => (
+          <Item>
+            <a
+              href={item.path}
+              onClick={handleClick()}
+            >
+              {item.title}
+            </a>
+          </Item>
+        ))}
       </List>
     </Container>
   );

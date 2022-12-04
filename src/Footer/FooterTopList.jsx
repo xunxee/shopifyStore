@@ -10,13 +10,11 @@ const Container = styled.div({
 const Item = styled.div(({ column, rowStart, rowEnd }) => ({
   gridColumn: `${column} / span 1`,
   gridRow: `${rowStart} / ${rowEnd}`,
+  paddingBottom: '2rem',
   '& button': {
-    padding: '0',
-    paddingBottom: '1.5rem',
-    border: '0',
+    all: 'unset',
     fontSize: '16px',
     color: '#FFF',
-    backgroundColor: 'transparent',
     cursor: 'pointer',
   },
 }));
@@ -24,41 +22,48 @@ const Item = styled.div(({ column, rowStart, rowEnd }) => ({
 export default function FooterTopList() {
   return (
     <Container>
-      <Item
-        column={1}
-        rowStart={1}
-        rowEnd={2}
-      >
-        <button type="button">Home</button>
-      </Item>
-      <Item
-        column={1}
-        rowStart={2}
-        rowEnd={3}
-      >
-        <button type="button">About</button>
-      </Item>
-      <Item
-        column={1}
-        rowStart={3}
-        rowEnd={4}
-      >
-        <button type="button">Terms of use</button>
-      </Item>
-      <Item
-        column={1}
-        rowStart={4}
-        rowEnd={5}
-      >
-        <button type="button">Shopping</button>
-      </Item>
-      <Item
-        column={2}
-        rowStart={1}
-        rowEnd={2}
-      >
-        <button type="button">Privacy Policy</button>
-      </Item>
+      {[
+        {
+          column: 1,
+          rowStart: 1,
+          rowEnd: 2,
+          title: 'Home',
+        },
+        {
+          column: 1,
+          rowStart: 2,
+          rowEnd: 3,
+          title: 'About',
+        },
+        {
+          column: 1,
+          rowStart: 3,
+          rowEnd: 4,
+          title: 'Terms of use',
+        },
+        {
+          column: 1,
+          rowStart: 4,
+          rowEnd: 5,
+          title: 'Shopping',
+        },
+        {
+          column: 2,
+          rowStart: 1,
+          rowEnd: 2,
+          title: 'Privacy Policy',
+        },
+      ].map((item) => (
+        <Item
+          column={item.column}
+          rowStart={item.rowStart}
+          rowEnd={item.rowEnd}
+        >
+          <button type="button">
+            {item.title}
+          </button>
+        </Item>
+      ))}
     </Container>
   );
 }
