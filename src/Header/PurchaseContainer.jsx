@@ -7,14 +7,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Container = styled.div({
-  width: '100%',
   display: 'flex',
   justifyContent: 'flex-end',
+  width: '100%',
   '& button': {
+    all: 'unset',
     marginLeft: '20px',
-    border: '0',
-    outline: '0',
-    backgroundColor: 'transparent',
     cursor: 'pointer',
   },
 });
