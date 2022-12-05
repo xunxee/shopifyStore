@@ -80,7 +80,7 @@ export default function LoginPage({
         >
           X
         </button>
-        <div>{refreshToken ? 'Logo' : 'LogoutPage'}</div>
+        <div>{refreshToken ? 'LogoutPage' : 'Logo'}</div>
         {
           refreshToken ? (
             <button
