@@ -43,6 +43,7 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         isAccountModalOpen: !isAccountModalOpen,
+        isLogin: true,
       };
     },
 
