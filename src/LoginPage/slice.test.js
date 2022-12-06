@@ -8,6 +8,7 @@ import reducer, {
   changeLoginFields,
   changeLoginErrorMessage,
   clearLoginFields,
+  clearPasswordInvalidCheckMessage,
   requestLogin,
   setRefreshToken,
   logout,
@@ -189,6 +190,25 @@ describe('reducer', () => {
       );
 
       expect(email.value).toBe('');
+    });
+  });
+
+  describe('clearPasswordInvalidCheckMessage', () => {
+    it('clear password invalid check message', () => {
+      const initialState = {
+        loginFields: {
+          password: {
+            invalidCheckMessage: '비밀번호를 입력해주세요',
+          },
+        },
+      };
+
+      const { loginFields: { password } } = reducer(
+        initialState,
+        clearPasswordInvalidCheckMessage(),
+      );
+
+      expect(password.invalidCheckMessage).toBe('');
     });
   });
 

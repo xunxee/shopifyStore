@@ -114,6 +114,20 @@ const { actions, reducer } = createSlice({
       };
     },
 
+    clearPasswordInvalidCheckMessage(state) {
+      const { loginFields } = state;
+      return {
+        ...state,
+        loginFields: {
+          ...loginFields,
+          password: {
+            value: loginFields.password.value,
+            invalidCheckMessage: '',
+          },
+        },
+      };
+    },
+
     setRefreshToken(state, { payload: refreshToken }) {
       return {
         ...state,
@@ -148,6 +162,7 @@ export const {
   changeInvalidCheckMessage,
   changeLoginErrorMessage,
   clearLoginFields,
+  clearPasswordInvalidCheckMessage,
   setRefreshToken,
   logout,
   setAccountInfo,
