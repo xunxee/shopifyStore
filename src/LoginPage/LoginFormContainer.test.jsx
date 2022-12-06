@@ -109,6 +109,30 @@ describe('LoginFormContainer', () => {
       });
     });
 
+    it('listens change events', () => {
+      const { getByPlaceholderText } = render((
+        <LoginFormContainer />
+      ));
+
+      fireEvent.change(getByPlaceholderText('Email'), {
+        target: { value: 'tester@example.com' },
+      });
+
+      fireEvent.change(getByPlaceholderText('Password'), {
+        target: { value: 'Tester@12345' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'login/changeLoginFields',
+        payload: { name: 'password', value: 'Tester@12345' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'login/clearPasswordInvalidCheckMessage',
+        payload: undefined,
+      });
+    });
+
     it('listens blur events', () => {
       const { queryByPlaceholderText } = render((
         <LoginFormContainer />

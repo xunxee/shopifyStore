@@ -8,11 +8,13 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSignUpValid = jest.fn();
   const handleSubmit = jest.fn();
+  const handleInvalidCheckMessage = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
     handleSignUpValid.mockClear();
     handleSubmit.mockClear();
+    handleInvalidCheckMessage.mockClear();
   });
 
   const fieldState = {
@@ -41,6 +43,7 @@ describe('LoginForm', () => {
         onChange={handleChange}
         onBlur={handleSignUpValid}
         onSubmit={handleSubmit}
+        onHandleInvalidCheckMessage={handleInvalidCheckMessage}
       />
     ));
   }
@@ -126,6 +129,56 @@ describe('LoginForm', () => {
 
       expect(handleChange).toBeCalledWith({
         name: 'lastName', value: '정',
+      });
+    });
+
+    it('changes the value of the disabled to false', () => {
+      const { getByPlaceholderText } = renderLoginForm({
+        isLogin: false,
+        firstName: {
+          value: '정',
+        },
+        lastName: {
+          value: '건희',
+        },
+        email: {
+          value: 'tester@example.com',
+        },
+        password: {
+          value: 'Tester@12345',
+        },
+      });
+
+      fireEvent.change(getByPlaceholderText('Password'), {
+        target: { value: 'TesterT@12345' },
+      });
+
+      expect(handleInvalidCheckMessage).toBeCalled();
+    });
+
+    context('when password validity does not match', () => {
+      it('renders invalid message', () => {
+        const { container } = renderLoginForm({
+          isLogin: false,
+          firstName: {
+            value: '정',
+          },
+          lastName: {
+            value: '건희',
+          },
+          email: {
+            value: 'testerexample.com',
+            invalidCheckMessage: 'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.',
+          },
+          password: {
+            value: 'test1234@@',
+            invalidCheckMessage: 'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
+          },
+        });
+
+        expect(container).toHaveTextContent(
+          'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
+        );
       });
     });
 
