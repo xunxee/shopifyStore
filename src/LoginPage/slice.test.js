@@ -21,6 +21,7 @@ import reducer, {
 import { postLogin, postSignUp } from '../services/api';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
+import VALID_FIELDS from '../../fixtures/validFields';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -449,7 +450,7 @@ describe('actions', () => {
           'Email은 필수 입력란입니다.',
         invalidValue: 'tester',
         inValidMessage:
-          'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.',
+          VALID_FIELDS.email.invalidMessage,
         validValue: 'tester@example.com',
       },
       {
@@ -458,7 +459,7 @@ describe('actions', () => {
           'Password는 필수 입력란입니다.',
         invalidValue: '123',
         inValidMessage:
-          'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
+          VALID_FIELDS.password.invalidMessage,
         validValue: 'Tester1234@',
       },
     ];

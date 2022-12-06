@@ -5,6 +5,7 @@ import { postLogin, postSignUp } from '../services/api';
 import { saveItem } from '../services/storage';
 
 import INPUT_LIST from '../../fixtures/inputList';
+import VALID_FIELDS from '../../fixtures/validFields';
 
 const initialLoginFields = {
   email: {
@@ -243,14 +244,14 @@ export function checkSignUpValid({ name, value }) {
     const validChecks = {
       email() {
         return (
-          /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
-            .test(value) ? '' : 'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.'
+          VALID_FIELDS.email.regexps.test(value)
+            ? '' : VALID_FIELDS.email.invalidMessage
         );
       },
       password() {
         return (
-          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#])[\da-zA-Z!@#]{8,}$/
-            .test(value) ? '' : 'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.'
+          VALID_FIELDS.password.regexps.test(value)
+            ? '' : VALID_FIELDS.password.invalidMessage
         );
       },
     };
