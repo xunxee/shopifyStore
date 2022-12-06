@@ -60,6 +60,7 @@ export default function HeaderPage() {
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
+    dispatch(clearLoginFields());
   }, [dispatch]);
 
   const handleLogout = useCallback(() => {
