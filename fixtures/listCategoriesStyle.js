@@ -9,12 +9,19 @@ const listCategoriesStyle = {
     marginTop: '2rem',
     fontSize: '20px',
     fontWeight: '700',
-  },
-  items: {
-    marginTop: '1.5rem',
-    fontSize: '17px',
-    fontWeight: '500',
-    cursor: 'pointer',
+    '& button': {
+      all: 'unset',
+      display: 'block',
+      marginTop: '1.5rem',
+      fontSize: '17px',
+      fontWeight: '700',
+      color: '#696871',
+      cursor: 'pointer',
+      '&:hover': {
+        color: '#333332',
+      },
+    },
+
   },
 };
 
