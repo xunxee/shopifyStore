@@ -2,31 +2,34 @@ import styled from '@emotion/styled';
 
 import LIST_CATEGORIES_STYLE from '../../fixtures/listCategoriesStyle';
 
-const { container, layout, items } = LIST_CATEGORIES_STYLE;
+const { container, layout } = LIST_CATEGORIES_STYLE;
 
-const Container = styled.div({
-  ...container,
-});
+const Container = styled.div(container);
 
-const Layout = styled.ul({
-  ...layout,
-});
+const Layout = styled.ul(layout);
 
-const Item = styled.li({
-  ...items,
-});
+export default function CategoryBar({ onClickCategories }) {
+  function handleClick({ target: { name } }) {
+    onClickCategories(name);
+  }
 
-export default function CategoryBar() {
   return (
     <Container>
       <div>
         <Layout>
           All Categories
           {[
-            { id: 1, title: 'New Arrivals' },
-            { id: 2, title: 'Featured' },
+            { id: 1, title: 'New Arrivals', name: 'new' },
+            { id: 2, title: 'Featured', name: 'featured' },
           ].map((item) => (
-            <Item key={item.id}>{item.title}</Item>
+            <button
+              type="button"
+              key={item.id}
+              name={item.name}
+              onClick={handleClick}
+            >
+              {item.title}
+            </button>
           ))}
         </Layout>
         <Layout>
@@ -37,7 +40,13 @@ export default function CategoryBar() {
             { id: 3, title: 'Tables & desks' },
             { id: 4, title: 'Chairs' },
           ].map((item) => (
-            <Item key={item.id}>{item.title}</Item>
+            <button
+              type="button"
+              key={item.id}
+              name={item.name}
+            >
+              {item.title}
+            </button>
           ))}
         </Layout>
       </div>

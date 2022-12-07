@@ -1,15 +1,19 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import CategoryBar from './CategoryBar';
 
 describe('CategoryBar', () => {
+  const handleClick = jest.fn();
+
   it('renders the categories', () => {
-    const { container } = render((
-      <CategoryBar />
+    const { queryByText } = render((
+      <CategoryBar
+        onClickCategories={handleClick}
+      />
     ));
 
-    expect(container).toHaveTextContent('All Categories');
+    fireEvent.click(queryByText('New Arrivals'));
 
-    expect(container).toHaveTextContent('All Products');
+    expect(handleClick).toBeCalled();
   });
 });

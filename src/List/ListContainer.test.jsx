@@ -1,11 +1,28 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+
+import { useDispatch } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
-describe('ListContainer', () => {
-  it('renders the title', () => {
-    const { container } = render(<ListContainer />);
+jest.mock('react-redux');
 
-    expect(container).toHaveTextContent('All Categories');
+describe('ListContainer', () => {
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
+  it('renders the categories', () => {
+    const { queryByText } = render(<ListContainer />);
+
+    fireEvent.click(queryByText('New Arrivals'));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'list/changesCategories',
+      payload: 'new',
+    });
   });
 });
