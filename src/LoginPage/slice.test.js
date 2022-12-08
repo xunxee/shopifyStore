@@ -16,6 +16,7 @@ import reducer, {
   changeInvalidCheckMessage,
   checkSignUpValid,
   requestSignUp,
+  clearEmailInvalidCheckMessage,
 } from './slice';
 
 import { postLogin, postSignUp } from '../services/api';
@@ -191,6 +192,23 @@ describe('reducer', () => {
       );
 
       expect(email.value).toBe('');
+    });
+  });
+
+  describe('clearEmailInvalidCheckMessage', () => {
+    it('clear email invalid check message', () => {
+      const initialState = {
+        loginFields: {
+          email: {
+            invalidCheckMessage: 'email을 확인하세요',
+          },
+        },
+      };
+
+      const { loginFields: { email } } = reducer(
+        initialState,
+        clearEmailInvalidCheckMessage(),
+      );
     });
   });
 
