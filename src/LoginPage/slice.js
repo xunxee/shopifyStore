@@ -256,22 +256,17 @@ export function checkSignUpValid({ name, value }) {
       return `${INPUT_LIST[name]} 필수 입력란입니다.`;
     }
 
-    const validChecks = {
-      email() {
-        return (
-          VALID_FIELDS.email.regexps.test(value)
-            ? '' : VALID_FIELDS.email.invalidMessage
-        );
-      },
-      password() {
-        return (
-          VALID_FIELDS.password.regexps.test(value)
-            ? '' : VALID_FIELDS.password.invalidMessage
-        );
-      },
-    };
+    if (name === 'email') {
+      return VALID_FIELDS.email.regexps.test(value)
+        ? '' : VALID_FIELDS.email.invalidMessage;
+    }
 
-    return validChecks[name] ? validChecks[name]() : '';
+    if (name === 'password') {
+      return VALID_FIELDS.password.regexps.test(value)
+        ? '' : VALID_FIELDS.password.invalidMessage;
+    }
+
+    return '';
   }
 
   return (dispatch) => {
