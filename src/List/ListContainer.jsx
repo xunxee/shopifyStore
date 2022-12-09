@@ -1,14 +1,19 @@
 import styled from '@emotion/styled';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
-import { changesCategories } from './slice';
+import {
+  changesCategories,
+  changesProducts,
+} from './slice';
 
 import CategoryBar from './CategoryBar';
 import RelevanceBar from './RelevanceBar';
 import ItemPage from './ItemPage';
+
+import { get } from '../utils';
 
 const Container = styled.div({
   display: 'flex',
@@ -22,14 +27,31 @@ const Container = styled.div({
 export default function ListContainer() {
   const dispatch = useDispatch();
 
+  const categories = useSelector(get({
+    page: 'list',
+    key: 'categories',
+  }));
+
+  const products = useSelector(get({
+    page: 'list',
+    key: 'products',
+  }));
+
   const handleClickCategories = useCallback((name) => {
     dispatch(changesCategories(name));
+  }, [dispatch]);
+
+  const handleClickProducts = useCallback((name) => {
+    dispatch(changesProducts(name));
   }, [dispatch]);
 
   return (
     <Container>
       <CategoryBar
+        categories={categories}
+        products={products}
         onClickCategories={handleClickCategories}
+        onClickProducts={handleClickProducts}
       />
       <ItemPage />
       <RelevanceBar />

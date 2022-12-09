@@ -25,4 +25,15 @@ describe('ListContainer', () => {
       payload: 'new',
     });
   });
+
+  it('renders the products', () => {
+    const { queryByText } = render(<ListContainer />);
+
+    fireEvent.click(queryByText('Beds'));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'list/changesProducts',
+      payload: 'beds',
+    });
+  });
 });
