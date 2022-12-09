@@ -1,14 +1,20 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import RelevanceBar from './RelevanceBar';
 
 describe('CategoryBar', () => {
-  it('renders the title', () => {
-    const { container } = render((
-      <RelevanceBar />
+  const handleClickSort = jest.fn();
+
+  it('renders the sort', () => {
+    const { queryByText } = render((
+      <RelevanceBar
+        sort="trending"
+        onClickSort={handleClickSort}
+      />
     ));
 
-    expect(container).toHaveTextContent('Sort');
-    expect(container).toHaveTextContent('Material');
+    fireEvent.click((queryByText('Trending')));
+
+    expect(handleClickSort).toBeCalled();
   });
 });

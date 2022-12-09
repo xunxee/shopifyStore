@@ -7,6 +7,7 @@ import { useCallback } from 'react';
 import {
   changesCategories,
   changesProducts,
+  changesSort,
 } from './slice';
 
 import CategoryBar from './CategoryBar';
@@ -37,12 +38,21 @@ export default function ListContainer() {
     key: 'products',
   }));
 
+  const sort = useSelector(get({
+    page: 'list',
+    key: 'sort',
+  }));
+
   const handleClickCategories = useCallback((name) => {
     dispatch(changesCategories(name));
   }, [dispatch]);
 
   const handleClickProducts = useCallback((name) => {
     dispatch(changesProducts(name));
+  }, [dispatch]);
+
+  const handleClickSort = useCallback((name) => {
+    dispatch(changesSort(name));
   }, [dispatch]);
 
   return (
@@ -54,7 +64,10 @@ export default function ListContainer() {
         onClickProducts={handleClickProducts}
       />
       <ItemPage />
-      <RelevanceBar />
+      <RelevanceBar
+        sort={sort}
+        onClickSort={handleClickSort}
+      />
     </Container>
   );
 }

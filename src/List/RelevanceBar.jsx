@@ -1,65 +1,63 @@
 import styled from '@emotion/styled';
 
-import LIST_CATEGORIES_STYLE from '../../fixtures/listCategoriesStyle';
+import { useCallback } from 'react';
 
-const { container, layout } = LIST_CATEGORIES_STYLE;
+import LIST_CATEGORIES_STYLE from '../../fixtures/listCategoriesStyle';
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
+const {
+  container,
+  layout,
+  button,
+} = LIST_CATEGORIES_STYLE;
 
 const Container = styled.div(container);
 
 const Layout = styled.ul(layout);
 
-export default function RelevanceBar() {
+const Button = styled.button(({ underLine }) => ({
+  ...button,
+  textDecoration: `${underLine}`,
+}));
+
+export default function RelevanceBar({
+  sort,
+  onClickSort,
+}) {
+  const handleClickSort = useCallback((
+    { target: { name } },
+  ) => {
+    onClickSort(name);
+  }, [sort]);
+
   return (
     <Container>
       <div>
         <Layout>
           Sort
-          {[
-            {
-              id: 1,
-              title: 'Trending',
-              name: 'trending',
-            },
-            {
-              id: 2,
-              title: 'Latest arrivals',
-              name: 'latestArrivals',
-            },
-            {
-              id: 3,
-              title: 'Price: Low to high',
-              name: 'lowToHigh',
-            },
-            {
-              id: 4,
-              title: 'Price: High to low',
-              name: 'highToLow',
-            },
-          ].map((item) => (
-            <button
+          {LIST_CATEGORIES.sort.map((item) => (
+            <Button
               type="button"
               key={item.id}
-              name={item.id}
+              name={item.name}
+              underLine={sort === item.name
+                ? 'underLine' : 'none'}
+              onClick={handleClickSort}
             >
               {item.title}
-            </button>
+            </Button>
           ))}
         </Layout>
         <Layout>
           Material
-          {[
-            { id: 1, title: 'Fabric', name: 'fabric' },
-            { id: 2, title: 'Wood', name: 'wood' },
-            { id: 3, title: 'Metal', name: 'metal' },
-            { id: 4, title: 'Glass', name: 'glass' },
-          ].map((item) => (
-            <button
+          {LIST_CATEGORIES.material.map((item) => (
+            <Button
               type="button"
               key={item.id}
               name={item.name}
             >
               {item.title}
-            </button>
+            </Button>
           ))}
         </Layout>
       </div>

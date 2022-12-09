@@ -36,4 +36,15 @@ describe('ListContainer', () => {
       payload: 'beds',
     });
   });
+
+  it('renders the sort', () => {
+    const { queryByText } = render(<ListContainer />);
+
+    fireEvent.click(queryByText('Trending'));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'list/changesSort',
+      payload: 'trending',
+    });
+  });
 });
