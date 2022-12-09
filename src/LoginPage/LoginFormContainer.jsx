@@ -13,6 +13,7 @@ import {
   requestLogin,
   requestSignUp,
   checkSignUpValid,
+  clearEmailInvalidCheckMessage,
   clearPasswordInvalidCheckMessage,
 } from './slice';
 
@@ -55,8 +56,12 @@ export default function LoginFormContainer() {
     dispatch(requestSignUp());
   }, [dispatch, isLogin]);
 
-  const handleInvalidCheckMessage = useCallback(() => {
-    dispatch(clearPasswordInvalidCheckMessage());
+  const handleInvalidCheckMessage = useCallback((name) => {
+    if (name === 'email') {
+      return dispatch(clearEmailInvalidCheckMessage());
+    }
+
+    return dispatch(clearPasswordInvalidCheckMessage());
   }, [dispatch]);
 
   return (
@@ -67,7 +72,7 @@ export default function LoginFormContainer() {
         onChange={handleChange}
         onBlur={handleCheckSignUpValid}
         onSubmit={handleSubmit}
-        onHandleInvalidCheckMessage={
+        handleInvalidCheckMessage={
           handleInvalidCheckMessage
         }
       />

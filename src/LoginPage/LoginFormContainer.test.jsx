@@ -19,10 +19,12 @@ describe('LoginFormContainer', () => {
         isLogin: given.isLogin,
         loginFields: {
           email: {
-            value: 'tester@example.com',
+            value: 'tester@example.co',
+            invalidCheckMessage: '',
           },
           password: {
             value: 'Tester123@',
+            invalidCheckMessage: '',
           },
           firstName: {
             value: given.firstName,
@@ -116,6 +118,11 @@ describe('LoginFormContainer', () => {
 
       fireEvent.change(getByPlaceholderText('Email'), {
         target: { value: 'tester@example.com' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'login/clearEmailInvalidCheckMessage',
+        payload: undefined,
       });
 
       fireEvent.change(getByPlaceholderText('Password'), {

@@ -209,6 +209,8 @@ describe('reducer', () => {
         initialState,
         clearEmailInvalidCheckMessage(),
       );
+
+      expect(email.invalidCheckMessage).toBe('');
     });
   });
 

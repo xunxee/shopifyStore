@@ -21,7 +21,7 @@ export default memo(({
   onChange,
   onBlur,
   onSubmit,
-  onHandleInvalidCheckMessage,
+  handleInvalidCheckMessage,
 }) => {
   function checkDisabled() {
     if (isLogin) return email.value && password.value;
@@ -48,9 +48,29 @@ export default memo(({
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
 
-    if (name === 'password' && checkDisabled()) {
-      onHandleInvalidCheckMessage();
+    if (name === 'email'
+        && firstName.value
+        && lastName.value
+    ) {
+      const emailValid = VALID_FIELDS.email.regexps
+        .test(value);
+
+      return emailValid && !password.invalidCheckMessage
+        && handleInvalidCheckMessage(name);
     }
+
+    if (name === 'password'
+      && firstName.value
+      && lastName.value
+    ) {
+      const passwordValid = VALID_FIELDS.password.regexps
+        .test(value);
+
+      return passwordValid && !email.invalidCheckMessage
+        && handleInvalidCheckMessage(name);
+    }
+
+    return null;
   }
 
   function handleSignUpValid({ target: { name } }) {

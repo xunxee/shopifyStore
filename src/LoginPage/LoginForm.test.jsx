@@ -43,7 +43,7 @@ describe('LoginForm', () => {
         onChange={handleChange}
         onBlur={handleSignUpValid}
         onSubmit={handleSubmit}
-        onHandleInvalidCheckMessage={handleInvalidCheckMessage}
+        handleInvalidCheckMessage={handleInvalidCheckMessage}
       />
     ));
   }
@@ -118,47 +118,109 @@ describe('LoginForm', () => {
         .toHaveTextContent('Passwords must be longer than 7');
     });
 
-    it('listens change events for "Sign UP"', () => {
-      const { getByPlaceholderText } = renderLoginForm({
-        isLogin: false,
+    describe('handleChange', () => {
+      context('when the email passes validation', () => {
+        it('execute the handleInvalidCheckMessage function', () => {
+          const { getByPlaceholderText } = renderLoginForm({
+            isLogin: false,
+            firstName: {
+              value: '정',
+            },
+            lastName: {
+              value: '건희',
+            },
+            email: {
+              value: 'tester@example.co',
+            },
+            password: {
+              value: 'Tester@123',
+            },
+          });
+
+          fireEvent.change(getByPlaceholderText('Email'), {
+            target: { value: 'tester@example.com' },
+          });
+
+          expect(handleInvalidCheckMessage).toBeCalled();
+        });
       });
 
-      fireEvent.change(getByPlaceholderText('성(Last Name)'), {
-        target: { value: '정' },
+      context('when the email fails validation', () => {
+        it("doesn't execute the handleInvalidCheckMessage function", () => {
+          const { getByPlaceholderText } = renderLoginForm({
+            isLogin: false,
+            firstName: {
+              value: '정',
+            },
+            lastName: {
+              value: '건희',
+            },
+            email: {
+              value: 'tester',
+            },
+            password: {
+              value: 'Tester@123',
+            },
+          });
+
+          fireEvent.change(getByPlaceholderText('Email'), {
+            target: { value: 'tester' },
+          });
+
+          expect(handleInvalidCheckMessage).not.toBeCalled();
+        });
       });
 
-      expect(handleChange).toBeCalledWith({
-        name: 'lastName', value: '정',
+      context('when the password passes validation', () => {
+        it('execute the handleInvalidCheckMessage function', () => {
+          const { getByPlaceholderText } = renderLoginForm({
+            isLogin: false,
+            firstName: {
+              value: '정',
+            },
+            lastName: {
+              value: '건희',
+            },
+            password: {
+              value: 'Tester@12',
+            },
+          });
+
+          fireEvent.change(getByPlaceholderText('Password'), {
+            target: { value: 'Tester@123' },
+          });
+
+          expect(handleInvalidCheckMessage).toBeCalled();
+        });
+      });
+
+      context('when the password fails validation', () => {
+        it("doesn't execute the handleInvalidCheckMessage function", () => {
+          const { getByPlaceholderText } = renderLoginForm({
+            isLogin: false,
+            firstName: {
+              value: '정',
+            },
+            lastName: {
+              value: '건희',
+            },
+            password: {
+              value: 'tester@12',
+            },
+          });
+
+          fireEvent.change(getByPlaceholderText('Email'), {
+            target: { value: 'tester@123' },
+          });
+
+          expect(handleInvalidCheckMessage).not.toBeCalled();
+        });
       });
     });
 
-    it('changes the value of the disabled to false', () => {
-      const { getByPlaceholderText } = renderLoginForm({
-        isLogin: false,
-        firstName: {
-          value: '정',
-        },
-        lastName: {
-          value: '건희',
-        },
-        email: {
-          value: 'tester@example.com',
-        },
-        password: {
-          value: 'Tester@12345',
-        },
-      });
-
-      fireEvent.change(getByPlaceholderText('Password'), {
-        target: { value: 'TesterT@12345' },
-      });
-
-      expect(handleInvalidCheckMessage).toBeCalled();
-    });
-
-    context('when password validity does not match', () => {
-      it('renders invalid message', () => {
-        const { container } = renderLoginForm({
+    context('when there is invalidCheckMessage', () => {
+      it('checkDisabled returns false', () => {
+        const { getByPlaceholderText } = renderLoginForm({
           isLogin: false,
           firstName: {
             value: '정',
@@ -167,18 +229,20 @@ describe('LoginForm', () => {
             value: '건희',
           },
           email: {
-            value: 'testerexample.com',
-            invalidCheckMessage: 'Email은 숫자나 문자로 시작하고 @를 포함해야합니다.',
+            value: 'tester',
+            invalidCheckMessage: 'email을 확인하세요.',
           },
           password: {
-            value: 'test1234@@',
-            invalidCheckMessage: 'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
+            value: 'Tester@12',
+            invalidCheckMessage: 'password를 확인하세요.',
           },
         });
 
-        expect(container).toHaveTextContent(
-          'Password는 숫자, 알파벳 소문자, 알파벳 대문자, 특수문자(!, @, #)을 포함한 8자리 이상의 문자여야합니다.',
-        );
+        fireEvent.change(getByPlaceholderText('Password'), {
+          target: { vale: 'Tester@123' },
+        });
+
+        expect(handleInvalidCheckMessage).not.toBeCalled();
       });
     });
 
@@ -210,26 +274,14 @@ describe('LoginForm', () => {
     });
 
     const inputs = [
-      {
-        invalidCheckMessage: 'lastNameInvalidCheckMessage',
-        name: 'lastName',
-      },
-      {
-        invalidCheckMessage: 'firstNameInvalidCheckMessage',
-        name: 'firstName',
-      },
-      {
-        invalidCheckMessage: 'emailInvalidCheckMessage',
-        name: 'email',
-      },
-      {
-        invalidCheckMessage: 'passwordInvalidCheckMessage',
-        name: 'password',
-      },
+      'lastName',
+      'firstName',
+      'email',
+      'password',
     ];
 
     inputs.forEach((input) => {
-      describe(input.invalidCheckMessage, () => {
+      describe(input, () => {
         context('when it have a value', () => {
           it("doesn't render", () => {
             const { queryByText } = renderLoginForm({
@@ -237,7 +289,7 @@ describe('LoginForm', () => {
             });
 
             expect(queryByText(
-              `${INPUT_LIST[input.name]} 필수 입력란입니다.`,
+              `${INPUT_LIST[input]} 필수 입력란입니다.`,
             )).toBeNull();
           });
         });
@@ -246,15 +298,15 @@ describe('LoginForm', () => {
           it('renders invalid message', () => {
             const { queryByText } = renderLoginForm({
               isLogin: false,
-              [input.name]: {
+              [input]: {
                 value: '',
                 invalidCheckMessage:
-                  `${INPUT_LIST[input.name]} 필수 입력란입니다.`,
+                  `${INPUT_LIST[input]} 필수 입력란입니다.`,
               },
             });
 
             expect(queryByText(
-              `${INPUT_LIST[input.name]} 필수 입력란입니다.`,
+              `${INPUT_LIST[input]} 필수 입력란입니다.`,
             )).not.toBeNull();
           });
         });
