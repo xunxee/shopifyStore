@@ -15,9 +15,18 @@ const { actions, reducer } = createSlice({
         categories: value,
       };
     },
+    changesProducts(state, { payload: value }) {
+      return {
+        ...state,
+        products: value,
+      };
+    },
   },
 });
 
-export const { changesCategories } = actions;
+export const {
+  changesCategories,
+  changesProducts,
+} = actions;
 
 export default reducer;

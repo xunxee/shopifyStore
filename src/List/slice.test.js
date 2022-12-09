@@ -1,5 +1,6 @@
 import reducer, {
   changesCategories,
+  changesProducts,
 } from './slice';
 
 describe('reducer', () => {
@@ -11,10 +12,25 @@ describe('reducer', () => {
 
       const { categories } = reducer(
         initialState,
-        changesCategories('New Arrivals'),
+        changesCategories('new'),
       );
 
-      expect(categories).toBe('New Arrivals');
+      expect(categories).toBe('new');
+    });
+  });
+
+  describe('setIsProducts', () => {
+    it('changes products', () => {
+      const initialState = {
+        products: '',
+      };
+
+      const { products } = reducer(
+        initialState,
+        changesProducts('sofas'),
+      );
+
+      expect(products).toBe('sofas');
     });
   });
 });
