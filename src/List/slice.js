@@ -27,7 +27,12 @@ const { actions, reducer } = createSlice({
         sort: value,
       };
     },
-
+    changesMaterial(state, { payload: value }) {
+      return {
+        ...state,
+        material: value,
+      };
+    },
   },
 });
 
@@ -35,6 +40,7 @@ export const {
   changesCategories,
   changesProducts,
   changesSort,
+  changesMaterial,
 } = actions;
 
 export default reducer;

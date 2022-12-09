@@ -2,6 +2,7 @@ import reducer, {
   changesCategories,
   changesProducts,
   changesSort,
+  changesMaterial,
 } from './slice';
 
 describe('reducer', () => {
@@ -47,6 +48,21 @@ describe('reducer', () => {
       );
 
       expect(sort).toBe('trending');
+    });
+  });
+
+  describe('changesMaterial', () => {
+    it('changes material', () => {
+      const initialState = {
+        material: '',
+      };
+
+      const { material } = reducer(
+        initialState,
+        changesMaterial('fabric'),
+      );
+
+      expect(material).toBe('fabric');
     });
   });
 });
