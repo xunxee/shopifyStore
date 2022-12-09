@@ -21,12 +21,20 @@ const { actions, reducer } = createSlice({
         products: value,
       };
     },
+    changesSort(state, { payload: value }) {
+      return {
+        ...state,
+        sort: value,
+      };
+    },
+
   },
 });
 
 export const {
   changesCategories,
   changesProducts,
+  changesSort,
 } = actions;
 
 export default reducer;

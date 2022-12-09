@@ -1,6 +1,7 @@
 import reducer, {
   changesCategories,
   changesProducts,
+  changesSort,
 } from './slice';
 
 describe('reducer', () => {
@@ -31,6 +32,21 @@ describe('reducer', () => {
       );
 
       expect(products).toBe('sofas');
+    });
+  });
+
+  describe('changesSort', () => {
+    it('changes sort', () => {
+      const initialState = {
+        sort: '',
+      };
+
+      const { sort } = reducer(
+        initialState,
+        changesSort('trending'),
+      );
+
+      expect(sort).toBe('trending');
     });
   });
 });
