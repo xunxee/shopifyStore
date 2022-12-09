@@ -22,13 +22,21 @@ const Button = styled.button(({ underLine }) => ({
 
 export default function RelevanceBar({
   sort,
+  material,
   onClickSort,
+  onClickMaterial,
 }) {
   const handleClickSort = useCallback((
     { target: { name } },
   ) => {
     onClickSort(name);
   }, [sort]);
+
+  const handleClickMaterial = useCallback((
+    { target: { name } },
+  ) => {
+    onClickMaterial(name);
+  }, [material]);
 
   return (
     <Container>
@@ -55,6 +63,9 @@ export default function RelevanceBar({
               type="button"
               key={item.id}
               name={item.name}
+              underLine={material === item.name
+                ? 'underLine' : 'none'}
+              onClick={handleClickMaterial}
             >
               {item.title}
             </Button>

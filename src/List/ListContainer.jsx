@@ -8,6 +8,7 @@ import {
   changesCategories,
   changesProducts,
   changesSort,
+  changesMaterial,
 } from './slice';
 
 import CategoryBar from './CategoryBar';
@@ -43,6 +44,11 @@ export default function ListContainer() {
     key: 'sort',
   }));
 
+  const material = useSelector(get({
+    page: 'list',
+    key: 'material',
+  }));
+
   const handleClickCategories = useCallback((name) => {
     dispatch(changesCategories(name));
   }, [dispatch]);
@@ -53,6 +59,10 @@ export default function ListContainer() {
 
   const handleClickSort = useCallback((name) => {
     dispatch(changesSort(name));
+  }, [dispatch]);
+
+  const handleClickMaterial = useCallback((name) => {
+    dispatch(changesMaterial(name));
   }, [dispatch]);
 
   return (
@@ -66,7 +76,9 @@ export default function ListContainer() {
       <ItemPage />
       <RelevanceBar
         sort={sort}
+        material={material}
         onClickSort={handleClickSort}
+        onClickMaterial={handleClickMaterial}
       />
     </Container>
   );

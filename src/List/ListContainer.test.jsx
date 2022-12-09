@@ -47,4 +47,15 @@ describe('ListContainer', () => {
       payload: 'trending',
     });
   });
+
+  it('renders the material', () => {
+    const { queryByText } = render(<ListContainer />);
+
+    fireEvent.click(queryByText('Fabric'));
+
+    expect(dispatch).toBeCalledWith({
+      type: 'list/changesMaterial',
+      payload: 'fabric',
+    });
+  });
 });
