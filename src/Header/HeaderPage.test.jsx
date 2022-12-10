@@ -25,6 +25,10 @@ jest.mock('react-redux');
 describe('HeaderPage', () => {
   const dispatch = jest.fn();
 
+  beforeEach(() => {
+    dispatch.mockClear();
+  });
+
   useDispatch.mockImplementation(() => dispatch);
 
   function renderHeaderPage() {
@@ -72,6 +76,24 @@ describe('HeaderPage', () => {
       fireEvent.click(getByText('All'));
 
       expect(mockUsedNavigate).toBeCalledWith('/search');
+
+      expect(dispatch).toBeCalledWith({
+        payload: undefined,
+        type: 'list/clearCategories',
+      });
+    });
+  });
+
+  context('when click New Arrivals', () => {
+    it('occurs handle event', () => {
+      const { getByText } = renderHeaderPage();
+
+      fireEvent.click(getByText('New Arrivals'));
+
+      expect(dispatch).toBeCalledWith({
+        payload: 'new',
+        type: 'list/changesCategories',
+      });
     });
   });
 

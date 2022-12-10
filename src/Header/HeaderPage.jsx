@@ -12,6 +12,11 @@ import {
   clearLoginFields,
 } from '../LoginPage/slice';
 
+import {
+  changesCategories,
+  clearCategories,
+} from '../List/slice';
+
 import TitleContainer from './TitleContainer';
 import SearchBarContainer from './SearchBarContainer';
 import PurchaseContainer from './PurchaseContainer';
@@ -46,7 +51,13 @@ export default function HeaderPage() {
 
   const handleClickCategories = useCallback((url) => {
     navigate(url);
-  }, [navigate]);
+
+    const name = url.substring(8);
+
+    if (!name) dispatch(clearCategories());
+
+    return name && dispatch(changesCategories(name));
+  }, [navigate, dispatch]);
 
   const refreshToken = useSelector(get({
     page: 'login',
