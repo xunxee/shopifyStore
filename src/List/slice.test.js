@@ -1,9 +1,9 @@
 import reducer, {
-  changesCategories,
-  changesProducts,
-  changesSort,
-  changesMaterial,
-  clearCategories,
+  changeCategory,
+  changeProduct,
+  changeSort,
+  changeMaterial,
+  clearCategory,
 } from './slice';
 
 describe('reducer', () => {
@@ -15,14 +15,14 @@ describe('reducer', () => {
 
       const { category } = reducer(
         initialState,
-        changesCategories('new'),
+        changeCategory('new'),
       );
 
       expect(category).toBe('new');
     });
   });
 
-  describe('clearCategories', () => {
+  describe('clearCategory', () => {
     it('clears categories', () => {
       const initialState = {
         category: 'new',
@@ -30,7 +30,7 @@ describe('reducer', () => {
 
       const { category } = reducer(
         initialState,
-        clearCategories(),
+        clearCategory(),
       );
 
       expect(category).toBe('');
@@ -45,14 +45,14 @@ describe('reducer', () => {
 
       const { product } = reducer(
         initialState,
-        changesProducts('sofas'),
+        changeProduct('sofas'),
       );
 
       expect(product).toBe('sofas');
     });
   });
 
-  describe('changesSort', () => {
+  describe('changeSort', () => {
     it('changes sort', () => {
       const initialState = {
         sort: '',
@@ -60,14 +60,14 @@ describe('reducer', () => {
 
       const { sort } = reducer(
         initialState,
-        changesSort('trending'),
+        changeSort('trending'),
       );
 
       expect(sort).toBe('trending');
     });
   });
 
-  describe('changesMaterial', () => {
+  describe('changeMaterial', () => {
     it('changes material', () => {
       const initialState = {
         material: '',
@@ -75,7 +75,7 @@ describe('reducer', () => {
 
       const { material } = reducer(
         initialState,
-        changesMaterial('fabric'),
+        changeMaterial('fabric'),
       );
 
       expect(material).toBe('fabric');

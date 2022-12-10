@@ -9,31 +9,31 @@ const { actions, reducer } = createSlice({
     material: '',
   },
   reducers: {
-    changesCategories(state, { payload: value }) {
+    changeCategory(state, { payload: value }) {
       return {
         ...state,
         category: value,
       };
     },
-    clearCategories(state) {
+    clearCategory(state) {
       return {
         ...state,
         category: '',
       };
     },
-    changesProducts(state, { payload: value }) {
+    changeProduct(state, { payload: value }) {
       return {
         ...state,
         product: value,
       };
     },
-    changesSort(state, { payload: value }) {
+    changeSort(state, { payload: value }) {
       return {
         ...state,
         sort: value,
       };
     },
-    changesMaterial(state, { payload: value }) {
+    changeMaterial(state, { payload: value }) {
       return {
         ...state,
         material: value,
@@ -43,11 +43,11 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  changesCategories,
-  clearCategories,
-  changesProducts,
-  changesSort,
-  changesMaterial,
+  changeCategory,
+  clearCategory,
+  changeProduct,
+  changeSort,
+  changeMaterial,
 } = actions;
 
 export default reducer;
