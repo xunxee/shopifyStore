@@ -3,6 +3,7 @@ import reducer, {
   changesProducts,
   changesSort,
   changesMaterial,
+  clearCategories,
 } from './slice';
 
 describe('reducer', () => {
@@ -18,6 +19,21 @@ describe('reducer', () => {
       );
 
       expect(categories).toBe('new');
+    });
+  });
+
+  describe('clearCategories', () => {
+    it('clears categories', () => {
+      const initialState = {
+        categories: 'new',
+      };
+
+      const { categories } = reducer(
+        initialState,
+        clearCategories(),
+      );
+
+      expect(categories).toBe('');
     });
   });
 

@@ -15,6 +15,12 @@ const { actions, reducer } = createSlice({
         categories: value,
       };
     },
+    clearCategories(state) {
+      return {
+        ...state,
+        categories: '',
+      };
+    },
     changesProducts(state, { payload: value }) {
       return {
         ...state,
@@ -38,6 +44,7 @@ const { actions, reducer } = createSlice({
 
 export const {
   changesCategories,
+  clearCategories,
   changesProducts,
   changesSort,
   changesMaterial,
