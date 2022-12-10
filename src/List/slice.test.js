@@ -10,45 +10,45 @@ describe('reducer', () => {
   describe('setIsCategories', () => {
     it('changes categories', () => {
       const initialState = {
-        categories: '',
+        category: '',
       };
 
-      const { categories } = reducer(
+      const { category } = reducer(
         initialState,
         changesCategories('new'),
       );
 
-      expect(categories).toBe('new');
+      expect(category).toBe('new');
     });
   });
 
   describe('clearCategories', () => {
     it('clears categories', () => {
       const initialState = {
-        categories: 'new',
+        category: 'new',
       };
 
-      const { categories } = reducer(
+      const { category } = reducer(
         initialState,
         clearCategories(),
       );
 
-      expect(categories).toBe('');
+      expect(category).toBe('');
     });
   });
 
   describe('setIsProducts', () => {
     it('changes products', () => {
       const initialState = {
-        products: '',
+        product: '',
       };
 
-      const { products } = reducer(
+      const { product } = reducer(
         initialState,
         changesProducts('sofas'),
       );
 
-      expect(products).toBe('sofas');
+      expect(product).toBe('sofas');
     });
   });
 

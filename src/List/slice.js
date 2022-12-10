@@ -3,8 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const { actions, reducer } = createSlice({
   name: 'list',
   initialState: {
-    categories: '',
-    products: '',
+    category: '',
+    product: '',
     sort: '',
     material: '',
   },
@@ -12,19 +12,19 @@ const { actions, reducer } = createSlice({
     changesCategories(state, { payload: value }) {
       return {
         ...state,
-        categories: value,
+        category: value,
       };
     },
     clearCategories(state) {
       return {
         ...state,
-        categories: '',
+        category: '',
       };
     },
     changesProducts(state, { payload: value }) {
       return {
         ...state,
-        products: value,
+        product: value,
       };
     },
     changesSort(state, { payload: value }) {
