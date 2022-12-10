@@ -79,7 +79,7 @@ describe('HeaderPage', () => {
 
       expect(dispatch).toBeCalledWith({
         payload: undefined,
-        type: 'list/clearCategories',
+        type: 'list/clearCategory',
       });
     });
   });
@@ -92,7 +92,7 @@ describe('HeaderPage', () => {
 
       expect(dispatch).toBeCalledWith({
         payload: 'new',
-        type: 'list/changesCategories',
+        type: 'list/changeCategory',
       });
     });
   });

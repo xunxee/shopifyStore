@@ -13,8 +13,8 @@ import {
 } from '../LoginPage/slice';
 
 import {
-  changesCategories,
-  clearCategories,
+  changeCategory,
+  clearCategory,
 } from '../List/slice';
 
 import TitleContainer from './TitleContainer';
@@ -54,9 +54,9 @@ export default function HeaderPage() {
 
     const name = url.substring(8);
 
-    if (!name) dispatch(clearCategories());
+    if (!name) dispatch(clearCategory());
 
-    return name && dispatch(changesCategories(name));
+    return name && dispatch(changeCategory(name));
   }, [navigate, dispatch]);
 
   const refreshToken = useSelector(get({
