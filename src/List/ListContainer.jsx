@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
@@ -27,6 +29,8 @@ const Container = styled.div({
 });
 
 export default function ListContainer() {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const categories = useSelector(get({
@@ -51,7 +55,8 @@ export default function ListContainer() {
 
   const handleClickCategories = useCallback((name) => {
     dispatch(changesCategories(name));
-  }, [dispatch]);
+    navigate(`/search/${name}`);
+  }, [dispatch, navigate]);
 
   const handleClickProducts = useCallback((name) => {
     dispatch(changesProducts(name));

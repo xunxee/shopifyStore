@@ -1,3 +1,5 @@
+import { MemoryRouter } from 'react-router-dom';
+
 import { fireEvent, render } from '@testing-library/react';
 
 import { useDispatch } from 'react-redux';
@@ -15,8 +17,16 @@ describe('ListContainer', () => {
     useDispatch.mockImplementation(() => dispatch);
   });
 
+  function renderListContainer() {
+    return render((
+      <MemoryRouter>
+        <ListContainer />
+      </MemoryRouter>
+    ));
+  }
+
   it('renders the categories', () => {
-    const { queryByText } = render(<ListContainer />);
+    const { queryByText } = renderListContainer();
 
     fireEvent.click(queryByText('New Arrivals'));
 
@@ -27,7 +37,7 @@ describe('ListContainer', () => {
   });
 
   it('renders the products', () => {
-    const { queryByText } = render(<ListContainer />);
+    const { queryByText } = renderListContainer();
 
     fireEvent.click(queryByText('Beds'));
 
@@ -38,7 +48,7 @@ describe('ListContainer', () => {
   });
 
   it('renders the sort', () => {
-    const { queryByText } = render(<ListContainer />);
+    const { queryByText } = renderListContainer();
 
     fireEvent.click(queryByText('Trending'));
 
@@ -49,7 +59,7 @@ describe('ListContainer', () => {
   });
 
   it('renders the material', () => {
-    const { queryByText } = render(<ListContainer />);
+    const { queryByText } = renderListContainer();
 
     fireEvent.click(queryByText('Fabric'));
 
