@@ -1,20 +1,41 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { fireEvent, render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
+
+const mockUseNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate() {
+    return mockUseNavigate;
+  },
+}));
 
 describe('ListContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
     dispatch.mockClear();
+    mockUseNavigate.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation(
+      (selector) => (selector({
+        list: {
+          category: given.category,
+          product: given.product,
+          sort: given.sort,
+          material: given.material,
+        },
+      })),
+    );
   });
 
   function renderListContainer() {
@@ -25,25 +46,91 @@ describe('ListContainer', () => {
     ));
   }
 
-  it('renders the categories', () => {
-    const { queryByText } = renderListContainer();
+  describe('click All Categories', () => {
+    context('with product item', () => {
+      given('product', () => 'sofas');
 
-    fireEvent.click(queryByText('New Arrivals'));
+      it('generates at the end of the categories path', () => {
+        const { queryByText } = renderListContainer();
 
-    expect(dispatch).toBeCalledWith({
-      type: 'list/changesCategories',
-      payload: 'new',
+        fireEvent.click(queryByText('Featured'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'list/changeAllCategories',
+          payload: {
+            name: 'featured',
+            belong: 'category',
+          },
+        });
+
+        expect(mockUseNavigate).toBeCalledWith(
+          '/search/products/sofas/featured',
+        );
+      });
+    });
+
+    context('without product item', () => {
+      it('generates categories path', () => {
+        const { queryByText } = renderListContainer();
+
+        fireEvent.click(queryByText('Featured'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'list/changeAllCategories',
+          payload: {
+            name: 'featured',
+            belong: 'category',
+          },
+        });
+
+        expect(mockUseNavigate).toBeCalledWith(
+          '/search/featured',
+        );
+      });
     });
   });
 
-  it('renders the products', () => {
-    const { queryByText } = renderListContainer();
+  describe('click All Products', () => {
+    context('with category item', () => {
+      given('category', () => 'featured');
 
-    fireEvent.click(queryByText('Beds'));
+      it('generates products path before categories', () => {
+        const { queryByText } = renderListContainer();
 
-    expect(dispatch).toBeCalledWith({
-      type: 'list/changesProducts',
-      payload: 'beds',
+        fireEvent.click(queryByText('Sofas'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'list/changeAllCategories',
+          payload: {
+            name: 'sofas',
+            belong: 'product',
+          },
+        });
+
+        expect(mockUseNavigate).toBeCalledWith(
+          '/search/products/sofas/featured',
+        );
+      });
+    });
+
+    context('without category item', () => {
+      it('generate products path', () => {
+        const { queryByText } = renderListContainer();
+
+        fireEvent.click(queryByText('Sofas'));
+
+        expect(dispatch).toBeCalledWith({
+          type: 'list/changeAllCategories',
+          payload: {
+            name: 'sofas',
+            belong: 'product',
+          },
+        });
+
+        expect(mockUseNavigate).toBeCalledWith(
+          '/search/products/sofas',
+        );
+      });
     });
   });
 
@@ -53,7 +140,7 @@ describe('ListContainer', () => {
     fireEvent.click(queryByText('Trending'));
 
     expect(dispatch).toBeCalledWith({
-      type: 'list/changesSort',
+      type: 'list/changeSort',
       payload: 'trending',
     });
   });
@@ -64,7 +151,7 @@ describe('ListContainer', () => {
     fireEvent.click(queryByText('Fabric'));
 
     expect(dispatch).toBeCalledWith({
-      type: 'list/changesMaterial',
+      type: 'list/changeMaterial',
       payload: 'fabric',
     });
   });

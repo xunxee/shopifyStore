@@ -7,10 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 
 import {
-  changesCategories,
-  changesProducts,
-  changesSort,
-  changesMaterial,
+  changeAllCategories,
+  changeSort,
+  changeMaterial,
 } from './slice';
 
 import CategoryBar from './CategoryBar';
@@ -33,14 +32,14 @@ export default function ListContainer() {
 
   const dispatch = useDispatch();
 
-  const categories = useSelector(get({
+  const category = useSelector(get({
     page: 'list',
-    key: 'categories',
+    key: 'category',
   }));
 
-  const products = useSelector(get({
+  const product = useSelector(get({
     page: 'list',
-    key: 'products',
+    key: 'product',
   }));
 
   const sort = useSelector(get({
@@ -53,30 +52,51 @@ export default function ListContainer() {
     key: 'material',
   }));
 
-  const handleClickCategories = useCallback((name) => {
-    dispatch(changesCategories(name));
-    navigate(`/search/${name}`);
-  }, [dispatch, navigate]);
+  const handleClickCategory = useCallback((name) => {
+    dispatch(changeAllCategories({
+      name,
+      belong: 'category',
+    }));
 
-  const handleClickProducts = useCallback((name) => {
-    dispatch(changesProducts(name));
-  }, [dispatch]);
+    if (product) {
+      navigate(`/search/products/${product}/${name}`);
+
+      return;
+    }
+
+    navigate(`/search/${name}`);
+  }, [dispatch, navigate, product]);
+
+  const handleClickProduct = useCallback((name) => {
+    dispatch(changeAllCategories({
+      name,
+      belong: 'product',
+    }));
+
+    if (category) {
+      navigate(`/search/products/${name}/${category}`);
+
+      return;
+    }
+
+    navigate(`/search/products/${name}`);
+  }, [dispatch, navigate, category]);
 
   const handleClickSort = useCallback((name) => {
-    dispatch(changesSort(name));
+    dispatch(changeSort(name));
   }, [dispatch]);
 
   const handleClickMaterial = useCallback((name) => {
-    dispatch(changesMaterial(name));
+    dispatch(changeMaterial(name));
   }, [dispatch]);
 
   return (
     <Container>
       <CategoryBar
-        categories={categories}
-        products={products}
-        onClickCategories={handleClickCategories}
-        onClickProducts={handleClickProducts}
+        category={category}
+        product={product}
+        onClickCategory={handleClickCategory}
+        onClickProduct={handleClickProduct}
       />
       <ItemPage />
       <RelevanceBar
