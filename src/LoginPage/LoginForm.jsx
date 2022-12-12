@@ -53,7 +53,7 @@ export default memo(({
         ? password : email;
 
       return VALID_FIELDS[name].regexps.test(value)
-        && ![checkInput].invalidCheckMessage
+        && !checkInput.invalidCheckMessage
         && handleInvalidCheckMessage(name);
     }
 
