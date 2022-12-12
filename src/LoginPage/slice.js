@@ -241,14 +241,15 @@ export function checkSignUpValid({ name, value }) {
       return `${INPUT_LIST[name]} 필수 입력란입니다.`;
     }
 
-    if (name === 'email') {
-      return VALID_FIELDS.email.regexps.test(value)
-        ? '' : VALID_FIELDS.email.invalidMessage;
-    }
+    if (VALID_FIELDS[name]) {
+      const {
+        regexps,
+        invalidMessage,
+      } = VALID_FIELDS[name];
 
-    if (name === 'password') {
-      return VALID_FIELDS.password.regexps.test(value)
-        ? '' : VALID_FIELDS.password.invalidMessage;
+      const isValid = regexps.test(value);
+
+      return isValid ? '' : invalidMessage;
     }
 
     return '';
