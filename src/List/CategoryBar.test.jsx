@@ -9,8 +9,8 @@ describe('CategoryBar', () => {
   it('renders the categories', () => {
     const { queryByText } = render((
       <CategoryBar
-        categories="new"
-        onClickCategories={handleClickCategories}
+        category="new"
+        onClickCategory={handleClickCategories}
       />
     ));
 
@@ -22,8 +22,8 @@ describe('CategoryBar', () => {
   it('renders the products', () => {
     const { queryByText } = render((
       <CategoryBar
-        products="beds"
-        onClickProducts={handleClickProducts}
+        product="beds"
+        onClickProduct={handleClickProducts}
       />
     ));
 

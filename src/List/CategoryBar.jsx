@@ -21,53 +21,57 @@ const Button = styled.button(({ underLine }) => ({
 }));
 
 export default function CategoryBar({
-  categories,
-  products,
-  onClickCategories,
-  onClickProducts,
+  category,
+  product,
+  onClickCategory,
+  onClickProduct,
 }) {
-  const handleClickCategories = useCallback((
+  const handleClickCategory = useCallback((
     { target: { name } },
   ) => {
-    onClickCategories(name);
-  }, [categories]);
+    onClickCategory(name);
+  }, [onClickCategory]);
 
-  const handleClickProducts = useCallback((
+  const handleClickProduct = useCallback((
     { target: { name } },
   ) => {
-    onClickProducts(name);
-  }, [products]);
+    onClickProduct(name);
+  }, [onClickProduct]);
 
   return (
     <Container>
       <div>
         <Layout>
           All Categories
-          {LIST_CATEGORIES.categories.map((item) => (
+          {LIST_CATEGORIES.categories.map(({
+            id, name, title,
+          }) => (
             <Button
               type="button"
-              key={item.id}
-              name={item.name}
-              underLine={categories === item.name
+              key={id}
+              name={name}
+              underLine={category === name
                 ? 'underLine' : 'none'}
-              onClick={handleClickCategories}
+              onClick={handleClickCategory}
             >
-              {item.title}
+              {title}
             </Button>
           ))}
         </Layout>
         <Layout>
           All Products
-          {LIST_CATEGORIES.products.map((item) => (
+          {LIST_CATEGORIES.products.map(({
+            id, name, title,
+          }) => (
             <Button
               type="button"
-              key={item.id}
-              name={item.name}
-              underLine={products === item.name
+              key={id}
+              name={name}
+              underLine={product === name
                 ? 'underLine' : 'none'}
-              onClick={handleClickProducts}
+              onClick={handleClickProduct}
             >
-              {item.title}
+              {title}
             </Button>
           ))}
         </Layout>
