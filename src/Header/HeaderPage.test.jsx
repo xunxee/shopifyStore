@@ -1,6 +1,6 @@
 import { MemoryRouter } from 'react-router-dom';
 
-import { fireEvent, render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,6 +11,8 @@ import {
 
 import HeaderPage from './HeaderPage';
 
+jest.mock('react-redux');
+
 const mockUsedNavigate = jest.fn();
 
 jest.mock('react-router-dom', () => ({
@@ -19,8 +21,6 @@ jest.mock('react-router-dom', () => ({
     return mockUsedNavigate;
   },
 }));
-
-jest.mock('react-redux');
 
 describe('HeaderPage', () => {
   const dispatch = jest.fn();
@@ -91,8 +91,11 @@ describe('HeaderPage', () => {
       fireEvent.click(getByText('New Arrivals'));
 
       expect(dispatch).toBeCalledWith({
-        payload: 'new',
-        type: 'list/changeCategory',
+        type: 'list/changeAllCategories',
+        payload: {
+          name: 'new',
+          belong: 'category',
+        },
       });
     });
   });

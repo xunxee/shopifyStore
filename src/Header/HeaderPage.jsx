@@ -13,7 +13,7 @@ import {
 } from '../LoginPage/slice';
 
 import {
-  changeCategory,
+  changeAllCategories,
   clearCategory,
 } from '../List/slice';
 
@@ -56,7 +56,9 @@ export default function HeaderPage() {
 
     if (!name) dispatch(clearCategory());
 
-    return name && dispatch(changeCategory(name));
+    return name && dispatch(changeAllCategories({
+      name, belong: 'category',
+    }));
   }, [navigate, dispatch]);
 
   const refreshToken = useSelector(get({
@@ -93,7 +95,7 @@ export default function HeaderPage() {
       )}
       <NavBarLayout>
         <TitleContainer
-          onClickCategories={handleClickCategories}
+          onClick={handleClickCategories}
         />
         <SearchBarContainer />
         <PurchaseContainer
