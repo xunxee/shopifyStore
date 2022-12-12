@@ -8,7 +8,7 @@ import reducer, {
   changeLoginFields,
   changeLoginErrorMessage,
   clearLoginFields,
-  clearPasswordInvalidCheckMessage,
+  clearInvalidCheckMessage,
   requestLogin,
   setRefreshToken,
   logout,
@@ -16,7 +16,6 @@ import reducer, {
   changeInvalidCheckMessage,
   checkSignUpValid,
   requestSignUp,
-  clearEmailInvalidCheckMessage,
 } from './slice';
 
 import { postLogin, postSignUp } from '../services/api';
@@ -195,7 +194,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('clearEmailInvalidCheckMessage', () => {
+  describe('clearInvalidCheckMessage', () => {
     it('clear email invalid check message', () => {
       const initialState = {
         loginFields: {
@@ -207,26 +206,24 @@ describe('reducer', () => {
 
       const { loginFields: { email } } = reducer(
         initialState,
-        clearEmailInvalidCheckMessage(),
+        clearInvalidCheckMessage('email'),
       );
 
       expect(email.invalidCheckMessage).toBe('');
     });
-  });
 
-  describe('clearPasswordInvalidCheckMessage', () => {
     it('clear password invalid check message', () => {
       const initialState = {
         loginFields: {
           password: {
-            invalidCheckMessage: '비밀번호를 입력해주세요',
+            invalidCheckMessage: 'password를 확인하세요',
           },
         },
       };
 
       const { loginFields: { password } } = reducer(
         initialState,
-        clearPasswordInvalidCheckMessage(),
+        clearInvalidCheckMessage('password'),
       );
 
       expect(password.invalidCheckMessage).toBe('');

@@ -115,28 +115,14 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    clearEmailInvalidCheckMessage(state) {
+    clearInvalidCheckMessage(state, { payload: name }) {
       const { loginFields } = state;
       return {
         ...state,
         loginFields: {
           ...loginFields,
-          email: {
-            value: loginFields.email.value,
-            invalidCheckMessage: '',
-          },
-        },
-      };
-    },
-
-    clearPasswordInvalidCheckMessage(state) {
-      const { loginFields } = state;
-      return {
-        ...state,
-        loginFields: {
-          ...loginFields,
-          password: {
-            value: loginFields.password.value,
+          [name]: {
+            value: loginFields[name].value,
             invalidCheckMessage: '',
           },
         },
@@ -177,8 +163,7 @@ export const {
   changeInvalidCheckMessage,
   changeLoginErrorMessage,
   clearLoginFields,
-  clearEmailInvalidCheckMessage,
-  clearPasswordInvalidCheckMessage,
+  clearInvalidCheckMessage,
   setRefreshToken,
   logout,
   setAccountInfo,
