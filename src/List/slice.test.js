@@ -1,21 +1,23 @@
 import reducer, {
-  changeCategory,
-  changeProduct,
+  changeAllCategories,
   changeSort,
   changeMaterial,
   clearCategory,
 } from './slice';
 
 describe('reducer', () => {
-  describe('setIsCategories', () => {
-    it('changes categories', () => {
+  describe('changeAllCategories', () => {
+    it('change categories', () => {
       const initialState = {
         category: '',
       };
 
       const { category } = reducer(
         initialState,
-        changeCategory('new'),
+        changeAllCategories({
+          name: 'new',
+          belong: 'category',
+        }),
       );
 
       expect(category).toBe('new');
@@ -34,21 +36,6 @@ describe('reducer', () => {
       );
 
       expect(category).toBe('');
-    });
-  });
-
-  describe('setIsProducts', () => {
-    it('changes products', () => {
-      const initialState = {
-        product: '',
-      };
-
-      const { product } = reducer(
-        initialState,
-        changeProduct('sofas'),
-      );
-
-      expect(product).toBe('sofas');
     });
   });
 

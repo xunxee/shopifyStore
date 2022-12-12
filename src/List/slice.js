@@ -9,22 +9,19 @@ const { actions, reducer } = createSlice({
     material: '',
   },
   reducers: {
-    changeCategory(state, { payload: value }) {
+    changeAllCategories(
+      state,
+      { payload: { name, belong } },
+    ) {
       return {
         ...state,
-        category: value,
+        [belong]: name,
       };
     },
     clearCategory(state) {
       return {
         ...state,
         category: '',
-      };
-    },
-    changeProduct(state, { payload: value }) {
-      return {
-        ...state,
-        product: value,
       };
     },
     changeSort(state, { payload: value }) {
@@ -43,9 +40,8 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  changeCategory,
+  changeAllCategories,
   clearCategory,
-  changeProduct,
   changeSort,
   changeMaterial,
 } = actions;
