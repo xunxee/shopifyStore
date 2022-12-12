@@ -3,6 +3,8 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
 const Container = styled.div({
   display: 'flex',
   alignItems: 'center',
@@ -66,17 +68,15 @@ export default function TitleContainer({
         </Logo>
       </a>
       <List>
-        {[
-          { id: 1, path: '/search', title: 'All' },
-          { id: 2, path: '/search/new', title: 'New Arrivals' },
-          { id: 3, path: '/search/featured', title: 'Featured' },
-        ].map((item) => (
-          <Item key={item.id}>
+        {LIST_CATEGORIES.headerCategories.map(({
+          title, path,
+        }) => (
+          <Item key={title}>
             <a
-              href={item.path}
+              href={path}
               onClick={handleClick()}
             >
-              {item.title}
+              {title}
             </a>
           </Item>
         ))}

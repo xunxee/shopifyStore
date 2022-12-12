@@ -1,4 +1,9 @@
 const listCategoriesCollection = {
+  headerCategories: [
+    { title: 'All', path: '/search' },
+    { title: 'New Arrivals', path: '/search/new' },
+    { title: 'Featured', path: '/search/featured' },
+  ],
   categories:
     [
       { id: 1, title: 'New Arrivals', name: 'new' },
