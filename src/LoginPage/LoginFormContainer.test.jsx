@@ -121,8 +121,8 @@ describe('LoginFormContainer', () => {
       });
 
       expect(dispatch).toBeCalledWith({
-        type: 'login/clearEmailInvalidCheckMessage',
-        payload: undefined,
+        type: 'login/clearInvalidCheckMessage',
+        payload: 'email',
       });
 
       fireEvent.change(getByPlaceholderText('Password'), {
@@ -135,8 +135,8 @@ describe('LoginFormContainer', () => {
       });
 
       expect(dispatch).toBeCalledWith({
-        type: 'login/clearPasswordInvalidCheckMessage',
-        payload: undefined,
+        type: 'login/clearInvalidCheckMessage',
+        payload: 'password',
       });
     });
 
