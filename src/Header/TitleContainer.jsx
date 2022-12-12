@@ -46,7 +46,10 @@ export default function TitleContainer({
   function handleClick() {
     return (event) => {
       event.preventDefault();
-      onClick(event.currentTarget.pathname);
+      onClick(
+        event.currentTarget.pathname,
+        event.currentTarget.name,
+      );
     };
   }
 

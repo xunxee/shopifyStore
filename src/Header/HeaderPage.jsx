@@ -14,7 +14,6 @@ import {
 
 import {
   changeAllCategories,
-  clearCategory,
 } from '../List/slice';
 
 import TitleContainer from './TitleContainer';
@@ -49,14 +48,13 @@ export default function HeaderPage() {
 
   const dispatch = useDispatch();
 
-  const handleClickCategories = useCallback((url) => {
+  const handleClickCategories = useCallback((
+    url,
+    name,
+  ) => {
     navigate(url);
 
-    const name = url.substring(8);
-
-    if (!name) dispatch(clearCategory());
-
-    return name && dispatch(changeAllCategories({
+    dispatch(changeAllCategories({
       name, belong: 'category',
     }));
   }, [navigate, dispatch]);
@@ -69,6 +67,11 @@ export default function HeaderPage() {
   const isAccountModalOpen = useSelector(get({
     page: 'login',
     key: 'isAccountModalOpen',
+  }));
+
+  const category = useSelector(get({
+    page: 'list',
+    key: 'category',
   }));
 
   const handleToggle = useCallback(() => {
@@ -95,6 +98,7 @@ export default function HeaderPage() {
       )}
       <NavBarLayout>
         <TitleContainer
+          category={category}
           onClick={handleClickCategories}
         />
         <SearchBarContainer />

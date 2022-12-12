@@ -76,11 +76,6 @@ describe('HeaderPage', () => {
       fireEvent.click(getByText('All'));
 
       expect(mockUsedNavigate).toBeCalledWith('/search');
-
-      expect(dispatch).toBeCalledWith({
-        payload: undefined,
-        type: 'list/clearCategory',
-      });
     });
   });
 
@@ -113,6 +108,9 @@ describe('HeaderPage', () => {
             error: '',
           },
           refreshToken: given.refreshToken,
+        },
+        list: {
+          category: '',
         },
       }));
     });
