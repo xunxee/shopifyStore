@@ -3,12 +3,22 @@ import { createSlice } from '@reduxjs/toolkit';
 const { actions, reducer } = createSlice({
   name: 'list',
   initialState: {
+    lightOnCategory: '',
     category: '',
     product: '',
     sort: '',
     material: '',
   },
   reducers: {
+    changeLightOnCategory(
+      state,
+      { payload: name },
+    ) {
+      return {
+        ...state,
+        lightOnCategory: name,
+      };
+    },
     changeAllCategories(
       state,
       { payload: { name, belong } },
@@ -16,12 +26,6 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         [belong]: name,
-      };
-    },
-    clearCategory(state) {
-      return {
-        ...state,
-        category: '',
       };
     },
     changeSort(state, { payload: value }) {
@@ -40,8 +44,8 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
+  changeLightOnCategory,
   changeAllCategories,
-  clearCategory,
   changeSort,
   changeMaterial,
 } = actions;

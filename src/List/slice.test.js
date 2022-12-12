@@ -1,11 +1,26 @@
 import reducer, {
+  changeLightOnCategory,
   changeAllCategories,
   changeSort,
   changeMaterial,
-  clearCategory,
 } from './slice';
 
 describe('reducer', () => {
+  describe('changeLightOnCategory', () => {
+    it('change lightOnCategory', () => {
+      const initialState = {
+        lightOnCategory: '',
+      };
+
+      const { lightOnCategory } = reducer(
+        initialState,
+        changeLightOnCategory('all'),
+      );
+
+      expect(lightOnCategory).toBe('all');
+    });
+  });
+
   describe('changeAllCategories', () => {
     it('change categories', () => {
       const initialState = {
@@ -21,21 +36,6 @@ describe('reducer', () => {
       );
 
       expect(category).toBe('new');
-    });
-  });
-
-  describe('clearCategory', () => {
-    it('clears categories', () => {
-      const initialState = {
-        category: 'new',
-      };
-
-      const { category } = reducer(
-        initialState,
-        clearCategory(),
-      );
-
-      expect(category).toBe('');
     });
   });
 
