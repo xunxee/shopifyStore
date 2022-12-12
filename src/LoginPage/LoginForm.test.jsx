@@ -281,7 +281,7 @@ describe('LoginForm', () => {
     ];
 
     inputs.forEach((input) => {
-      describe(input, () => {
+      describe(`${input} invalid check message`, () => {
         context('when it have a value', () => {
           it("doesn't render", () => {
             const { queryByText } = renderLoginForm({
