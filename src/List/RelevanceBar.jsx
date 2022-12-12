@@ -30,7 +30,7 @@ export default function RelevanceBar({
     { target: { name } },
   ) => {
     onClickSort(name);
-  }, [sort]);
+  }, [sort, onClickSort]);
 
   const handleClickMaterial = useCallback((
     { target: { name } },

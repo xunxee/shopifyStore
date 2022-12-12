@@ -15,6 +15,10 @@ jest.mock('react-router-dom', () => ({
   useNavigate() {
     return mockUseNavigate;
   },
+  useLocation: () => ({
+    pathname: '/search/featured',
+    search: '',
+  }),
 }));
 
 describe('ListContainer', () => {
@@ -134,14 +138,23 @@ describe('ListContainer', () => {
     });
   });
 
-  it('renders the sort', () => {
-    const { queryByText } = renderListContainer();
+  describe('click Sort', () => {
+    it('generates sort query parameter', () => {
+      const { queryByText } = renderListContainer();
 
-    fireEvent.click(queryByText('Trending'));
+      fireEvent.click(queryByText('Trending'));
 
-    expect(dispatch).toBeCalledWith({
-      type: 'list/changeSort',
-      payload: 'trending',
+      expect(dispatch).toBeCalledWith({
+        type: 'list/changeAllCategories',
+        payload: {
+          name: 'trending',
+          belong: 'sort',
+        },
+      });
+
+      expect(mockUseNavigate).toBeCalledWith(
+        '/search/featured?sort=trending',
+      );
     });
   });
 

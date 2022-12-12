@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,6 @@ import { useCallback } from 'react';
 
 import {
   changeAllCategories,
-  changeSort,
   changeMaterial,
 } from './slice';
 
@@ -52,6 +51,8 @@ export default function ListContainer() {
     key: 'material',
   }));
 
+  const { pathname, search } = useLocation();
+
   const handleClickCategory = useCallback((name) => {
     dispatch(changeAllCategories({
       name,
@@ -59,13 +60,15 @@ export default function ListContainer() {
     }));
 
     if (product) {
-      navigate(`/search/products/${product}/${name}`);
+      navigate(
+        `/search/products/${product}/${name}${search}`,
+      );
 
       return;
     }
 
     navigate(`/search/${name}`);
-  }, [dispatch, navigate, product]);
+  }, [dispatch, navigate, product, search]);
 
   const handleClickProduct = useCallback((name) => {
     dispatch(changeAllCategories({
@@ -74,17 +77,24 @@ export default function ListContainer() {
     }));
 
     if (category) {
-      navigate(`/search/products/${name}/${category}`);
+      navigate(
+        `/search/products/${name}/${category}${search}`,
+      );
 
       return;
     }
 
     navigate(`/search/products/${name}`);
-  }, [dispatch, navigate, category]);
+  }, [dispatch, navigate, category, search]);
 
   const handleClickSort = useCallback((name) => {
-    dispatch(changeSort(name));
-  }, [dispatch]);
+    dispatch(changeAllCategories({
+      name,
+      belong: 'sort',
+    }));
+
+    navigate(`${pathname}?sort=${name}`);
+  }, [dispatch, navigate, pathname]);
 
   const handleClickMaterial = useCallback((name) => {
     dispatch(changeMaterial(name));
