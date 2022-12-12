@@ -48,27 +48,17 @@ export default memo(({
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
 
-    function checkValid(inputName) {
-      const valid = {
-        email: VALID_FIELDS.email.regexps
-          .test(value),
-        password: VALID_FIELDS.password.regexps
-          .test(value),
-      };
+    function checkValid() {
+      const checkInput = name === 'email'
+        ? password : email;
 
-      function returnResult(checkInput) {
-        return valid[name]
-          && !checkInput.invalidCheckMessage
-          && handleInvalidCheckMessage(name);
-      }
-
-      return inputName === 'email'
-        ? returnResult(password)
-        : returnResult(email);
+      return VALID_FIELDS[name].regexps.test(value)
+        && ![checkInput].invalidCheckMessage
+        && handleInvalidCheckMessage(name);
     }
 
     return firstName.value
-      && lastName.value && checkValid(name);
+      && lastName.value && checkValid();
   }
 
   function handleSignUpValid({ target: { name } }) {
