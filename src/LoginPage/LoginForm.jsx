@@ -48,29 +48,27 @@ export default memo(({
   function handleChange({ target: { name, value } }) {
     onChange({ name, value });
 
-    if (name === 'email'
-        && firstName.value
-        && lastName.value
-    ) {
-      const emailValid = VALID_FIELDS.email.regexps
-        .test(value);
+    function checkValid(inputName) {
+      const valid = {
+        email: VALID_FIELDS.email.regexps
+          .test(value),
+        password: VALID_FIELDS.password.regexps
+          .test(value),
+      };
 
-      return emailValid && !password.invalidCheckMessage
-        && handleInvalidCheckMessage(name);
+      function returnResult(checkInput) {
+        return valid[name]
+          && !checkInput.invalidCheckMessage
+          && handleInvalidCheckMessage(name);
+      }
+
+      return inputName === 'email'
+        ? returnResult(password)
+        : returnResult(email);
     }
 
-    if (name === 'password'
-      && firstName.value
-      && lastName.value
-    ) {
-      const passwordValid = VALID_FIELDS.password.regexps
-        .test(value);
-
-      return passwordValid && !email.invalidCheckMessage
-        && handleInvalidCheckMessage(name);
-    }
-
-    return null;
+    return firstName.value
+      && lastName.value && checkValid(name);
   }
 
   function handleSignUpValid({ target: { name } }) {
