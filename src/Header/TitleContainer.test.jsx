@@ -11,6 +11,7 @@ describe('TitleContainer', () => {
     return render((
       <MemoryRouter>
         <TitleContainer
+          category="new"
           onClickCategories={handleClick}
         />
       </MemoryRouter>

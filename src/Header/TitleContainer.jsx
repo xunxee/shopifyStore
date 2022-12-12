@@ -26,22 +26,22 @@ const List = styled.ul({
   display: 'flex',
 });
 
-const Item = styled.li({
+const Item = styled.li(({ clickColor }) => ({
   '& a': {
     marginLeft: '24px',
     fontSize: '18px',
     textDecoration: 'none',
-    color: '#888',
+    color: clickColor,
     cursor: 'pointer',
     transition: 'color 300ms ease-in-out',
     '&:hover': {
       color: '#FFF',
     },
   },
-});
+}));
 
 export default function TitleContainer({
-  onClick,
+  category, onClick,
 }) {
   function handleClick() {
     return (event) => {
@@ -74,7 +74,11 @@ export default function TitleContainer({
         {LIST_CATEGORIES.headerCategories.map(({
           title, name, path,
         }) => (
-          <Item key={title}>
+          <Item
+            key={title}
+            clickColor={category === name
+              ? '#FFF' : '#888'}
+          >
             <a
               name={name}
               href={path}
