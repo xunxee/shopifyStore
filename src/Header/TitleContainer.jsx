@@ -69,10 +69,11 @@ export default function TitleContainer({
       </a>
       <List>
         {LIST_CATEGORIES.headerCategories.map(({
-          title, path,
+          title, name, path,
         }) => (
           <Item key={title}>
             <a
+              name={name}
               href={path}
               onClick={handleClick()}
             >
