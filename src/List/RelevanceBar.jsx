@@ -43,31 +43,35 @@ export default function RelevanceBar({
       <div>
         <Layout>
           Sort
-          {LIST_CATEGORIES.sort.map((item) => (
+          {LIST_CATEGORIES.sort.map(({
+            id, name, title,
+          }) => (
             <Button
               type="button"
-              key={item.id}
-              name={item.name}
-              underLine={sort === item.name
+              key={id}
+              name={name}
+              underLine={sort === name
                 ? 'underLine' : 'none'}
               onClick={handleClickSort}
             >
-              {item.title}
+              {title}
             </Button>
           ))}
         </Layout>
         <Layout>
           Material
-          {LIST_CATEGORIES.material.map((item) => (
+          {LIST_CATEGORIES.material.map(({
+            id, name, title,
+          }) => (
             <Button
               type="button"
-              key={item.id}
-              name={item.name}
-              underLine={material === item.name
+              key={id}
+              name={name}
+              underLine={material === name
                 ? 'underLine' : 'none'}
               onClick={handleClickMaterial}
             >
-              {item.title}
+              {title}
             </Button>
           ))}
         </Layout>
