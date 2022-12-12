@@ -39,12 +39,12 @@ const Item = styled.li({
 });
 
 export default function TitleContainer({
-  onClickCategories,
+  onClick,
 }) {
   function handleClick() {
     return (event) => {
       event.preventDefault();
-      onClickCategories(event.currentTarget.pathname);
+      onClick(event.currentTarget.pathname);
     };
   }
 
