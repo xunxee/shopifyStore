@@ -17,7 +17,7 @@ const Container = styled.div({
   },
 });
 
-export default function PurchaseContainer({ onClick }) {
+export default function UserBar({ onClick }) {
   return (
     <Container>
       <button

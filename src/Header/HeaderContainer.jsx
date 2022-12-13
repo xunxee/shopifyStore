@@ -16,7 +16,7 @@ import {
 
 import TitleBar from './TitleBar';
 import SearchBar from './SearchBar';
-import PurchaseContainer from './PurchaseContainer';
+import UserBar from './UserBar';
 import LoginPage from '../LoginPage/LoginPage';
 
 import { get } from '../utils';
@@ -98,7 +98,7 @@ export default function HeaderContainer({ onClick }) {
           onClick={handleClickCategories}
         />
         <SearchBar />
-        <PurchaseContainer
+        <UserBar
           onClick={handleToggle}
         />
       </NavBarLayout>

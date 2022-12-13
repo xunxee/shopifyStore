@@ -1,10 +1,10 @@
 import { render } from '@testing-library/react';
 
-import PurchaseContainer from './PurchaseContainer';
+import UserBar from './UserBar';
 
-describe('PurchaseContainer', () => {
+describe('UserBar', () => {
   it('renders the icons', () => {
-    const { queryByTitle } = render(<PurchaseContainer />);
+    const { queryByTitle } = render(<UserBar />);
 
     const titles = ['shoppingCart', 'circleUser'];
 
