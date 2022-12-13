@@ -14,8 +14,6 @@ import {
 import CategoryBar from './component/CategoryBar';
 import ItemPage from './ItemPage';
 
-import { get } from '../utils';
-
 const Container = styled.div({
   display: 'flex',
   minWidth: '950px',
@@ -36,25 +34,12 @@ export default function ListContainer() {
 
   const dispatch = useDispatch();
 
-  const category = useSelector(get({
-    page: 'list',
-    key: 'category',
-  }));
-
-  const product = useSelector(get({
-    page: 'list',
-    key: 'product',
-  }));
-
-  const sort = useSelector(get({
-    page: 'list',
-    key: 'sort',
-  }));
-
-  const material = useSelector(get({
-    page: 'list',
-    key: 'material',
-  }));
+  const {
+    category,
+    product,
+    sort,
+    material,
+  } = useSelector(({ list }) => list);
 
   const { pathname, search } = useLocation();
 

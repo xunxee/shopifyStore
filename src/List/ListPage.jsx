@@ -13,3 +13,9 @@ export default function ListPage() {
     </Container>
   );
 }
+
+// useNavigate를 사용하자
+// HeaderPage 처럼
+
+// page에는 'react-router-dom'
+// container에는 'react-redux'
