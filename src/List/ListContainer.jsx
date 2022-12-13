@@ -11,8 +11,7 @@ import {
   changeMaterial,
 } from './slice';
 
-import CategoryBar from './CategoryBar';
-import RelevanceBar from './RelevanceBar';
+import CategoryBar from './component/CategoryBar';
 import ItemPage from './ItemPage';
 
 import { get } from '../utils';
@@ -24,6 +23,12 @@ const Container = styled.div({
   minHeight: 'calc(100vh - 110px)',
   margin: '0 auto',
   backgroundColor: '#f8ddaf',
+});
+
+const Layout = styled.div({
+  display: 'flex',
+  flexDirection: 'column',
+  width: '15%',
 });
 
 export default function ListContainer() {
@@ -102,19 +107,35 @@ export default function ListContainer() {
 
   return (
     <Container>
-      <CategoryBar
-        category={category}
-        product={product}
-        onClickCategory={handleClickCategory}
-        onClickProduct={handleClickProduct}
-      />
+      <Layout>
+        <CategoryBar
+          title="All Categories"
+          keyword="categories"
+          item={category}
+          onClick={handleClickCategory}
+        />
+        <CategoryBar
+          title="All Products"
+          keyword="products"
+          item={product}
+          onClick={handleClickProduct}
+        />
+      </Layout>
       <ItemPage />
-      <RelevanceBar
-        sort={sort}
-        material={material}
-        onClickSort={handleClickSort}
-        onClickMaterial={handleClickMaterial}
-      />
+      <Layout>
+        <CategoryBar
+          title="Sort"
+          keyword="sort"
+          item={sort}
+          onClick={handleClickSort}
+        />
+        <CategoryBar
+          title="Material"
+          keyword="material"
+          item={material}
+          onClick={handleClickMaterial}
+        />
+      </Layout>
     </Container>
   );
 }
