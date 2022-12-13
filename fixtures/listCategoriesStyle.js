@@ -1,11 +1,8 @@
 const listCategoriesStyle = {
   container: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: '15%',
+    margin: '2rem 0 0 2rem',
   },
   layout: {
-    marginTop: '2rem',
     fontSize: '20px',
     fontWeight: '700',
   },
