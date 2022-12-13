@@ -1,11 +1,11 @@
 import { render } from '@testing-library/react';
 
-import SearchBarContainer from './SearchBarContainer';
+import SearchBar from './SearchBar';
 
-describe('SearchBarContainer', () => {
+describe('SearchBar', () => {
   it('renders the search bar of the input tag', () => {
     const { queryByPlaceholderText } = render(
-      <SearchBarContainer />,
+      <SearchBar />,
     );
 
     expect(queryByPlaceholderText(
@@ -14,7 +14,7 @@ describe('SearchBarContainer', () => {
   });
 
   it('renders the Magnifying Glass icon', () => {
-    const { queryByTitle } = render(<SearchBarContainer />);
+    const { queryByTitle } = render(<SearchBar />);
 
     expect(queryByTitle('magnifyingGlass')).not.toBeNull();
   });

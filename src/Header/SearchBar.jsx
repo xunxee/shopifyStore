@@ -26,7 +26,7 @@ const Container = styled.div({
   },
 });
 
-export default function SearchBarContainer() {
+export default function SearchBar() {
   return (
     <Container>
       <input

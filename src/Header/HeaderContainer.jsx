@@ -15,7 +15,7 @@ import {
 } from '../List/slice';
 
 import TitleBar from './TitleBar';
-import SearchBarContainer from './SearchBarContainer';
+import SearchBar from './SearchBar';
 import PurchaseContainer from './PurchaseContainer';
 import LoginPage from '../LoginPage/LoginPage';
 
@@ -97,7 +97,7 @@ export default function HeaderContainer({ onClick }) {
           category={category}
           onClick={handleClickCategories}
         />
-        <SearchBarContainer />
+        <SearchBar />
         <PurchaseContainer
           onClick={handleToggle}
         />
