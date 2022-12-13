@@ -1,111 +1,19 @@
-import styled from '@emotion/styled';
+import { useCallback } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
-
-import { useCallback } from 'react';
-
-import {
-  setIsAccountModalOpen,
-  logout,
-  clearLoginFields,
-} from '../LoginPage/slice';
-
-import {
-  changeAllCategories,
-} from '../List/slice';
-
-import TitleContainer from './TitleContainer';
-import SearchBarContainer from './SearchBarContainer';
-import PurchaseContainer from './PurchaseContainer';
-import LoginPage from '../LoginPage/LoginPage';
-
-import { get } from '../utils';
-
-const Container = styled.div({
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  width: '100%',
-  minWidth: '950px',
-  backgroundColor: '#000',
-});
-
-const NavBarLayout = styled.div({
-  display: 'flex',
-  alignItems: 'center',
-  width: '90%',
-  maxWidth: '1920px',
-  height: '74px',
-  margin: '0 auto',
-  color: '#EAEAEA',
-  backgroundColor: '#000',
-});
+import HeaderContainer from './HeaderContainer';
 
 export default function HeaderPage() {
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const handleClickCategories = useCallback((
-    url,
-    name,
-  ) => {
+  const handleClick = useCallback((url) => {
     navigate(url);
+  }, [navigate]);
 
-    dispatch(changeAllCategories({
-      name, belong: 'category',
-    }));
-  }, [navigate, dispatch]);
-
-  const refreshToken = useSelector(get({
-    page: 'login',
-    key: 'refreshToken',
-  }));
-
-  const isAccountModalOpen = useSelector(get({
-    page: 'login',
-    key: 'isAccountModalOpen',
-  }));
-
-  const category = useSelector(get({
-    page: 'list',
-    key: 'category',
-  }));
-
-  const handleToggle = useCallback(() => {
-    dispatch(setIsAccountModalOpen());
-    dispatch(clearLoginFields());
-  }, [dispatch]);
-
-  const handleLogout = useCallback(() => {
-    dispatch(logout());
-    dispatch(clearLoginFields({
-      name: 'password',
-      value: '',
-    }));
-  }, [dispatch]);
-
-  return (
-    <Container>
-      {isAccountModalOpen && (
-        <LoginPage
-          refreshToken={refreshToken}
-          onClickToggle={handleToggle}
-          onClickLogout={handleLogout}
-        />
-      )}
-      <NavBarLayout>
-        <TitleContainer
-          category={category}
-          onClick={handleClickCategories}
-        />
-        <SearchBarContainer />
-        <PurchaseContainer
-          onClick={handleToggle}
-        />
-      </NavBarLayout>
-    </Container>
-  );
+  return ((
+    <HeaderContainer
+      onClick={handleClick}
+    />
+  ));
 }
