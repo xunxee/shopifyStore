@@ -55,9 +55,9 @@ describe('ListContainer', () => {
       given('product', () => 'sofas');
 
       it('generates at the end of the categories path', () => {
-        const { queryByText } = renderListContainer();
+        const { getByText } = renderListContainer();
 
-        fireEvent.click(queryByText('Featured'));
+        fireEvent.click(getByText('Featured'));
 
         expect(dispatch).toBeCalledWith({
           type: 'list/changeAllCategories',
@@ -75,9 +75,9 @@ describe('ListContainer', () => {
 
     context('without product item', () => {
       it('generates categories path', () => {
-        const { queryByText } = renderListContainer();
+        const { getByText } = renderListContainer();
 
-        fireEvent.click(queryByText('Featured'));
+        fireEvent.click(getByText('Featured'));
 
         expect(dispatch).toBeCalledWith({
           type: 'list/changeAllCategories',
@@ -99,9 +99,9 @@ describe('ListContainer', () => {
       given('category', () => 'featured');
 
       it('generates products path before categories', () => {
-        const { queryByText } = renderListContainer();
+        const { getByText } = renderListContainer();
 
-        fireEvent.click(queryByText('Sofas'));
+        fireEvent.click(getByText('Sofas'));
 
         expect(dispatch).toBeCalledWith({
           type: 'list/changeAllCategories',
@@ -119,9 +119,9 @@ describe('ListContainer', () => {
 
     context('without category item', () => {
       it('generate products path', () => {
-        const { queryByText } = renderListContainer();
+        const { getByText } = renderListContainer();
 
-        fireEvent.click(queryByText('Sofas'));
+        fireEvent.click(getByText('Sofas'));
 
         expect(dispatch).toBeCalledWith({
           type: 'list/changeAllCategories',
@@ -140,9 +140,9 @@ describe('ListContainer', () => {
 
   describe('click Sort', () => {
     it('generates sort query parameter', () => {
-      const { queryByText } = renderListContainer();
+      const { getByText } = renderListContainer();
 
-      fireEvent.click(queryByText('Trending'));
+      fireEvent.click(getByText('Trending'));
 
       expect(dispatch).toBeCalledWith({
         type: 'list/changeAllCategories',
@@ -159,9 +159,9 @@ describe('ListContainer', () => {
   });
 
   it('renders the material', () => {
-    const { queryByText } = renderListContainer();
+    const { getByText } = renderListContainer();
 
-    fireEvent.click(queryByText('Fabric'));
+    fireEvent.click(getByText('Fabric'));
 
     expect(dispatch).toBeCalledWith({
       type: 'list/changeMaterial',

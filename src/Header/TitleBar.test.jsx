@@ -19,9 +19,9 @@ describe('TitleBar', () => {
   }
 
   it('renders the title logo', () => {
-    const { queryByTitle } = renderTitleBar();
+    const { getByText } = renderTitleBar();
 
-    expect(queryByTitle('chair')).not.toBeNull();
+    expect(getByText('chair')).not.toBeNull();
   });
 
   it('renders the title list', () => {

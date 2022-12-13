@@ -141,11 +141,11 @@ describe('LoginFormContainer', () => {
     });
 
     it('listens blur events', () => {
-      const { queryByPlaceholderText } = render((
+      const { getByPlaceholderText } = render((
         <LoginFormContainer />
       ));
 
-      const inputBox = queryByPlaceholderText(
+      const inputBox = getByPlaceholderText(
         '성(Last Name)',
       );
 

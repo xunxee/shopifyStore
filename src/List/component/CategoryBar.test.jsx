@@ -6,7 +6,7 @@ describe('CategoryBar', () => {
   const handleClickCategory = jest.fn();
 
   it('renders the categories', () => {
-    const { queryByText } = render((
+    const { getByText } = render((
       <CategoryBar
         title="All Categories"
         keyword="categories"
@@ -15,7 +15,7 @@ describe('CategoryBar', () => {
       />
     ));
 
-    fireEvent.click(queryByText('New Arrivals'));
+    fireEvent.click(getByText('New Arrivals'));
 
     expect(handleClickCategory).toBeCalledWith(
       'new',

@@ -42,9 +42,9 @@ describe('HeaderPage', () => {
   });
 
   it('clicks New Arrivals', () => {
-    const { queryByText } = renderHeaderPage();
+    const { getByText } = renderHeaderPage();
 
-    fireEvent.click(queryByText('All'));
+    fireEvent.click(getByText('All'));
 
     expect(mockUsedNavigate).toBeCalledWith(
       '/search',

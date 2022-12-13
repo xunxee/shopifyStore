@@ -4,12 +4,12 @@ import UserBar from './UserBar';
 
 describe('UserBar', () => {
   it('renders the icons', () => {
-    const { queryByTitle } = render(<UserBar />);
+    const { getByText } = render(<UserBar />);
 
     const titles = ['shoppingCart', 'circleUser'];
 
     titles.forEach((title) => {
-      expect(queryByTitle(title)).not.toBeNull();
+      expect(getByText(title)).not.toBeNull();
     });
   });
 });

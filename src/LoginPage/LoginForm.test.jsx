@@ -51,12 +51,10 @@ describe('LoginForm', () => {
   context('when logging in', () => {
     it('renders the login fields', () => {
       const {
-        getByText,
         queryByPlaceholderText,
         container,
       } = renderLoginForm({ error: 'not found' });
 
-      expect(getByText('not found')).not.toBeNull();
       expect(queryByPlaceholderText('First')).toBeNull();
       expect(queryByPlaceholderText('Last')).toBeNull();
 
@@ -79,9 +77,9 @@ describe('LoginForm', () => {
     });
 
     it('renders "Log In" button', () => {
-      const { queryByText } = renderLoginForm();
+      const { getByText } = renderLoginForm();
 
-      fireEvent.submit(queryByText('Log In'));
+      fireEvent.submit(getByText('Log In'));
 
       expect(handleSubmit).toBeCalled();
     });
@@ -247,21 +245,21 @@ describe('LoginForm', () => {
     });
 
     it('renders "Sign Up" button', () => {
-      const { queryByText } = renderLoginForm(
+      const { getByText } = renderLoginForm(
         { isLogin: false },
       );
 
-      fireEvent.submit(queryByText('Sign Up'));
+      fireEvent.submit(getByText('Sign Up'));
 
       expect(handleSubmit).toBeCalled();
     });
 
     it('listens blur events', () => {
-      const { queryByPlaceholderText } = renderLoginForm({
+      const { getByPlaceholderText } = renderLoginForm({
         isLogin: false,
       });
 
-      const inputBox = queryByPlaceholderText(
+      const inputBox = getByPlaceholderText(
         '성(Last Name)',
       );
 

@@ -123,9 +123,9 @@ describe('HeaderContainer', () => {
       given('refreshToken', () => 'REFRESH_TOKEN');
 
       it('renders LogoutPage', () => {
-        const { queryByText } = renderHeaderContainer();
+        const { getByText } = renderHeaderContainer();
 
-        fireEvent.click(queryByText('Log out'));
+        fireEvent.click(getByText('Log out'));
 
         expect(dispatch).toBeCalledWith(logout());
       });
