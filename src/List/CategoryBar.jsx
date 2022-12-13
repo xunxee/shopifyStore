@@ -15,9 +15,10 @@ const Container = styled.div(container);
 
 const Layout = styled.ul(layout);
 
-const Button = styled.button(({ underLine }) => ({
+const Button = styled.button(({ underLine, name }) => ({
   ...button,
-  textDecoration: `${underLine}`,
+  textDecoration: underLine === name
+    ? 'underLine' : 'none',
 }));
 
 export default function CategoryBar({
@@ -50,8 +51,7 @@ export default function CategoryBar({
               type="button"
               key={id}
               name={name}
-              underLine={category === name
-                ? 'underLine' : 'none'}
+              underLine={category}
               onClick={handleClickCategory}
             >
               {title}
@@ -67,8 +67,7 @@ export default function CategoryBar({
               type="button"
               key={id}
               name={name}
-              underLine={product === name
-                ? 'underLine' : 'none'}
+              underLine={product}
               onClick={handleClickProduct}
             >
               {title}
