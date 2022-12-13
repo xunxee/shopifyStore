@@ -14,7 +14,7 @@ import {
   changeAllCategories,
 } from '../List/slice';
 
-import TitleContainer from './TitleContainer';
+import TitleBar from './TitleBar';
 import SearchBarContainer from './SearchBarContainer';
 import PurchaseContainer from './PurchaseContainer';
 import LoginPage from '../LoginPage/LoginPage';
@@ -93,7 +93,7 @@ export default function HeaderContainer({ onClick }) {
         />
       )}
       <NavBarLayout>
-        <TitleContainer
+        <TitleBar
           category={category}
           onClick={handleClickCategories}
         />
@@ -105,9 +105,3 @@ export default function HeaderContainer({ onClick }) {
     </Container>
   );
 }
-// HeaderPage -> HeaderContainer
-// HeaderPage를 하나 더 만들어야하고 -> 여기서 'react-router-dom'
-// Form은 진짜 그 HTML <From />을 말하는구나
-// SearchBarContainer -> SearchBar
-// TitleContainer -> TitleBar
-// PurchaseContainer -> UserBar

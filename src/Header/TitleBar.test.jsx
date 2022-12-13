@@ -2,15 +2,15 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
-import TitleContainer from './TitleContainer';
+import TitleBar from './TitleBar';
 
-describe('TitleContainer', () => {
+describe('TitleBar', () => {
   const handleClick = jest.fn();
 
-  function renderTitleContainer() {
+  function renderTitleBar() {
     return render((
       <MemoryRouter>
-        <TitleContainer
+        <TitleBar
           category="new"
           onClickCategories={handleClick}
         />
@@ -19,13 +19,13 @@ describe('TitleContainer', () => {
   }
 
   it('renders the title logo', () => {
-    const { queryByTitle } = renderTitleContainer();
+    const { queryByTitle } = renderTitleBar();
 
     expect(queryByTitle('chair')).not.toBeNull();
   });
 
   it('renders the title list', () => {
-    const { container } = renderTitleContainer();
+    const { container } = renderTitleBar();
 
     const texts = ['All', 'New Arrivals', 'Featured'];
 

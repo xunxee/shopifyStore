@@ -40,7 +40,7 @@ const Item = styled.li(({ clickColor }) => ({
   },
 }));
 
-export default function TitleContainer({
+export default function TitleBar({
   category, onClick,
 }) {
   function handleClick() {
