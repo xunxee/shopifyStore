@@ -18,42 +18,38 @@ const listCategoriesCollection = {
   ],
   categories:
     [
-      { id: 1, title: 'New Arrivals', name: 'new' },
-      { id: 2, title: 'Featured', name: 'featured' },
+      { subHeading: 'New Arrivals', value: 'new' },
+      { subHeading: 'Featured', value: 'featured' },
     ],
   products: [
-    { id: 1, title: 'Beds', name: 'beds' },
-    { id: 2, title: 'Sofas', name: 'sofas' },
-    { id: 3, title: 'Tables & desks', name: 'tables' },
-    { id: 4, title: 'Chairs', name: 'chairs' },
+    { subHeading: 'Beds', value: 'beds' },
+    { subHeading: 'Sofas', value: 'sofas' },
+    { subHeading: 'Tables & desks', value: 'tables' },
+    { subHeading: 'Chairs', value: 'chairs' },
   ],
   sort: [
     {
-      id: 1,
-      title: 'Trending',
-      name: 'trending',
+      subHeading: 'Trending',
+      value: 'trending',
     },
     {
-      id: 2,
-      title: 'Latest arrivals',
-      name: 'latestArrivals',
+      subHeading: 'Latest arrivals',
+      value: 'latestArrivals',
     },
     {
-      id: 3,
-      title: 'Price: Low to high',
-      name: 'lowToHigh',
+      subHeading: 'Price: Low to high',
+      value: 'lowToHigh',
     },
     {
-      id: 4,
-      title: 'Price: High to low',
-      name: 'highToLow',
+      subHeading: 'Price: High to low',
+      value: 'highToLow',
     },
   ],
   material: [
-    { id: 1, title: 'Fabric', name: 'fabric' },
-    { id: 2, title: 'Wood', name: 'wood' },
-    { id: 3, title: 'Metal', name: 'metal' },
-    { id: 4, title: 'Glass', name: 'glass' },
+    { subHeading: 'Fabric', value: 'fabric' },
+    { subHeading: 'Wood', value: 'wood' },
+    { subHeading: 'Metal', value: 'metal' },
+    { subHeading: 'Glass', value: 'glass' },
   ],
 };
 
