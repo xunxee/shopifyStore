@@ -87,7 +87,10 @@ export default function ListContainer() {
   }, [dispatch, navigate, pathname]);
 
   const handleClickMaterial = useCallback((name) => {
-    dispatch(changeMaterial(name));
+    dispatch(changeAllCategories({
+      name,
+      belong: 'material',
+    }));
   }, [dispatch]);
 
   return (

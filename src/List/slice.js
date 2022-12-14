@@ -10,15 +10,6 @@ const { actions, reducer } = createSlice({
     material: '',
   },
   reducers: {
-    changeLightOnCategory(
-      state,
-      { payload: name },
-    ) {
-      return {
-        ...state,
-        lightOnCategory: name,
-      };
-    },
     changeAllCategories(
       state,
       { payload: { name, belong } },
@@ -28,26 +19,11 @@ const { actions, reducer } = createSlice({
         [belong]: name,
       };
     },
-    changeSort(state, { payload: value }) {
-      return {
-        ...state,
-        sort: value,
-      };
-    },
-    changeMaterial(state, { payload: value }) {
-      return {
-        ...state,
-        material: value,
-      };
-    },
   },
 });
 
 export const {
-  changeLightOnCategory,
   changeAllCategories,
-  changeSort,
-  changeMaterial,
 } = actions;
 
 export default reducer;

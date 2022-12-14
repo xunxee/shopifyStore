@@ -65,11 +65,6 @@ export default function HeaderContainer({ onClick }) {
     key: 'isAccountModalOpen',
   }));
 
-  const category = useSelector(get({
-    page: 'list',
-    key: 'category',
-  }));
-
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
     dispatch(clearLoginFields());
@@ -94,7 +89,6 @@ export default function HeaderContainer({ onClick }) {
       )}
       <NavBarLayout>
         <TitleBar
-          category={category}
           onClick={handleClickCategories}
         />
         <SearchBar />

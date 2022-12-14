@@ -164,8 +164,11 @@ describe('ListContainer', () => {
     fireEvent.click(getByText('Fabric'));
 
     expect(dispatch).toBeCalledWith({
-      type: 'list/changeMaterial',
-      payload: 'fabric',
+      type: 'list/changeAllCategories',
+      payload: {
+        name: 'fabric',
+        belong: 'material',
+      },
     });
   });
 });

@@ -26,23 +26,24 @@ const List = styled.ul({
   display: 'flex',
 });
 
-const Item = styled.li(({ clickColor }) => ({
+const Item = styled.li({
   '& a': {
     marginLeft: '24px',
     fontSize: '18px',
     textDecoration: 'none',
-    color: clickColor,
+    color: '#888',
     cursor: 'pointer',
     transition: 'color 300ms ease-in-out',
+    '&:focus': {
+      color: '#FFF',
+    },
     '&:hover': {
       color: '#FFF',
     },
   },
-}));
+});
 
-export default function TitleBar({
-  category, onClick,
-}) {
+export default function TitleBar({ onClick }) {
   function handleClick() {
     return (event) => {
       event.preventDefault();
@@ -76,8 +77,6 @@ export default function TitleBar({
         }) => (
           <Item
             key={title}
-            clickColor={category === name
-              ? '#FFF' : '#888'}
           >
             <a
               name={name}
