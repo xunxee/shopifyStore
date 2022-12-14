@@ -13,7 +13,7 @@ import {
   requestLogin,
   requestSignUp,
   checkSignUpValid,
-  clearInvalidCheckMessage,
+  checkInvalidMessageClear,
 } from './slice';
 
 export default function LoginFormContainer() {
@@ -34,25 +34,14 @@ export default function LoginFormContainer() {
     dispatch(clearLoginFields());
   }, [dispatch]);
 
-  const handleChange = useCallback(({ name, value }) => {
+  const handleChange = useCallback(({
+    name, value, email, password,
+  }) => {
     dispatch(changeLoginFields({ name, value }));
+    dispatch(checkInvalidMessageClear({
+      name, value, email, password,
+    }));
   }, [dispatch]);
-
-  // const handleChange = useCallback(({ name, value }) => {
-  //   dispatch(changeLoginFields({ name, value }));
-
-  //   function checkValid() {
-  //     const checkInput = name === 'email'
-  //       ? password : email;
-
-  //     return (VALID_FIELDS[name].regexps.test(value)
-  //       && !checkInput.invalidCheckMessage);
-  //   }
-
-  //   if (firstName.value && lastName.value && checkValid()) {
-  //     handleInvalidCheckMessage(name);
-  //   }
-  // }, [dispatch]);
 
   const handleCheckSignUpValid = useCallback(({ name }) => {
     const { [name]: { value } } = loginFields;
@@ -60,9 +49,7 @@ export default function LoginFormContainer() {
     dispatch(checkSignUpValid({ name, value }));
   }, [dispatch, loginFields]);
 
-  const handleSubmit = useCallback((e) => {
-    // e.preventDefault();
-
+  const handleSubmit = useCallback(() => {
     if (isLogin) {
       dispatch(requestLogin());
       return;
@@ -70,10 +57,6 @@ export default function LoginFormContainer() {
 
     dispatch(requestSignUp());
   }, [dispatch, isLogin]);
-
-  const handleInvalidCheckMessage = useCallback((name) => {
-    dispatch(clearInvalidCheckMessage(name));
-  }, [dispatch]);
 
   return (
     <div>
@@ -83,9 +66,6 @@ export default function LoginFormContainer() {
         onChange={handleChange}
         onBlur={handleCheckSignUpValid}
         onSubmit={handleSubmit}
-        handleInvalidCheckMessage={
-          handleInvalidCheckMessage
-        }
       />
       <button
         type="button"

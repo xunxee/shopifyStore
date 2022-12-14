@@ -8,13 +8,11 @@ describe('LoginForm', () => {
   const handleChange = jest.fn();
   const handleSignUpValid = jest.fn();
   const handleSubmit = jest.fn();
-  const handleInvalidCheckMessage = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
     handleSignUpValid.mockClear();
     handleSubmit.mockClear();
-    handleInvalidCheckMessage.mockClear();
   });
 
   const fieldState = {
@@ -43,7 +41,6 @@ describe('LoginForm', () => {
         onChange={handleChange}
         onBlur={handleSignUpValid}
         onSubmit={handleSubmit}
-        handleInvalidCheckMessage={handleInvalidCheckMessage}
       />
     ));
   }
@@ -72,7 +69,16 @@ describe('LoginForm', () => {
       });
 
       expect(handleChange).toBeCalledWith({
-        name: 'email', value: 'new email',
+        name: 'email',
+        value: 'new email',
+        email: {
+          invalidCheckMessage: '',
+          value: '',
+        },
+        password: {
+          invalidCheckMessage: '',
+          value: '',
+        },
       });
     });
 
@@ -109,6 +115,7 @@ describe('LoginForm', () => {
 
       expect(queryByPlaceholderText('성(Last Name)'))
         .not.toBeNull();
+
       expect(queryByPlaceholderText('이름(First Name)'))
         .not.toBeNull();
 
@@ -139,7 +146,7 @@ describe('LoginForm', () => {
             target: { value: 'tester@example.com' },
           });
 
-          expect(handleInvalidCheckMessage).toBeCalled();
+          expect(handleChange).toBeCalled();
         });
       });
 
@@ -165,7 +172,7 @@ describe('LoginForm', () => {
             target: { value: 'tester' },
           });
 
-          expect(handleInvalidCheckMessage).not.toBeCalled();
+          expect(handleChange).not.toBeCalled();
         });
       });
 
@@ -188,7 +195,7 @@ describe('LoginForm', () => {
             target: { value: 'Tester@123' },
           });
 
-          expect(handleInvalidCheckMessage).toBeCalled();
+          expect(handleChange).toBeCalled();
         });
       });
 
@@ -211,7 +218,7 @@ describe('LoginForm', () => {
             target: { value: 'tester@123' },
           });
 
-          expect(handleInvalidCheckMessage).not.toBeCalled();
+          expect(handleChange).toBeCalled();
         });
       });
     });
@@ -237,10 +244,10 @@ describe('LoginForm', () => {
         });
 
         fireEvent.change(getByPlaceholderText('Password'), {
-          target: { vale: 'Tester@123' },
+          target: { value: 'Tester@123' },
         });
 
-        expect(handleInvalidCheckMessage).not.toBeCalled();
+        expect(handleChange).toBeCalled();
       });
     });
 

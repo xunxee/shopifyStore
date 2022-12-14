@@ -21,7 +21,6 @@ export default memo(({
   onChange,
   onBlur,
   onSubmit,
-  handleInvalidCheckMessage,
 }) => {
   function checkDisabled() {
     if (isLogin) return email.value && password.value;
@@ -43,21 +42,9 @@ export default memo(({
   }
 
   function handleChange({ target: { name, value } }) {
-    onChange({ name, value });
-
-    function checkValid() {
-      const checkInput = name === 'email'
-        ? password : email;
-
-      if (VALID_FIELDS[name].regexps.test(value)
-        && !checkInput.invalidCheckMessage) {
-        handleInvalidCheckMessage(name);
-      }
-    }
-
-    if (firstName.value && lastName.value) {
-      checkValid();
-    }
+    onChange({
+      name, value, email, password,
+    });
   }
 
   function handleSignUpValid({ target: { name } }) {
