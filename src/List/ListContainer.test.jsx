@@ -8,25 +8,15 @@ import ListContainer from './ListContainer';
 
 jest.mock('react-redux');
 
-const mockUseNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate() {
-    return mockUseNavigate;
-  },
-  useLocation: () => ({
-    pathname: '/search/featured',
-    search: '',
-  }),
-}));
-
 describe('ListContainer', () => {
   const dispatch = jest.fn();
 
+  const handleClick = jest.fn();
+
   beforeEach(() => {
     dispatch.mockClear();
-    mockUseNavigate.mockClear();
+
+    handleClick.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
 
@@ -42,10 +32,16 @@ describe('ListContainer', () => {
     );
   });
 
-  function renderListContainer() {
+  function renderListContainer(
+    { pathname, search } = {},
+  ) {
     return render((
       <MemoryRouter>
-        <ListContainer />
+        <ListContainer
+          onClickCategories={handleClick}
+          pathname={pathname}
+          search={search}
+        />
       </MemoryRouter>
     ));
   }
@@ -55,19 +51,21 @@ describe('ListContainer', () => {
       given('product', () => 'sofas');
 
       it('generates at the end of the categories path', () => {
-        const { getByText } = renderListContainer();
+        const { getByText } = renderListContainer({
+          search: '',
+        });
 
         fireEvent.click(getByText('Featured'));
 
         expect(dispatch).toBeCalledWith({
-          type: 'list/changeAllCategories',
+          type: 'list/changeCategoriesDataField',
           payload: {
             name: 'featured',
             belong: 'category',
           },
         });
 
-        expect(mockUseNavigate).toBeCalledWith(
+        expect(handleClick).toBeCalledWith(
           '/search/products/sofas/featured',
         );
       });
@@ -80,14 +78,14 @@ describe('ListContainer', () => {
         fireEvent.click(getByText('Featured'));
 
         expect(dispatch).toBeCalledWith({
-          type: 'list/changeAllCategories',
+          type: 'list/changeCategoriesDataField',
           payload: {
             name: 'featured',
             belong: 'category',
           },
         });
 
-        expect(mockUseNavigate).toBeCalledWith(
+        expect(handleClick).toBeCalledWith(
           '/search/featured',
         );
       });
@@ -99,19 +97,21 @@ describe('ListContainer', () => {
       given('category', () => 'featured');
 
       it('generates products path before categories', () => {
-        const { getByText } = renderListContainer();
+        const { getByText } = renderListContainer({
+          search: '',
+        });
 
         fireEvent.click(getByText('Sofas'));
 
         expect(dispatch).toBeCalledWith({
-          type: 'list/changeAllCategories',
+          type: 'list/changeCategoriesDataField',
           payload: {
             name: 'sofas',
             belong: 'product',
           },
         });
 
-        expect(mockUseNavigate).toBeCalledWith(
+        expect(handleClick).toBeCalledWith(
           '/search/products/sofas/featured',
         );
       });
@@ -124,14 +124,14 @@ describe('ListContainer', () => {
         fireEvent.click(getByText('Sofas'));
 
         expect(dispatch).toBeCalledWith({
-          type: 'list/changeAllCategories',
+          type: 'list/changeCategoriesDataField',
           payload: {
             name: 'sofas',
             belong: 'product',
           },
         });
 
-        expect(mockUseNavigate).toBeCalledWith(
+        expect(handleClick).toBeCalledWith(
           '/search/products/sofas',
         );
       });
@@ -140,19 +140,21 @@ describe('ListContainer', () => {
 
   describe('click Sort', () => {
     it('generates sort query parameter', () => {
-      const { getByText } = renderListContainer();
+      const { getByText } = renderListContainer({
+        pathname: '/search/featured',
+      });
 
       fireEvent.click(getByText('Trending'));
 
       expect(dispatch).toBeCalledWith({
-        type: 'list/changeAllCategories',
+        type: 'list/changeCategoriesDataField',
         payload: {
           name: 'trending',
           belong: 'sort',
         },
       });
 
-      expect(mockUseNavigate).toBeCalledWith(
+      expect(handleClick).toBeCalledWith(
         '/search/featured?sort=trending',
       );
     });
@@ -164,7 +166,7 @@ describe('ListContainer', () => {
     fireEvent.click(getByText('Fabric'));
 
     expect(dispatch).toBeCalledWith({
-      type: 'list/changeAllCategories',
+      type: 'list/changeCategoriesDataField',
       payload: {
         name: 'fabric',
         belong: 'material',

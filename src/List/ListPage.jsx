@@ -1,5 +1,9 @@
 import styled from '@emotion/styled';
 
+import { useCallback } from 'react';
+
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import ListContainer from './ListContainer';
 
 const Container = styled.div({
@@ -7,15 +11,21 @@ const Container = styled.div({
 });
 
 export default function ListPage() {
+  const navigate = useNavigate();
+
+  const { pathname, search } = useLocation();
+
+  const handleClickCategories = useCallback((url) => {
+    navigate(url);
+  });
+
   return (
     <Container>
-      <ListContainer />
+      <ListContainer
+        onClickCategories={handleClickCategories}
+        pathname={pathname}
+        search={search}
+      />
     </Container>
   );
 }
-
-// useNavigate를 사용하자
-// HeaderPage 처럼
-
-// page에는 'react-router-dom'
-// container에는 'react-redux'

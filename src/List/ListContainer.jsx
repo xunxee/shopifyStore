@@ -1,7 +1,5 @@
 import styled from '@emotion/styled';
 
-import { useLocation, useNavigate } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
@@ -28,9 +26,11 @@ const Layout = styled.div({
   width: '15%',
 });
 
-export default function ListContainer() {
-  const navigate = useNavigate();
-
+export default function ListContainer({
+  onClickCategories,
+  pathname,
+  search,
+}) {
   const dispatch = useDispatch();
 
   const {
@@ -40,8 +40,6 @@ export default function ListContainer() {
     material,
   } = useSelector(({ list }) => list);
 
-  const { pathname, search } = useLocation();
-
   const handleClickCategory = useCallback((name) => {
     dispatch(changeCategoriesDataField({
       name,
@@ -49,15 +47,15 @@ export default function ListContainer() {
     }));
 
     if (product) {
-      navigate(
+      onClickCategories(
         `/search/products/${product}/${name}${search}`,
       );
 
       return;
     }
 
-    navigate(`/search/${name}`);
-  }, [dispatch, navigate, product, search]);
+    onClickCategories(`/search/${name}`);
+  }, [dispatch, onClickCategories, product, search]);
 
   const handleClickProduct = useCallback((name) => {
     dispatch(changeCategoriesDataField({
@@ -66,15 +64,15 @@ export default function ListContainer() {
     }));
 
     if (category) {
-      navigate(
+      onClickCategories(
         `/search/products/${name}/${category}${search}`,
       );
 
       return;
     }
 
-    navigate(`/search/products/${name}`);
-  }, [dispatch, navigate, category, search]);
+    onClickCategories(`/search/products/${name}`);
+  }, [dispatch, onClickCategories, category, search]);
 
   const handleClickSort = useCallback((name) => {
     dispatch(changeCategoriesDataField({
@@ -82,8 +80,8 @@ export default function ListContainer() {
       belong: 'sort',
     }));
 
-    navigate(`${pathname}?sort=${name}`);
-  }, [dispatch, navigate, pathname]);
+    onClickCategories(`${pathname}?sort=${name}`);
+  }, [dispatch, onClickCategories, pathname]);
 
   const handleClickMaterial = useCallback((name) => {
     dispatch(changeCategoriesDataField({

@@ -32,6 +32,7 @@ export default function CategoryBar({
   ) => {
     onClick(name);
   }, [item, onClick]);
+
   return (
     <Container>
       <div>
