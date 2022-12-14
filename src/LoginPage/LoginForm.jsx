@@ -29,20 +29,17 @@ export default memo(({
     if (!(email.value && password.value
       && firstName.value && lastName.value)) return false;
 
-    if (!(email.invalidCheckMessage
-      && password.invalidCheckMessage)) {
-      const validChecks = {
-        email: VALID_FIELDS.email.regexps
-          .test(email.value),
-        password: VALID_FIELDS.password.regexps
-          .test(password.value),
-      };
+    if (email.invalidCheckMessage
+      && password.invalidCheckMessage) return false;
 
-      return !!(lastName.value && firstName.value
-      && validChecks.email && validChecks.password);
-    }
+    const emailValidCheck = VALID_FIELDS.email.regexps
+      .test(email.value);
 
-    return false;
+    const passwordValidCheck = VALID_FIELDS.password.regexps
+      .test(password.value);
+
+    return (lastName.value && firstName.value
+      && emailValidCheck && passwordValidCheck);
   }
 
   function handleChange({ target: { name, value } }) {
@@ -52,23 +49,33 @@ export default memo(({
       const checkInput = name === 'email'
         ? password : email;
 
-      return VALID_FIELDS[name].regexps.test(value)
-        && !checkInput.invalidCheckMessage
-        && handleInvalidCheckMessage(name);
+      if (VALID_FIELDS[name].regexps.test(value)
+        && !checkInput.invalidCheckMessage) {
+        handleInvalidCheckMessage(name);
+      }
     }
 
-    return firstName.value
-      && lastName.value && checkValid();
+    if (firstName.value && lastName.value) {
+      checkValid();
+    }
   }
 
   function handleSignUpValid({ target: { name } }) {
     onBlur({ name });
   }
 
+  function handleSubmit() {
+    return (event) => {
+      event.preventDefault();
+
+      onSubmit();
+    };
+  }
+
   return (
     <>
       {error && <p>{error}</p>}
-      <Container onSubmit={onSubmit}>
+      <Container onSubmit={handleSubmit()}>
         {isLogin || (
           <>
             <input
