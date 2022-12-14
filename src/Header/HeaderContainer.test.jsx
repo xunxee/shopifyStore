@@ -79,7 +79,7 @@ describe('HeaderContainer', () => {
       fireEvent.click(getByText('New Arrivals'));
 
       expect(dispatch).toBeCalledWith({
-        type: 'list/changeAllCategories',
+        type: 'list/changeCategoriesDataField',
         payload: {
           name: 'new',
           belong: 'category',

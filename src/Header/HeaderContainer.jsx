@@ -11,7 +11,7 @@ import {
 } from '../LoginPage/slice';
 
 import {
-  changeAllCategories,
+  changeCategoriesDataField,
 } from '../List/slice';
 
 import TitleBar from './TitleBar';
@@ -50,7 +50,7 @@ export default function HeaderContainer({ onClick }) {
   ) => {
     onClick(url);
 
-    dispatch(changeAllCategories({
+    dispatch(changeCategoriesDataField({
       name, belong: 'category',
     }));
   }, [onClick, dispatch]);

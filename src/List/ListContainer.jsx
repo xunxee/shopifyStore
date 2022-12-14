@@ -7,8 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 
 import {
-  changeAllCategories,
-  changeMaterial,
+  changeCategoriesDataField,
 } from './slice';
 
 import CategoryBar from './component/CategoryBar';
@@ -44,7 +43,7 @@ export default function ListContainer() {
   const { pathname, search } = useLocation();
 
   const handleClickCategory = useCallback((name) => {
-    dispatch(changeAllCategories({
+    dispatch(changeCategoriesDataField({
       name,
       belong: 'category',
     }));
@@ -61,7 +60,7 @@ export default function ListContainer() {
   }, [dispatch, navigate, product, search]);
 
   const handleClickProduct = useCallback((name) => {
-    dispatch(changeAllCategories({
+    dispatch(changeCategoriesDataField({
       name,
       belong: 'product',
     }));
@@ -78,7 +77,7 @@ export default function ListContainer() {
   }, [dispatch, navigate, category, search]);
 
   const handleClickSort = useCallback((name) => {
-    dispatch(changeAllCategories({
+    dispatch(changeCategoriesDataField({
       name,
       belong: 'sort',
     }));
@@ -87,7 +86,7 @@ export default function ListContainer() {
   }, [dispatch, navigate, pathname]);
 
   const handleClickMaterial = useCallback((name) => {
-    dispatch(changeAllCategories({
+    dispatch(changeCategoriesDataField({
       name,
       belong: 'material',
     }));

@@ -10,7 +10,7 @@ const { actions, reducer } = createSlice({
     material: '',
   },
   reducers: {
-    changeAllCategories(
+    changeCategoriesDataField(
       state,
       { payload: { name, belong } },
     ) {
@@ -23,7 +23,7 @@ const { actions, reducer } = createSlice({
 });
 
 export const {
-  changeAllCategories,
+  changeCategoriesDataField,
 } = actions;
 
 export default reducer;

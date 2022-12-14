@@ -1,9 +1,9 @@
 import reducer, {
-  changeAllCategories,
+  changeCategoriesDataField,
 } from './slice';
 
 describe('reducer', () => {
-  describe('changeAllCategories', () => {
+  describe('changeCategoriesDataField', () => {
     it('change categories', () => {
       const initialState = {
         category: '',
@@ -11,7 +11,7 @@ describe('reducer', () => {
 
       const { category } = reducer(
         initialState,
-        changeAllCategories({
+        changeCategoriesDataField({
           name: 'new',
           belong: 'category',
         }),
