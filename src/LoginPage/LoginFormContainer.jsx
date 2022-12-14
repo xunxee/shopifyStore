@@ -38,6 +38,22 @@ export default function LoginFormContainer() {
     dispatch(changeLoginFields({ name, value }));
   }, [dispatch]);
 
+  // const handleChange = useCallback(({ name, value }) => {
+  //   dispatch(changeLoginFields({ name, value }));
+
+  //   function checkValid() {
+  //     const checkInput = name === 'email'
+  //       ? password : email;
+
+  //     return (VALID_FIELDS[name].regexps.test(value)
+  //       && !checkInput.invalidCheckMessage);
+  //   }
+
+  //   if (firstName.value && lastName.value && checkValid()) {
+  //     handleInvalidCheckMessage(name);
+  //   }
+  // }, [dispatch]);
+
   const handleCheckSignUpValid = useCallback(({ name }) => {
     const { [name]: { value } } = loginFields;
 
@@ -45,7 +61,7 @@ export default function LoginFormContainer() {
   }, [dispatch, loginFields]);
 
   const handleSubmit = useCallback((e) => {
-    e.preventDefault();
+    // e.preventDefault();
 
     if (isLogin) {
       dispatch(requestLogin());
