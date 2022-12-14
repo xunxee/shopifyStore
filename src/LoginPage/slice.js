@@ -264,4 +264,26 @@ export function checkSignUpValid({ name, value }) {
   };
 }
 
+export function checkInvalidMessageClear({
+  name, value, email, password,
+}) {
+  function checkValid() {
+    if (name !== 'email' && name !== 'password') {
+      return false;
+    }
+
+    const checkInput = name === 'email'
+      ? password : email;
+
+    return VALID_FIELDS[name].regexps.test(value)
+      && !checkInput.invalidCheckMessage;
+  }
+
+  return (dispatch) => {
+    if (checkValid()) {
+      dispatch(clearInvalidCheckMessage(name));
+    }
+  };
+}
+
 export default reducer;

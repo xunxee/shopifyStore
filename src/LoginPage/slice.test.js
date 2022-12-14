@@ -16,6 +16,7 @@ import reducer, {
   changeInvalidCheckMessage,
   checkSignUpValid,
   requestSignUp,
+  checkInvalidMessageClear,
 } from './slice';
 
 import { postLogin, postSignUp } from '../services/api';
@@ -281,15 +282,17 @@ describe('reducer', () => {
 describe('actions', () => {
   let store;
 
+  beforeEach(() => {
+    store = mockStore({
+      login: {
+        loginFields: INITIAL_LOGIN_FIELDS,
+      },
+    });
+  });
+
   describe('requestLogin', () => {
     context('when login successful', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
-
         postLogin.mockResolvedValue({});
       });
 
@@ -304,12 +307,6 @@ describe('actions', () => {
 
     context('when login fails', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
-
         postLogin.mockRejectedValue(
           new Error('INVALID_PASSWORD'),
         );
@@ -331,12 +328,6 @@ describe('actions', () => {
   describe('requestSignUp', () => {
     context('when sign up successful', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
-
         postSignUp.mockResolvedValue({});
       });
 
@@ -351,12 +342,6 @@ describe('actions', () => {
 
     context('when sign up fails', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
-
         postSignUp.mockRejectedValue(
           new Error('EMAIL_EXISTS'),
         );
@@ -391,24 +376,18 @@ describe('actions', () => {
       },
     ];
 
-    profileInputs.forEach((input) => {
-      describe(input.name, () => {
+    profileInputs.forEach(({
+      name, value, invalidCheckMessage,
+    }) => {
+      describe(name, () => {
         context(
-          `when the length of ${input.name} value is 0`,
+          `when the length of ${name} value is 0`,
           () => {
-            beforeEach(() => {
-              store = mockStore({
-                login: {
-                  loginFields: INITIAL_LOGIN_FIELDS,
-                },
-              });
-            });
-
             it(
-              'changes invalidCheckMessage of lastName',
+              `changes invalidCheckMessage of ${name}`,
               () => {
                 store.dispatch(checkSignUpValid({
-                  name: `${input.name}`,
+                  name: `${name}`,
                   value: '',
                 }));
 
@@ -416,9 +395,9 @@ describe('actions', () => {
 
                 expect(actions[0]).toEqual(
                   changeInvalidCheckMessage({
-                    name: `${input.name}`,
+                    name: `${name}`,
                     invalidCheckMessage:
-                      `${input.invalidCheckMessage}`,
+                      `${invalidCheckMessage}`,
                   }),
                 );
               },
@@ -426,29 +405,21 @@ describe('actions', () => {
           },
         );
         context(
-          `when the length of ${input.name} value is 1`,
+          `when the length of ${name} value is 1`,
           () => {
-            beforeEach(() => {
-              store = mockStore({
-                login: {
-                  loginFields: INITIAL_LOGIN_FIELDS,
-                },
-              });
-            });
-
             it(
-              `doesn't changes invalidCheckMessage of ${input.name}`,
+              `doesn't changes invalidCheckMessage of ${name}`,
               () => {
                 store.dispatch(checkSignUpValid({
-                  name: `${input.name}`,
-                  value: `${input.value}`,
+                  name: `${name}`,
+                  value: `${value}`,
                 }));
 
                 const actions = store.getActions();
 
                 expect(actions[0]).toEqual(
                   changeInvalidCheckMessage({
-                    name: `${input.name}`,
+                    name: `${name}`,
                     invalidCheckMessage:
                       '',
                   }),
@@ -484,14 +455,6 @@ describe('actions', () => {
     loginInputs.forEach((input) => {
       describe(`${input.name}`, () => {
         context(`when the length of ${input.name} value is 0`, () => {
-          beforeEach(() => {
-            store = mockStore({
-              login: {
-                loginFields: INITIAL_LOGIN_FIELDS,
-              },
-            });
-          });
-
           it(`changes invalidCheckMessage of ${input.name}`, () => {
             store.dispatch(checkSignUpValid({
               name: `${input.name}`,
@@ -511,14 +474,6 @@ describe('actions', () => {
         });
 
         context('when a invalid value', () => {
-          beforeEach(() => {
-            store = mockStore({
-              login: {
-                loginFields: INITIAL_LOGIN_FIELDS,
-              },
-            });
-          });
-
           it(`changes invalidCheckMessage of ${input.name}`, () => {
             store.dispatch(checkSignUpValid({
               name: `${input.name}`,
@@ -538,14 +493,6 @@ describe('actions', () => {
         });
 
         context('when a valid value', () => {
-          beforeEach(() => {
-            store = mockStore({
-              login: {
-                loginFields: INITIAL_LOGIN_FIELDS,
-              },
-            });
-          });
-
           it(`changes invalidCheckMessage of ${input.name}`, () => {
             store.dispatch(checkSignUpValid({
               name: `${input.name}`,
@@ -562,6 +509,54 @@ describe('actions', () => {
               }),
             );
           });
+        });
+      });
+    });
+  });
+
+  describe('checkInvalidMessageClear', () => {
+    context('when the name of the target is firstName', () => {
+      it("doesn't calls the checkInvalidMessageClear", () => {
+        store.dispatch(checkInvalidMessageClear({
+          name: 'firstName',
+          value: '정',
+        }));
+
+        const actions = store.getActions();
+
+        expect(actions).toStrictEqual([]);
+      });
+    });
+
+    const inputs = [
+      {
+        name: 'email',
+        value: 'tester@example.com',
+        checkInput: 'password',
+      },
+      {
+        name: 'password',
+        value: 'Tester@123',
+        checkInput: 'email',
+      },
+    ];
+
+    inputs.forEach(({ name, value, checkInput }) => {
+      context(`when the name of the target is ${name}`, () => {
+        it(`clears ${name} invalidCheckMessage`, () => {
+          store.dispatch(checkInvalidMessageClear({
+            name,
+            value,
+            [checkInput]: {
+              invalidCheckMessage: '',
+            },
+          }));
+
+          const actions = store.getActions();
+
+          expect(actions[0]).toEqual(
+            clearInvalidCheckMessage(name),
+          );
         });
       });
     });
