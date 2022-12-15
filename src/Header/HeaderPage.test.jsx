@@ -1,6 +1,5 @@
-import { render, fireEvent } from '@testing-library/react';
-
-import { useDispatch } from 'react-redux';
+import { render } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { MemoryRouter } from 'react-router-dom';
 
@@ -23,6 +22,12 @@ describe('HeaderPage', () => {
   beforeEach((() => {
     dispatch.mockClear();
     mockUsedNavigate.mockClear();
+
+    useSelector.mockImplementation((selector) => selector({
+      login: {
+        refreshToken: '',
+      },
+    }));
   }));
 
   useDispatch.mockImplementation(() => dispatch);
@@ -39,15 +44,5 @@ describe('HeaderPage', () => {
     const { container } = renderHeaderPage();
 
     expect(container).toHaveTextContent('New Arrivals');
-  });
-
-  it('clicks New Arrivals', () => {
-    const { getByText } = renderHeaderPage();
-
-    fireEvent.click(getByText('All'));
-
-    expect(mockUsedNavigate).toBeCalledWith(
-      '/search',
-    );
   });
 });

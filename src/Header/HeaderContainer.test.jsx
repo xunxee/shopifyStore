@@ -18,6 +18,23 @@ describe('HeaderContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+
+    useSelector.mockImplementation((selector) => selector({
+      login: {
+        isAccountModalOpen: given.isAccountModalOpen,
+        loginFields: {
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          error: '',
+        },
+        refreshToken: given.refreshToken,
+      },
+      list: {
+        category: '',
+      },
+    }));
   });
 
   useDispatch.mockImplementation(() => dispatch);
@@ -89,24 +106,7 @@ describe('HeaderContainer', () => {
   });
 
   describe('modal', () => {
-    beforeEach(() => {
-      useSelector.mockImplementation((selector) => selector({
-        login: {
-          isAccountModalOpen: true,
-          loginFields: {
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            error: '',
-          },
-          refreshToken: given.refreshToken,
-        },
-        list: {
-          category: '',
-        },
-      }));
-    });
+    given('isAccountModalOpen', () => 'false');
 
     context('when logged in', () => {
       it('renders LoginPage', () => {

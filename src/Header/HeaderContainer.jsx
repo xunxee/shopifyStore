@@ -19,8 +19,6 @@ import SearchBar from './SearchBar';
 import UserBar from './UserBar';
 import LoginPage from '../LoginPage/LoginPage';
 
-import { get } from '../utils';
-
 const Container = styled.div({
   position: 'fixed',
   top: '0',
@@ -55,15 +53,10 @@ export default function HeaderContainer({ onClick }) {
     }));
   }, [onClick, dispatch]);
 
-  const refreshToken = useSelector(get({
-    page: 'login',
-    key: 'refreshToken',
-  }));
-
-  const isAccountModalOpen = useSelector(get({
-    page: 'login',
-    key: 'isAccountModalOpen',
-  }));
+  const {
+    refreshToken,
+    isAccountModalOpen,
+  } = useSelector(({ login }) => login);
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());

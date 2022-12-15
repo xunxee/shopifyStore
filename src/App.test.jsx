@@ -1,9 +1,18 @@
+import { useSelector } from 'react-redux';
+
 import { render } from '@testing-library/react';
+
 import { MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
 describe('App', () => {
+  beforeEach(() => {
+    useSelector.mockImplementation((selection) => selection({
+      login: {},
+    }));
+  });
+
   function renderApp({ path }) {
     return render((
       <MemoryRouter initialEntries={[path]}>
