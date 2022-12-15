@@ -5,15 +5,9 @@ import { useCallback } from 'react';
 import LIST_CATEGORIES_STYLE from '../../../fixtures/listCategoriesStyle';
 import LIST_CATEGORIES from '../../../fixtures/listCategoriesCollection';
 
-const {
-  container,
-  layout,
-  button,
-} = LIST_CATEGORIES_STYLE;
+const { container, button } = LIST_CATEGORIES_STYLE;
 
 const Container = styled.div(container);
-
-const Layout = styled.ul(layout);
 
 const Button = styled.button(({ underLine, name }) => ({
   ...button,
@@ -22,36 +16,35 @@ const Button = styled.button(({ underLine, name }) => ({
 }));
 
 export default function CategoryBar({
-  title,
-  keyword,
-  item,
+  field,
+  selectedItem,
   onClick,
 }) {
+  const { title, belong, data } = LIST_CATEGORIES[field];
+
   const handleClick = useCallback((
     { target: { name } },
   ) => {
-    onClick(name);
-  }, [item, onClick]);
+    onClick({ name, belong });
+  }, [onClick]);
 
   return (
     <Container>
       <div>
-        <Layout>
-          {title}
-          {LIST_CATEGORIES[keyword].map(({
-            value, subHeading,
-          }) => (
+        <h1>{title}</h1>
+        <ul>
+          {data.map(({ value, subHeading }) => (
             <Button
               type="button"
               key={value}
               name={value}
-              underLine={item}
+              underLine={selectedItem}
               onClick={handleClick}
             >
               {subHeading}
             </Button>
           ))}
-        </Layout>
+        </ul>
       </div>
     </Container>
   );

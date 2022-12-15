@@ -1,10 +1,10 @@
 const listCategoriesStyle = {
   container: {
     margin: '2rem 0 0 2rem',
-  },
-  layout: {
-    fontSize: '20px',
-    fontWeight: '700',
+    '& h1': {
+      fontSize: '20px',
+      fontWeight: '700',
+    },
   },
   button: {
     all: 'unset',

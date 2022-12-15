@@ -40,10 +40,12 @@ export default function ListContainer({
     material,
   } = useSelector(({ list }) => list);
 
-  const handleClickCategory = useCallback((name) => {
+  const handleClickCategory = useCallback(({
+    name, belong,
+  }) => {
     dispatch(changeCategoriesDataField({
       name,
-      belong: 'category',
+      belong,
     }));
 
     if (product) {
@@ -57,10 +59,12 @@ export default function ListContainer({
     onClickCategories(`/search/${name}`);
   }, [dispatch, onClickCategories, product, search]);
 
-  const handleClickProduct = useCallback((name) => {
+  const handleClickProduct = useCallback(({
+    name, belong,
+  }) => {
     dispatch(changeCategoriesDataField({
       name,
-      belong: 'product',
+      belong,
     }));
 
     if (category) {
@@ -74,19 +78,23 @@ export default function ListContainer({
     onClickCategories(`/search/products/${name}`);
   }, [dispatch, onClickCategories, category, search]);
 
-  const handleClickSort = useCallback((name) => {
+  const handleClickSort = useCallback(({
+    name, belong,
+  }) => {
     dispatch(changeCategoriesDataField({
       name,
-      belong: 'sort',
+      belong,
     }));
 
     onClickCategories(`${pathname}?sort=${name}`);
   }, [dispatch, onClickCategories, pathname]);
 
-  const handleClickMaterial = useCallback((name) => {
+  const handleClickMaterial = useCallback(({
+    name, belong,
+  }) => {
     dispatch(changeCategoriesDataField({
       name,
-      belong: 'material',
+      belong,
     }));
   }, [dispatch]);
 
@@ -94,30 +102,26 @@ export default function ListContainer({
     <Container>
       <Layout>
         <CategoryBar
-          title="All Categories"
-          keyword="categories"
-          item={category}
+          field="categories"
+          selectedItem={category}
           onClick={handleClickCategory}
         />
         <CategoryBar
-          title="All Products"
-          keyword="products"
-          item={product}
+          field="products"
+          selectedItem={product}
           onClick={handleClickProduct}
         />
       </Layout>
       <ItemPage />
       <Layout>
         <CategoryBar
-          title="Sort"
-          keyword="sort"
-          item={sort}
+          field="sort"
+          selectedItem={sort}
           onClick={handleClickSort}
         />
         <CategoryBar
-          title="Material"
-          keyword="material"
-          item={material}
+          field="material"
+          selectedItem={material}
           onClick={handleClickMaterial}
         />
       </Layout>
