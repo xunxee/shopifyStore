@@ -73,14 +73,15 @@ export default function TitleBar({ onClick }) {
       </a>
       <List>
         {LIST_CATEGORIES.headerCategories.map(({
-          title, name, path,
+          title, name,
         }) => (
           <Item
             key={title}
           >
             <a
               name={name}
-              href={path}
+              href={name === 'all'
+                ? '/search' : `/search/${name}`}
               onClick={handleClick()}
             >
               {title}
