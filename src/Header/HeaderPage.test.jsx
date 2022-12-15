@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MemoryRouter } from 'react-router-dom';
@@ -41,8 +41,10 @@ describe('HeaderPage', () => {
   }
 
   it('renders the Title bar', () => {
-    const { container } = renderHeaderPage();
+    const { getByText } = renderHeaderPage();
 
-    expect(container).toHaveTextContent('New Arrivals');
+    fireEvent.click(getByText('New Arrivals'));
+
+    expect(mockUsedNavigate).toBeCalled();
   });
 });

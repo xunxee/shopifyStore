@@ -1,5 +1,3 @@
-import { MemoryRouter } from 'react-router-dom';
-
 import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,13 +34,11 @@ describe('ListContainer', () => {
     { pathname, search } = {},
   ) {
     return render((
-      <MemoryRouter>
-        <ListContainer
-          onClickCategories={handleClick}
-          pathname={pathname}
-          search={search}
-        />
-      </MemoryRouter>
+      <ListContainer
+        onClickCategories={handleClick}
+        pathname={pathname}
+        search={search}
+      />
     ));
   }
 
