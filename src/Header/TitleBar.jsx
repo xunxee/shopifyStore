@@ -47,10 +47,10 @@ export default function TitleBar({ onClick }) {
   function handleClick() {
     return (event) => {
       event.preventDefault();
-      onClick(
-        event.currentTarget.pathname,
-        event.currentTarget.name,
-      );
+      onClick({
+        url: event.currentTarget.pathname,
+        name: event.currentTarget.name,
+      });
     };
   }
 

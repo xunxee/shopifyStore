@@ -44,10 +44,10 @@ const NavBarLayout = styled.div({
 export default function HeaderContainer({ onClick }) {
   const dispatch = useDispatch();
 
-  const handleClickCategories = useCallback((
+  const handleClickCategories = useCallback(({
     url,
     name,
-  ) => {
+  }) => {
     onClick(url);
 
     dispatch(changeCategoriesDataField({

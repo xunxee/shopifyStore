@@ -4,6 +4,8 @@ import { render } from '@testing-library/react';
 
 import TitleBar from './TitleBar';
 
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
 describe('TitleBar', () => {
   const handleClick = jest.fn();
 
@@ -27,10 +29,9 @@ describe('TitleBar', () => {
   it('renders the title list', () => {
     const { container } = renderTitleBar();
 
-    const texts = ['All', 'New Arrivals', 'Featured'];
-
-    texts.forEach((text) => {
-      expect(container).toHaveTextContent(text);
-    });
+    LIST_CATEGORIES.headerCategories
+      .forEach(({ title }) => {
+        expect(container).toHaveTextContent(title);
+      });
   });
 });
