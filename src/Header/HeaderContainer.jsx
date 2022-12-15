@@ -45,10 +45,10 @@ export default function HeaderContainer({ onClick }) {
   const dispatch = useDispatch();
 
   const handleClickCategories = useCallback(({
-    url,
+    pathname,
     name,
   }) => {
-    onClick(url);
+    onClick(pathname);
 
     dispatch(changeCategoriesDataField({
       name, belong: 'category',
