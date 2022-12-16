@@ -32,6 +32,7 @@ const { actions, reducer } = createSlice({
   initialState: {
     isAccountModalOpen: false,
     isLogin: true,
+    isButtonActive: false,
     loginFields: initialLoginFields,
     refreshToken: '',
     accountInfo: {
@@ -153,6 +154,13 @@ const { actions, reducer } = createSlice({
         },
       };
     },
+
+    setButtonActive(state, { payload: isButtonActive }) {
+      return {
+        ...state,
+        isButtonActive,
+      };
+    },
   },
 });
 
@@ -167,6 +175,7 @@ export const {
   setRefreshToken,
   logout,
   setAccountInfo,
+  setButtonActive,
 } = actions;
 
 export function requestLogin() {
@@ -185,9 +194,10 @@ export function requestLogin() {
     } = getState();
 
     try {
-      const { refreshToken, localId: uid } = await postLogin(
-        { email, password },
-      );
+      const {
+        refreshToken,
+        localId: uid,
+      } = await postLogin({ email, password });
 
       saveItem('refreshToken', refreshToken);
 
@@ -196,7 +206,8 @@ export function requestLogin() {
       dispatch(setIsAccountModalOpen());
     } catch (error) {
       dispatch(changeLoginErrorMessage({
-        name: 'error', value: 'Check your ID or password',
+        name: 'error',
+        value: 'Check your ID or password',
       }));
     }
   };
@@ -218,9 +229,10 @@ export function requestSignUp() {
     } = getState();
 
     try {
-      const { refreshToken, localId: uid } = await postSignUp(
-        { email, password },
-      );
+      const {
+        refreshToken,
+        localId: uid,
+      } = await postSignUp({ email, password });
 
       saveItem('refreshToken', refreshToken);
 
@@ -241,18 +253,16 @@ export function checkSignUpValid({ name, value }) {
       return `${INPUT_LIST[name]} 필수 입력란입니다.`;
     }
 
-    if (VALID_FIELDS[name]) {
-      const {
-        regexps,
-        invalidMessage,
-      } = VALID_FIELDS[name];
+    if (!VALID_FIELDS[name]) return '';
 
-      const isValid = regexps.test(value);
+    const {
+      regexps,
+      invalidMessage,
+    } = VALID_FIELDS[name];
 
-      return isValid ? '' : invalidMessage;
-    }
+    const isValid = regexps.test(value);
 
-    return '';
+    return isValid ? '' : invalidMessage;
   }
 
   return (dispatch) => {
@@ -265,24 +275,41 @@ export function checkSignUpValid({ name, value }) {
 }
 
 export function checkInvalidMessageClear({
-  name, value, email, password,
+  name, value,
 }) {
-  function checkValid() {
-    if (name !== 'email' && name !== 'password') {
-      return false;
+  return async (dispatch, getState) => {
+    await dispatch(changeLoginFields({ name, value }));
+
+    const { login: { isLogin, loginFields } } = getState();
+
+    const {
+      email, password, lastName, firstName,
+    } = loginFields;
+
+    function checkValid() {
+      if (isLogin) return email.value && password.value;
+
+      if (!(email.value && password.value
+        && firstName.value && lastName.value)) return false;
+
+      if (!VALID_FIELDS[name]
+        && !email.invalidCheckMessage
+        && !password.invalidCheckMessage) return true;
+
+      const { regexps } = VALID_FIELDS[name];
+      return regexps.test(value);
     }
 
-    const checkInput = name === 'email'
-      ? password : email;
+    const isValid = checkValid();
 
-    return VALID_FIELDS[name].regexps.test(value)
-      && !checkInput.invalidCheckMessage;
-  }
-
-  return (dispatch) => {
-    if (checkValid()) {
-      dispatch(clearInvalidCheckMessage(name));
+    if (!isValid) {
+      dispatch(setButtonActive(isValid));
+      return;
     }
+
+    dispatch(setButtonActive(isValid));
+
+    dispatch(clearInvalidCheckMessage(name));
   };
 }
 

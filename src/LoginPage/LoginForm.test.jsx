@@ -27,6 +27,7 @@ describe('LoginForm', () => {
     firstName = fieldState,
     lastName = fieldState,
     error,
+    isButtonActive = false,
   } = {}) {
     return render((
       <LoginForm
@@ -38,6 +39,7 @@ describe('LoginForm', () => {
           lastName,
           error,
         }}
+        isButtonActive={isButtonActive}
         onChange={handleChange}
         onBlur={handleSignUpValid}
         onSubmit={handleSubmit}
@@ -71,14 +73,6 @@ describe('LoginForm', () => {
       expect(handleChange).toBeCalledWith({
         name: 'email',
         value: 'new email',
-        email: {
-          invalidCheckMessage: '',
-          value: '',
-        },
-        password: {
-          invalidCheckMessage: '',
-          value: '',
-        },
       });
     });
 
@@ -275,6 +269,7 @@ describe('LoginForm', () => {
 
       expect(handleSignUpValid).toBeCalledWith({
         name: 'lastName',
+        value: '',
       });
     });
 

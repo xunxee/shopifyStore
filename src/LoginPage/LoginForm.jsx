@@ -2,8 +2,6 @@ import styled from '@emotion/styled';
 
 import { memo } from 'react';
 
-import VALID_FIELDS from '../../fixtures/validFields';
-
 const Container = styled.form({
   display: 'flex',
   flexDirection: 'column',
@@ -18,37 +16,17 @@ export default memo(({
     lastName,
     error,
   },
+  isButtonActive,
   onChange,
   onBlur,
   onSubmit,
 }) => {
-  function checkDisabled() {
-    if (isLogin) return email.value && password.value;
-
-    if (!(email.value && password.value
-      && firstName.value && lastName.value)) return false;
-
-    if (email.invalidCheckMessage
-      && password.invalidCheckMessage) return false;
-
-    const emailValidCheck = VALID_FIELDS.email.regexps
-      .test(email.value);
-
-    const passwordValidCheck = VALID_FIELDS.password.regexps
-      .test(password.value);
-
-    return (lastName.value && firstName.value
-      && emailValidCheck && passwordValidCheck);
-  }
-
   function handleChange({ target: { name, value } }) {
-    onChange({
-      name, value, email, password,
-    });
+    onChange({ name, value });
   }
 
-  function handleSignUpValid({ target: { name } }) {
-    onBlur({ name });
+  function handleSignUpValid({ target: { name, value } }) {
+    onBlur({ name, value });
   }
 
   function handleSubmit() {
@@ -112,7 +90,7 @@ export default memo(({
           && <p>{password.invalidCheckMessage}</p>}
         <button
           type="submit"
-          disabled={!checkDisabled()}
+          disabled={!isButtonActive}
         >
           {isLogin ? 'Log In' : 'Sign Up'}
         </button>

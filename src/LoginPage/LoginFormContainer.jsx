@@ -9,7 +9,6 @@ import LoginForm from './LoginForm';
 import {
   setIsLogin,
   clearLoginFields,
-  changeLoginFields,
   requestLogin,
   requestSignUp,
   checkSignUpValid,
@@ -29,25 +28,27 @@ export default function LoginFormContainer() {
     key: 'loginFields',
   }));
 
+  const isButtonActive = useSelector(get({
+    page: 'login',
+    key: 'isButtonActive',
+  }));
+
   const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
     dispatch(clearLoginFields());
   }, [dispatch]);
 
   const handleChange = useCallback(({
-    name, value, email, password,
+    name, value,
   }) => {
-    dispatch(changeLoginFields({ name, value }));
-    dispatch(checkInvalidMessageClear({
-      name, value, email, password,
-    }));
+    dispatch(checkInvalidMessageClear({ name, value }));
   }, [dispatch]);
 
-  const handleCheckSignUpValid = useCallback(({ name }) => {
-    const { [name]: { value } } = loginFields;
-
+  const handleCheckSignUpValid = useCallback(({
+    name, value,
+  }) => {
     dispatch(checkSignUpValid({ name, value }));
-  }, [dispatch, loginFields]);
+  }, [dispatch]);
 
   const handleSubmit = useCallback(() => {
     if (isLogin) {
@@ -63,6 +64,7 @@ export default function LoginFormContainer() {
       <LoginForm
         isLogin={isLogin}
         fields={loginFields}
+        isButtonActive={isButtonActive}
         onChange={handleChange}
         onBlur={handleCheckSignUpValid}
         onSubmit={handleSubmit}
