@@ -8,6 +8,7 @@ import {
   setIsAccountModalOpen,
   logout,
   clearLoginFields,
+  setButtonActive,
 } from '../LoginPage/slice';
 
 import {
@@ -61,6 +62,7 @@ export default function HeaderContainer({ onClick }) {
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
     dispatch(clearLoginFields());
+    dispatch(setButtonActive(false));
   }, [dispatch]);
 
   const handleLogout = useCallback(() => {
