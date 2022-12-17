@@ -24,6 +24,7 @@ import { postLogin, postSignUp } from '../services/api';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 import VALID_FIELDS from '../../fixtures/validFields';
+import FIELDS_STATE from '../../fixtures/fieldState';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -299,14 +300,44 @@ describe('reducer', () => {
 describe('actions', () => {
   let store;
 
+  function makeMockStore({
+    isLogin = false,
+    email = FIELDS_STATE,
+    password = FIELDS_STATE,
+    firstName = FIELDS_STATE,
+    lastName = FIELDS_STATE,
+    isButtonActive = false,
+  } = {}) {
+    return mockStore({
+      login: {
+        isLogin,
+        loginFields: {
+          email: {
+            value: email.value,
+            invalidCheckMessage: email.invalidCheckMessage,
+          },
+          password: {
+            value: password.value,
+            invalidCheckMessage: password.invalidCheckMessage,
+          },
+          firstName: {
+            value: firstName.value,
+            invalidCheckMessage: firstName.invalidCheckMessage,
+          },
+          lastName: {
+            value: lastName.value,
+            invalidCheckMessage: lastName.invalidCheckMessage,
+          },
+        },
+        isButtonActive,
+      },
+    });
+  }
+
   describe('requestLogin', () => {
     context('when login successful', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
+        store = makeMockStore();
 
         postLogin.mockResolvedValue({});
       });
@@ -322,11 +353,7 @@ describe('actions', () => {
 
     context('when login fails', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
+        store = makeMockStore();
 
         postLogin.mockRejectedValue(
           new Error('INVALID_PASSWORD'),
@@ -349,11 +376,7 @@ describe('actions', () => {
   describe('requestSignUp', () => {
     context('when sign up successful', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
+        store = makeMockStore();
 
         postSignUp.mockResolvedValue({});
       });
@@ -369,11 +392,7 @@ describe('actions', () => {
 
     context('when sign up fails', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            loginFields: INITIAL_LOGIN_FIELDS,
-          },
-        });
+        store = makeMockStore();
 
         postSignUp.mockRejectedValue(
           new Error('EMAIL_EXISTS'),
@@ -417,11 +436,7 @@ describe('actions', () => {
           `when the length of ${name} value is 0`,
           () => {
             beforeEach(() => {
-              store = mockStore({
-                login: {
-                  loginFields: INITIAL_LOGIN_FIELDS,
-                },
-              });
+              store = makeMockStore();
             });
 
             it(
@@ -449,11 +464,7 @@ describe('actions', () => {
           `when the length of ${name} value is 1`,
           () => {
             beforeEach(() => {
-              store = mockStore({
-                login: {
-                  loginFields: INITIAL_LOGIN_FIELDS,
-                },
-              });
+              store = makeMockStore();
             });
 
             it(
@@ -505,11 +516,7 @@ describe('actions', () => {
       describe(`${input.name}`, () => {
         context(`when the length of ${input.name} value is 0`, () => {
           beforeEach(() => {
-            store = mockStore({
-              login: {
-                loginFields: INITIAL_LOGIN_FIELDS,
-              },
-            });
+            store = makeMockStore();
 
             postSignUp.mockRejectedValue(
               new Error('EMAIL_EXISTS'),
@@ -536,11 +543,7 @@ describe('actions', () => {
 
         context('when a invalid value', () => {
           beforeEach(() => {
-            store = mockStore({
-              login: {
-                loginFields: INITIAL_LOGIN_FIELDS,
-              },
-            });
+            store = makeMockStore();
           });
 
           it(`changes invalidCheckMessage of ${input.name}`, () => {
@@ -563,11 +566,7 @@ describe('actions', () => {
 
         context('when a valid value', () => {
           beforeEach(() => {
-            store = mockStore({
-              login: {
-                loginFields: INITIAL_LOGIN_FIELDS,
-              },
-            });
+            store = makeMockStore();
           });
 
           it(`changes invalidCheckMessage of ${input.name}`, () => {
@@ -594,86 +593,63 @@ describe('actions', () => {
   describe('checkInvalidMessageClear', () => {
     context('when all values for login are entered correctly', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            isLogin: true,
-            loginFields: {
-              email: {
-                value: 'tester@example.com',
-              },
-              password: {
-                value: 'Tester@123',
-              },
-            },
-            isButtonActive: false,
-          },
+        store = makeMockStore({
+          isLogin: true,
+          email: { value: 'tester@example.com' },
+          password: { value: 'Tester@123' },
         });
       });
 
-      it('conveys false to setButtonActive', async () => {
-        await store.dispatch(checkInvalidMessageClear({
+      it('conveys true to setButtonActive', () => {
+        store.dispatch(checkInvalidMessageClear({
           name: 'email',
           value: 'tester@example.com',
         }));
 
         const actions = store.getActions();
 
-        expect(actions[2]).toEqual(
-          clearInvalidCheckMessage('email'),
+        expect(actions[0]).toEqual(
+          setButtonActive(true),
         );
       });
     });
 
     context('when there is no Sign Up email', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            isLogin: false,
-            loginFields: INITIAL_LOGIN_FIELDS,
-            isButtonActive: false,
-          },
-        });
+        store = makeMockStore();
       });
 
-      it('conveys false to setButtonActive', async () => {
-        await store.dispatch(checkInvalidMessageClear({
+      it('terminates the function', () => {
+        store.dispatch(checkInvalidMessageClear({
           name: 'email',
           value: '',
         }));
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(
-          setButtonActive(false),
-        );
+        expect(actions).toStrictEqual([]);
       });
     });
 
     context('when all values for sign up are entered correctly', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            isLogin: false,
-            loginFields: {
-              email: { value: 'tester@example.com' },
-              password: { value: 'Tester@123' },
-              firstName: { value: '건희' },
-              lastName: { value: '정' },
-            },
-            isButtonActive: false,
-          },
+        store = makeMockStore({
+          email: { value: 'tester@example.com' },
+          password: { value: 'Tester@123' },
+          firstName: { value: '건희' },
+          lastName: { value: '정' },
         });
       });
 
-      it('conveys true to setButtonActive', async () => {
-        await store.dispatch(checkInvalidMessageClear({
+      it('conveys true to setButtonActive', () => {
+        store.dispatch(checkInvalidMessageClear({
           name: 'firstName',
           value: '정',
         }));
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(
+        expect(actions[0]).toEqual(
           setButtonActive(true),
         );
       });
@@ -681,17 +657,14 @@ describe('actions', () => {
 
     context('when enter password for sign up', () => {
       beforeEach(() => {
-        store = mockStore({
-          login: {
-            isLogin: false,
-            loginFields: {
-              email: { value: 'tester@example.com' },
-              password: { value: 'Tester@123' },
-              firstName: { value: '건희' },
-              lastName: { value: '정' },
-            },
-            isButtonActive: false,
+        store = makeMockStore({
+          email: { value: 'tester@example.com' },
+          password: {
+            value: 'Tester@123',
+            invalidCheckMessage: '비밀번호를 확인하세요',
           },
+          firstName: { value: '건희' },
+          lastName: { value: '정' },
         });
       });
 
@@ -703,9 +676,63 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[2]).toEqual(
+        expect(actions[0]).toEqual(
           clearInvalidCheckMessage('password'),
         );
+      });
+    });
+
+    context('when enter an invalid password', () => {
+      beforeEach(() => {
+        store = makeMockStore({
+          email: { value: 'tester@example.com' },
+          password: {
+            value: 'Tester@',
+            invalidCheckMessage: '비밀번호를 확인하세요',
+          },
+          lastName: { value: '정' },
+          isButtonActive: true,
+        });
+      });
+
+      it('conveys false to setButtonActive', async () => {
+        await store.dispatch(checkInvalidMessageClear({
+          name: 'password',
+          value: 'Tester@',
+        }));
+
+        const actions = store.getActions();
+
+        expect(actions[0]).toEqual(
+          setButtonActive(false),
+        );
+      });
+    });
+
+    context('when email have invalidCheckMessage', () => {
+      beforeEach(() => {
+        store = makeMockStore({
+          email: {
+            value: 'tester',
+            invalidCheckMessage: '이메일을 확인하세요',
+          },
+          password: {
+            value: 'Tester@123',
+          },
+          firstName: { value: '건희' },
+          lastName: { value: '정' },
+        });
+      });
+
+      it('terminates the function', async () => {
+        await store.dispatch(checkInvalidMessageClear({
+          name: 'password',
+          value: 'Tester@',
+        }));
+
+        const actions = store.getActions();
+
+        expect(actions).toStrictEqual([]);
       });
     });
   });

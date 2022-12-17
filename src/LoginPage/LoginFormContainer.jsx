@@ -13,6 +13,7 @@ import {
   requestSignUp,
   checkSignUpValid,
   checkInvalidMessageClear,
+  changeLoginFields,
 } from './slice';
 
 export default function LoginFormContainer() {
@@ -41,6 +42,7 @@ export default function LoginFormContainer() {
   const handleChange = useCallback(({
     name, value,
   }) => {
+    dispatch(changeLoginFields({ name, value }));
     dispatch(checkInvalidMessageClear({ name, value }));
   }, [dispatch]);
 

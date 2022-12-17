@@ -277,39 +277,64 @@ export function checkSignUpValid({ name, value }) {
 export function checkInvalidMessageClear({
   name, value,
 }) {
-  return async (dispatch, getState) => {
-    await dispatch(changeLoginFields({ name, value }));
-
-    const { login: { isLogin, loginFields } } = getState();
-
+  return (dispatch, getState) => {
     const {
-      email, password, lastName, firstName,
-    } = loginFields;
+      login:
+      { isLogin, loginFields, isButtonActive },
+    } = getState();
 
-    function checkValid() {
-      if (isLogin) return email.value && password.value;
+    function validateRestSignUpFields() {
+      const { error, ...restSignUpFields } = loginFields;
 
-      if (!(email.value && password.value
-        && firstName.value && lastName.value)) return false;
+      delete restSignUpFields[name];
 
-      if (!VALID_FIELDS[name]
-        && !email.invalidCheckMessage
-        && !password.invalidCheckMessage) return true;
+      const restSignUpFieldsEntries = Object
+        .entries(restSignUpFields);
 
-      const { regexps } = VALID_FIELDS[name];
-      return regexps.test(value);
+      for (let i = 0; i < restSignUpFieldsEntries.length; i += 1) {
+        const [
+          , { value: restSignUpFieldValue, invalidCheckMessage },
+        ] = restSignUpFieldsEntries[i];
+
+        if (!restSignUpFieldValue) return false;
+
+        if (invalidCheckMessage) return false;
+      }
+
+      return true;
     }
 
-    const isValid = checkValid();
+    function validateAccountFields() {
+      if (!value) return false;
+
+      if (isLogin) {
+        const { email, password } = loginFields;
+
+        return !!(email.value && password.value);
+      }
+
+      if (!validateRestSignUpFields()) return false;
+
+      if (!VALID_FIELDS[name]) return true;
+
+      return VALID_FIELDS[name].regexps.test(value);
+    }
+
+    const isValid = validateAccountFields();
+
+    if (isButtonActive === isValid) return;
 
     if (!isValid) {
-      dispatch(setButtonActive(isValid));
+      dispatch(setButtonActive(false));
+
       return;
     }
 
-    dispatch(setButtonActive(isValid));
+    if (loginFields[name].invalidCheckMessage) {
+      dispatch(clearInvalidCheckMessage(name));
+    }
 
-    dispatch(clearInvalidCheckMessage(name));
+    dispatch(setButtonActive(true));
   };
 }
 
