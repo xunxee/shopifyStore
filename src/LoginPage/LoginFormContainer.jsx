@@ -14,6 +14,7 @@ import {
   checkSignUpValid,
   checkInvalidMessageClear,
   changeLoginFields,
+  setButtonActive,
 } from './slice';
 
 export default function LoginFormContainer() {
@@ -37,6 +38,7 @@ export default function LoginFormContainer() {
   const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
     dispatch(clearLoginFields());
+    dispatch(setButtonActive(false));
   }, [dispatch]);
 
   const handleChange = useCallback(({
