@@ -17,7 +17,7 @@ export default function ListPage() {
 
   const handleClickCategories = useCallback((url) => {
     navigate(url);
-  });
+  }, [navigate]);
 
   return (
     <Container>

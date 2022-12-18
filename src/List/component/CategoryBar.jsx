@@ -22,9 +22,7 @@ export default function CategoryBar({
 }) {
   const { title, belong, data } = LIST_CATEGORIES[field];
 
-  const handleClick = useCallback((
-    { target: { name } },
-  ) => {
+  const handleClick = useCallback(({ target: { name } }) => {
     onClick({ name, belong });
   }, [onClick]);
 

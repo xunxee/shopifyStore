@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 
 import {
-  changeCategoriesDataField,
+  checkUrl,
 } from './slice';
 
 import CategoryBar from './component/CategoryBar';
@@ -28,8 +28,9 @@ const Layout = styled.div({
 
 export default function ListContainer({
   onClickCategories,
-  pathname,
-  search,
+  // TODO:
+  // pathname,
+  // search,
 }) {
   const dispatch = useDispatch();
 
@@ -40,63 +41,9 @@ export default function ListContainer({
     material,
   } = useSelector(({ list }) => list);
 
-  const handleClickCategory = useCallback(({
-    name, belong,
-  }) => {
-    dispatch(changeCategoriesDataField({
-      name,
-      belong,
-    }));
-
-    if (product) {
-      onClickCategories(
-        `/search/products/${product}/${name}${search}`,
-      );
-
-      return;
-    }
-
-    onClickCategories(`/search/${name}`);
-  }, [dispatch, onClickCategories, product, search]);
-
-  const handleClickProduct = useCallback(({
-    name, belong,
-  }) => {
-    dispatch(changeCategoriesDataField({
-      name,
-      belong,
-    }));
-
-    if (category) {
-      onClickCategories(
-        `/search/products/${name}/${category}${search}`,
-      );
-
-      return;
-    }
-
-    onClickCategories(`/search/products/${name}`);
-  }, [dispatch, onClickCategories, category, search]);
-
-  const handleClickSort = useCallback(({
-    name, belong,
-  }) => {
-    dispatch(changeCategoriesDataField({
-      name,
-      belong,
-    }));
-
-    onClickCategories(`${pathname}?sort=${name}`);
-  }, [dispatch, onClickCategories, pathname]);
-
-  const handleClickMaterial = useCallback(({
-    name, belong,
-  }) => {
-    dispatch(changeCategoriesDataField({
-      name,
-      belong,
-    }));
-  }, [dispatch]);
+  const handleClick = useCallback(({ name, belong }) => {
+    onClickCategories(dispatch(checkUrl({ name, belong })));
+  }, [dispatch, onClickCategories]);
 
   return (
     <Container>
@@ -104,12 +51,12 @@ export default function ListContainer({
         <CategoryBar
           field="categories"
           selectedItem={category}
-          onClick={handleClickCategory}
+          onClick={handleClick}
         />
         <CategoryBar
           field="products"
           selectedItem={product}
-          onClick={handleClickProduct}
+          onClick={handleClick}
         />
       </Layout>
       <ItemPage />
@@ -117,12 +64,12 @@ export default function ListContainer({
         <CategoryBar
           field="sort"
           selectedItem={sort}
-          onClick={handleClickSort}
+          onClick={handleClick}
         />
         <CategoryBar
           field="material"
           selectedItem={material}
-          onClick={handleClickMaterial}
+          onClick={handleClick}
         />
       </Layout>
     </Container>
