@@ -25,6 +25,12 @@ module.exports = () => {
       historyApiFallback: {
         index: '/index.html',
       },
+      proxy: {
+        '/api': {
+          target: 'https://nextjsintro-flame.vercel.app',
+          changeOrigin: true,
+        },
+      },
     },
     // devServer: {
     //   historyApiFallback: {
