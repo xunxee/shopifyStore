@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
 
-import LoginForm from './LoginForm';
+import ControlMemberForm from './ControlMemberForm';
 
 import {
   setIsLogin,
@@ -67,7 +67,7 @@ export default function ControlMemberContainer() {
 
   return (
     <div>
-      <LoginForm
+      <ControlMemberForm
         isLogin={isLogin}
         fields={loginFields}
         isButtonActive={isButtonActive}

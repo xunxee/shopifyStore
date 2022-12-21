@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 
-import LoginForm from './LoginForm';
+import ControlMemberForm from './ControlMemberForm';
 
 import INPUT_LIST from '../../fixtures/inputList';
 
@@ -30,7 +30,7 @@ describe('LoginForm', () => {
     isButtonActive = false,
   } = {}) {
     return render((
-      <LoginForm
+      <ControlMemberForm
         isLogin={isLogin}
         fields={{
           email,
