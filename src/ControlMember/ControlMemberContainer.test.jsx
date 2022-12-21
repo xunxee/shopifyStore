@@ -6,7 +6,7 @@ import ControlMemberContainer from './ControlMemberContainer';
 
 jest.mock('react-redux');
 
-describe('LoginFormContainer', () => {
+describe('ControlMemberContainer', () => {
   const dispatch = jest.fn();
 
   useDispatch.mockImplementation(() => dispatch);
@@ -108,7 +108,7 @@ describe('LoginFormContainer', () => {
       fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalledWith({
-        type: 'login/setIsLogin',
+        type: 'controlMember/setIsLogin',
       });
     });
 

@@ -2,13 +2,13 @@ import { useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
-import LoginPage from './ControlMemberPage';
+import ControlMemberPage from './ControlMemberPage';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 
 jest.mock('react-redux');
 
-describe('LoginPage', () => {
+describe('ControlMemberPage', () => {
   useSelector.mockImplementation((selector) => selector({
     login: {
       isLogin: true,
@@ -16,8 +16,8 @@ describe('LoginPage', () => {
     },
   }));
 
-  it('renders the LoginFormContainer', () => {
-    const { container } = render(<LoginPage />);
+  it('renders the ControlMemberContainer', () => {
+    const { container } = render(<ControlMemberPage />);
 
     expect(container).toHaveTextContent('X');
   });
@@ -50,7 +50,7 @@ describe('LoginPage', () => {
         const events = mockEvents();
 
         const { getByTestId } = render((
-          <LoginPage
+          <ControlMemberPage
             onClick={handleClick}
           />
         ));
@@ -68,7 +68,7 @@ describe('LoginPage', () => {
         const events = mockEvents();
 
         const { getByTestId } = render((
-          <LoginPage
+          <ControlMemberPage
             onClickToggle={handleClick}
           />
         ));

@@ -28,16 +28,13 @@ const initialLoginFields = {
 };
 
 const { actions, reducer } = createSlice({
-  name: 'login',
+  name: 'controlMember',
   initialState: {
     isAccountModalOpen: false,
     isLogin: true,
     isButtonActive: false,
-    loginFields: initialLoginFields,
+    accountFields: initialLoginFields,
     refreshToken: '',
-    accountInfo: {
-      uid: '',
-    },
   },
   reducers: {
     setIsAccountModalOpen(state) {
@@ -61,16 +58,16 @@ const { actions, reducer } = createSlice({
       state,
       { payload: { name, value } },
     ) {
-      const { loginFields } = state;
+      const { accountFields } = state;
 
       return {
         ...state,
-        loginFields: {
-          ...loginFields,
+        accountFields: {
+          ...accountFields,
           [name]: {
             value,
             invalidCheckMessage:
-              loginFields[name].invalidCheckMessage,
+              accountFields[name].invalidCheckMessage,
           },
         },
       };
@@ -80,14 +77,14 @@ const { actions, reducer } = createSlice({
       state,
       { payload: { name, invalidCheckMessage } },
     ) {
-      const { loginFields } = state;
+      const { accountFields } = state;
 
       return {
         ...state,
-        loginFields: {
-          ...loginFields,
+        accountFields: {
+          ...accountFields,
           [name]: {
-            value: loginFields[name].value,
+            value: accountFields[name].value,
             invalidCheckMessage,
           },
         },
@@ -98,12 +95,12 @@ const { actions, reducer } = createSlice({
       state,
       { payload: { name, value } },
     ) {
-      const { loginFields } = state;
+      const { accountFields } = state;
 
       return {
         ...state,
-        loginFields: {
-          ...loginFields,
+        accountFields: {
+          ...accountFields,
           [name]: value,
         },
       };
@@ -112,18 +109,18 @@ const { actions, reducer } = createSlice({
     clearLoginFields(state) {
       return {
         ...state,
-        loginFields: initialLoginFields,
+        accountFields: initialLoginFields,
       };
     },
 
     clearInvalidCheckMessage(state, { payload: name }) {
-      const { loginFields } = state;
+      const { accountFields } = state;
       return {
         ...state,
-        loginFields: {
-          ...loginFields,
+        accountFields: {
+          ...accountFields,
           [name]: {
-            value: loginFields[name].value,
+            value: accountFields[name].value,
             invalidCheckMessage: '',
           },
         },
@@ -141,17 +138,6 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         refreshToken: '',
-      };
-    },
-
-    setAccountInfo(state, { payload: uid }) {
-      const { accountInfo } = state;
-      return {
-        ...state,
-        accountInfo: {
-          ...accountInfo,
-          uid,
-        },
       };
     },
 
@@ -186,7 +172,7 @@ export function requestLogin() {
 
     const {
       login: {
-        loginFields: {
+        accountFields: {
           email: { value: email },
           password: { value: password },
         },
@@ -221,7 +207,7 @@ export function requestSignUp() {
 
     const {
       login: {
-        loginFields: {
+        accountFields: {
           email: { value: email },
           password: { value: password },
         },
@@ -278,11 +264,11 @@ export function checkInvalidMessageClear({ name, value }) {
   return (dispatch, getState) => {
     const {
       login:
-      { isLogin, loginFields, isButtonActive },
+      { isLogin, accountFields, isButtonActive },
     } = getState();
 
     function validateRestSignUpFields() {
-      const { error, ...restSignUpFields } = loginFields;
+      const { error, ...restSignUpFields } = accountFields;
 
       delete restSignUpFields[name];
 
@@ -306,7 +292,7 @@ export function checkInvalidMessageClear({ name, value }) {
       if (!value) return false;
 
       if (isLogin) {
-        const { email, password } = loginFields;
+        const { email, password } = accountFields;
 
         return !!(email.value && password.value);
       }
@@ -328,7 +314,7 @@ export function checkInvalidMessageClear({ name, value }) {
       return;
     }
 
-    if (loginFields[name].invalidCheckMessage) {
+    if (accountFields[name].invalidCheckMessage) {
       dispatch(clearInvalidCheckMessage(name));
     }
 

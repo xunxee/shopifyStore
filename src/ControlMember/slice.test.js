@@ -37,11 +37,8 @@ describe('reducer', () => {
       isAccountModalOpen: false,
       isLogin: true,
       isButtonActive: false,
-      loginFields: INITIAL_LOGIN_FIELDS,
+      accountFields: INITIAL_LOGIN_FIELDS,
       refreshToken: '',
-      accountInfo: {
-        uid: '',
-      },
     };
 
     it('returns initialState', () => {
@@ -83,7 +80,7 @@ describe('reducer', () => {
     context('when email is changed', () => {
       it('changes only email field', () => {
         const initialState = {
-          loginFields: {
+          accountFields: {
             email: { value: 'email' },
             password: { value: 'password' },
             firstName: '',
@@ -91,7 +88,7 @@ describe('reducer', () => {
           },
         };
 
-        const { loginFields: { email } } = reducer(
+        const { accountFields: { email } } = reducer(
           initialState,
           changeLoginFields({
             name: 'email',
@@ -106,7 +103,7 @@ describe('reducer', () => {
     describe('changeInvalidCheckMessage', () => {
       it('changes email invalidCheckMessage', () => {
         const initialState = {
-          loginFields: {
+          accountFields: {
             lastName: {
               value: '',
               invalidCheckMessage: '',
@@ -114,7 +111,7 @@ describe('reducer', () => {
           },
         };
 
-        const { loginFields: { lastName } } = reducer(
+        const { accountFields: { lastName } } = reducer(
           initialState,
           changeInvalidCheckMessage({
             name: 'lastName',
@@ -131,12 +128,12 @@ describe('reducer', () => {
     describe('changeLoginErrorMessage', () => {
       it('changes login error message', () => {
         const initialState = {
-          loginFields: {
+          accountFields: {
             error: '',
           },
         };
 
-        const { loginFields: { error } } = reducer(
+        const { accountFields: { error } } = reducer(
           initialState,
           changeLoginErrorMessage({
             name: 'error',
@@ -151,7 +148,7 @@ describe('reducer', () => {
     context('when firstName is changed', () => {
       it('changes only firstName field', () => {
         const initialState = {
-          loginFields: {
+          accountFields: {
             email: '',
             password: '',
             firstName: {
@@ -161,7 +158,7 @@ describe('reducer', () => {
           },
         };
 
-        const { loginFields: { firstName } } = reducer(
+        const { accountFields: { firstName } } = reducer(
           initialState,
           changeLoginFields({
             name: 'firstName',
@@ -177,7 +174,7 @@ describe('reducer', () => {
   describe('clearLoginFields', () => {
     it('clears LoginFields', () => {
       const initialState = {
-        loginFields: {
+        accountFields: {
           email: {
             value: 'tester@example.com',
           },
@@ -189,7 +186,7 @@ describe('reducer', () => {
         },
       };
 
-      const { loginFields: { email } } = reducer(
+      const { accountFields: { email } } = reducer(
         initialState,
         clearLoginFields(),
       );
@@ -201,14 +198,14 @@ describe('reducer', () => {
   describe('clearInvalidCheckMessage', () => {
     it('clear email invalid check message', () => {
       const initialState = {
-        loginFields: {
+        accountFields: {
           email: {
             invalidCheckMessage: 'email을 확인하세요',
           },
         },
       };
 
-      const { loginFields: { email } } = reducer(
+      const { accountFields: { email } } = reducer(
         initialState,
         clearInvalidCheckMessage('email'),
       );
@@ -218,14 +215,14 @@ describe('reducer', () => {
 
     it('clear password invalid check message', () => {
       const initialState = {
-        loginFields: {
+        accountFields: {
           password: {
             invalidCheckMessage: 'password를 확인하세요',
           },
         },
       };
 
-      const { loginFields: { password } } = reducer(
+      const { accountFields: { password } } = reducer(
         initialState,
         clearInvalidCheckMessage('password'),
       );
@@ -264,23 +261,6 @@ describe('reducer', () => {
     });
   });
 
-  describe('setAccountInfo', () => {
-    it('changes accountInfo', () => {
-      const initialState = {
-        accountInfo: {
-          uid: '',
-        },
-      };
-
-      const state = reducer(
-        initialState,
-        setAccountInfo('UID'),
-      );
-
-      expect(state.accountInfo.uid).toBe('UID');
-    });
-  });
-
   describe('setButtonActive', () => {
     it('changes isButtonActive', () => {
       const initialState = {
@@ -311,7 +291,7 @@ describe('actions', () => {
     return mockStore({
       login: {
         isLogin,
-        loginFields: {
+        accountFields: {
           email: {
             value: email.value,
             invalidCheckMessage: email.invalidCheckMessage,
