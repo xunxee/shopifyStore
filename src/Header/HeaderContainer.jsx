@@ -9,7 +9,7 @@ import {
   logout,
   clearLoginFields,
   setButtonActive,
-} from '../LoginPage/slice';
+} from '../ControlMember/slice';
 
 import {
   changeCategoriesDataField,
@@ -18,7 +18,7 @@ import {
 import TitleBar from './TitleBar';
 import SearchBar from './SearchBar';
 import UserBar from './UserBar';
-import LoginPage from '../LoginPage/LoginPage';
+import LoginPage from '../ControlMember/ControlMemberPage';
 
 const Container = styled.div({
   position: 'fixed',

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
-import LoginPage from './LoginPage';
+import LoginPage from './ControlMemberPage';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 

@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import LoginFormContainer from './LoginFormContainer';
+import ControlMemberContainer from './ControlMemberContainer';
 
 jest.mock('react-redux');
 
@@ -33,17 +33,18 @@ describe('LoginFormContainer', () => {
             value: given.lastName,
           },
         },
-        isButtonActive: 'false',
+        isButtonActive: given.isButtonActive,
       },
     }));
   });
 
   context('with logged in', () => {
     given('isLogin', () => true);
+    given('isButtonActive', () => true);
 
     it('renders the login fields', () => {
       const { container } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       expect(container).toHaveTextContent("Don't have an account?");
@@ -51,7 +52,7 @@ describe('LoginFormContainer', () => {
 
     it('listens change events', () => {
       const { getByPlaceholderText } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       fireEvent.change(getByPlaceholderText('Email'), {
@@ -63,7 +64,7 @@ describe('LoginFormContainer', () => {
 
     it('renders "Log In" button', () => {
       const { getByText } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       fireEvent.click(getByText('Log In'));
@@ -79,7 +80,7 @@ describe('LoginFormContainer', () => {
 
     it('renders the sign up fields', () => {
       const { container } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       expect(container).toHaveTextContent(
@@ -88,8 +89,10 @@ describe('LoginFormContainer', () => {
     });
 
     it('renders "Sing Up" button', () => {
+      given('isButtonActive', () => true);
+
       const { getByText } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       fireEvent.click(getByText('Sign Up'));
@@ -99,7 +102,7 @@ describe('LoginFormContainer', () => {
 
     it('renders "Log In" button', () => {
       const { getByText } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       fireEvent.click(getByText('Log In'));
@@ -111,7 +114,7 @@ describe('LoginFormContainer', () => {
 
     it('listens change events', () => {
       const { getByPlaceholderText } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       fireEvent.change(getByPlaceholderText('Email'), {
@@ -122,8 +125,10 @@ describe('LoginFormContainer', () => {
     });
 
     it('listens blur events', () => {
+      given('isButtonActive', () => false);
+
       const { getByPlaceholderText } = render((
-        <LoginFormContainer />
+        <ControlMemberContainer />
       ));
 
       const inputBox = getByPlaceholderText(
@@ -134,6 +139,25 @@ describe('LoginFormContainer', () => {
       inputBox.blur();
 
       expect(dispatch).toBeCalled();
+    });
+
+    context('when isButtonActive is true', () => {
+      given('isButtonActive', () => true);
+
+      it("doesn't fire onBlur event", () => {
+        const { getByPlaceholderText } = render((
+          <ControlMemberContainer />
+        ));
+
+        const inputBox = getByPlaceholderText(
+          '성(Last Name)',
+        );
+
+        inputBox.focus();
+        inputBox.blur();
+
+        expect(dispatch).not.toBeCalled();
+      });
     });
   });
 });

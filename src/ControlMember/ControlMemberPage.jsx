@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { useRef, useEffect } from 'react';
 
-import LoginFormContainer from './LoginFormContainer';
+import ControlMemberContainer from './ControlMemberContainer';
 
 const DeleteAll = styled.div((
   { 'data-testid': name },
@@ -45,7 +45,7 @@ const Container = styled.div((
   };
 });
 
-export default function LoginPage({
+export default function ControlMemberPage({
   refreshToken,
   onClickToggle,
   onClickLogout,
@@ -90,7 +90,7 @@ export default function LoginPage({
               Log out
             </button>
           )
-            : <LoginFormContainer />
+            : <ControlMemberContainer />
         }
       </Container>
     </DeleteAll>

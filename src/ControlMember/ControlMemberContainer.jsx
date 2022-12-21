@@ -17,7 +17,7 @@ import {
   setButtonActive,
 } from './slice';
 
-export default function LoginFormContainer() {
+export default function ControlMemberContainer() {
   const dispatch = useDispatch();
 
   const isLogin = useSelector(get({
@@ -51,8 +51,10 @@ export default function LoginFormContainer() {
   const handleCheckSignUpValid = useCallback(({
     name, value,
   }) => {
+    if (isButtonActive) return;
+
     dispatch(checkSignUpValid({ name, value }));
-  }, [dispatch]);
+  }, [dispatch, isButtonActive]);
 
   const handleSubmit = useCallback(() => {
     if (isLogin) {

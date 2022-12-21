@@ -15,7 +15,7 @@ const Container = styled.div({
   paddingBottom: '3rem',
 });
 
-export default function FooterTopContainer() {
+export default function FooterTopLayout() {
   return (
     <Container>
       <FooterTopTitle />
