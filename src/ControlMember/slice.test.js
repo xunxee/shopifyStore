@@ -5,14 +5,13 @@ import configureStore from 'redux-mock-store';
 import reducer, {
   setIsAccountModalOpen,
   setIsLogin,
-  changeLoginFields,
-  changeLoginErrorMessage,
-  clearLoginFields,
+  changeAccountFields,
+  changeAccountErrorMessage,
+  clearAccountFields,
   clearInvalidCheckMessage,
   requestLogin,
   setRefreshToken,
   logout,
-  setAccountInfo,
   changeInvalidCheckMessage,
   checkSignUpValid,
   requestSignUp,
@@ -76,7 +75,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('changeLoginFields', () => {
+  describe('changeAccountFields', () => {
     context('when email is changed', () => {
       it('changes only email field', () => {
         const initialState = {
@@ -90,7 +89,7 @@ describe('reducer', () => {
 
         const { accountFields: { email } } = reducer(
           initialState,
-          changeLoginFields({
+          changeAccountFields({
             name: 'email',
             value: 'new email',
           }),
@@ -125,7 +124,7 @@ describe('reducer', () => {
       });
     });
 
-    describe('changeLoginErrorMessage', () => {
+    describe('changeAccountErrorMessage', () => {
       it('changes login error message', () => {
         const initialState = {
           accountFields: {
@@ -135,7 +134,7 @@ describe('reducer', () => {
 
         const { accountFields: { error } } = reducer(
           initialState,
-          changeLoginErrorMessage({
+          changeAccountErrorMessage({
             name: 'error',
             value: 'Check your ID or password',
           }),
@@ -160,7 +159,7 @@ describe('reducer', () => {
 
         const { accountFields: { firstName } } = reducer(
           initialState,
-          changeLoginFields({
+          changeAccountFields({
             name: 'firstName',
             value: 'gunhee',
           }),
@@ -171,7 +170,7 @@ describe('reducer', () => {
     });
   });
 
-  describe('clearLoginFields', () => {
+  describe('clearAccountFields', () => {
     it('clears LoginFields', () => {
       const initialState = {
         accountFields: {
@@ -188,7 +187,7 @@ describe('reducer', () => {
 
       const { accountFields: { email } } = reducer(
         initialState,
-        clearLoginFields(),
+        clearAccountFields(),
       );
 
       expect(email.value).toBe('');
@@ -340,12 +339,12 @@ describe('actions', () => {
         );
       });
 
-      it('dispatch changeLoginErrorMessage', async () => {
+      it('dispatch changeAccountErrorMessage', async () => {
         await store.dispatch(requestLogin());
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(changeLoginErrorMessage({
+        expect(actions[1]).toEqual(changeAccountErrorMessage({
           name: 'error',
           value: 'Check your ID or password',
         }));
@@ -379,12 +378,12 @@ describe('actions', () => {
         );
       });
 
-      it('dispatch changeLoginErrorMessage', async () => {
+      it('dispatch changeAccountErrorMessage', async () => {
         await store.dispatch(requestSignUp());
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(changeLoginErrorMessage({
+        expect(actions[1]).toEqual(changeAccountErrorMessage({
           name: 'error',
           value: '이미 존재하는 아이디입니다.',
         }));

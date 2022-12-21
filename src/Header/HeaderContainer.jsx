@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 import {
   setIsAccountModalOpen,
   logout,
-  clearLoginFields,
+  clearAccountFields,
   setButtonActive,
 } from '../ControlMember/slice';
 
@@ -61,13 +61,13 @@ export default function HeaderContainer({ onClick }) {
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
-    dispatch(clearLoginFields());
+    dispatch(clearAccountFields());
     dispatch(setButtonActive(false));
   }, [dispatch]);
 
   const handleLogout = useCallback(() => {
     dispatch(logout());
-    dispatch(clearLoginFields({
+    dispatch(clearAccountFields({
       name: 'password',
       value: '',
     }));

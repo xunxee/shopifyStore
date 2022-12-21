@@ -54,7 +54,7 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    changeLoginFields(
+    changeAccountFields(
       state,
       { payload: { name, value } },
     ) {
@@ -91,7 +91,7 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    changeLoginErrorMessage(
+    changeAccountErrorMessage(
       state,
       { payload: { name, value } },
     ) {
@@ -106,7 +106,7 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    clearLoginFields(state) {
+    clearAccountFields(state) {
       return {
         ...state,
         accountFields: initialLoginFields,
@@ -153,10 +153,10 @@ const { actions, reducer } = createSlice({
 export const {
   setIsAccountModalOpen,
   setIsLogin,
-  changeLoginFields,
+  changeAccountFields,
   changeInvalidCheckMessage,
-  changeLoginErrorMessage,
-  clearLoginFields,
+  changeAccountErrorMessage,
+  clearAccountFields,
   clearInvalidCheckMessage,
   setRefreshToken,
   logout,
@@ -166,7 +166,7 @@ export const {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    dispatch(changeLoginErrorMessage({
+    dispatch(changeAccountErrorMessage({
       name: 'error', value: 'Loading......',
     }));
 
@@ -191,7 +191,7 @@ export function requestLogin() {
       dispatch(setAccountInfo(uid));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
-      dispatch(changeLoginErrorMessage({
+      dispatch(changeAccountErrorMessage({
         name: 'error',
         value: 'Check your ID or password',
       }));
@@ -201,7 +201,7 @@ export function requestLogin() {
 
 export function requestSignUp() {
   return async (dispatch, getState) => {
-    dispatch(changeLoginErrorMessage({
+    dispatch(changeAccountErrorMessage({
       name: 'error', value: 'Loading......',
     }));
 
@@ -226,7 +226,7 @@ export function requestSignUp() {
       dispatch(setAccountInfo(uid));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
-      dispatch(changeLoginErrorMessage({
+      dispatch(changeAccountErrorMessage({
         name: 'error', value: '이미 존재하는 아이디입니다.',
       }));
     }

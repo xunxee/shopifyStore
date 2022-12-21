@@ -8,12 +8,12 @@ import ControlMemberForm from './ControlMemberForm';
 
 import {
   setIsLogin,
-  clearLoginFields,
+  clearAccountFields,
   requestLogin,
   requestSignUp,
   checkSignUpValid,
   checkInvalidMessageClear,
-  changeLoginFields,
+  changeAccountFields,
   setButtonActive,
 } from './slice';
 
@@ -37,14 +37,14 @@ export default function ControlMemberContainer() {
 
   const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
-    dispatch(clearLoginFields());
+    dispatch(clearAccountFields());
     dispatch(setButtonActive(false));
   }, [dispatch]);
 
   const handleChange = useCallback(({
     name, value,
   }) => {
-    dispatch(changeLoginFields({ name, value }));
+    dispatch(changeAccountFields({ name, value }));
     dispatch(checkInvalidMessageClear({ name, value }));
   }, [dispatch]);
 
