@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
-import FooterTopContainer from './FooterTopContainer';
-import FooterBottomContainer from './FooterBottomContainer';
+import FooterTopContainer from './FooterTopLayout';
+import FooterBottomLayout from './FooterBottomLayout';
 
 const Container = styled.div({
   width: '100%',
@@ -15,7 +15,7 @@ export default function FooterPage() {
   return (
     <Container>
       <FooterTopContainer />
-      <FooterBottomContainer />
+      <FooterBottomLayout />
     </Container>
   );
 }

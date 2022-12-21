@@ -36,7 +36,7 @@ const Creator = styled.div({
   },
 });
 
-export default function FooterBottomContainer() {
+export default function FooterBottomLayout() {
   return (
     <Container>
       <RightsReserved>
