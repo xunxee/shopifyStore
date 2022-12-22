@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import loginReducer from './LoginPage/slice';
+import loginReducer from './ControlMember/slice';
 import listPageReducer from './List/slice';
 
 const store = configureStore({

@@ -160,7 +160,6 @@ export const {
   clearInvalidCheckMessage,
   setRefreshToken,
   logout,
-  setAccountInfo,
   setButtonActive,
 } = actions;
 
@@ -182,13 +181,11 @@ export function requestLogin() {
     try {
       const {
         refreshToken,
-        localId: uid,
       } = await postLogin({ email, password });
 
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
-      dispatch(setAccountInfo(uid));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
       dispatch(changeAccountErrorMessage({
@@ -217,13 +214,11 @@ export function requestSignUp() {
     try {
       const {
         refreshToken,
-        localId: uid,
       } = await postSignUp({ email, password });
 
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
-      dispatch(setAccountInfo(uid));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
       dispatch(changeAccountErrorMessage({

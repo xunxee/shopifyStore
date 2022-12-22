@@ -12,7 +12,7 @@ import {
 } from '../ControlMember/slice';
 
 import {
-  changeCategoriesDataField,
+  changeUrlDataField,
 } from '../List/slice';
 
 import TitleBar from './TitleBar';
@@ -49,7 +49,7 @@ export default function HeaderContainer({ onClick }) {
   }) => {
     onClick(pathname);
 
-    dispatch(changeCategoriesDataField({
+    dispatch(changeUrlDataField({
       name, belong: 'category',
     }));
   }, [onClick, dispatch]);

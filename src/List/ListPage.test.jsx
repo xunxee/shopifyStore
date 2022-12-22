@@ -34,10 +34,12 @@ describe('ListPage', () => {
     useSelector.mockImplementation(
       (selector) => (selector({
         list: {
-          category: '',
-          product: '',
-          sort: '',
-          material: '',
+          url: {
+            category: '',
+            product: '',
+            sort: '',
+            material: '',
+          },
         },
       })),
     );

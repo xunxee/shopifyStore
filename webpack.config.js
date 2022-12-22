@@ -26,7 +26,7 @@ module.exports = () => {
         index: '/index.html',
       },
       proxy: {
-        '/api': {
+        '/api': { // /api로 시작하면 아래의 타켓으로 이동
           target: 'https://nextjsintro-flame.vercel.app',
           changeOrigin: true,
         },
