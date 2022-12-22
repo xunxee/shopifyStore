@@ -57,7 +57,7 @@ export default function HeaderContainer({ onClick }) {
   const {
     refreshToken,
     isAccountModalOpen,
-  } = useSelector(({ login }) => login);
+  } = useSelector(({ controlMember }) => controlMember);
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());

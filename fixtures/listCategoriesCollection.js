@@ -1,7 +1,7 @@
 const listCategoriesCollection = {
   url: {
     pathnames: ['product', 'category'],
-    searchs: ['sort', 'material'],
+    searches: ['sort', 'material'],
   },
   headerCategories: [
     { title: 'All', name: 'all' },

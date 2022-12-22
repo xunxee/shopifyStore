@@ -9,12 +9,15 @@ import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 jest.mock('react-redux');
 
 describe('ControlMemberPage', () => {
-  useSelector.mockImplementation((selector) => selector({
-    login: {
-      isLogin: true,
-      loginFields: INITIAL_LOGIN_FIELDS,
-    },
-  }));
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      controlMember: {
+        isLogin: true,
+        accountFields: INITIAL_LOGIN_FIELDS,
+        isButtonActive: false,
+      },
+    }));
+  });
 
   it('renders the ControlMemberContainer', () => {
     const { container } = render(<ControlMemberPage />);

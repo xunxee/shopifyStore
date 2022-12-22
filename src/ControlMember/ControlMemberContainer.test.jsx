@@ -15,9 +15,9 @@ describe('ControlMemberContainer', () => {
     dispatch.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
-      login: {
+      controlMember: {
         isLogin: given.isLogin,
-        loginFields: {
+        accountFields: {
           email: {
             value: 'tester@example.co',
             invalidCheckMessage: '',

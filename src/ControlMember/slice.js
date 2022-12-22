@@ -170,7 +170,7 @@ export function requestLogin() {
     }));
 
     const {
-      login: {
+      controlMember: {
         accountFields: {
           email: { value: email },
           password: { value: password },
@@ -203,7 +203,7 @@ export function requestSignUp() {
     }));
 
     const {
-      login: {
+      controlMember: {
         accountFields: {
           email: { value: email },
           password: { value: password },
@@ -258,7 +258,7 @@ export function checkSignUpValid({ name, value }) {
 export function checkInvalidMessageClear({ name, value }) {
   return (dispatch, getState) => {
     const {
-      login:
+      controlMember:
       { isLogin, accountFields, isButtonActive },
     } = getState();
 

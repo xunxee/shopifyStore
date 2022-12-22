@@ -24,7 +24,7 @@ describe('HeaderPage', () => {
     mockUsedNavigate.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
-      login: {
+      controlMember: {
         refreshToken: '',
       },
     }));

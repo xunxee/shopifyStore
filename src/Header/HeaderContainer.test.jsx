@@ -20,9 +20,9 @@ describe('HeaderContainer', () => {
     dispatch.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
-      login: {
+      controlMember: {
         isAccountModalOpen: given.isAccountModalOpen,
-        loginFields: {
+        accountFields: {
           email: '',
           password: '',
           firstName: '',

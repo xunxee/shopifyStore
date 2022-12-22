@@ -21,17 +21,17 @@ export default function ControlMemberContainer() {
   const dispatch = useDispatch();
 
   const isLogin = useSelector(get({
-    page: 'login',
+    page: 'controlMember',
     key: 'isLogin',
   }));
 
-  const loginFields = useSelector(get({
-    page: 'login',
-    key: 'loginFields',
+  const accountFields = useSelector(get({
+    page: 'controlMember',
+    key: 'accountFields',
   }));
 
   const isButtonActive = useSelector(get({
-    page: 'login',
+    page: 'controlMember',
     key: 'isButtonActive',
   }));
 
@@ -69,7 +69,7 @@ export default function ControlMemberContainer() {
     <div>
       <ControlMemberForm
         isLogin={isLogin}
-        fields={loginFields}
+        fields={accountFields}
         isButtonActive={isButtonActive}
         onChange={handleChange}
         onBlur={handleCheckSignUpValid}
