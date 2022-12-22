@@ -52,7 +52,8 @@ export default function ListContainer({
       newListStates[belong] = name;
 
       return Object.entries(newListStates)
-        .filter((categories) => url[kind].includes(categories[0]));
+        .filter(([categoryName]) => url[kind]
+          .includes(categoryName));
     }
 
     function makePathname() {
@@ -60,17 +61,20 @@ export default function ListContainer({
 
       const pathnameEntries = returnEntries('pathnames');
 
-      for (let i = 0; i < pathnameEntries.length; i += 1) {
-        const categories = pathnameEntries[i];
+      pathnameEntries.forEach(([
+        categoryName,
+        categoryValue,
+      ]) => {
+        if (!categoryValue) return;
 
-        if (categories[0] === 'category' && categories[1]) {
-          pathname.push(`/${categories[1]}`);
+        if (categoryName === 'product') {
+          pathname.push(`/product/${categoryValue}`);
         }
 
-        if (categories[0] === 'product' && categories[1]) {
-          pathname.push(`/product/${categories[1]}`);
+        if (categoryName === 'category') {
+          pathname.push(`/${categoryValue}`);
         }
-      }
+      });
 
       return pathname;
     }
@@ -78,19 +82,22 @@ export default function ListContainer({
     function makeSearch() {
       const search = [];
 
-      const searchEntries = returnEntries('searchs');
+      const searchEntries = returnEntries('searches');
 
-      for (let i = 0; i < searchEntries.length; i += 1) {
-        const categories = searchEntries[i];
+      searchEntries.forEach(([
+        categoryName,
+        categoryValue,
+      ]) => {
+        if (!categoryValue) return;
 
-        if (search.length >= 1 && categories[1]) {
-          search.push(`&${categories[0]}=${categories[1]}`);
+        if (search.length) {
+          search.push(`&${categoryName}=${categoryValue}`);
         }
 
-        if (search.length === 0 && categories[1]) {
-          search.push(`?${categories[0]}=${categories[1]}`);
+        if (!search.length) {
+          search.push(`?${categoryName}=${categoryValue}`);
         }
-      }
+      });
 
       return search;
     }
