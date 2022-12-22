@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
 
 import {
-  checkUrl,
+  changeUrlDataField,
 } from './slice';
 
 import CategoryBar from './component/CategoryBar';
 import ItemPage from './ItemPage';
+
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
 
 const Container = styled.div({
   display: 'flex',
@@ -34,16 +36,78 @@ export default function ListContainer({
 }) {
   const dispatch = useDispatch();
 
+  const listStates = useSelector(({ list }) => list);
+
   const {
-    category,
-    product,
-    sort,
-    material,
-  } = useSelector(({ list }) => list);
+    url: {
+      category, product, sort, material,
+    },
+  } = listStates;
+
+  function checkUrl({ name, belong }) {
+    function returnEntries(kind) {
+      const { url } = LIST_CATEGORIES;
+
+      const { url: { ...newListStates } } = listStates;
+      newListStates[belong] = name;
+
+      return Object.entries(newListStates)
+        .filter((categories) => url[kind].includes(categories[0]));
+    }
+
+    function makePathname() {
+      const pathname = ['/search'];
+
+      const pathnameEntries = returnEntries('pathnames');
+
+      for (let i = 0; i < pathnameEntries.length; i += 1) {
+        const categories = pathnameEntries[i];
+
+        if (categories[0] === 'category' && categories[1]) {
+          pathname.push(`/${categories[1]}`);
+        }
+
+        if (categories[0] === 'product' && categories[1]) {
+          pathname.push(`/product/${categories[1]}`);
+        }
+      }
+
+      return pathname;
+    }
+
+    function makeSearch() {
+      const search = [];
+
+      const searchEntries = returnEntries('searchs');
+
+      for (let i = 0; i < searchEntries.length; i += 1) {
+        const categories = searchEntries[i];
+
+        if (search.length >= 1 && categories[1]) {
+          search.push(`&${categories[0]}=${categories[1]}`);
+        }
+
+        if (search.length === 0 && categories[1]) {
+          search.push(`?${categories[0]}=${categories[1]}`);
+        }
+      }
+
+      return search;
+    }
+
+    return [...makePathname(), ...makeSearch()].join('');
+  }
 
   const handleClick = useCallback(({ name, belong }) => {
-    onClickCategories(dispatch(checkUrl({ name, belong })));
-  }, [dispatch, onClickCategories]);
+    dispatch(changeUrlDataField({ name, belong }));
+
+    onClickCategories(checkUrl({ name, belong }));
+  }, [
+    dispatch,
+    onClickCategories,
+    listStates,
+    checkUrl,
+  ]);
 
   return (
     <Container>
