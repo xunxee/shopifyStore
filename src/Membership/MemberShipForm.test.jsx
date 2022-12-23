@@ -6,12 +6,12 @@ import INPUT_LIST from '../../fixtures/inputList';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
-  const handleSignUpValid = jest.fn();
+  const handleBlur = jest.fn();
   const handleSubmit = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
-    handleSignUpValid.mockClear();
+    handleBlur.mockClear();
     handleSubmit.mockClear();
   });
 
@@ -41,7 +41,7 @@ describe('LoginForm', () => {
         }}
         isButtonActive={isButtonActive}
         onChange={handleChange}
-        onBlur={handleSignUpValid}
+        onBlur={handleBlur}
         onSubmit={handleSubmit}
       />
     ));
@@ -267,7 +267,7 @@ describe('LoginForm', () => {
       inputBox.focus();
       inputBox.blur();
 
-      expect(handleSignUpValid).toBeCalledWith({
+      expect(handleBlur).toBeCalledWith({
         name: 'lastName',
         value: '',
       });

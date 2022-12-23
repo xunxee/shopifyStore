@@ -15,7 +15,7 @@ import reducer, {
   changeInvalidCheckMessage,
   checkSignUpValid,
   requestSignUp,
-  checkInvalidMessageClear,
+  checkMembershipValid,
   setButtonActive,
 } from './slice';
 
@@ -569,7 +569,7 @@ describe('actions', () => {
     });
   });
 
-  describe('checkInvalidMessageClear', () => {
+  describe('checkMembershipValid', () => {
     context('when all values for login are entered correctly', () => {
       beforeEach(() => {
         store = makeMockStore({
@@ -580,7 +580,7 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkInvalidMessageClear({
+        store.dispatch(checkMembershipValid({
           name: 'email',
           value: 'tester@example.com',
         }));
@@ -599,7 +599,7 @@ describe('actions', () => {
       });
 
       it('terminates the function', () => {
-        store.dispatch(checkInvalidMessageClear({
+        store.dispatch(checkMembershipValid({
           name: 'email',
           value: '',
         }));
@@ -621,7 +621,7 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkInvalidMessageClear({
+        store.dispatch(checkMembershipValid({
           name: 'firstName',
           value: '정',
         }));
@@ -648,7 +648,7 @@ describe('actions', () => {
       });
 
       it('clears invalidCheckMessage', async () => {
-        await store.dispatch(checkInvalidMessageClear({
+        await store.dispatch(checkMembershipValid({
           name: 'password',
           value: 'Tester@123',
         }));
@@ -675,7 +675,7 @@ describe('actions', () => {
       });
 
       it('conveys false to setButtonActive', async () => {
-        await store.dispatch(checkInvalidMessageClear({
+        await store.dispatch(checkMembershipValid({
           name: 'password',
           value: 'Tester@',
         }));
@@ -704,7 +704,7 @@ describe('actions', () => {
       });
 
       it('terminates the function', async () => {
-        await store.dispatch(checkInvalidMessageClear({
+        await store.dispatch(checkMembershipValid({
           name: 'password',
           value: 'Tester@',
         }));

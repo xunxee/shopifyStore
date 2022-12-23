@@ -255,7 +255,7 @@ export function checkSignUpValid({ name, value }) {
   };
 }
 
-export function checkInvalidMessageClear({ name, value }) {
+export function checkMembershipValid({ name, value }) {
   return (dispatch, getState) => {
     const {
       membership:

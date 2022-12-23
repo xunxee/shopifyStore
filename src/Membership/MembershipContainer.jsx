@@ -12,7 +12,7 @@ import {
   requestLogin,
   requestSignUp,
   checkSignUpValid,
-  checkInvalidMessageClear,
+  checkMembershipValid,
   changeAccountFields,
   setButtonActive,
 } from './slice';
@@ -45,10 +45,10 @@ export default function MembershipContainer() {
     name, value,
   }) => {
     dispatch(changeAccountFields({ name, value }));
-    dispatch(checkInvalidMessageClear({ name, value }));
+    dispatch(checkMembershipValid({ name, value }));
   }, [dispatch]);
 
-  const handleCheckSignUpValid = useCallback(({
+  const handleBlur = useCallback(({
     name, value,
   }) => {
     if (isButtonActive) return;
@@ -72,7 +72,7 @@ export default function MembershipContainer() {
         fields={accountFields}
         isButtonActive={isButtonActive}
         onChange={handleChange}
-        onBlur={handleCheckSignUpValid}
+        onBlur={handleBlur}
         onSubmit={handleSubmit}
       />
       <button
