@@ -2,16 +2,16 @@ import { useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
-import ControlMemberPage from './ControlMemberPage';
+import MembershipPage from './MemberShipPage';
 
 import INITIAL_LOGIN_FIELDS from '../../fixtures/initialLoginFields';
 
 jest.mock('react-redux');
 
-describe('ControlMemberPage', () => {
+describe('MembershipPage', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selector) => selector({
-      controlMember: {
+      membership: {
         isLogin: true,
         accountFields: INITIAL_LOGIN_FIELDS,
         isButtonActive: false,
@@ -19,8 +19,8 @@ describe('ControlMemberPage', () => {
     }));
   });
 
-  it('renders the ControlMemberContainer', () => {
-    const { container } = render(<ControlMemberPage />);
+  it('renders the MembershipContainer', () => {
+    const { container } = render(<MembershipPage />);
 
     expect(container).toHaveTextContent('X');
   });
@@ -53,7 +53,7 @@ describe('ControlMemberPage', () => {
         const events = mockEvents();
 
         const { getByTestId } = render((
-          <ControlMemberPage
+          <MembershipPage
             onClick={handleClick}
           />
         ));
@@ -71,7 +71,7 @@ describe('ControlMemberPage', () => {
         const events = mockEvents();
 
         const { getByTestId } = render((
-          <ControlMemberPage
+          <MembershipPage
             onClickToggle={handleClick}
           />
         ));

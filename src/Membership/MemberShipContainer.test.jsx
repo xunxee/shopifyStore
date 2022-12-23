@@ -2,20 +2,20 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import ControlMemberContainer from './ControlMemberContainer';
+import MembershipContainer from './MembershipContainer';
 
 jest.mock('react-redux');
 
-describe('ControlMemberContainer', () => {
+describe('MembershipContainer', () => {
   const dispatch = jest.fn();
-
-  useDispatch.mockImplementation(() => dispatch);
 
   beforeEach(() => {
     dispatch.mockClear();
 
+    useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selector) => selector({
-      controlMember: {
+      membership: {
         isLogin: given.isLogin,
         accountFields: {
           email: {
@@ -44,7 +44,7 @@ describe('ControlMemberContainer', () => {
 
     it('renders the login fields', () => {
       const { container } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       expect(container).toHaveTextContent("Don't have an account?");
@@ -52,7 +52,7 @@ describe('ControlMemberContainer', () => {
 
     it('listens change events', () => {
       const { getByPlaceholderText } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       fireEvent.change(getByPlaceholderText('Email'), {
@@ -64,7 +64,7 @@ describe('ControlMemberContainer', () => {
 
     it('renders "Log In" button', () => {
       const { getByText } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       fireEvent.click(getByText('Log In'));
@@ -80,7 +80,7 @@ describe('ControlMemberContainer', () => {
 
     it('renders the sign up fields', () => {
       const { container } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       expect(container).toHaveTextContent(
@@ -92,7 +92,7 @@ describe('ControlMemberContainer', () => {
       given('isButtonActive', () => true);
 
       const { getByText } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       fireEvent.click(getByText('Sign Up'));
@@ -102,19 +102,19 @@ describe('ControlMemberContainer', () => {
 
     it('renders "Log In" button', () => {
       const { getByText } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       fireEvent.click(getByText('Log In'));
 
       expect(dispatch).toBeCalledWith({
-        type: 'controlMember/setIsLogin',
+        type: 'membership/setIsLogin',
       });
     });
 
     it('listens change events', () => {
       const { getByPlaceholderText } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       fireEvent.change(getByPlaceholderText('Email'), {
@@ -128,7 +128,7 @@ describe('ControlMemberContainer', () => {
       given('isButtonActive', () => false);
 
       const { getByPlaceholderText } = render((
-        <ControlMemberContainer />
+        <MembershipContainer />
       ));
 
       const inputBox = getByPlaceholderText(
@@ -146,7 +146,7 @@ describe('ControlMemberContainer', () => {
 
       it("doesn't fire onBlur event", () => {
         const { getByPlaceholderText } = render((
-          <ControlMemberContainer />
+          <MembershipContainer />
         ));
 
         const inputBox = getByPlaceholderText(

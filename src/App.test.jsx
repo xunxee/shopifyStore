@@ -9,7 +9,7 @@ import App from './App';
 describe('App', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selection) => selection({
-      controlMember: {},
+      membership: {},
     }));
   });
 

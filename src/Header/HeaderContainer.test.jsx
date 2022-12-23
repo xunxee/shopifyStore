@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setIsAccountModalOpen,
   logout,
-} from '../ControlMember/slice';
+} from '../Membership/slice';
 
 import HeaderContainer from './HeaderContainer';
 
@@ -20,7 +20,7 @@ describe('HeaderContainer', () => {
     dispatch.mockClear();
 
     useSelector.mockImplementation((selector) => selector({
-      controlMember: {
+      membership: {
         isAccountModalOpen: given.isAccountModalOpen,
         accountFields: {
           email: '',
@@ -109,7 +109,7 @@ describe('HeaderContainer', () => {
     given('isAccountModalOpen', () => 'false');
 
     context('when logged in', () => {
-      it('renders LoginPage', () => {
+      it('renders MembershipPage', () => {
         const {
           queryByPlaceholderText,
         } = renderHeaderContainer();

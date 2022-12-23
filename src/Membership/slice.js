@@ -28,7 +28,7 @@ const initialLoginFields = {
 };
 
 const { actions, reducer } = createSlice({
-  name: 'controlMember',
+  name: 'membership',
   initialState: {
     isAccountModalOpen: false,
     isLogin: true,
@@ -170,7 +170,7 @@ export function requestLogin() {
     }));
 
     const {
-      controlMember: {
+      membership: {
         accountFields: {
           email: { value: email },
           password: { value: password },
@@ -203,7 +203,7 @@ export function requestSignUp() {
     }));
 
     const {
-      controlMember: {
+      membership: {
         accountFields: {
           email: { value: email },
           password: { value: password },
@@ -258,7 +258,7 @@ export function checkSignUpValid({ name, value }) {
 export function checkInvalidMessageClear({ name, value }) {
   return (dispatch, getState) => {
     const {
-      controlMember:
+      membership:
       { isLogin, accountFields, isButtonActive },
     } = getState();
 

@@ -288,7 +288,7 @@ describe('actions', () => {
     isButtonActive = false,
   } = {}) {
     return mockStore({
-      controlMember: {
+      membership: {
         isLogin,
         accountFields: {
           email: {

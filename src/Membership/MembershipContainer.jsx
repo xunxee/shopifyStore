@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
 
-import ControlMemberForm from './ControlMemberForm';
+import MembershipForm from './MemberShipForm';
 
 import {
   setIsLogin,
@@ -17,21 +17,21 @@ import {
   setButtonActive,
 } from './slice';
 
-export default function ControlMemberContainer() {
+export default function MembershipContainer() {
   const dispatch = useDispatch();
 
   const isLogin = useSelector(get({
-    page: 'controlMember',
+    page: 'membership',
     key: 'isLogin',
   }));
 
   const accountFields = useSelector(get({
-    page: 'controlMember',
+    page: 'membership',
     key: 'accountFields',
   }));
 
   const isButtonActive = useSelector(get({
-    page: 'controlMember',
+    page: 'membership',
     key: 'isButtonActive',
   }));
 
@@ -67,7 +67,7 @@ export default function ControlMemberContainer() {
 
   return (
     <div>
-      <ControlMemberForm
+      <MembershipForm
         isLogin={isLogin}
         fields={accountFields}
         isButtonActive={isButtonActive}

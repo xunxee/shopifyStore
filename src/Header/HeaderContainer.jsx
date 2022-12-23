@@ -9,7 +9,7 @@ import {
   logout,
   clearAccountFields,
   setButtonActive,
-} from '../ControlMember/slice';
+} from '../Membership/slice';
 
 import {
   changeUrlDataField,
@@ -18,7 +18,7 @@ import {
 import TitleBar from './TitleBar';
 import SearchBar from './SearchBar';
 import UserBar from './UserBar';
-import LoginPage from '../ControlMember/ControlMemberPage';
+import MembershipPage from '../Membership/MemberShipPage';
 
 const Container = styled.div({
   position: 'fixed',
@@ -57,7 +57,7 @@ export default function HeaderContainer({ onClick }) {
   const {
     refreshToken,
     isAccountModalOpen,
-  } = useSelector(({ controlMember }) => controlMember);
+  } = useSelector(({ membership }) => membership);
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
@@ -76,7 +76,7 @@ export default function HeaderContainer({ onClick }) {
   return (
     <Container>
       {isAccountModalOpen && (
-        <LoginPage
+        <MembershipPage
           refreshToken={refreshToken}
           onClickToggle={handleToggle}
           onClickLogout={handleLogout}
