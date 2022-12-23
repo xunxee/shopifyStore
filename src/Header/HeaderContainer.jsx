@@ -49,6 +49,14 @@ export default function HeaderContainer({ onClick }) {
   }) => {
     onClick(pathname);
 
+    if (name === 'all') {
+      dispatch(changeUrlDataField({
+        name: '', belong: 'category',
+      }));
+
+      return;
+    }
+
     dispatch(changeUrlDataField({
       name, belong: 'category',
     }));

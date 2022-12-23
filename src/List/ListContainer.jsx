@@ -44,45 +44,33 @@ export default function ListContainer({
     },
   } = listStates;
 
-  function checkUrl({ name, belong }) {
-    function returnEntries(kind) {
-      const { url } = LIST_CATEGORIES;
-
-      const { url: { ...newListStates } } = listStates;
-      newListStates[belong] = name;
-
-      return Object.entries(newListStates)
-        .filter(([categoryName]) => url[kind]
-          .includes(categoryName));
-    }
+  function makeUrl({ name, belong }) {
+    const { url: { ...urlStates } } = listStates;
+    urlStates[belong] = name;
 
     function makePathname() {
       const pathname = ['/search'];
 
-      const pathnameEntries = returnEntries('pathnames');
+      const {
+        product: productValue,
+        category: categoryValue,
+      } = urlStates;
 
-      pathnameEntries.forEach(([
-        categoryName,
-        categoryValue,
-      ]) => {
-        if (!categoryValue) return;
+      if (productValue) pathname.push(`/product/${productValue}`);
 
-        if (categoryName === 'product') {
-          pathname.push(`/product/${categoryValue}`);
-        }
-
-        if (categoryName === 'category') {
-          pathname.push(`/${categoryValue}`);
-        }
-      });
+      if (categoryValue) pathname.push(`/${categoryValue}`);
 
       return pathname;
     }
 
     function makeSearch() {
+      const { url } = LIST_CATEGORIES;
+
       const search = [];
 
-      const searchEntries = returnEntries('searches');
+      const searchEntries = Object.entries(urlStates)
+        .filter(([categoryName]) => url.searches
+          .includes(categoryName));
 
       searchEntries.forEach(([
         categoryName,
@@ -92,11 +80,11 @@ export default function ListContainer({
 
         if (search.length) {
           search.push(`&${categoryName}=${categoryValue}`);
+
+          return;
         }
 
-        if (!search.length) {
-          search.push(`?${categoryName}=${categoryValue}`);
-        }
+        search.push(`?${categoryName}=${categoryValue}`);
       });
 
       return search;
@@ -108,12 +96,14 @@ export default function ListContainer({
   const handleClick = useCallback(({ name, belong }) => {
     dispatch(changeUrlDataField({ name, belong }));
 
-    onClickCategories(checkUrl({ name, belong }));
+    const url = makeUrl({ name, belong });
+
+    onClickCategories(url);
   }, [
     dispatch,
     onClickCategories,
     listStates,
-    checkUrl,
+    makeUrl,
   ]);
 
   return (

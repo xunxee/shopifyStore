@@ -48,7 +48,7 @@ describe('ListContainer', () => {
     expect(handleClick).toBeCalled();
   });
 
-  describe('checkUrl', () => {
+  describe('makeUrl', () => {
     context('when it clicks New Arrivals', () => {
       it('changes url to /search/new', () => {
         const { getByText } = renderListContainer();
