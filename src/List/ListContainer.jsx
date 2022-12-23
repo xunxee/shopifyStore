@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import {
   changeUrlDataField,
@@ -30,9 +30,8 @@ const Layout = styled.div({
 
 export default function ListContainer({
   onClickCategories,
-  // TODO:
-  // pathname,
-  // search,
+  urlPathname,
+  urlSearch,
 }) {
   const dispatch = useDispatch();
 
@@ -43,6 +42,27 @@ export default function ListContainer({
       category, product, sort, material,
     },
   } = listStates;
+
+  useEffect(() => {
+    function makeCategoryList(title) {
+      return LIST_CATEGORIES[title].data
+        .map(({ value }) => value);
+    }
+
+    urlPathname.split('/').forEach((name) => {
+      if (makeCategoryList('categories').includes(name)) {
+        dispatch(changeUrlDataField({
+          name, belong: 'category',
+        }));
+      }
+
+      if (makeCategoryList('products').includes(name)) {
+        dispatch(changeUrlDataField({
+          name, belong: 'product',
+        }));
+      }
+    });
+  }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {
     const { url: { ...urlStates } } = listStates;

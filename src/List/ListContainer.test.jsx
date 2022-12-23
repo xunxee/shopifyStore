@@ -32,10 +32,15 @@ describe('ListContainer', () => {
     );
   });
 
-  function renderListContainer() {
+  function renderListContainer({
+    urlPathname = '/search',
+    urlSearch,
+  } = {}) {
     return render((
       <ListContainer
         onClickCategories={handleClick}
+        urlPathname={urlPathname}
+        urlSearch={urlSearch}
       />
     ));
   }
@@ -73,7 +78,9 @@ describe('ListContainer', () => {
 
     context('when it clicks Trending', () => {
       it('changes url to /search?sort=trending', () => {
-        const { getByText } = renderListContainer();
+        const { getByText } = renderListContainer({
+          urlPathname: '/search/new',
+        });
 
         fireEvent.click(getByText('Trending'));
 
@@ -87,7 +94,9 @@ describe('ListContainer', () => {
       given('sort', () => 'trending');
 
       it('changes url to /search?sort=trending', () => {
-        const { getByText } = renderListContainer();
+        const { getByText } = renderListContainer({
+          urlPathname: '/search/product/beds/new',
+        });
 
         fireEvent.click(getByText('Fabric'));
 

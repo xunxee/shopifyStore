@@ -23,8 +23,8 @@ export default function ListPage() {
     <Container>
       <ListContainer
         onClickCategories={handleClickCategories}
-        pathname={pathname}
-        search={search}
+        urlPathname={pathname}
+        urlSearch={search}
       />
     </Container>
   );
