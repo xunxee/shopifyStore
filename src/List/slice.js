@@ -24,11 +24,25 @@ const { actions, reducer } = createSlice({
         },
       };
     },
+
+    changeUrlAllDataFields(state, {
+      payload: object,
+    }) {
+      const { url } = state;
+      return {
+        ...state,
+        url: {
+          ...url,
+          ...object,
+        },
+      };
+    },
   },
 });
 
 export const {
   changeUrlDataField,
+  changeUrlAllDataFields,
 } = actions;
 
 export default reducer;

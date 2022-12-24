@@ -1,5 +1,6 @@
 import reducer, {
   changeUrlDataField,
+  changeUrlAllDataFields,
 } from './slice';
 
 describe('reducer', () => {
@@ -20,6 +21,36 @@ describe('reducer', () => {
       );
 
       expect(category).toBe('new');
+    });
+  });
+
+  describe('changeUrlAllDataFields', () => {
+    it('change url all data field', () => {
+      const initialState = {
+        url: {
+          product: '',
+          category: '',
+          sort: '',
+          material: '',
+        },
+      };
+
+      const { url } = reducer(
+        initialState,
+        changeUrlAllDataFields({
+          product: 'beds',
+          category: 'new',
+          sort: 'trending',
+          material: 'fabric',
+        }),
+      );
+
+      expect(url).toEqual({
+        product: 'beds',
+        category: 'new',
+        sort: 'trending',
+        material: 'fabric',
+      });
     });
   });
 });
