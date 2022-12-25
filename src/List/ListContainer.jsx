@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect } from 'react';
 
 import {
+  changeUrlAllDataFields,
   changeUrlDataField,
 } from './slice';
 
@@ -44,24 +45,41 @@ export default function ListContainer({
   } = listStates;
 
   useEffect(() => {
-    function makeCategoryList(title) {
-      return LIST_CATEGORIES[title].data
-        .map(({ value }) => value);
+    const pathnameList = urlPathname.split('/');
+    const { length } = pathnameList;
+
+    function makeApiData(number) {
+      const lengthList = {
+        2() { return 'category=all'; },
+        3() { return `category=${pathnameList[2]}`; },
+        4() { return `product=${pathnameList[3]}&category=all`; },
+        5() {
+          return `category=${pathnameList[4]}&`
+            + `product=${pathnameList[3]}`;
+        },
+      };
+
+      const pathnameQueryString = lengthList[number]();
+
+      if (urlSearch) return (`${urlSearch}&${pathnameQueryString}`);
+
+      return `?${pathnameQueryString}`;
     }
 
-    urlPathname.split('/').forEach((name) => {
-      if (makeCategoryList('categories').includes(name)) {
-        dispatch(changeUrlDataField({
-          name, belong: 'category',
-        }));
-      }
+    console.log(makeApiData(length));
 
-      if (makeCategoryList('products').includes(name)) {
-        dispatch(changeUrlDataField({
-          name, belong: 'product',
-        }));
-      }
-    });
+    const isClickAccess = category || product || sort || material;
+
+    function changeUrlData() {
+      const apiDataObject = JSON.parse(`{"${makeApiData(length)
+        .substring(1)
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')}"}`);
+
+      dispatch(changeUrlAllDataFields(apiDataObject));
+    }
+
+    if (!isClickAccess) changeUrlData();
   }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {

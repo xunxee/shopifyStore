@@ -66,7 +66,9 @@ describe('ListContainer', () => {
 
     context('when it clicks Sofas', () => {
       it('changes url to /search/product/sofas', () => {
-        const { getByText } = renderListContainer();
+        const { getByText } = renderListContainer({
+          urlPathname: '/search/product/sofas',
+        });
 
         fireEvent.click(getByText('Sofas'));
 
