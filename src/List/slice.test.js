@@ -1,10 +1,22 @@
+import thunk from 'redux-thunk';
+
+import configureStore from 'redux-mock-store';
+
 import reducer, {
   changeUrlDataField,
   changeUrlAllDataFields,
   setProductList,
+  loadProductList,
 } from './slice';
 
+import { fetchMockData } from '../services/api';
+
 import MOCK_DATA from '../../fixtures/fetchMockData';
+
+const middlewares = [thunk];
+const mockStore = configureStore(middlewares);
+
+jest.mock('../services/api');
 
 describe('reducer', () => {
   describe('changeUrlDataField', () => {
@@ -69,6 +81,36 @@ describe('reducer', () => {
       );
 
       expect(productList).toBe(MOCK_DATA);
+    });
+  });
+});
+
+describe('actions', () => {
+  let store;
+
+  function makeMockStore({
+    productList = [],
+  } = {}) {
+    return mockStore({
+      list: {
+        productList,
+      },
+    });
+  }
+
+  describe('loadProductList', () => {
+    beforeEach(() => {
+      store = makeMockStore();
+
+      fetchMockData.mockResolvedValue([]);
+    });
+
+    it('runs setProductList', async () => {
+      await store.dispatch(loadProductList());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setProductList([]));
     });
   });
 });

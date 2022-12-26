@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchMockData } from '../services/api';
 
 const { actions, reducer } = createSlice({
   name: 'list',
@@ -53,5 +54,12 @@ export const {
   changeUrlAllDataFields,
   setProductList,
 } = actions;
+
+export function loadProductList() {
+  return async (dispatch) => {
+    const productList = await fetchMockData();
+    dispatch(setProductList(productList));
+  };
+}
 
 export default reducer;
