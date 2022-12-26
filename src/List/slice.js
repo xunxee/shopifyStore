@@ -9,6 +9,7 @@ const { actions, reducer } = createSlice({
       sort: '',
       material: '',
     },
+    productList: [],
   },
   reducers: {
     changeUrlDataField(
@@ -37,12 +38,20 @@ const { actions, reducer } = createSlice({
         },
       };
     },
+
+    setProductList(state, { payload: productList }) {
+      return {
+        ...state,
+        productList,
+      };
+    },
   },
 });
 
 export const {
   changeUrlDataField,
   changeUrlAllDataFields,
+  setProductList,
 } = actions;
 
 export default reducer;

@@ -1,7 +1,10 @@
 import reducer, {
   changeUrlDataField,
   changeUrlAllDataFields,
+  setProductList,
 } from './slice';
+
+import MOCK_DATA from '../../fixtures/fetchMockData';
 
 describe('reducer', () => {
   describe('changeUrlDataField', () => {
@@ -51,6 +54,21 @@ describe('reducer', () => {
         sort: 'trending',
         material: 'fabric',
       });
+    });
+  });
+
+  describe('setProductList', () => {
+    it('changes productList', () => {
+      const initialState = {
+        productList: [],
+      };
+
+      const { productList } = reducer(
+        initialState,
+        setProductList(MOCK_DATA),
+      );
+
+      expect(productList).toBe(MOCK_DATA);
     });
   });
 });
