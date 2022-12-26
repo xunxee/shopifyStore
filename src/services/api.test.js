@@ -1,12 +1,14 @@
 import {
   postLogin,
   postSignUp,
+  fetchMockData,
 } from './api';
 
 import LOGIN_TOKENS from '../../fixtures/loginTokens';
 import POST_LOGIN_DATA from '../../fixtures/postLoginData';
 import LOGIN_FAIL_DATA from '../../fixtures/loginFailData';
 import SIGNUP_FAIL_DATA from '../../fixtures/signUpFailData';
+import FETCH_MOCK_DATA from '../../fixtures/fetchMockData';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -64,6 +66,18 @@ describe('api', () => {
           await postSignUp(SIGNUP_FAIL_DATA);
         }).rejects.toThrowError(new Error('ID_ALREADY_EXISTS'));
       });
+    });
+  });
+
+  describe('fetchMockData', () => {
+    beforeEach(() => {
+      mockFetch(FETCH_MOCK_DATA);
+    });
+
+    it('returns mock data', async () => {
+      const mockData = await fetchMockData();
+
+      expect(mockData).toBe(FETCH_MOCK_DATA);
     });
   });
 });
