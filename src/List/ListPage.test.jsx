@@ -40,6 +40,7 @@ describe('ListPage', () => {
             sort: '',
             material: '',
           },
+          productList: [],
         },
       })),
     );

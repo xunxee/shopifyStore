@@ -27,6 +27,7 @@ describe('ListContainer', () => {
             sort: given.sort,
             material: given.material,
           },
+          productList: [],
         },
       })),
     );

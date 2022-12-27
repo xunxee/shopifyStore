@@ -7,12 +7,15 @@ import { useCallback, useEffect } from 'react';
 import {
   changeUrlAllDataFields,
   changeUrlDataField,
+  loadProductList,
 } from './slice';
 
 import CategoryBar from './component/CategoryBar';
-import ItemPage from './ItemPage';
+import ItemList from './ItemList';
 
 import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
+import { get } from '../utils';
 
 const Container = styled.div({
   display: 'flex',
@@ -38,6 +41,10 @@ export default function ListContainer({
 
   const listStates = useSelector(({ list }) => list);
 
+  const productList = useSelector(get({
+    page: 'list', key: 'productList',
+  }));
+
   const {
     url: {
       category, product, sort, material,
@@ -45,6 +52,8 @@ export default function ListContainer({
   } = listStates;
 
   useEffect(() => {
+    dispatch(loadProductList());
+
     const pathnameList = urlPathname.split('/');
     const { length } = pathnameList;
 
@@ -65,8 +74,6 @@ export default function ListContainer({
 
       return `?${pathnameQueryString}`;
     }
-
-    console.log(makeApiData(length));
 
     const isClickAccess = category || product || sort || material;
 
@@ -158,7 +165,9 @@ export default function ListContainer({
           onClick={handleClick}
         />
       </Layout>
-      <ItemPage />
+      <ItemList
+        productList={productList}
+      />
       <Layout>
         <CategoryBar
           field="sort"
