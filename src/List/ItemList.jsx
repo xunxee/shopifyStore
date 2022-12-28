@@ -1,14 +1,24 @@
 import styled from '@emotion/styled';
+
 import ItemCard from './component/ItemCard';
 
-const Container = styled.div({
+const Container = styled.div(({ length }) => ({
+  '@media (max-width: 1152px)': {
+    height: `${(length / 2) * 256 + ((length / 2) * 25)}px`,
+  },
+  display: 'flex',
+  flexWrap: 'wrap',
   flexGrow: 1,
-  backgroundColor: '#ebd28b',
-});
+  justifyContent: 'space-evenly',
+  alignContent: 'space-between',
+  height: `${(length / 3) * 256 + ((length / 3) * 40)}px`,
+}));
 
 export default function ItemList({ productList }) {
   return (
-    <Container>
+    <Container
+      length={productList.length}
+    >
       {productList.map((product) => (
         <ItemCard
           key={product.id}

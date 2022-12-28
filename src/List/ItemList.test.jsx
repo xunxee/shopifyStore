@@ -25,6 +25,8 @@ describe('ItemList', () => {
       />
     ));
 
-    expect(container).toHaveTextContent('ItemPage');
+    expect(container).toHaveTextContent(
+      'Special Edition T-Shirt',
+    );
   });
 });

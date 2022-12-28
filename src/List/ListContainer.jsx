@@ -23,13 +23,12 @@ const Container = styled.div({
   maxWidth: '1300px',
   minHeight: 'calc(100vh - 110px)',
   margin: '0 auto',
-  backgroundColor: '#f8ddaf',
 });
 
 const Layout = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  width: '15%',
+  minWidth: '192px',
 });
 
 export default function ListContainer({
