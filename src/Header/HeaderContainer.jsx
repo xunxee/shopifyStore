@@ -24,6 +24,7 @@ const Container = styled.div({
   position: 'fixed',
   top: '0',
   left: '0',
+  zIndex: '30',
   width: '100%',
   minWidth: '950px',
   backgroundColor: '#000',
