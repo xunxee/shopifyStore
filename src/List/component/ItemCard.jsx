@@ -1,15 +1,23 @@
 import styled from '@emotion/styled';
 
+import PALETTE from '../../styles/Palette';
+
+const {
+  basicWhite,
+  paleWhite,
+  itemCardHoverList,
+} = PALETTE;
+
 const Layout = styled.div(({ hoverColor }) => ({
   position: 'relative',
   width: '256px',
   height: '267px',
   marginTop: '1rem',
-  backgroundColor: '#F8F8F8',
+  backgroundColor: paleWhite,
   ': hover': {
     '& h3, span': {
       backgroundColor: hoverColor,
-      color: '#fff',
+      color: basicWhite,
     },
   },
 }));
@@ -26,7 +34,7 @@ const TitleBox = styled.div({
     lineHeight: '40px',
     fontWeight: '700',
     letterSpacing: '.4px',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: basicWhite,
     boxDecorationBreak: 'clone',
   },
   '& span': {
@@ -36,7 +44,7 @@ const TitleBox = styled.div({
     lineHeight: '20px',
     fontWeight: '600',
     letterSpacing: '.35px',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: basicWhite,
   },
 });
 
@@ -48,22 +56,9 @@ export default function ItemCard(
   },
 ) {
   function makeHoverColor() {
-    const colorList = {
-      1: '#7928ca',
-      2: '#eb367f',
-      3: '#22b8cf',
-      4: '#37b679',
-      5: '#0070f3',
-      6: '#FF7F50',
-      7: '#008B8B',
-      8: '#9932CC',
-      9: '#8B0000',
-      0: '#90EE90',
-    };
-
     const number = id % 10;
 
-    return colorList[number];
+    return itemCardHoverList[number];
   }
 
   return (
