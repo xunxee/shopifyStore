@@ -1,12 +1,18 @@
 import styled from '@emotion/styled';
 
-const Layout = styled.div({
+const Layout = styled.div(({ hoverColor }) => ({
   position: 'relative',
   width: '256px',
   height: '267px',
   marginTop: '1rem',
   backgroundColor: '#F8F8F8',
-});
+  ': hover': {
+    '& h3, span': {
+      backgroundColor: hoverColor,
+      color: '#fff',
+    },
+  },
+}));
 
 const TitleBox = styled.div({
   position: 'absolute',
@@ -35,10 +41,35 @@ const TitleBox = styled.div({
 });
 
 export default function ItemCard(
-  { product: { title, price, img } },
+  {
+    product: {
+      id, title, price, img,
+    },
+  },
 ) {
+  function makeHoverColor() {
+    const colorList = {
+      1: '#7928ca',
+      2: '#eb367f',
+      3: '#22b8cf',
+      4: '#37b679',
+      5: '#0070f3',
+      6: '#FF7F50',
+      7: '#008B8B',
+      8: '#9932CC',
+      9: '#8B0000',
+      0: '#90EE90',
+    };
+
+    const number = id % 10;
+
+    return colorList[number];
+  }
+
   return (
-    <Layout>
+    <Layout
+      hoverColor={makeHoverColor()}
+    >
       <TitleBox>
         <h3>
           {title}

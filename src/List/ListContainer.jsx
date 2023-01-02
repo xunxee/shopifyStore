@@ -77,10 +77,11 @@ export default function ListContainer({
     const isClickAccess = category || product || sort || material;
 
     function changeUrlData() {
-      const apiDataObject = JSON.parse(`{"${makeApiData(length)
-        .substring(1)
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')}"}`);
+      const apiDataObject = JSON
+        .parse(`{"${makeApiData(length)
+          .substring(1)
+          .replace(/&/g, '","')
+          .replace(/=/g, '":"')}"}`);
 
       dispatch(changeUrlAllDataFields(apiDataObject));
     }
