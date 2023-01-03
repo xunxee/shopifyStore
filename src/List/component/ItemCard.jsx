@@ -14,10 +14,14 @@ const Layout = styled.div(({ hoverColor }) => ({
   height: '267px',
   marginTop: '1rem',
   backgroundColor: paleWhite,
-  ': hover': {
-    '& h3, span': {
+  cursor: 'pointer',
+  '&:hover': {
+    'h3, span': {
       backgroundColor: hoverColor,
       color: basicWhite,
+    },
+    '& img': {
+      transform: 'scale(1.2)',
     },
   },
 }));
@@ -26,6 +30,8 @@ const TitleBox = styled.div({
   position: 'absolute',
   top: '0',
   left: '0',
+  zIndex: '20',
+  overflow: 'hidden',
   paddingRight: '4rem',
   '& h3': {
     display: 'inline',
@@ -33,6 +39,8 @@ const TitleBox = styled.div({
     fontSize: '18px',
     lineHeight: '40px',
     fontWeight: '700',
+    transition: '0.5s',
+    transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
     letterSpacing: '.4px',
     backgroundColor: basicWhite,
     boxDecorationBreak: 'clone',
@@ -43,8 +51,20 @@ const TitleBox = styled.div({
     fontSize: '14px',
     lineHeight: '20px',
     fontWeight: '600',
+    transition: '0.5s',
+    transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
     letterSpacing: '.35px',
     backgroundColor: basicWhite,
+  },
+});
+
+const ImgBox = styled.div({
+  overflow: 'hidden',
+  '& img': {
+    transition: '0.5s',
+    width: '100%',
+    height: '100%',
+    backgroundColor: paleWhite,
   },
 });
 
@@ -71,9 +91,9 @@ export default function ItemCard(
         </h3>
         <span>{price}</span>
       </TitleBox>
-      <div>
-        <img alt={title} src={img} width="200px" />
-      </div>
+      <ImgBox>
+        <img alt={title} src={img} />
+      </ImgBox>
     </Layout>
   );
 }
