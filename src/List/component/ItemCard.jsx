@@ -71,7 +71,7 @@ const ImgBox = styled.div({
 export default function ItemCard(
   {
     product: {
-      id, title, price, img,
+      id, title, price, mainImage,
     },
   },
 ) {
@@ -92,7 +92,7 @@ export default function ItemCard(
         <span>{price}</span>
       </TitleBox>
       <ImgBox>
-        <img alt={title} src={img} />
+        <img alt={title} src={mainImage} />
       </ImgBox>
     </Layout>
   );

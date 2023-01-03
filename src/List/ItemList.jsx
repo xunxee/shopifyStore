@@ -10,8 +10,10 @@ const Container = styled.div(({ length }) => ({
   flexWrap: 'wrap',
   flexGrow: 1,
   justifyContent: 'space-evenly',
-  alignContent: 'space-between',
+  alignContent: 'space-around',
   height: `${(length / 3) * 256 + ((length / 3) * 40)}px`,
+  marginTop: '.75rem',
+  marginBottom: '5rem',
 }));
 
 export default function ItemList({ productList }) {
