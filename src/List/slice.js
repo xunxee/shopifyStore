@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchMockData } from '../services/api';
+import { fetchMockProductList } from '../services/api';
 
 const { actions, reducer } = createSlice({
   name: 'list',
@@ -11,6 +11,7 @@ const { actions, reducer } = createSlice({
       material: '',
     },
     productList: [],
+    product: {},
   },
   reducers: {
     changeUrlDataField(
@@ -46,6 +47,13 @@ const { actions, reducer } = createSlice({
         productList,
       };
     },
+
+    setProduct(state, { payload: product }) {
+      return {
+        ...state,
+        product,
+      };
+    },
   },
 });
 
@@ -53,11 +61,12 @@ export const {
   changeUrlDataField,
   changeUrlAllDataFields,
   setProductList,
+  setProduct,
 } = actions;
 
 export function loadProductList() {
   return async (dispatch) => {
-    const productList = await fetchMockData();
+    const productList = await fetchMockProductList();
     dispatch(setProductList(productList));
   };
 }
