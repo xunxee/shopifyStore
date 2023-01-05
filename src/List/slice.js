@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchMockProductList } from '../services/api';
+import {
+  fetchMockProduct,
+  fetchMockProductList,
+} from '../services/api';
 
 const { actions, reducer } = createSlice({
   name: 'list',
@@ -68,6 +71,13 @@ export function loadProductList() {
   return async (dispatch) => {
     const productList = await fetchMockProductList();
     dispatch(setProductList(productList));
+  };
+}
+
+export function loadProduct() {
+  return async (dispatch) => {
+    const product = await fetchMockProduct();
+    dispatch(setProduct(product));
   };
 }
 

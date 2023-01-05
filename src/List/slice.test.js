@@ -8,11 +8,15 @@ import reducer, {
   setProductList,
   setProduct,
   loadProductList,
+  loadProduct,
 } from './slice';
 
-import { fetchMockProductList } from '../services/api';
+import {
+  fetchMockProductList,
+  fetchMockProduct,
+} from '../services/api';
 
-import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/MockProductListData';
+import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -114,10 +118,12 @@ describe('actions', () => {
 
   function makeMockStore({
     productList = [],
+    product = {},
   } = {}) {
     return mockStore({
       list: {
         productList,
+        product,
       },
     });
   }
@@ -135,6 +141,22 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setProductList([]));
+    });
+  });
+
+  describe('loadProduct', () => {
+    beforeEach(() => {
+      store = makeMockStore();
+
+      fetchMockProduct.mockResolvedValue({});
+    });
+
+    it('runs setProduct', async () => {
+      await store.dispatch(loadProduct());
+
+      const actions = store.getActions();
+
+      expect(actions[0]).toEqual(setProduct({}));
     });
   });
 });
