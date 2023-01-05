@@ -1,14 +1,16 @@
 import {
   postLogin,
   postSignUp,
-  fetchMockData,
+  fetchMockProductList,
+  fetchMockProduct,
 } from './api';
 
 import LOGIN_TOKENS from '../../fixtures/loginTokens';
 import POST_LOGIN_DATA from '../../fixtures/postLoginData';
 import LOGIN_FAIL_DATA from '../../fixtures/loginFailData';
 import SIGNUP_FAIL_DATA from '../../fixtures/signUpFailData';
-import FETCH_MOCK_DATA from '../../fixtures/fetchMockData';
+import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
+import MOCK_PRODUCT_DATA from '../../fixtures/MockData/product';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -69,15 +71,27 @@ describe('api', () => {
     });
   });
 
-  describe('fetchMockData', () => {
+  describe('fetchMockProductList', () => {
     beforeEach(() => {
-      mockFetch(FETCH_MOCK_DATA);
+      mockFetch(MOCK_PRODUCT_LIST_DATA);
     });
 
     it('returns mock data', async () => {
-      const mockData = await fetchMockData();
+      const mockData = await fetchMockProductList();
 
-      expect(mockData).toBe(FETCH_MOCK_DATA);
+      expect(mockData).toBe(MOCK_PRODUCT_LIST_DATA);
+    });
+  });
+
+  describe('fetchMockProduct', () => {
+    beforeEach(() => {
+      mockFetch(MOCK_PRODUCT_DATA);
+    });
+
+    it('returns mock data', async () => {
+      const mockData = await fetchMockProduct();
+
+      expect(mockData).toBe(MOCK_PRODUCT_DATA);
     });
   });
 });

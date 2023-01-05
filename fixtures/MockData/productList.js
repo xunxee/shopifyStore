@@ -1,4 +1,4 @@
-const postMockData = [
+const productList = [
   {
     id: 1,
     title: '',
@@ -11,4 +11,4 @@ const postMockData = [
   },
 ];
 
-export default postMockData;
+export default productList;
