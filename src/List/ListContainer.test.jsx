@@ -54,6 +54,77 @@ describe('ListContainer', () => {
     expect(handleClick).toBeCalled();
   });
 
+  describe('changeUrlData', () => {
+    context('when only urlPathname exists', () => {
+      it('saves the data of pathname', () => {
+        renderListContainer({
+          urlPathname: '/search/product/beds/new',
+        });
+
+        expect(dispatch).toBeCalledTimes(2);
+
+        expect(dispatch).toBeCalledWith({
+          payload: { category: 'new', product: 'beds' },
+          type: 'list/changeUrlAllDataFields',
+        });
+      });
+    });
+
+    context('when urlPathname and urlSearch exist', () => {
+      it('saves the data of urlPathname and urlSearch', () => {
+        renderListContainer({
+          urlPathname: '/search/product/beds/new',
+          urlSearch: '?sort=trending',
+        });
+
+        expect(dispatch).toBeCalledTimes(2);
+
+        expect(dispatch).toBeCalledWith({
+          payload: {
+            category: 'new',
+            product: 'beds',
+            sort: 'trending',
+          },
+          type: 'list/changeUrlAllDataFields',
+        });
+      });
+    });
+
+    context('when only search exists in urlPathname', () => {
+      it("saves 'all' in category", () => {
+        renderListContainer({
+          urlPathname: '/search',
+        });
+
+        expect(dispatch).toBeCalledTimes(2);
+
+        expect(dispatch).toBeCalledWith({
+          payload: {
+            category: 'all',
+          },
+          type: 'list/changeUrlAllDataFields',
+        });
+      });
+
+      it("saves 'all' and 'trending'", () => {
+        renderListContainer({
+          urlPathname: '/search',
+          urlSearch: '?sort=trending',
+        });
+
+        expect(dispatch).toBeCalledTimes(2);
+
+        expect(dispatch).toBeCalledWith({
+          payload: {
+            category: 'all',
+            sort: 'trending',
+          },
+          type: 'list/changeUrlAllDataFields',
+        });
+      });
+    });
+  });
+
   describe('makeUrl', () => {
     context('when it clicks New Arrivals', () => {
       it('changes url to /search/new', () => {

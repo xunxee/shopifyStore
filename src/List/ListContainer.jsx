@@ -53,35 +53,44 @@ export default function ListContainer({
   useEffect(() => {
     dispatch(loadProductList());
 
-    const pathnameList = urlPathname.split('/');
+    const pathnameList = urlPathname.substring(1).split('/');
+
     const { length } = pathnameList;
 
-    function makeApiData(number) {
-      const lengthList = {
-        2() { return 'category=all'; },
-        3() { return `category=${pathnameList[2]}`; },
-        4() { return `product=${pathnameList[3]}&category=all`; },
-        5() {
-          return `category=${pathnameList[4]}&`
-            + `product=${pathnameList[3]}`;
-        },
-      };
+    function makeQueryString(queryStringList) {
+      for (let i = 0; i < length; i += 1) {
+        if (length === 1) {
+          return urlSearch
+            ? `${urlSearch}&category=all` : '?category=all';
+        }
 
-      const pathnameQueryString = lengthList[number]();
+        if (pathnameList[i] === 'product') {
+          queryStringList.push(`product=${pathnameList[2]}`);
+        }
 
-      if (urlSearch) return (`${urlSearch}&${pathnameQueryString}`);
+        if (pathnameList[i] === 'new') {
+          queryStringList.push('category=new');
+        }
 
-      return `?${pathnameQueryString}`;
+        if (pathnameList[i] === 'featured') {
+          queryStringList.push('category=featured');
+        }
+      }
+
+      if (urlSearch) {
+        return (`${urlSearch}&${queryStringList.join('&')}`);
+      }
+
+      return `?${queryStringList.join('&')}`;
     }
 
     const isClickAccess = category || product || sort || material;
 
     function changeUrlData() {
-      const apiDataObject = JSON
-        .parse(`{"${makeApiData(length)
-          .substring(1)
-          .replace(/&/g, '","')
-          .replace(/=/g, '":"')}"}`);
+      const apiDataObject = JSON.parse(`{"${makeQueryString([])
+        .substring(1)
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')}"}`);
 
       dispatch(changeUrlAllDataFields(apiDataObject));
     }
