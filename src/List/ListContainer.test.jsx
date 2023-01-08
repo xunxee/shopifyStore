@@ -55,72 +55,70 @@ describe('ListContainer', () => {
   });
 
   describe('changeUrlData', () => {
-    context('when only urlPathname exists', () => {
-      it('saves the data of pathname', () => {
-        renderListContainer({
-          urlPathname: '/search/product/beds/new',
-        });
+    const scenarios = [
+      {
+        situation: 'when only urlPathname exists',
+        described: 'saves the data of pathname',
+        urlPathname: 'search/product/beds/new',
+        payload: { category: 'new', product: 'beds' },
+      },
+      {
+        situation: 'when urlPathname and urlSearch exist',
+        described: 'saves the data of urlPathname and urlSearch',
+        urlPathname: '/search/product/beds/new',
+        urlSearch: '?sort=trending',
+        payload: {
+          category: 'new',
+          product: 'beds',
+          sort: 'trending',
+        },
+      },
+      {
+        situation: "when urlPathname has 'search' and urlSearch doesn't exist",
+        described: "saves 'all' in category",
+        urlPathname: '/search',
+        payload: { category: 'all' },
+      },
+      {
+        situation: "when urlPathname has 'search' and urlSearch",
+        described: "saves 'all' and 'trending'",
+        urlPathname: '/search',
+        urlSearch: '?sort=trending',
+        payload: {
+          category: 'all',
+          sort: 'trending',
+        },
+      },
+    ];
 
-        expect(dispatch).toBeCalledTimes(2);
+    scenarios.forEach(({
+      situation,
+      described,
+      urlPathname,
+      urlSearch,
+      payload,
+    }) => {
+      context(situation, () => {
+        it(described, () => {
+          renderListContainer({ urlPathname, urlSearch });
 
-        expect(dispatch).toBeCalledWith({
-          payload: { category: 'new', product: 'beds' },
-          type: 'list/changeUrlAllDataFields',
+          expect(dispatch).toBeCalledTimes(2);
+
+          expect(dispatch).toBeCalledWith({
+            payload,
+            type: 'list/changeUrlAllDataFields',
+          });
         });
       });
     });
 
-    context('when urlPathname and urlSearch exist', () => {
-      it('saves the data of urlPathname and urlSearch', () => {
+    context('when not a valid pathname', () => {
+      it("doesn't call dispatch", () => {
         renderListContainer({
-          urlPathname: '/search/product/beds/new',
-          urlSearch: '?sort=trending',
+          urlPathname: '/search/',
         });
 
-        expect(dispatch).toBeCalledTimes(2);
-
-        expect(dispatch).toBeCalledWith({
-          payload: {
-            category: 'new',
-            product: 'beds',
-            sort: 'trending',
-          },
-          type: 'list/changeUrlAllDataFields',
-        });
-      });
-    });
-
-    context('when only search exists in urlPathname', () => {
-      it("saves 'all' in category", () => {
-        renderListContainer({
-          urlPathname: '/search',
-        });
-
-        expect(dispatch).toBeCalledTimes(2);
-
-        expect(dispatch).toBeCalledWith({
-          payload: {
-            category: 'all',
-          },
-          type: 'list/changeUrlAllDataFields',
-        });
-      });
-
-      it("saves 'all' and 'trending'", () => {
-        renderListContainer({
-          urlPathname: '/search',
-          urlSearch: '?sort=trending',
-        });
-
-        expect(dispatch).toBeCalledTimes(2);
-
-        expect(dispatch).toBeCalledWith({
-          payload: {
-            category: 'all',
-            sort: 'trending',
-          },
-          type: 'list/changeUrlAllDataFields',
-        });
+        expect(dispatch).toBeCalledTimes(1);
       });
     });
   });

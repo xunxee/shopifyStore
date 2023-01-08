@@ -77,6 +77,10 @@ export default function ListContainer({
         }
       }
 
+      if (queryStringList.length === 0) {
+        return false;
+      }
+
       if (urlSearch) {
         return (`${urlSearch}&${queryStringList.join('&')}`);
       }
@@ -87,6 +91,10 @@ export default function ListContainer({
     const isClickAccess = category || product || sort || material;
 
     function changeUrlData() {
+      const isValidAddress = makeQueryString([]);
+
+      if (!isValidAddress) return;
+
       const apiDataObject = JSON.parse(`{"${makeQueryString([])
         .substring(1)
         .replace(/&/g, '","')
