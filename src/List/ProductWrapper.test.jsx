@@ -14,4 +14,12 @@ describe('ProductWrapper', () => {
 
     expect(container).toHaveTextContent(title);
   });
+
+  it('renders the arrow icon', () => {
+    const { getByTitle } = render((
+      <ProductWrapper product={PRODUCT} />
+    ));
+
+    expect(getByTitle('leftArrow')).not.toBeNull();
+  });
 });
