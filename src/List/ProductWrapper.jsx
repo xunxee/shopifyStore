@@ -1,3 +1,5 @@
+import { useState, useRef, useEffect } from 'react';
+
 import styled from '@emotion/styled';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -27,6 +29,10 @@ const Slides = styled.div({
   overflow: 'hidden',
   '& ul': {
     display: 'flex',
+    width: '100%',
+  },
+  '& li': {
+    display: 'flex',
     justifyContent: 'center',
     minWidth: '100%',
     backgroundColor: `${basicPurple}`,
@@ -42,10 +48,12 @@ const SlideControlButton = styled.div({
   position: 'absolute',
   right: '2.5rem',
   bottom: '2.5rem',
+  zIndex: '30',
   width: '194px',
   border: `1px solid ${basicWhite}`,
   borderWidth: '1px',
-  '& div': {
+  '& button': {
+    all: 'unset',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -80,40 +88,66 @@ export default function ProductWrapper({
     // details,
   },
 }) {
+  const [currentImgOrder, setCurrentImgOrder] = useState(0);
+  const IMG_WIDTH = 936;
+  const slideRange = currentImgOrder * IMG_WIDTH;
+
+  const slideRef = useRef(null);
+
+  function handleSlideRight() {
+    setCurrentImgOrder(currentImgOrder + 1);
+  }
+
+  useEffect(() => {
+    slideRef.current.style
+      .transition = '.5s';
+    slideRef.current.style
+      .transitionTimingFunction = 'cubic-bezier(.4, 0, .2, 1)';
+    slideRef.current.style
+      .transform = `translateX(-${slideRange}px)`;
+  }, [currentImgOrder]);
+
   return (
     <>
       <ItemLayout>
         <SlideWrapper>
           <Slides>
             <SlideControlButton>
-              <div>
+              <button
+                type="button"
+              >
                 <FontAwesomeIcon
                   title="leftArrow"
                   icon={faArrowLeft}
                   size="2x"
                   color={basicWhite}
                 />
-              </div>
-              <div>
+              </button>
+              <button
+                type="button"
+                onClick={handleSlideRight}
+              >
                 <FontAwesomeIcon
                   title="rightArrow"
                   icon={faArrowRight}
                   size="2x"
                   color={basicWhite}
                 />
-              </div>
+              </button>
             </SlideControlButton>
-            {imageList && imageList.map((image) => (
-              <ul key={image}>
-                {title}
-                <img alt={title} src={image} />
-              </ul>
-            ))}
+            <ul ref={slideRef}>
+              {imageList && imageList.map((image) => (
+                <li key={image}>
+                  <img alt={title} src={image} />
+                </li>
+              ))}
+            </ul>
           </Slides>
           <SlideAlbum />
         </SlideWrapper>
         <ItemInfo />
       </ItemLayout>
+      <div>{title}</div>
       <div>Product Info</div>
     </>
   );
