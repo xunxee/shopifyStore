@@ -1,12 +1,16 @@
 import {
   postLogin,
   postSignUp,
+  fetchMockProductList,
+  fetchMockProduct,
 } from './api';
 
 import LOGIN_TOKENS from '../../fixtures/loginTokens';
 import POST_LOGIN_DATA from '../../fixtures/postLoginData';
 import LOGIN_FAIL_DATA from '../../fixtures/loginFailData';
 import SIGNUP_FAIL_DATA from '../../fixtures/signUpFailData';
+import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
+import MOCK_PRODUCT_DATA from '../../fixtures/MockData/product';
 
 describe('api', () => {
   const mockFetch = (data) => {
@@ -64,6 +68,30 @@ describe('api', () => {
           await postSignUp(SIGNUP_FAIL_DATA);
         }).rejects.toThrowError(new Error('ID_ALREADY_EXISTS'));
       });
+    });
+  });
+
+  describe('fetchMockProductList', () => {
+    beforeEach(() => {
+      mockFetch(MOCK_PRODUCT_LIST_DATA);
+    });
+
+    it('returns mock data', async () => {
+      const mockData = await fetchMockProductList();
+
+      expect(mockData).toBe(MOCK_PRODUCT_LIST_DATA);
+    });
+  });
+
+  describe('fetchMockProduct', () => {
+    beforeEach(() => {
+      mockFetch(MOCK_PRODUCT_DATA);
+    });
+
+    it('returns mock data', async () => {
+      const mockData = await fetchMockProduct();
+
+      expect(mockData).toBe(MOCK_PRODUCT_DATA);
     });
   });
 });

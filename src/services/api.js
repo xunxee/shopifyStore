@@ -57,3 +57,17 @@ export async function postSignUp({ email, password }) {
     refreshToken, localId,
   };
 }
+
+export async function fetchMockProductList() {
+  const url = 'http://localhost:8080/mockData/productList.json';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchMockProduct() {
+  const url = 'http://localhost:8080/mockData/product.json';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
