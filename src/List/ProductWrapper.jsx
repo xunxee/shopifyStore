@@ -94,7 +94,11 @@ export default function ProductWrapper({
 
   const slideRef = useRef(null);
 
-  function handleSlideRight() {
+  function handleClickLeftButton() {
+    setCurrentImgOrder(currentImgOrder - 1);
+  }
+
+  function handleClickRightButton() {
     setCurrentImgOrder(currentImgOrder + 1);
   }
 
@@ -115,6 +119,7 @@ export default function ProductWrapper({
             <SlideControlButton>
               <button
                 type="button"
+                onClick={handleClickLeftButton}
               >
                 <FontAwesomeIcon
                   title="leftArrow"
@@ -125,7 +130,7 @@ export default function ProductWrapper({
               </button>
               <button
                 type="button"
-                onClick={handleSlideRight}
+                onClick={handleClickRightButton}
               >
                 <FontAwesomeIcon
                   title="rightArrow"

@@ -34,13 +34,25 @@ describe('ProductWrapper', () => {
     expect(getByTitle('leftArrow')).not.toBeNull();
   });
 
-  it("clicks the 'right arrow button'", () => {
-    const { getByTitle } = render((
-      <ProductWrapper product={PRODUCT} />
-    ));
+  context('when the arrow button is clicked', () => {
+    it('executes the handleClickLeftButton function', () => {
+      const { getByTitle } = render((
+        <ProductWrapper product={PRODUCT} />
+      ));
 
-    fireEvent.click(getByTitle('rightArrow'));
+      fireEvent.click(getByTitle('rightArrow'));
 
-    expect(mockSetState).toHaveBeenNthCalledWith(1, '1');
+      expect(mockSetState).toHaveBeenNthCalledWith(1, '1');
+    });
+
+    it('executes the handleClickLeftButton function', () => {
+      const { getByTitle } = render((
+        <ProductWrapper product={PRODUCT} />
+      ));
+
+      fireEvent.click(getByTitle('leftArrow'));
+
+      expect(mockSetState).toHaveBeenNthCalledWith(1, -1);
+    });
   });
 });
