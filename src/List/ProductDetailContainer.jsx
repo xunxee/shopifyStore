@@ -24,6 +24,10 @@ export default function ProductDetailContainer() {
     dispatch(loadProduct());
   }, []);
 
+  if (!product.imageList) {
+    return null;
+  }
+
   return (
     <>
       <ProductWrapper product={product} />

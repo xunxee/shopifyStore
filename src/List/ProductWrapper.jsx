@@ -2,6 +2,8 @@ import { useState, useRef, useEffect } from 'react';
 
 import styled from '@emotion/styled';
 
+import { v4 } from 'uuid';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowRight,
@@ -23,25 +25,25 @@ const SlideWrapper = styled.div({
   width: '65%',
 });
 
-const Slides = styled.div({
+const Slides = styled.div(({ slideLength }) => ({
   display: 'flex',
   position: 'relative',
   overflow: 'hidden',
   '& ul': {
     display: 'flex',
-    width: '100%',
+    width: `${slideLength * 65}vw`,
   },
   '& li': {
     display: 'flex',
     justifyContent: 'center',
-    minWidth: '100%',
+    minWidth: '65vw',
     backgroundColor: `${basicPurple}`,
   },
   '& img': {
     width: '600px',
     height: '600px',
   },
-});
+}));
 
 const SlideControlButton = styled.div({
   display: 'flex',
@@ -88,38 +90,68 @@ export default function ProductWrapper({
     // details,
   },
 }) {
-  const [currentImgOrder, setCurrentImgOrder] = useState(0);
-  const IMG_WIDTH = 936;
-  const slideRange = currentImgOrder * IMG_WIDTH;
+  const [banners, setBanners] = useState([]);
 
-  const slideRef = useRef(null);
-
-  function handleClickLeftButton() {
-    setCurrentImgOrder(currentImgOrder - 1);
-  }
-
-  function handleClickRightButton() {
-    setCurrentImgOrder(currentImgOrder + 1);
-  }
+  const slideRef = useRef();
 
   useEffect(() => {
-    slideRef.current.style
-      .transition = '.5s';
-    slideRef.current.style
-      .transitionTimingFunction = 'cubic-bezier(.4, 0, .2, 1)';
-    slideRef.current.style
-      .transform = `translateX(-${slideRange}px)`;
-  }, [currentImgOrder]);
+    setBanners([...imageList, ...imageList, ...imageList]);
+
+    setBanners((bannerList) => {
+      const result = bannerList.map((imgUrl) => ({
+        key: v4(),
+        imgUrl,
+      }));
+
+      return result;
+    });
+  }, []);
+
+  const SLIDE_WIDTH = 65;
+
+  const BANNERS_COUNT = banners.length / 3;
+
+  const TOTAL_BANNERS_COUNT = BANNERS_COUNT * 3;
+
+  const START = (TOTAL_BANNERS_COUNT * 1) / 3 + 1;
+
+  const END = (TOTAL_BANNERS_COUNT * 2) / 3;
+
+  const PREVIOUS_END = (TOTAL_BANNERS_COUNT * 1) / 3;
+
+  const NEXT_START = (TOTAL_BANNERS_COUNT * 2) / 3 + 1;
+
+  const [slide, setSlide] = useState({
+    number: START,
+    withMotion: true,
+  });
+
+  useEffect(() => {
+    function setInitialPosition() {
+      slideRef.current.style
+        .transform = `translateX(-${
+          SLIDE_WIDTH * (START - 1)
+        }vw)`;
+
+      setSlide({
+        number: START,
+        withMotion: false,
+      });
+    }
+
+    setInitialPosition();
+  }, [banners]);
 
   return (
     <>
       <ItemLayout>
         <SlideWrapper>
-          <Slides>
+          <Slides
+            slideLength={banners.length}
+          >
             <SlideControlButton>
               <button
                 type="button"
-                onClick={handleClickLeftButton}
               >
                 <FontAwesomeIcon
                   title="leftArrow"
@@ -130,7 +162,6 @@ export default function ProductWrapper({
               </button>
               <button
                 type="button"
-                onClick={handleClickRightButton}
               >
                 <FontAwesomeIcon
                   title="rightArrow"
@@ -141,9 +172,9 @@ export default function ProductWrapper({
               </button>
             </SlideControlButton>
             <ul ref={slideRef}>
-              {imageList && imageList.map((image) => (
-                <li key={image}>
-                  <img alt={title} src={image} />
+              {banners && banners.map(({ key, imgUrl }) => (
+                <li key={key}>
+                  <img alt={title} src={imgUrl} />
                 </li>
               ))}
             </ul>
