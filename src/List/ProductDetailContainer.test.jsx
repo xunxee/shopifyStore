@@ -44,4 +44,18 @@ describe('ProductDetailContainer', () => {
       );
     });
   });
+
+  context('without product', () => {
+    given('product', () => ({
+      imageList: undefined,
+    }));
+
+    it('returns null', () => {
+      const { container } = render((
+        <ProductDetailContainer />
+      ));
+
+      expect(container).toBeEmptyDOMElement();
+    });
+  });
 });
