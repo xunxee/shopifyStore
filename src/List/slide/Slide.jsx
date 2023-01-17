@@ -62,9 +62,33 @@ export default function Slide({
   banners,
   slideRef,
   title,
-  onClickPreviousButton,
-  onClickNextButton,
+  isPassTheFirstSlide,
+  goToMainEndSlide,
+  goToPreviousBanner,
+  isPassTheLastSlide,
+  goToMainStartSlide,
+  goToNextBanner,
 }) {
+  function handleClickPreviousButton() {
+    if (isPassTheFirstSlide) {
+      goToMainEndSlide();
+
+      return;
+    }
+
+    goToPreviousBanner();
+  }
+
+  function handleClickNextButton() {
+    if (isPassTheLastSlide) {
+      goToMainStartSlide();
+
+      return;
+    }
+
+    goToNextBanner();
+  }
+
   return (
     <Layout
       slideLength={banners.length}
@@ -73,7 +97,7 @@ export default function Slide({
         <button
           type="button"
           title="previousArrow"
-          onClick={onClickPreviousButton}
+          onClick={handleClickPreviousButton}
         >
           <FontAwesomeIcon
             icon={faArrowLeft}
@@ -84,7 +108,7 @@ export default function Slide({
         <button
           title="nextArrow"
           type="button"
-          onClick={onClickNextButton}
+          onClick={handleClickNextButton}
         >
           <FontAwesomeIcon
             icon={faArrowRight}

@@ -10,33 +10,86 @@ describe('Slide', () => {
   jest.spyOn(React, 'useRef')
     .mockReturnValueOnce({ current: 'ul' });
 
-  const handleClickPreviousButton = jest.fn();
-  const handleClickNextButton = jest.fn();
+  const goToMainEndSlide = jest.fn();
+  const goToPreviousBanner = jest.fn();
+
+  const goToMainStartSlide = jest.fn();
+  const goToNextBanner = jest.fn();
 
   beforeEach(() => {
-    handleClickPreviousButton.mockClear();
-    handleClickNextButton.mockClear();
+    goToMainEndSlide.mockClear();
+    goToPreviousBanner.mockClear();
+    goToMainStartSlide.mockClear();
+    goToNextBanner.mockClear();
   });
 
   function renderSlide({
     banners = PRODUCT.banners,
     title = PRODUCT.title,
+    isPassTheFirstSlide = false,
+    isPassTheLastSlide = false,
   } = {}) {
     return render((
       <Slide
         banners={banners}
         title={title}
-        onClickPreviousButton={handleClickPreviousButton}
-        onClickNextButton={handleClickNextButton}
+        isPassTheFirstSlide={isPassTheFirstSlide}
+        goToMainEndSlide={goToMainEndSlide}
+        goToPreviousBanner={goToPreviousBanner}
+        isPassTheLastSlide={isPassTheLastSlide}
+        goToMainStartSlide={goToMainStartSlide}
+        goToNextBanner={goToNextBanner}
       />
     ));
   }
 
-  it('clicks previous button', () => {
-    const { getByTitle } = renderSlide();
+  describe('click the next button', () => {
+    context('when reaches the next slide', () => {
+      it('moves to the main slide', () => {
+        const { getByTitle } = renderSlide({
+          isPassTheLastSlide: true,
+        });
 
-    fireEvent.click(getByTitle('previousArrow'));
+        fireEvent.click(getByTitle('nextArrow'));
 
-    expect(handleClickPreviousButton).toBeCalled();
+        expect(goToMainStartSlide).toBeCalled();
+      });
+    });
+
+    context("when doesn't reach the next slide", () => {
+      it('moves to the next banner', () => {
+        const { getByTitle } = renderSlide({
+          isPassTheLastSlide: false,
+        });
+
+        fireEvent.click(getByTitle('nextArrow'));
+
+        expect(goToNextBanner).toBeCalled();
+      });
+    });
+  });
+
+  describe('click the previous button', () => {
+    context('when reaches the previous slide', () => {
+      it('moves to the main slide', () => {
+        const { getByTitle } = renderSlide({
+          isPassTheFirstSlide: true,
+        });
+
+        fireEvent.click(getByTitle('previousArrow'));
+
+        expect(goToMainEndSlide).toBeCalled();
+      });
+    });
+
+    context("when doesn't reach the previous slide", () => {
+      it('moves to the previous banner', () => {
+        const { getByTitle } = renderSlide();
+
+        fireEvent.click(getByTitle('previousArrow'));
+
+        expect(goToPreviousBanner).toBeCalled();
+      });
+    });
   });
 });
