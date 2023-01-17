@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-// TODO:
+// TODO: Back-end와의 통신 준비중
 // import { useParams } from 'react-router-dom';
 
 import ProductDetailContainer from './ProductDetailContainer';
