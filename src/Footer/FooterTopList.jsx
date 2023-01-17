@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import FOOTER_MENU_LIST from '../../fixtures/footerMenuList';
+
 const Container = styled.div({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
@@ -22,39 +24,9 @@ const Item = styled.div(({ column, rowStart, rowEnd }) => ({
 export default function FooterTopList() {
   return (
     <Container>
-      {[
-        {
-          column: 1,
-          rowStart: 1,
-          rowEnd: 2,
-          title: 'Home',
-        },
-        {
-          column: 1,
-          rowStart: 2,
-          rowEnd: 3,
-          title: 'About',
-        },
-        {
-          column: 1,
-          rowStart: 3,
-          rowEnd: 4,
-          title: 'Terms of use',
-        },
-        {
-          column: 1,
-          rowStart: 4,
-          rowEnd: 5,
-          title: 'Shopping',
-        },
-        {
-          column: 2,
-          rowStart: 1,
-          rowEnd: 2,
-          title: 'Privacy Policy',
-        },
-      ].map((item) => (
+      {FOOTER_MENU_LIST.map((item) => (
         <Item
+          key={item.id}
           column={item.column}
           rowStart={item.rowStart}
           rowEnd={item.rowEnd}
