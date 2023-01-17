@@ -8,12 +8,10 @@ const Container = styled.div({
   alignItems: 'flex-start',
   gridColumn: '1 / span 2',
   '& button': {
+    all: 'unset',
     display: 'flex',
     alignItems: 'center',
-    padding: '0',
-    border: '0',
-    color: '#FFFFFF',
-    backgroundColor: 'transparent',
+    color: '#FFF',
     cursor: 'pointer',
   },
   '& div': {
