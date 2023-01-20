@@ -64,29 +64,34 @@ export default function Slide({
   title,
   isPassTheFirstSlide,
   goToMainEndSlide,
-  goToPreviousBanner,
   isPassTheLastSlide,
   goToMainStartSlide,
-  goToNextBanner,
+  goToBanner,
 }) {
-  function handleClickPreviousButton() {
-    if (isPassTheFirstSlide) {
-      goToMainEndSlide();
-
-      return;
+  function handleClickArrowButtons({
+    currentTarget: {
+      title: targetName,
+    },
+  }) {
+    if (targetName === 'previousArrow') {
+      return isPassTheFirstSlide
+        ? goToMainEndSlide({
+          targetName,
+          isMotion: false,
+        }) : goToBanner({
+          targetName,
+          isMotion: true,
+        });
     }
 
-    goToPreviousBanner();
-  }
-
-  function handleClickNextButton() {
-    if (isPassTheLastSlide) {
-      goToMainStartSlide();
-
-      return;
-    }
-
-    goToNextBanner();
+    return isPassTheLastSlide
+      ? goToMainStartSlide({
+        targetName,
+        isMotion: false,
+      }) : goToBanner({
+        targetName,
+        isMotion: true,
+      });
   }
 
   return (
@@ -97,7 +102,7 @@ export default function Slide({
         <button
           type="button"
           title="previousArrow"
-          onClick={handleClickPreviousButton}
+          onClick={handleClickArrowButtons}
         >
           <FontAwesomeIcon
             icon={faArrowLeft}
@@ -108,7 +113,7 @@ export default function Slide({
         <button
           title="nextArrow"
           type="button"
-          onClick={handleClickNextButton}
+          onClick={handleClickArrowButtons}
         >
           <FontAwesomeIcon
             icon={faArrowRight}

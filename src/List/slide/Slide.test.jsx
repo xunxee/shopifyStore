@@ -11,16 +11,13 @@ describe('Slide', () => {
     .mockReturnValueOnce({ current: 'ul' });
 
   const goToMainEndSlide = jest.fn();
-  const goToPreviousBanner = jest.fn();
-
   const goToMainStartSlide = jest.fn();
-  const goToNextBanner = jest.fn();
+  const goToBanner = jest.fn();
 
   beforeEach(() => {
     goToMainEndSlide.mockClear();
-    goToPreviousBanner.mockClear();
     goToMainStartSlide.mockClear();
-    goToNextBanner.mockClear();
+    goToBanner.mockClear();
   });
 
   function renderSlide({
@@ -35,10 +32,9 @@ describe('Slide', () => {
         title={title}
         isPassTheFirstSlide={isPassTheFirstSlide}
         goToMainEndSlide={goToMainEndSlide}
-        goToPreviousBanner={goToPreviousBanner}
         isPassTheLastSlide={isPassTheLastSlide}
         goToMainStartSlide={goToMainStartSlide}
-        goToNextBanner={goToNextBanner}
+        goToBanner={goToBanner}
       />
     ));
   }
@@ -64,7 +60,7 @@ describe('Slide', () => {
 
         fireEvent.click(getByTitle('nextArrow'));
 
-        expect(goToNextBanner).toBeCalled();
+        expect(goToBanner).toBeCalled();
       });
     });
   });
@@ -88,7 +84,7 @@ describe('Slide', () => {
 
         fireEvent.click(getByTitle('previousArrow'));
 
-        expect(goToPreviousBanner).toBeCalled();
+        expect(goToBanner).toBeCalled();
       });
     });
   });
