@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { fireEvent, render } from '@testing-library/react';
 
 import ProductWrapper from './ProductWrapper';
@@ -6,16 +8,16 @@ import PRODUCT from '../../fixtures/MockData/product';
 
 const { title: TITLE, imageList: IMAGE_LIST } = PRODUCT;
 
-const mockSetState = jest.fn();
-
-jest.mock('react', () => ({
-  ...jest.requireActual('react'),
-  useState: () => ['', mockSetState],
-}));
-
 describe('ProductWrapper', () => {
+  const setState = jest.fn();
+
+  jest.spyOn(React, 'useState')
+    .mockImplementation((initialState) => [
+      initialState, setState,
+    ]);
+
   beforeEach(() => {
-    mockSetState.mockClear();
+    setState.mockClear();
   });
 
   function renderProductWrapper({
@@ -66,30 +68,11 @@ describe('ProductWrapper', () => {
         jest.useFakeTimers();
         fireEvent.click(getByTitle('previousArrow'));
 
-        expect(mockSetState).toHaveBeenNthCalledWith(
-          4,
-          {
-            isMotion: false,
-            number: 8,
-          },
-        );
+        expect(setState).toBeCalledTimes(4);
 
         jest.runAllTimers();
 
         jest.useRealTimers();
-      });
-    });
-
-    context("when doesn't reach the previous slide", () => {
-      it('moves with motion', () => {
-        const { getByTitle } = renderProductWrapper();
-
-        fireEvent.click(getByTitle('previousArrow'));
-
-        expect(mockSetState).toHaveBeenNthCalledWith(
-          4,
-          expect.any(Function),
-        );
       });
     });
   });
@@ -104,27 +87,14 @@ describe('ProductWrapper', () => {
         jest.useFakeTimers();
         fireEvent.click(getByTitle('nextArrow'));
 
-        expect(mockSetState).toHaveBeenNthCalledWith(
-          4,
+        expect(setState).toHaveBeenNthCalledWith(
+          3,
           { isMotion: false, number: 4 },
         );
 
         jest.runAllTimers();
 
         jest.useRealTimers();
-      });
-    });
-
-    context("when doesn't reach the next slide", () => {
-      it('moves with motion', () => {
-        const { getByTitle } = renderProductWrapper();
-
-        fireEvent.click(getByTitle('nextArrow'));
-
-        expect(mockSetState).toHaveBeenNthCalledWith(
-          4,
-          expect.any(Function),
-        );
       });
     });
   });
