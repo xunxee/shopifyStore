@@ -53,6 +53,8 @@ export default function ListContainer({
   useEffect(() => {
     dispatch(loadProductList());
 
+    const isClickAccess = category || product || sort || material;
+
     const pathnameList = urlPathname.substring(1).split('/');
 
     const { length } = pathnameList;
@@ -87,8 +89,6 @@ export default function ListContainer({
 
       return `?${queryStringList.join('&')}`;
     }
-
-    const isClickAccess = category || product || sort || material;
 
     function changeUrlData() {
       const isValidAddress = makeQueryString([]);
