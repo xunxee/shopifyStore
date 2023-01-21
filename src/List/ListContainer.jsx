@@ -36,6 +36,11 @@ export default function ListContainer({
   urlPathname,
   urlSearch,
 }) {
+  console.log('urlPathname');
+  console.log(urlPathname);
+  console.log('urlSearch');
+  console.log(urlSearch);
+
   const dispatch = useDispatch();
 
   const listStates = useSelector(({ list }) => list);
@@ -55,11 +60,15 @@ export default function ListContainer({
 
     const isClickAccess = category || product || sort || material;
 
+    if (!isClickAccess) return;
+
     const pathnameList = urlPathname.substring(1).split('/');
 
     const { length } = pathnameList;
 
-    function makeQueryString(queryStringList) {
+    function makeQueryString() {
+      const queryStringList = [];
+
       for (let i = 0; i < length; i += 1) {
         if (length === 1) {
           return urlSearch
@@ -91,11 +100,11 @@ export default function ListContainer({
     }
 
     function changeUrlData() {
-      const isValidAddress = makeQueryString([]);
+      const isValidAddress = makeQueryString();
 
       if (!isValidAddress) return;
 
-      const apiDataObject = JSON.parse(`{"${makeQueryString([])
+      const apiDataObject = JSON.parse(`{"${makeQueryString()
         .substring(1)
         .replace(/&/g, '","')
         .replace(/=/g, '":"')}"}`);
