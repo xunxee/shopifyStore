@@ -60,17 +60,15 @@ export default function ListContainer({
 
     const isClickAccess = category || product || sort || material;
 
-    if (!isClickAccess) return;
+    if (isClickAccess) return;
 
     const pathnameList = urlPathname.substring(1).split('/');
-
-    const { length } = pathnameList;
 
     function makeQueryString() {
       const queryStringList = [];
 
-      for (let i = 0; i < length; i += 1) {
-        if (length === 1) {
+      for (let i = 0; i < pathnameList.length; i += 1) {
+        if (pathnameList.length === 1) {
           return urlSearch
             ? `${urlSearch}&category=all` : '?category=all';
         }
