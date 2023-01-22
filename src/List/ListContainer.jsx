@@ -36,11 +36,6 @@ export default function ListContainer({
   urlPathname,
   urlSearch,
 }) {
-  console.log('urlPathname');
-  console.log(urlPathname);
-  console.log('urlSearch');
-  console.log(urlSearch);
-
   const dispatch = useDispatch();
 
   const listStates = useSelector(({ list }) => list);
@@ -67,12 +62,12 @@ export default function ListContainer({
     function makeQueryString() {
       const queryStringList = [];
 
-      for (let i = 0; i < pathnameList.length; i += 1) {
-        if (pathnameList.length === 1) {
-          return urlSearch
-            ? `${urlSearch}&category=all` : '?category=all';
-        }
+      if (pathnameList.length === 1) {
+        return `${urlSearch
+          ? `${urlSearch}&category=all` : '?category=all'}`;
+      }
 
+      for (let i = 1; i < pathnameList.length; i += 1) {
         if (pathnameList[i] === 'product') {
           queryStringList.push(`product=${pathnameList[2]}`);
         }
