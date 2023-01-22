@@ -68,16 +68,15 @@ export default function ListContainer({
       }
 
       for (let i = 1; i < pathnameList.length; i += 1) {
-        if (pathnameList[i] === 'product') {
-          queryStringList.push(`product=${pathnameList[2]}`);
+        const pathname = pathnameList[i];
+
+        if (pathname === 'product') {
+          const productName = pathnameList[i + 1];
+          queryStringList.push(`product=${productName}`);
         }
 
-        if (pathnameList[i] === 'new') {
-          queryStringList.push('category=new');
-        }
-
-        if (pathnameList[i] === 'featured') {
-          queryStringList.push('category=featured');
+        if (pathname === 'new' || pathname === 'featured') {
+          queryStringList.push(`category=${pathname}`);
         }
       }
 
