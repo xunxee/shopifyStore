@@ -84,27 +84,23 @@ export default function ListContainer({
         return false;
       }
 
-      if (urlSearch) {
-        return (`${urlSearch}&${queryStringList.join('&')}`);
-      }
-
-      return `?${queryStringList.join('&')}`;
+      return urlSearch
+        ? `${urlSearch}&${queryStringList.join('&')}`
+        : `?${queryStringList.join('&')}`;
     }
 
-    function changeUrlData() {
-      const isValidAddress = makeQueryString();
+    const isValidAddress = makeQueryString();
 
-      if (!isValidAddress) return;
+    if (!isValidAddress) return;
 
-      const apiDataObject = JSON.parse(`{"${makeQueryString()
+    const apiDataObject = JSON.parse(`{"${
+      isValidAddress
         .substring(1)
         .replace(/&/g, '","')
-        .replace(/=/g, '":"')}"}`);
+        .replace(/=/g, '":"')
+    }"}`);
 
-      dispatch(changeUrlAllDataFields(apiDataObject));
-    }
-
-    if (!isClickAccess) changeUrlData();
+    dispatch(changeUrlAllDataFields(apiDataObject));
   }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {
