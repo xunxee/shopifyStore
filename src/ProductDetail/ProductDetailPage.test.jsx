@@ -11,7 +11,7 @@ describe('ProductDetailPage', () => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({
-      list: {
+      productDetail: {
         product: {
           id: 1,
           title: 'Special Edition T-Shirt',
