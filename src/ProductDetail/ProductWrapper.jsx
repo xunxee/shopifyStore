@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import { v4 } from 'uuid';
 
 import Slide from './slide/Slide';
+import SlideAlbum from './slide/SlideAlbum';
 
 import { updateSlide } from '../utils';
 
@@ -16,11 +17,6 @@ const ItemLayout = styled.div({
 
 const SlideWrapper = styled.div({
   width: '65%',
-});
-
-const SlideAlbum = styled.div({
-  height: '182px',
-  backgroundColor: 'red',
 });
 
 const ItemInfo = styled.div({
