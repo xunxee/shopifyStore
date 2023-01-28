@@ -159,7 +159,10 @@ export default function ProductWrapper({
             goToMainStartSlide={goToMainStartSlide}
             goToBanner={goToBanner}
           />
-          <SlideAlbum />
+          <SlideAlbum
+            title={title}
+            banners={banners}
+          />
         </SlideWrapper>
         <ItemInfo />
       </ItemLayout>
