@@ -229,7 +229,7 @@ export function requestSignUp() {
 }
 
 export function checkSignUpValid({ name, value }) {
-  function validationCheckList() {
+  function makeValidationMessage() {
     if (!value) {
       return `${INPUT_LIST[name]} 필수 입력란입니다.`;
     }
@@ -247,7 +247,7 @@ export function checkSignUpValid({ name, value }) {
   }
 
   return (dispatch) => {
-    const validationMessage = validationCheckList();
+    const validationMessage = makeValidationMessage();
 
     dispatch(changeInvalidCheckMessage(
       { name, validationMessage },
