@@ -12,7 +12,7 @@ import {
   requestLogin,
   requestSignUp,
   checkSignUpValid,
-  checkMembershipValid,
+  checkMemberInfo,
   changeAccountFields,
   setButtonActive,
 } from './slice';
@@ -45,7 +45,7 @@ export default function MembershipContainer() {
     name, value,
   }) => {
     dispatch(changeAccountFields({ name, value }));
-    dispatch(checkMembershipValid({ name, value }));
+    dispatch(checkMemberInfo({ name, value }));
   }, [dispatch]);
 
   const handleBlur = useCallback(({

@@ -15,7 +15,7 @@ import reducer, {
   changeInvalidCheckMessage,
   checkSignUpValid,
   requestSignUp,
-  checkMembershipValid,
+  checkMemberInfo,
   setButtonActive,
 } from './slice';
 
@@ -569,7 +569,7 @@ describe('actions', () => {
     });
   });
 
-  describe('checkMembershipValid', () => {
+  describe('checkMemberInfo', () => {
     context('when all values for login are entered correctly', () => {
       beforeEach(() => {
         store = makeMockStore({
@@ -580,7 +580,7 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkMembershipValid({
+        store.dispatch(checkMemberInfo({
           name: 'email',
           value: 'tester@example.com',
         }));
@@ -599,7 +599,7 @@ describe('actions', () => {
       });
 
       it('terminates the function', () => {
-        store.dispatch(checkMembershipValid({
+        store.dispatch(checkMemberInfo({
           name: 'email',
           value: '',
         }));
@@ -621,7 +621,7 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkMembershipValid({
+        store.dispatch(checkMemberInfo({
           name: 'firstName',
           value: '정',
         }));
@@ -648,7 +648,7 @@ describe('actions', () => {
       });
 
       it('clears validationMessage', async () => {
-        await store.dispatch(checkMembershipValid({
+        await store.dispatch(checkMemberInfo({
           name: 'password',
           value: 'Tester@123',
         }));
@@ -675,7 +675,7 @@ describe('actions', () => {
       });
 
       it('conveys false to setButtonActive', async () => {
-        await store.dispatch(checkMembershipValid({
+        await store.dispatch(checkMemberInfo({
           name: 'password',
           value: 'Tester@',
         }));
@@ -704,7 +704,7 @@ describe('actions', () => {
       });
 
       it('terminates the function', async () => {
-        await store.dispatch(checkMembershipValid({
+        await store.dispatch(checkMemberInfo({
           name: 'password',
           value: 'Tester@',
         }));
