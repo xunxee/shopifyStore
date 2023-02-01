@@ -31,17 +31,21 @@ describe('SearchBar', () => {
     expect(queryByTitle('magnifyingGlass')).not.toBeNull();
   });
 
-  it('listens change events for "search bar"', () => {
-    const { getByPlaceholderText } = renderSearchBar();
+  describe('handleChange', () => {
+    context('when enter product information', () => {
+      it('listens change events for "search bar"', () => {
+        const { getByPlaceholderText } = renderSearchBar();
 
-    fireEvent.change(getByPlaceholderText(
-      'Search for products...',
-    ), {
-      target: { value: 'bed' },
-    });
+        fireEvent.change(getByPlaceholderText(
+          'Search for products...',
+        ), {
+          target: { value: 'bed' },
+        });
 
-    expect(handleChange).toBeCalledWith({
-      value: 'bed',
+        expect(handleChange).toBeCalledWith({
+          value: 'bed',
+        });
+      });
     });
   });
 });
