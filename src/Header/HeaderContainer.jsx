@@ -15,6 +15,10 @@ import {
   changeUrlDataField,
 } from '../List/slice';
 
+import {
+  changeSearchBarFields,
+} from './slice';
+
 import TitleBar from './TitleBar';
 import SearchBar from './SearchBar';
 import UserBar from './UserBar';
@@ -82,6 +86,10 @@ export default function HeaderContainer({ onClick }) {
     }));
   }, [dispatch]);
 
+  const handleChange = useCallback(({ value }) => {
+    dispatch(changeSearchBarFields({ value }));
+  }, [dispatch]);
+
   return (
     <Container>
       {isAccountModalOpen && (
@@ -95,7 +103,9 @@ export default function HeaderContainer({ onClick }) {
         <TitleBar
           onClick={handleClickCategories}
         />
-        <SearchBar />
+        <SearchBar
+          onChange={handleChange}
+        />
         <UserBar
           onClick={handleToggle}
         />

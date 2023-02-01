@@ -34,6 +34,11 @@ describe('HeaderContainer', () => {
       list: {
         category: '',
       },
+      header: {
+        searchBarFields: {
+          value: '',
+        },
+      },
     }));
   });
 
@@ -101,6 +106,21 @@ describe('HeaderContainer', () => {
           name: 'new',
           belong: 'category',
         },
+      });
+    });
+  });
+
+  context('when enter an item in the search bar', () => {
+    it('listens change events', () => {
+      const { getByPlaceholderText } = renderHeaderContainer();
+
+      fireEvent.change(getByPlaceholderText('Search for products...'), {
+        target: { value: 'beds' },
+      });
+
+      expect(dispatch).toBeCalledWith({
+        type: 'header/changeSearchBarFields',
+        payload: { value: 'beds' },
       });
     });
   });
