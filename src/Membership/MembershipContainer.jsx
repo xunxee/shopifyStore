@@ -11,7 +11,7 @@ import {
   clearAccountFields,
   requestLogin,
   requestSignUp,
-  checkSignUpValid,
+  checkInputValue,
   checkMemberInfo,
   changeAccountFields,
   setButtonActive,
@@ -53,7 +53,7 @@ export default function MembershipContainer() {
   }) => {
     if (isButtonActive) return;
 
-    dispatch(checkSignUpValid({ name, value }));
+    dispatch(checkInputValue({ name, value }));
   }, [dispatch, isButtonActive]);
 
   const handleSubmit = useCallback(() => {

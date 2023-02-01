@@ -228,7 +228,7 @@ export function requestSignUp() {
   };
 }
 
-export function checkSignUpValid({ name, value }) {
+export function checkInputValue({ name, value }) {
   function makeValidationMessage() {
     if (!value) {
       return `${INPUT_LIST[name]} 필수 입력란입니다.`;

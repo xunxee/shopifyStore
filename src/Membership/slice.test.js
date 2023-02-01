@@ -13,7 +13,7 @@ import reducer, {
   setRefreshToken,
   logout,
   changeInvalidCheckMessage,
-  checkSignUpValid,
+  checkInputValue,
   requestSignUp,
   checkMemberInfo,
   setButtonActive,
@@ -391,7 +391,7 @@ describe('actions', () => {
     });
   });
 
-  describe('checkSignUpValid', () => {
+  describe('checkInputValue', () => {
     const profileInputs = [
       {
         name: 'lastName',
@@ -421,7 +421,7 @@ describe('actions', () => {
             it(
               `changes validationMessage of ${name}`,
               () => {
-                store.dispatch(checkSignUpValid({
+                store.dispatch(checkInputValue({
                   name: `${name}`,
                   value: '',
                 }));
@@ -449,7 +449,7 @@ describe('actions', () => {
             it(
               `doesn't changes validationMessage of ${name}`,
               () => {
-                store.dispatch(checkSignUpValid({
+                store.dispatch(checkInputValue({
                   name: `${name}`,
                   value: `${value}`,
                 }));
@@ -503,7 +503,7 @@ describe('actions', () => {
           });
 
           it(`changes validationMessage of ${input.name}`, () => {
-            store.dispatch(checkSignUpValid({
+            store.dispatch(checkInputValue({
               name: `${input.name}`,
               value: '',
             }));
@@ -526,7 +526,7 @@ describe('actions', () => {
           });
 
           it(`changes validationMessage of ${input.name}`, () => {
-            store.dispatch(checkSignUpValid({
+            store.dispatch(checkInputValue({
               name: `${input.name}`,
               value: `${input.invalidValue}`,
             }));
@@ -549,7 +549,7 @@ describe('actions', () => {
           });
 
           it(`changes validationMessage of ${input.name}`, () => {
-            store.dispatch(checkSignUpValid({
+            store.dispatch(checkInputValue({
               name: `${input.name}`,
               value: `${input.validValue}`,
             }));
