@@ -1,6 +1,6 @@
 const fieldState = {
   value: '',
-  invalidCheckMessage: '',
+  validationMessage: '',
 };
 
 export default fieldState;

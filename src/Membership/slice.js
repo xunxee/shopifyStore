@@ -10,19 +10,19 @@ import VALID_FIELDS from '../../fixtures/validFields';
 const initialLoginFields = {
   email: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   password: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   firstName: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   lastName: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   error: '',
 };
@@ -66,8 +66,8 @@ const { actions, reducer } = createSlice({
           ...accountFields,
           [name]: {
             value,
-            invalidCheckMessage:
-              accountFields[name].invalidCheckMessage,
+            validationMessage:
+              accountFields[name].validationMessage,
           },
         },
       };
@@ -75,7 +75,7 @@ const { actions, reducer } = createSlice({
 
     changeInvalidCheckMessage(
       state,
-      { payload: { name, invalidCheckMessage } },
+      { payload: { name, validationMessage } },
     ) {
       const { accountFields } = state;
 
@@ -85,7 +85,7 @@ const { actions, reducer } = createSlice({
           ...accountFields,
           [name]: {
             value: accountFields[name].value,
-            invalidCheckMessage,
+            validationMessage,
           },
         },
       };
@@ -121,7 +121,7 @@ const { actions, reducer } = createSlice({
           ...accountFields,
           [name]: {
             value: accountFields[name].value,
-            invalidCheckMessage: '',
+            validationMessage: '',
           },
         },
       };
@@ -247,10 +247,10 @@ export function checkSignUpValid({ name, value }) {
   }
 
   return (dispatch) => {
-    const invalidCheckMessage = validationCheckList();
+    const validationMessage = validationCheckList();
 
     dispatch(changeInvalidCheckMessage(
-      { name, invalidCheckMessage },
+      { name, validationMessage },
     ));
   };
 }
@@ -272,12 +272,12 @@ export function checkMembershipValid({ name, value }) {
 
       for (let i = 0; i < restSignUpFieldsEntries.length; i += 1) {
         const [
-          , { value: restSignUpFieldValue, invalidCheckMessage },
+          , { value: restSignUpFieldValue, validationMessage },
         ] = restSignUpFieldsEntries[i];
 
         if (!restSignUpFieldValue) return false;
 
-        if (invalidCheckMessage) return false;
+        if (validationMessage) return false;
       }
 
       return true;
@@ -309,7 +309,7 @@ export function checkMembershipValid({ name, value }) {
       return;
     }
 
-    if (accountFields[name].invalidCheckMessage) {
+    if (accountFields[name].validationMessage) {
       dispatch(clearInvalidCheckMessage(name));
     }
 

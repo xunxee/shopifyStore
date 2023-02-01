@@ -51,8 +51,8 @@ export default memo(({
               onChange={handleChange}
               onBlur={handleSignUpValid}
             />
-            {lastName.invalidCheckMessage
-              && <p>{lastName.invalidCheckMessage}</p>}
+            {lastName.validationMessage
+              && <p>{lastName.validationMessage}</p>}
             <input
               name="firstName"
               type="text"
@@ -61,8 +61,8 @@ export default memo(({
               onChange={handleChange}
               onBlur={handleSignUpValid}
             />
-            {firstName.invalidCheckMessage
-              && <p>{firstName.invalidCheckMessage}</p>}
+            {firstName.validationMessage
+              && <p>{firstName.validationMessage}</p>}
           </>
         )}
         <input
@@ -74,8 +74,8 @@ export default memo(({
           onBlur={isLogin ? null : handleSignUpValid}
         />
         {isLogin ? null
-          : email.invalidCheckMessage
-          && <p>{email.invalidCheckMessage}</p>}
+          : email.validationMessage
+          && <p>{email.validationMessage}</p>}
         <input
           name="password"
           type="password"
@@ -86,8 +86,8 @@ export default memo(({
           onBlur={isLogin ? null : handleSignUpValid}
         />
         {isLogin ? null
-          : password.invalidCheckMessage
-          && <p>{password.invalidCheckMessage}</p>}
+          : password.validationMessage
+          && <p>{password.validationMessage}</p>}
         <button
           type="submit"
           disabled={!isButtonActive}

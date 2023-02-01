@@ -1,19 +1,19 @@
 const initialLoginFields = {
   email: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   password: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   firstName: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   lastName: {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   },
   error: '',
 };
