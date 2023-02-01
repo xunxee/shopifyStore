@@ -7,6 +7,8 @@ import {
   logout,
 } from '../Membership/slice';
 
+import { changeSearchBarFields } from './slice';
+
 import HeaderContainer from './HeaderContainer';
 
 jest.mock('react-redux');
@@ -118,10 +120,9 @@ describe('HeaderContainer', () => {
         target: { value: 'beds' },
       });
 
-      expect(dispatch).toBeCalledWith({
-        type: 'header/changeSearchBarFields',
-        payload: { value: 'beds' },
-      });
+      expect(dispatch).toBeCalledWith(
+        changeSearchBarFields({ value: 'beds' }),
+      );
     });
   });
 
