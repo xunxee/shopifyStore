@@ -26,12 +26,20 @@ const Container = styled.div({
   },
 });
 
-export default function SearchBar() {
+export default function SearchBar({
+  onChange,
+}) {
+  function handleChange({ target: { value } }) {
+    onChange({ value });
+  }
+
   return (
     <Container>
       <input
+        name="searchBar"
         type="text"
         placeholder="Search for products..."
+        onChange={handleChange}
       />
       <div>
         <FontAwesomeIcon

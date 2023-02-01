@@ -1,12 +1,24 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import SearchBar from './SearchBar';
 
 describe('SearchBar', () => {
+  const handleChange = jest.fn();
+
+  beforeEach(() => {
+    handleChange.mockClear();
+  });
+
+  function renderSearchBar() {
+    return render((
+      <SearchBar
+        onChange={handleChange}
+      />
+    ));
+  }
+
   it('renders the search bar of the input tag', () => {
-    const { queryByPlaceholderText } = render(
-      <SearchBar />,
-    );
+    const { queryByPlaceholderText } = renderSearchBar();
 
     expect(queryByPlaceholderText(
       'Search for products...',
@@ -17,5 +29,19 @@ describe('SearchBar', () => {
     const { queryByTitle } = render(<SearchBar />);
 
     expect(queryByTitle('magnifyingGlass')).not.toBeNull();
+  });
+
+  it('listens change events for "search bar"', () => {
+    const { getByPlaceholderText } = renderSearchBar();
+
+    fireEvent.change(getByPlaceholderText(
+      'Search for products...',
+    ), {
+      target: { value: 'bed' },
+    });
+
+    expect(handleChange).toBeCalledWith({
+      value: 'bed',
+    });
   });
 });
