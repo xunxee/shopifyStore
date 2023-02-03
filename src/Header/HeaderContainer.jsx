@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
-// import { get } from '../utils';
+import { get } from '../utils';
 
 import {
   setIsAccountModalOpen,
@@ -47,7 +47,10 @@ const NavBarLayout = styled.div({
   backgroundColor: '#000',
 });
 
-export default function HeaderContainer({ onClick }) {
+export default function HeaderContainer({
+  onClick,
+  onKeyDown,
+}) {
   const dispatch = useDispatch();
 
   const handleClickCategories = useCallback(({
@@ -74,10 +77,10 @@ export default function HeaderContainer({ onClick }) {
     isAccountModalOpen,
   } = useSelector(({ membership }) => membership);
 
-  // const { searchBarFields } = useSelector(get({
-  //   page: 'header',
-  //   key: 'searchBarFields',
-  // }));
+  const { value: searchBarValue } = useSelector(get({
+    page: 'header',
+    key: 'searchBarFields',
+  }));
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
@@ -98,8 +101,10 @@ export default function HeaderContainer({ onClick }) {
   }, [dispatch]);
 
   const handleKeyDown = useCallback(() => {
-    console.log('here');
-  }, []);
+    const url = `/search?q=${searchBarValue}`;
+
+    onKeyDown(url);
+  }, [searchBarValue]);
 
   return (
     <Container>

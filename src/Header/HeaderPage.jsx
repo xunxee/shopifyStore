@@ -11,9 +11,14 @@ export default function HeaderPage() {
     navigate(url);
   }, [navigate]);
 
+  const handleKeyDown = useCallback((url) => {
+    navigate(url);
+  }, [navigate]);
+
   return ((
     <HeaderContainer
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
     />
   ));
 }

@@ -17,9 +17,12 @@ describe('HeaderContainer', () => {
   const dispatch = jest.fn();
 
   const handleClick = jest.fn();
+  const handleKeyDown = jest.fn();
 
   beforeEach(() => {
     dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
       membership: {
@@ -44,12 +47,11 @@ describe('HeaderContainer', () => {
     }));
   });
 
-  useDispatch.mockImplementation(() => dispatch);
-
   function renderHeaderContainer() {
     return render((
       <HeaderContainer
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
       />
     ));
   }

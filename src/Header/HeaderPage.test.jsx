@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import { MemoryRouter } from 'react-router-dom';
@@ -27,6 +28,11 @@ describe('HeaderPage', () => {
       membership: {
         refreshToken: '',
       },
+      header: {
+        searchBarFields: {
+          value: given.value,
+        },
+      },
     }));
   }));
 
@@ -46,5 +52,23 @@ describe('HeaderPage', () => {
     fireEvent.click(getByText('New Arrivals'));
 
     expect(mockUsedNavigate).toBeCalled();
+  });
+
+  describe('handleKeyDown', () => {
+    context('when enter the Enter key', () => {
+      given('value', () => 'test');
+
+      it('test', () => {
+        const { getByPlaceholderText } = renderHeaderPage();
+
+        fireEvent.keyDown(getByPlaceholderText(
+          'Search for products...',
+        ), { code: 'Enter' });
+
+        expect(mockUsedNavigate).toBeCalledWith(
+          '/search?q=test',
+        );
+      });
+    });
   });
 });
