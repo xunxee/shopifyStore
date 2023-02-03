@@ -4,15 +4,18 @@ import SearchBar from './SearchBar';
 
 describe('SearchBar', () => {
   const handleChange = jest.fn();
+  const handleKeyDown = jest.fn();
 
   beforeEach(() => {
     handleChange.mockClear();
+    handleKeyDown.mockClear();
   });
 
   function renderSearchBar() {
     return render((
       <SearchBar
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
     ));
   }
@@ -45,6 +48,20 @@ describe('SearchBar', () => {
         expect(handleChange).toBeCalledWith({
           value: 'bed',
         });
+      });
+    });
+  });
+
+  describe('handleKeyDown', () => {
+    context('when enter the Enter key', () => {
+      it('transfers value to the onPressEnterKey function', () => {
+        const { getByPlaceholderText } = renderSearchBar();
+
+        fireEvent.keyDown(getByPlaceholderText(
+          'Search for products...',
+        ), { code: 'Enter' });
+
+        expect(handleKeyDown).toBeCalled();
       });
     });
   });

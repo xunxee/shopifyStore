@@ -28,9 +28,14 @@ const Container = styled.div({
 
 export default function SearchBar({
   onChange,
+  onKeyDown,
 }) {
   function handleChange({ target: { value } }) {
     onChange({ value });
+  }
+
+  function handleKeyDown({ code }) {
+    if (code === 'Enter') onKeyDown();
   }
 
   return (
@@ -40,6 +45,7 @@ export default function SearchBar({
         type="text"
         placeholder="Search for products..."
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
       <div>
         <FontAwesomeIcon

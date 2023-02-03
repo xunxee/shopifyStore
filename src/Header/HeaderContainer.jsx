@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
+// import { get } from '../utils';
+
 import {
   setIsAccountModalOpen,
   logout,
@@ -72,6 +74,11 @@ export default function HeaderContainer({ onClick }) {
     isAccountModalOpen,
   } = useSelector(({ membership }) => membership);
 
+  // const { searchBarFields } = useSelector(get({
+  //   page: 'header',
+  //   key: 'searchBarFields',
+  // }));
+
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
     dispatch(clearAccountFields());
@@ -90,6 +97,10 @@ export default function HeaderContainer({ onClick }) {
     dispatch(changeSearchBarFields({ value }));
   }, [dispatch]);
 
+  const handleKeyDown = useCallback(() => {
+    console.log('here');
+  }, []);
+
   return (
     <Container>
       {isAccountModalOpen && (
@@ -105,6 +116,7 @@ export default function HeaderContainer({ onClick }) {
         />
         <SearchBar
           onChange={handleChange}
+          onKeyDown={handleKeyDown}
         />
         <UserBar
           onClick={handleToggle}
