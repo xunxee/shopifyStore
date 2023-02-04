@@ -1,4 +1,10 @@
 const listCategoriesCollection = {
+  initialCategoryList: {
+    product: '',
+    category: '',
+    sort: '',
+    material: '',
+  },
   url: {
     pathnames: ['product', 'category'],
     searches: ['sort', 'material'],
