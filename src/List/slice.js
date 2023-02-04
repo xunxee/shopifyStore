@@ -4,15 +4,14 @@ import {
   fetchMockProductList,
 } from '../services/api';
 
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
+const { initialCategoryList } = LIST_CATEGORIES;
+
 const { actions, reducer } = createSlice({
   name: 'list',
   initialState: {
-    url: {
-      product: '',
-      category: '',
-      sort: '',
-      material: '',
-    },
+    url: initialCategoryList,
     productList: [],
   },
   reducers: {
