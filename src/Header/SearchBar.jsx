@@ -35,7 +35,9 @@ export default function SearchBar({
   }
 
   function handleKeyDown({ code }) {
-    if (code === 'Enter') onKeyDown();
+    if (code !== 'Enter') return;
+
+    onKeyDown();
   }
 
   return (

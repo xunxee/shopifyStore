@@ -54,7 +54,7 @@ describe('SearchBar', () => {
 
   describe('handleKeyDown', () => {
     context('when enter the Enter key', () => {
-      it('transfers value to the onPressEnterKey function', () => {
+      it('execute the onKeyDown function', () => {
         const { getByPlaceholderText } = renderSearchBar();
 
         fireEvent.keyDown(getByPlaceholderText(
@@ -62,6 +62,18 @@ describe('SearchBar', () => {
         ), { code: 'Enter' });
 
         expect(handleKeyDown).toBeCalled();
+      });
+    });
+
+    context('when enter a key other than enter key', () => {
+      it("doesn't execute the onKeyDown function", () => {
+        const { getByPlaceholderText } = renderSearchBar();
+
+        fireEvent.keyDown(getByPlaceholderText(
+          'Search for products...',
+        ), { code: 'a' });
+
+        expect(handleKeyDown).not.toBeCalled();
       });
     });
   });

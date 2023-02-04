@@ -15,16 +15,21 @@ import {
 
 import {
   changeUrlDataField,
+  changeUrlAllDataFields,
 } from '../List/slice';
 
 import {
   changeSearchBarFields,
 } from './slice';
 
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
+import MembershipPage from '../Membership/MemberShipPage';
 import TitleBar from './TitleBar';
 import SearchBar from './SearchBar';
 import UserBar from './UserBar';
-import MembershipPage from '../Membership/MemberShipPage';
+
+const { initialCategoryList } = LIST_CATEGORIES;
 
 const Container = styled.div({
   position: 'fixed',
@@ -104,6 +109,8 @@ export default function HeaderContainer({
     const url = `/search?q=${searchBarValue}`;
 
     onKeyDown(url);
+
+    dispatch(changeUrlAllDataFields(initialCategoryList));
   }, [searchBarValue]);
 
   return (
