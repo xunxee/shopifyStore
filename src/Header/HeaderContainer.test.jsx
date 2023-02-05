@@ -11,6 +11,11 @@ import { changeSearchBarFields } from './slice';
 
 import HeaderContainer from './HeaderContainer';
 
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import { changeUrlAllDataFields } from '../List/slice';
+
+const { initialCategoryList } = LIST_CATEGORIES;
+
 jest.mock('react-redux');
 
 describe('HeaderContainer', () => {
@@ -88,8 +93,8 @@ describe('HeaderContainer', () => {
     );
   });
 
-  context('when click All', () => {
-    it('occurs handle event', () => {
+  context('when click on "All"', () => {
+    it('clears all selection of "CategoryBar"', () => {
       const { getByText } = renderHeaderContainer();
 
       fireEvent.click(getByText('All'));
@@ -98,19 +103,18 @@ describe('HeaderContainer', () => {
     });
   });
 
-  context('when click New Arrivals', () => {
-    it('occurs handle event', () => {
+  context('when click on "New Arrivals"', () => {
+    it('clears all "CategoryBar" expect "All Categories" selected', () => {
       const { getByText } = renderHeaderContainer();
 
       fireEvent.click(getByText('New Arrivals'));
 
-      expect(dispatch).toBeCalledWith({
-        type: 'list/changeUrlDataField',
-        payload: {
-          name: 'new',
-          belong: 'category',
-        },
-      });
+      expect(dispatch).toBeCalledWith(
+        changeUrlAllDataFields({
+          ...initialCategoryList,
+          category: 'new',
+        }),
+      );
     });
   });
 

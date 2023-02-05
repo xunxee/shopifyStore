@@ -52,7 +52,9 @@ export default function ListContainer({
 
   useEffect(() => {
     dispatch(loadProductList());
+  }, []);
 
+  useEffect(() => {
     const isClickAccess = category || product || sort || material;
 
     if (isClickAccess) return;

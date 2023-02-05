@@ -6,6 +6,8 @@ import { useCallback } from 'react';
 
 import { get } from '../utils';
 
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
 import {
   setIsAccountModalOpen,
   logout,
@@ -14,15 +16,12 @@ import {
 } from '../Membership/slice';
 
 import {
-  changeUrlDataField,
   changeUrlAllDataFields,
 } from '../List/slice';
 
 import {
   changeSearchBarFields,
 } from './slice';
-
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
 
 import MembershipPage from '../Membership/MemberShipPage';
 import TitleBar from './TitleBar';
@@ -64,16 +63,9 @@ export default function HeaderContainer({
   }) => {
     onClick(pathname);
 
-    if (name === 'all') {
-      dispatch(changeUrlDataField({
-        name: '', belong: 'category',
-      }));
-
-      return;
-    }
-
-    dispatch(changeUrlDataField({
-      name, belong: 'category',
+    dispatch(changeUrlAllDataFields({
+      ...initialCategoryList,
+      category: name,
     }));
   }, [onClick, dispatch]);
 
