@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
+import { get } from '../utils';
+
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
 import {
   setIsAccountModalOpen,
   logout,
@@ -12,13 +16,19 @@ import {
 } from '../Membership/slice';
 
 import {
-  changeUrlDataField,
+  changeUrlAllDataFields,
 } from '../List/slice';
 
+import {
+  changeSearchBarFields,
+} from './slice';
+
+import MembershipPage from '../Membership/MemberShipPage';
 import TitleBar from './TitleBar';
 import SearchBar from './SearchBar';
 import UserBar from './UserBar';
-import MembershipPage from '../Membership/MemberShipPage';
+
+const { initialCategoryList } = LIST_CATEGORIES;
 
 const Container = styled.div({
   position: 'fixed',
@@ -41,7 +51,10 @@ const NavBarLayout = styled.div({
   backgroundColor: '#000',
 });
 
-export default function HeaderContainer({ onClick }) {
+export default function HeaderContainer({
+  onClick,
+  onKeyDown,
+}) {
   const dispatch = useDispatch();
 
   const handleClickCategories = useCallback(({
@@ -50,16 +63,9 @@ export default function HeaderContainer({ onClick }) {
   }) => {
     onClick(pathname);
 
-    if (name === 'all') {
-      dispatch(changeUrlDataField({
-        name: '', belong: 'category',
-      }));
-
-      return;
-    }
-
-    dispatch(changeUrlDataField({
-      name, belong: 'category',
+    dispatch(changeUrlAllDataFields({
+      ...initialCategoryList,
+      category: name,
     }));
   }, [onClick, dispatch]);
 
@@ -67,6 +73,11 @@ export default function HeaderContainer({ onClick }) {
     refreshToken,
     isAccountModalOpen,
   } = useSelector(({ membership }) => membership);
+
+  const { value: searchBarValue } = useSelector(get({
+    page: 'header',
+    key: 'searchBarFields',
+  }));
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
@@ -82,6 +93,18 @@ export default function HeaderContainer({ onClick }) {
     }));
   }, [dispatch]);
 
+  const handleChange = useCallback(({ value }) => {
+    dispatch(changeSearchBarFields({ value }));
+  }, [dispatch]);
+
+  const handleKeyDown = useCallback(() => {
+    const url = `/search?q=${searchBarValue}`;
+
+    onKeyDown(url);
+
+    dispatch(changeUrlAllDataFields(initialCategoryList));
+  }, [searchBarValue]);
+
   return (
     <Container>
       {isAccountModalOpen && (
@@ -95,7 +118,10 @@ export default function HeaderContainer({ onClick }) {
         <TitleBar
           onClick={handleClickCategories}
         />
-        <SearchBar />
+        <SearchBar
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
         <UserBar
           onClick={handleToggle}
         />

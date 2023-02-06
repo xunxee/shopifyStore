@@ -7,6 +7,9 @@ import styled from '@emotion/styled';
 import { v4 } from 'uuid';
 
 import Slide from './slide/Slide';
+import SlideAlbum from './slide/SlideAlbum';
+
+import { updateSlide } from '../utils';
 
 const ItemLayout = styled.div({
   display: 'flex',
@@ -14,11 +17,6 @@ const ItemLayout = styled.div({
 
 const SlideWrapper = styled.div({
   width: '65%',
-});
-
-const SlideAlbum = styled.div({
-  height: '182px',
-  backgroundColor: 'red',
 });
 
 const ItemInfo = styled.div({
@@ -106,39 +104,44 @@ export default function ProductWrapper({
   const isPassTheLastSlide = isPassTheSlide
     || slide.number === NEXT_START;
 
-  const goToPreviousBanner = useCallback(() => {
-    setSlide(({ number }) => ({
-      number: number - 1,
-      isMotion: true,
-    }));
-  }, [slide]);
+  const goToBanner = useCallback(({
+    targetName,
+    isMotion,
+  }) => {
+    setSlide(updateSlide({ targetName, isMotion }));
+  });
 
-  const goToMainEndSlide = useCallback(() => {
+  const goToMainEndSlide = useCallback(({
+    targetName,
+    isMotion,
+  }) => {
     setSlide({
       number: END,
-      isMotion: false,
+      isMotion,
     });
 
     setTimeout(() => {
-      goToPreviousBanner();
+      goToBanner({
+        targetName,
+        isMotion: true,
+      });
     }, 50);
   }, [slide]);
 
-  const goToNextBanner = useCallback(() => {
-    setSlide(({ number }) => ({
-      number: number + 1,
-      isMotion: true,
-    }));
-  }, [slide, slide.number]);
-
-  const goToMainStartSlide = useCallback(() => {
+  const goToMainStartSlide = useCallback(({
+    targetName,
+    isMotion,
+  }) => {
     setSlide({
       number: START,
-      isMotion: false,
+      isMotion,
     });
 
     setTimeout(() => {
-      goToNextBanner();
+      goToBanner({
+        targetName,
+        isMotion: true,
+      });
     }, 50);
   }, [slide]);
 
@@ -152,12 +155,14 @@ export default function ProductWrapper({
             title={title}
             isPassTheFirstSlide={isPassTheFirstSlide}
             goToMainEndSlide={goToMainEndSlide}
-            goToPreviousBanner={goToPreviousBanner}
             isPassTheLastSlide={isPassTheLastSlide}
             goToMainStartSlide={goToMainStartSlide}
-            goToNextBanner={goToNextBanner}
+            goToBanner={goToBanner}
           />
-          <SlideAlbum />
+          <SlideAlbum
+            title={title}
+            banners={banners}
+          />
         </SlideWrapper>
         <ItemInfo />
       </ItemLayout>

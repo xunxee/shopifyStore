@@ -1,20 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
+
 import {
-  fetchMockProduct,
   fetchMockProductList,
 } from '../services/api';
+
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+
+const { initialCategoryList } = LIST_CATEGORIES;
 
 const { actions, reducer } = createSlice({
   name: 'list',
   initialState: {
-    url: {
-      product: '',
-      category: '',
-      sort: '',
-      material: '',
-    },
+    url: initialCategoryList,
     productList: [],
-    product: {},
   },
   reducers: {
     changeUrlDataField(
@@ -50,13 +48,6 @@ const { actions, reducer } = createSlice({
         productList,
       };
     },
-
-    setProduct(state, { payload: product }) {
-      return {
-        ...state,
-        product,
-      };
-    },
   },
 });
 
@@ -64,20 +55,12 @@ export const {
   changeUrlDataField,
   changeUrlAllDataFields,
   setProductList,
-  setProduct,
 } = actions;
 
 export function loadProductList() {
   return async (dispatch) => {
     const productList = await fetchMockProductList();
     dispatch(setProductList(productList));
-  };
-}
-
-export function loadProduct() {
-  return async (dispatch) => {
-    const product = await fetchMockProduct();
-    dispatch(setProduct(product));
   };
 }
 

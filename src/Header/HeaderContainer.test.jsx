@@ -7,7 +7,14 @@ import {
   logout,
 } from '../Membership/slice';
 
+import { changeSearchBarFields } from './slice';
+
 import HeaderContainer from './HeaderContainer';
+
+import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import { changeUrlAllDataFields } from '../List/slice';
+
+const { initialCategoryList } = LIST_CATEGORIES;
 
 jest.mock('react-redux');
 
@@ -15,9 +22,12 @@ describe('HeaderContainer', () => {
   const dispatch = jest.fn();
 
   const handleClick = jest.fn();
+  const handleKeyDown = jest.fn();
 
   beforeEach(() => {
     dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((selector) => selector({
       membership: {
@@ -34,15 +44,19 @@ describe('HeaderContainer', () => {
       list: {
         category: '',
       },
+      header: {
+        searchBarFields: {
+          value: '',
+        },
+      },
     }));
   });
-
-  useDispatch.mockImplementation(() => dispatch);
 
   function renderHeaderContainer() {
     return render((
       <HeaderContainer
         onClick={handleClick}
+        onKeyDown={handleKeyDown}
       />
     ));
   }
@@ -79,8 +93,8 @@ describe('HeaderContainer', () => {
     );
   });
 
-  context('when click All', () => {
-    it('occurs handle event', () => {
+  context('when click on "All"', () => {
+    it('clears all selection of "CategoryBar"', () => {
       const { getByText } = renderHeaderContainer();
 
       fireEvent.click(getByText('All'));
@@ -89,19 +103,32 @@ describe('HeaderContainer', () => {
     });
   });
 
-  context('when click New Arrivals', () => {
-    it('occurs handle event', () => {
+  context('when click on "New Arrivals"', () => {
+    it('clears all "CategoryBar" expect "All Categories" selected', () => {
       const { getByText } = renderHeaderContainer();
 
       fireEvent.click(getByText('New Arrivals'));
 
-      expect(dispatch).toBeCalledWith({
-        type: 'list/changeUrlDataField',
-        payload: {
-          name: 'new',
-          belong: 'category',
-        },
+      expect(dispatch).toBeCalledWith(
+        changeUrlAllDataFields({
+          ...initialCategoryList,
+          category: 'new',
+        }),
+      );
+    });
+  });
+
+  context('when enter an item in the search bar', () => {
+    it('listens change events', () => {
+      const { getByPlaceholderText } = renderHeaderContainer();
+
+      fireEvent.change(getByPlaceholderText('Search for products...'), {
+        target: { value: 'beds' },
       });
+
+      expect(dispatch).toBeCalledWith(
+        changeSearchBarFields({ value: 'beds' }),
+      );
     });
   });
 

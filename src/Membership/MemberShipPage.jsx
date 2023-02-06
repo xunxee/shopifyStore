@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useLayoutEffect } from 'react';
 
 import MembershipContainer from './MembershipContainer';
 
@@ -56,6 +56,14 @@ export default function MembershipPage({
     if (refLogin.current.contains(target)) return;
     onClickToggle();
   }
+
+  useLayoutEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   useEffect(() => {
     document.addEventListener('mousedown', listener);

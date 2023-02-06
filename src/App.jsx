@@ -10,7 +10,7 @@ import NotFoundPage from './NotFoundPage/NotFoundPage';
 import FooterPage from './Footer/FooterPage';
 import HeaderPage from './Header/HeaderPage';
 import ListPage from './List/ListPage';
-import ProductDetailPage from './List/ProductDetailPage';
+import ProductDetailPage from './ProductDetail/ProductDetailPage';
 
 const Container = styled.div({
   display: 'flex',

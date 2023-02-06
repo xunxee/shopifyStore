@@ -10,6 +10,9 @@ describe('App', () => {
   beforeEach(() => {
     useSelector.mockImplementation((selection) => selection({
       membership: {},
+      header: {
+        searchBarFields: {},
+      },
     }));
   });
 

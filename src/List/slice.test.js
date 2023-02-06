@@ -6,14 +6,11 @@ import reducer, {
   changeUrlDataField,
   changeUrlAllDataFields,
   setProductList,
-  setProduct,
   loadProductList,
-  loadProduct,
 } from './slice';
 
 import {
   fetchMockProductList,
-  fetchMockProduct,
 } from '../services/api';
 
 import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
@@ -88,29 +85,6 @@ describe('reducer', () => {
       expect(productList).toBe(MOCK_PRODUCT_LIST_DATA);
     });
   });
-
-  describe('setProduct', () => {
-    it('changes product', () => {
-      const initialState = {
-        product: {},
-      };
-
-      const product = {
-        id: 1,
-        name: 'Special Edition T-Shirt',
-        price: '$50.00 USD',
-      };
-
-      const state = reducer(
-        initialState,
-        setProduct(product),
-      );
-
-      expect(state.product.id).toBe(1);
-      expect(state.product.name)
-        .toBe('Special Edition T-Shirt');
-    });
-  });
 });
 
 describe('actions', () => {
@@ -141,22 +115,6 @@ describe('actions', () => {
       const actions = store.getActions();
 
       expect(actions[0]).toEqual(setProductList([]));
-    });
-  });
-
-  describe('loadProduct', () => {
-    beforeEach(() => {
-      store = makeMockStore();
-
-      fetchMockProduct.mockResolvedValue({});
-    });
-
-    it('runs setProduct', async () => {
-      await store.dispatch(loadProduct());
-
-      const actions = store.getActions();
-
-      expect(actions[0]).toEqual(setProduct({}));
     });
   });
 });

@@ -13,9 +13,9 @@ import reducer, {
   setRefreshToken,
   logout,
   changeInvalidCheckMessage,
-  checkSignUpValid,
+  checkInputValue,
   requestSignUp,
-  checkMembershipValid,
+  checkMemberInfo,
   setButtonActive,
 } from './slice';
 
@@ -100,12 +100,12 @@ describe('reducer', () => {
     });
 
     describe('changeInvalidCheckMessage', () => {
-      it('changes email invalidCheckMessage', () => {
+      it('changes email validationMessage', () => {
         const initialState = {
           accountFields: {
             lastName: {
               value: '',
-              invalidCheckMessage: '',
+              validationMessage: '',
             },
           },
         };
@@ -114,12 +114,12 @@ describe('reducer', () => {
           initialState,
           changeInvalidCheckMessage({
             name: 'lastName',
-            invalidCheckMessage:
+            validationMessage:
               'Last name is a required field.',
           }),
         );
 
-        expect(lastName.invalidCheckMessage)
+        expect(lastName.validationMessage)
           .toBe('Last name is a required field.');
       });
     });
@@ -199,7 +199,7 @@ describe('reducer', () => {
       const initialState = {
         accountFields: {
           email: {
-            invalidCheckMessage: 'email을 확인하세요',
+            validationMessage: 'email을 확인하세요',
           },
         },
       };
@@ -209,14 +209,14 @@ describe('reducer', () => {
         clearInvalidCheckMessage('email'),
       );
 
-      expect(email.invalidCheckMessage).toBe('');
+      expect(email.validationMessage).toBe('');
     });
 
     it('clear password invalid check message', () => {
       const initialState = {
         accountFields: {
           password: {
-            invalidCheckMessage: 'password를 확인하세요',
+            validationMessage: 'password를 확인하세요',
           },
         },
       };
@@ -226,7 +226,7 @@ describe('reducer', () => {
         clearInvalidCheckMessage('password'),
       );
 
-      expect(password.invalidCheckMessage).toBe('');
+      expect(password.validationMessage).toBe('');
     });
   });
 
@@ -293,19 +293,19 @@ describe('actions', () => {
         accountFields: {
           email: {
             value: email.value,
-            invalidCheckMessage: email.invalidCheckMessage,
+            validationMessage: email.validationMessage,
           },
           password: {
             value: password.value,
-            invalidCheckMessage: password.invalidCheckMessage,
+            validationMessage: password.validationMessage,
           },
           firstName: {
             value: firstName.value,
-            invalidCheckMessage: firstName.invalidCheckMessage,
+            validationMessage: firstName.validationMessage,
           },
           lastName: {
             value: lastName.value,
-            invalidCheckMessage: lastName.invalidCheckMessage,
+            validationMessage: lastName.validationMessage,
           },
         },
         isButtonActive,
@@ -391,24 +391,24 @@ describe('actions', () => {
     });
   });
 
-  describe('checkSignUpValid', () => {
+  describe('checkInputValue', () => {
     const profileInputs = [
       {
         name: 'lastName',
         value: '정',
-        invalidCheckMessage:
+        validationMessage:
           'Last Name은 필수 입력란입니다.',
       },
       {
         name: 'firstName',
         value: '건희',
-        invalidCheckMessage:
+        validationMessage:
           'First Name은 필수 입력란입니다.',
       },
     ];
 
     profileInputs.forEach(({
-      name, value, invalidCheckMessage,
+      name, value, validationMessage,
     }) => {
       describe(name, () => {
         context(
@@ -419,9 +419,9 @@ describe('actions', () => {
             });
 
             it(
-              `changes invalidCheckMessage of ${name}`,
+              `changes validationMessage of ${name}`,
               () => {
-                store.dispatch(checkSignUpValid({
+                store.dispatch(checkInputValue({
                   name: `${name}`,
                   value: '',
                 }));
@@ -431,8 +431,8 @@ describe('actions', () => {
                 expect(actions[0]).toEqual(
                   changeInvalidCheckMessage({
                     name: `${name}`,
-                    invalidCheckMessage:
-                      `${invalidCheckMessage}`,
+                    validationMessage:
+                      `${validationMessage}`,
                   }),
                 );
               },
@@ -447,9 +447,9 @@ describe('actions', () => {
             });
 
             it(
-              `doesn't changes invalidCheckMessage of ${name}`,
+              `doesn't changes validationMessage of ${name}`,
               () => {
-                store.dispatch(checkSignUpValid({
+                store.dispatch(checkInputValue({
                   name: `${name}`,
                   value: `${value}`,
                 }));
@@ -459,7 +459,7 @@ describe('actions', () => {
                 expect(actions[0]).toEqual(
                   changeInvalidCheckMessage({
                     name: `${name}`,
-                    invalidCheckMessage:
+                    validationMessage:
                       '',
                   }),
                 );
@@ -502,8 +502,8 @@ describe('actions', () => {
             );
           });
 
-          it(`changes invalidCheckMessage of ${input.name}`, () => {
-            store.dispatch(checkSignUpValid({
+          it(`changes validationMessage of ${input.name}`, () => {
+            store.dispatch(checkInputValue({
               name: `${input.name}`,
               value: '',
             }));
@@ -513,7 +513,7 @@ describe('actions', () => {
             expect(actions[0]).toEqual(
               changeInvalidCheckMessage({
                 name: `${input.name}`,
-                invalidCheckMessage:
+                validationMessage:
                   `${input.defaultMessage}`,
               }),
             );
@@ -525,8 +525,8 @@ describe('actions', () => {
             store = makeMockStore();
           });
 
-          it(`changes invalidCheckMessage of ${input.name}`, () => {
-            store.dispatch(checkSignUpValid({
+          it(`changes validationMessage of ${input.name}`, () => {
+            store.dispatch(checkInputValue({
               name: `${input.name}`,
               value: `${input.invalidValue}`,
             }));
@@ -536,7 +536,7 @@ describe('actions', () => {
             expect(actions[0]).toEqual(
               changeInvalidCheckMessage({
                 name: `${input.name}`,
-                invalidCheckMessage:
+                validationMessage:
                   `${input.inValidMessage}`,
               }),
             );
@@ -548,8 +548,8 @@ describe('actions', () => {
             store = makeMockStore();
           });
 
-          it(`changes invalidCheckMessage of ${input.name}`, () => {
-            store.dispatch(checkSignUpValid({
+          it(`changes validationMessage of ${input.name}`, () => {
+            store.dispatch(checkInputValue({
               name: `${input.name}`,
               value: `${input.validValue}`,
             }));
@@ -559,7 +559,7 @@ describe('actions', () => {
             expect(actions[0]).toEqual(
               changeInvalidCheckMessage({
                 name: `${input.name}`,
-                invalidCheckMessage:
+                validationMessage:
                   '',
               }),
             );
@@ -569,7 +569,7 @@ describe('actions', () => {
     });
   });
 
-  describe('checkMembershipValid', () => {
+  describe('checkMemberInfo', () => {
     context('when all values for login are entered correctly', () => {
       beforeEach(() => {
         store = makeMockStore({
@@ -580,7 +580,7 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkMembershipValid({
+        store.dispatch(checkMemberInfo({
           name: 'email',
           value: 'tester@example.com',
         }));
@@ -599,7 +599,7 @@ describe('actions', () => {
       });
 
       it('terminates the function', () => {
-        store.dispatch(checkMembershipValid({
+        store.dispatch(checkMemberInfo({
           name: 'email',
           value: '',
         }));
@@ -621,7 +621,7 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkMembershipValid({
+        store.dispatch(checkMemberInfo({
           name: 'firstName',
           value: '정',
         }));
@@ -640,15 +640,15 @@ describe('actions', () => {
           email: { value: 'tester@example.com' },
           password: {
             value: 'Tester@123',
-            invalidCheckMessage: '비밀번호를 확인하세요',
+            validationMessage: '비밀번호를 확인하세요',
           },
           firstName: { value: '건희' },
           lastName: { value: '정' },
         });
       });
 
-      it('clears invalidCheckMessage', async () => {
-        await store.dispatch(checkMembershipValid({
+      it('clears validationMessage', async () => {
+        await store.dispatch(checkMemberInfo({
           name: 'password',
           value: 'Tester@123',
         }));
@@ -667,7 +667,7 @@ describe('actions', () => {
           email: { value: 'tester@example.com' },
           password: {
             value: 'Tester@',
-            invalidCheckMessage: '비밀번호를 확인하세요',
+            validationMessage: '비밀번호를 확인하세요',
           },
           lastName: { value: '정' },
           isButtonActive: true,
@@ -675,7 +675,7 @@ describe('actions', () => {
       });
 
       it('conveys false to setButtonActive', async () => {
-        await store.dispatch(checkMembershipValid({
+        await store.dispatch(checkMemberInfo({
           name: 'password',
           value: 'Tester@',
         }));
@@ -688,12 +688,12 @@ describe('actions', () => {
       });
     });
 
-    context('when email have invalidCheckMessage', () => {
+    context('when email have validationMessage', () => {
       beforeEach(() => {
         store = makeMockStore({
           email: {
             value: 'tester',
-            invalidCheckMessage: '이메일을 확인하세요',
+            validationMessage: '이메일을 확인하세요',
           },
           password: {
             value: 'Tester@123',
@@ -704,7 +704,7 @@ describe('actions', () => {
       });
 
       it('terminates the function', async () => {
-        await store.dispatch(checkMembershipValid({
+        await store.dispatch(checkMemberInfo({
           name: 'password',
           value: 'Tester@',
         }));

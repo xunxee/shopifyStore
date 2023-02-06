@@ -20,11 +20,11 @@ describe('MembershipContainer', () => {
         accountFields: {
           email: {
             value: 'tester@example.co',
-            invalidCheckMessage: '',
+            validationMessage: '',
           },
           password: {
             value: 'Tester123@',
-            invalidCheckMessage: '',
+            validationMessage: '',
           },
           firstName: {
             value: given.firstName,

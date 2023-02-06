@@ -11,8 +11,8 @@ import {
   clearAccountFields,
   requestLogin,
   requestSignUp,
-  checkSignUpValid,
-  checkMembershipValid,
+  checkInputValue,
+  checkMemberInfo,
   changeAccountFields,
   setButtonActive,
 } from './slice';
@@ -45,7 +45,7 @@ export default function MembershipContainer() {
     name, value,
   }) => {
     dispatch(changeAccountFields({ name, value }));
-    dispatch(checkMembershipValid({ name, value }));
+    dispatch(checkMemberInfo({ name, value }));
   }, [dispatch]);
 
   const handleBlur = useCallback(({
@@ -53,7 +53,7 @@ export default function MembershipContainer() {
   }) => {
     if (isButtonActive) return;
 
-    dispatch(checkSignUpValid({ name, value }));
+    dispatch(checkInputValue({ name, value }));
   }, [dispatch, isButtonActive]);
 
   const handleSubmit = useCallback(() => {

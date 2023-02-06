@@ -17,7 +17,7 @@ describe('LoginForm', () => {
 
   const fieldState = {
     value: '',
-    invalidCheckMessage: '',
+    validationMessage: '',
   };
 
   function renderLoginForm({
@@ -84,12 +84,12 @@ describe('LoginForm', () => {
       expect(handleSubmit).toBeCalled();
     });
 
-    describe('invalidCheckMessage', () => {
+    describe('validationMessage', () => {
       it("doesn't render", () => {
         const { queryByText } = renderLoginForm({
           email: {
             value: 'tester',
-            invalidCheckMessage: '',
+            validationMessage: '',
           },
         });
 
@@ -217,7 +217,7 @@ describe('LoginForm', () => {
       });
     });
 
-    context('when there is invalidCheckMessage', () => {
+    context('when there is validationMessage', () => {
       it('checkDisabled returns false', () => {
         const { getByPlaceholderText } = renderLoginForm({
           isLogin: false,
@@ -229,11 +229,11 @@ describe('LoginForm', () => {
           },
           email: {
             value: 'tester',
-            invalidCheckMessage: 'email을 확인하세요.',
+            validationMessage: 'email을 확인하세요.',
           },
           password: {
             value: 'Tester@12',
-            invalidCheckMessage: 'password를 확인하세요.',
+            validationMessage: 'password를 확인하세요.',
           },
         });
 
@@ -300,7 +300,7 @@ describe('LoginForm', () => {
               isLogin: false,
               [input]: {
                 value: '',
-                invalidCheckMessage:
+                validationMessage:
                   `${INPUT_LIST[input]} 필수 입력란입니다.`,
               },
             });

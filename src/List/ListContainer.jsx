@@ -52,28 +52,29 @@ export default function ListContainer({
 
   useEffect(() => {
     dispatch(loadProductList());
+  }, []);
 
+  useEffect(() => {
     const pathnameList = urlPathname.substring(1).split('/');
 
-    const { length } = pathnameList;
+    function makeQueryString() {
+      const queryStringList = [];
 
-    function makeQueryString(queryStringList) {
-      for (let i = 0; i < length; i += 1) {
-        if (length === 1) {
-          return urlSearch
-            ? `${urlSearch}&category=all` : '?category=all';
+      if (pathnameList.length === 1) {
+        return `${urlSearch
+          ? `${urlSearch}&category=all` : '?category=all'}`;
+      }
+
+      for (let i = 1; i < pathnameList.length; i += 1) {
+        const pathname = pathnameList[i];
+
+        if (pathname === 'product') {
+          const productName = pathnameList[i + 1];
+          queryStringList.push(`product=${productName}`);
         }
 
-        if (pathnameList[i] === 'product') {
-          queryStringList.push(`product=${pathnameList[2]}`);
-        }
-
-        if (pathnameList[i] === 'new') {
-          queryStringList.push('category=new');
-        }
-
-        if (pathnameList[i] === 'featured') {
-          queryStringList.push('category=featured');
+        if (pathname === 'new' || pathname === 'featured') {
+          queryStringList.push(`category=${pathname}`);
         }
       }
 
@@ -81,29 +82,29 @@ export default function ListContainer({
         return false;
       }
 
-      if (urlSearch) {
-        return (`${urlSearch}&${queryStringList.join('&')}`);
-      }
-
-      return `?${queryStringList.join('&')}`;
+      return urlSearch
+        ? `${urlSearch}&${queryStringList.join('&')}`
+        : `?${queryStringList.join('&')}`;
     }
+
+    const isValidAddress = makeQueryString();
+
+    if (!isValidAddress) return;
+
+    const apiDataObject = JSON.parse(`{"${
+      isValidAddress
+        .substring(1)
+        .replace(/&/g, '","')
+        .replace(/=/g, '":"')
+    }"}`);
 
     const isClickAccess = category || product || sort || material;
 
-    function changeUrlData() {
-      const isValidAddress = makeQueryString([]);
-
-      if (!isValidAddress) return;
-
-      const apiDataObject = JSON.parse(`{"${makeQueryString([])
-        .substring(1)
-        .replace(/&/g, '","')
-        .replace(/=/g, '":"')}"}`);
-
+    if (!isClickAccess) {
       dispatch(changeUrlAllDataFields(apiDataObject));
     }
 
-    if (!isClickAccess) changeUrlData();
+    // TODO: back-end와의 통신 준비
   }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {

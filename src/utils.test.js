@@ -1,4 +1,4 @@
-import { get, TODO } from './utils';
+import { get, updateSlide } from './utils';
 
 test('get', () => {
   const state = {
@@ -14,8 +14,37 @@ test('get', () => {
   expect(b(state)).toBeUndefined();
 });
 
-test('TODO', () => {
-  const result = TODO();
+describe('updateSlide', () => {
+  const slide = {
+    number: 3,
+    isMotion: false,
+  };
 
-  expect(result).not.toBeNull();
+  context("when targetName is 'previousArrow'", () => {
+    it('decreases the slide number', () => {
+      const a = updateSlide({
+        targetName: 'previousArrow',
+        isMotion: true,
+      });
+
+      expect(a(slide)).toEqual({
+        number: 2,
+        isMotion: true,
+      });
+    });
+  });
+
+  context("when targetName is 'nextArrow'", () => {
+    it('increases the slide number', () => {
+      const b = updateSlide({
+        targetName: 'nextArrow',
+        isMotion: true,
+      });
+
+      expect(b(slide)).toEqual({
+        number: 4,
+        isMotion: true,
+      });
+    });
+  });
 });

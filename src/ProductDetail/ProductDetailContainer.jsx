@@ -17,7 +17,7 @@ export default function ProductDetailContainer() {
   const dispatch = useDispatch();
 
   const product = useSelector(get({
-    page: 'list', key: 'product',
+    page: 'productDetail', key: 'product',
   }));
 
   useEffect(() => {

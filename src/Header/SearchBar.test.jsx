@@ -1,12 +1,27 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import SearchBar from './SearchBar';
 
 describe('SearchBar', () => {
+  const handleChange = jest.fn();
+  const handleKeyDown = jest.fn();
+
+  beforeEach(() => {
+    handleChange.mockClear();
+    handleKeyDown.mockClear();
+  });
+
+  function renderSearchBar() {
+    return render((
+      <SearchBar
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+      />
+    ));
+  }
+
   it('renders the search bar of the input tag', () => {
-    const { queryByPlaceholderText } = render(
-      <SearchBar />,
-    );
+    const { queryByPlaceholderText } = renderSearchBar();
 
     expect(queryByPlaceholderText(
       'Search for products...',
@@ -17,5 +32,49 @@ describe('SearchBar', () => {
     const { queryByTitle } = render(<SearchBar />);
 
     expect(queryByTitle('magnifyingGlass')).not.toBeNull();
+  });
+
+  describe('handleChange', () => {
+    context('when enter product information', () => {
+      it('listens change events for "search bar"', () => {
+        const { getByPlaceholderText } = renderSearchBar();
+
+        fireEvent.change(getByPlaceholderText(
+          'Search for products...',
+        ), {
+          target: { value: 'bed' },
+        });
+
+        expect(handleChange).toBeCalledWith({
+          value: 'bed',
+        });
+      });
+    });
+  });
+
+  describe('handleKeyDown', () => {
+    context('when enter the Enter key', () => {
+      it('execute the onKeyDown function', () => {
+        const { getByPlaceholderText } = renderSearchBar();
+
+        fireEvent.keyDown(getByPlaceholderText(
+          'Search for products...',
+        ), { code: 'Enter' });
+
+        expect(handleKeyDown).toBeCalled();
+      });
+    });
+
+    context('when enter a key other than enter key', () => {
+      it("doesn't execute the onKeyDown function", () => {
+        const { getByPlaceholderText } = renderSearchBar();
+
+        fireEvent.keyDown(getByPlaceholderText(
+          'Search for products...',
+        ), { code: 'a' });
+
+        expect(handleKeyDown).not.toBeCalled();
+      });
+    });
   });
 });
