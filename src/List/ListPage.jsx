@@ -1,14 +1,8 @@
-import styled from '@emotion/styled';
-
 import { useCallback } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import ListContainer from './ListContainer';
-
-const Container = styled.div({
-  width: '100%',
-});
 
 export default function ListPage() {
   const navigate = useNavigate();
@@ -20,12 +14,10 @@ export default function ListPage() {
   }, [navigate]);
 
   return (
-    <Container>
-      <ListContainer
-        onClickCategories={handleClickCategories}
-        urlPathname={pathname}
-        urlSearch={search}
-      />
-    </Container>
+    <ListContainer
+      onClickCategories={handleClickCategories}
+      urlPathname={pathname}
+      urlSearch={search}
+    />
   );
 }
