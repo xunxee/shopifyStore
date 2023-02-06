@@ -55,10 +55,6 @@ export default function ListContainer({
   }, []);
 
   useEffect(() => {
-    const isClickAccess = category || product || sort || material;
-
-    if (isClickAccess) return;
-
     const pathnameList = urlPathname.substring(1).split('/');
 
     function makeQueryString() {
@@ -102,7 +98,13 @@ export default function ListContainer({
         .replace(/=/g, '":"')
     }"}`);
 
-    dispatch(changeUrlAllDataFields(apiDataObject));
+    const isClickAccess = category || product || sort || material;
+
+    if (!isClickAccess) {
+      dispatch(changeUrlAllDataFields(apiDataObject));
+    }
+
+    // TODO: back-end와의 통신 준비
   }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {
