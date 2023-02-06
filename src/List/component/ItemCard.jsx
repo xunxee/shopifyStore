@@ -12,9 +12,10 @@ const Layout = styled.div(({ hoverColor }) => ({
   position: 'relative',
   width: '256px',
   height: '267px',
-  marginTop: '1rem',
   backgroundColor: paleWhite,
   cursor: 'pointer',
+  marginLeft: '3%',
+  marginBottom: '3%',
   '&:hover': {
     'h3, span': {
       backgroundColor: hoverColor,
