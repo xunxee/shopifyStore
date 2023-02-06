@@ -19,7 +19,7 @@ import { get } from '../utils';
 
 const Container = styled.div({
   display: 'flex',
-  minWidth: '950px',
+  minWidth: '990px',
   maxWidth: '1300px',
   minHeight: 'calc(100vh - 110px)',
   margin: '0 auto',
