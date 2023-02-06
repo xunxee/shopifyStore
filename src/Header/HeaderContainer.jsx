@@ -36,7 +36,7 @@ const Container = styled.div({
   left: '0',
   zIndex: '30',
   width: '100%',
-  minWidth: '950px',
+  minWidth: '990px',
   backgroundColor: '#000',
 });
 
