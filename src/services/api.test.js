@@ -5,10 +5,10 @@ import {
   fetchMockProduct,
 } from './api';
 
-import LOGIN_TOKENS from '../../fixtures/loginTokens';
-import POST_LOGIN_DATA from '../../fixtures/postLoginData';
-import LOGIN_FAIL_DATA from '../../fixtures/loginFailData';
-import SIGNUP_FAIL_DATA from '../../fixtures/signUpFailData';
+import LOGIN_TOKENS from '../../fixtures/Membership/loginTokens';
+import POST_LOGIN_DATA from '../../fixtures/Membership/postLoginData';
+import LOGIN_FAIL_DATA from '../../fixtures/Membership/loginFailData';
+import SIGNUP_FAIL_DATA from '../../fixtures/Membership/signUpFailData';
 import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
 import MOCK_PRODUCT_DATA from '../../fixtures/MockData/product';
 

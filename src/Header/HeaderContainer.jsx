@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 
 import { get } from '../utils';
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 import {
   setIsAccountModalOpen,

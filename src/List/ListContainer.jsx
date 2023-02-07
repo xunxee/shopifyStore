@@ -13,7 +13,7 @@ import {
 import CategoryBar from './component/CategoryBar';
 import ItemList from './ItemList';
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 import { get } from '../utils';
 

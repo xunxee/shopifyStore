@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import TitleBar from './TitleBar';
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 describe('TitleBar', () => {
   const handleClick = jest.fn();

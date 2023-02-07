@@ -4,7 +4,7 @@ import {
   fetchMockProductList,
 } from '../services/api';
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 const { initialCategoryList } = LIST_CATEGORIES;
 

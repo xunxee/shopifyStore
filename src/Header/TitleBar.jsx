@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 const Container = styled.div({
   display: 'flex',
