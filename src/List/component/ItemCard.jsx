@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useCallback } from 'react';
 
 import PALETTE from '../../styles/Palette';
 
@@ -74,6 +75,7 @@ export default function ItemCard(
     product: {
       id, title, price, mainImage,
     },
+    onClick,
   },
 ) {
   function makeHoverColor() {
@@ -82,9 +84,14 @@ export default function ItemCard(
     return itemCardHoverList[number];
   }
 
+  const handleClick = useCallback(() => {
+    onClick(id);
+  }, [onClick]);
+
   return (
     <Layout
       hoverColor={makeHoverColor()}
+      onClick={handleClick}
     >
       <TitleBox>
         <h3>

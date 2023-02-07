@@ -1,21 +1,32 @@
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 
 import ItemCard from './ItemCard';
 
-describe('ItemCard', () => {
-  const productList = {
-    title: 'Special Edition T-Shirt',
-    price: '$50.00 USD',
-    img: 'https://user-images.githubusercontent.com/87808288/209490726-1626694c-35c8-49db-a082-0e6e1001310e.png',
-  };
+import PRODUCT_DETAIL from '../../../fixtures/List/productDetail';
 
-  it('renders the title', () => {
-    const { container } = render((
+describe('ItemCard', () => {
+  const handleClick = jest.fn();
+
+  beforeEach(() => {
+    handleClick.mockClear();
+  });
+
+  function renderItemCard() {
+    return render((
       <ItemCard
-        product={productList}
+        product={PRODUCT_DETAIL}
+        onClick={handleClick}
       />
     ));
+  }
+
+  it('renders the title', () => {
+    const { container, getByText } = renderItemCard();
 
     expect(container).toHaveTextContent('Special Edition T-Shirt');
+
+    fireEvent.click(getByText('Special Edition T-Shirt'));
+
+    expect(handleClick).toBeCalled();
   });
 });
