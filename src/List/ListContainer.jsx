@@ -156,7 +156,10 @@ export default function ListContainer({
     return [...makePathname(), ...makeSearch()].join('');
   }
 
-  const handleClick = useCallback(({ name, belong }) => {
+  const handleClickCategories = useCallback(({
+    name,
+    belong,
+  }) => {
     dispatch(changeUrlDataField({ name, belong }));
 
     const url = makeUrl({ name, belong });
@@ -175,12 +178,12 @@ export default function ListContainer({
         <CategoryBar
           field="categories"
           selectedItem={category}
-          onClick={handleClick}
+          onClick={handleClickCategories}
         />
         <CategoryBar
           field="products"
           selectedItem={product}
-          onClick={handleClick}
+          onClick={handleClickCategories}
         />
       </Layout>
       <ItemList
@@ -190,12 +193,12 @@ export default function ListContainer({
         <CategoryBar
           field="sort"
           selectedItem={sort}
-          onClick={handleClick}
+          onClick={handleClickCategories}
         />
         <CategoryBar
           field="material"
           selectedItem={material}
-          onClick={handleClick}
+          onClick={handleClickCategories}
         />
       </Layout>
     </Container>
