@@ -6,6 +6,8 @@ import { render, fireEvent } from '@testing-library/react';
 
 import ListPage from './ListPage';
 
+import PRODUCT_LIST from '../../fixtures/List/productList';
+
 jest.mock('react-redux');
 
 const dispatch = jest.fn();
@@ -40,7 +42,7 @@ describe('ListPage', () => {
             sort: '',
             material: '',
           },
-          productList: [],
+          productList: PRODUCT_LIST,
         },
       })),
     );
@@ -65,5 +67,15 @@ describe('ListPage', () => {
     const { getByText } = renderListPage();
 
     fireEvent.click(getByText('New Arrivals'));
+  });
+
+  context('when click a "Plan T-Shirt" in the product list', () => {
+    it('changes URL address to "product/1"', () => {
+      const { getByText } = renderListPage();
+
+      fireEvent.click(getByText('Plain T-Shirt'));
+
+      expect(mockUseNavigate).toBeCalledWith('/product/1');
+    });
   });
 });

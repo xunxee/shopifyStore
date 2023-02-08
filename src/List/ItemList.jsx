@@ -10,13 +10,17 @@ const Container = styled.div({
   marginBottom: '5rem',
 });
 
-export default function ItemList({ productList }) {
+export default function ItemList({
+  onClickItemList,
+  productList,
+}) {
   return (
     <Container>
       {productList.map((product) => (
         <ItemCard
           key={product.id}
           product={product}
+          onClickItemList={onClickItemList}
         />
       ))}
     </Container>

@@ -13,9 +13,14 @@ export default function ListPage() {
     navigate(url);
   }, [navigate]);
 
+  const handleClickItemList = useCallback((url) => {
+    navigate(url);
+  }, [navigate]);
+
   return (
     <ListContainer
       onClickCategories={handleClickCategories}
+      onClickItemList={handleClickItemList}
       urlPathname={pathname}
       urlSearch={search}
     />

@@ -9,12 +9,13 @@ jest.mock('react-redux');
 describe('ListContainer', () => {
   const dispatch = jest.fn();
 
-  const handleClick = jest.fn();
+  const handleClickCategories = jest.fn();
+  const handleClickItemList = jest.fn();
 
   beforeEach(() => {
     dispatch.mockClear();
 
-    handleClick.mockClear();
+    handleClickCategories.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
 
@@ -39,7 +40,8 @@ describe('ListContainer', () => {
   } = {}) {
     return render((
       <ListContainer
-        onClickCategories={handleClick}
+        onClickCategories={handleClickCategories}
+        onClickItemList={handleClickItemList}
         urlPathname={urlPathname}
         urlSearch={urlSearch}
       />
@@ -51,7 +53,7 @@ describe('ListContainer', () => {
 
     fireEvent.click(getByText('New Arrivals'));
 
-    expect(handleClick).toBeCalled();
+    expect(handleClickCategories).toBeCalled();
   });
 
   describe('changeUrlData', () => {
@@ -130,7 +132,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(getByText('New Arrivals'));
 
-        expect(handleClick).toBeCalledWith('/search/new');
+        expect(handleClickCategories).toBeCalledWith('/search/new');
       });
     });
 
@@ -142,7 +144,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(getByText('Sofas'));
 
-        expect(handleClick).toBeCalledWith(
+        expect(handleClickCategories).toBeCalledWith(
           '/search/product/sofas',
         );
       });
@@ -156,7 +158,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(getByText('Trending'));
 
-        expect(handleClick).toBeCalledWith(
+        expect(handleClickCategories).toBeCalledWith(
           '/search?sort=trending',
         );
       });
@@ -172,7 +174,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(getByText('Fabric'));
 
-        expect(handleClick).toBeCalledWith(
+        expect(handleClickCategories).toBeCalledWith(
           '/search?sort=trending&material=fabric',
         );
       });

@@ -15,7 +15,7 @@ describe('ItemCard', () => {
     return render((
       <ItemCard
         product={PRODUCT_DETAIL}
-        onClick={handleClick}
+        onClickItemList={handleClick}
       />
     ));
   }

@@ -33,6 +33,7 @@ const Layout = styled.div({
 
 export default function ListContainer({
   onClickCategories,
+  onClickItemList,
   urlPathname,
   urlSearch,
 }) {
@@ -187,6 +188,7 @@ export default function ListContainer({
         />
       </Layout>
       <ItemList
+        onClickItemList={onClickItemList}
         productList={productList}
       />
       <Layout>

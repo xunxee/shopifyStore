@@ -75,7 +75,7 @@ export default function ItemCard(
     product: {
       id, title, price, mainImage,
     },
-    onClick,
+    onClickItemList,
   },
 ) {
   function makeHoverColor() {
@@ -85,8 +85,10 @@ export default function ItemCard(
   }
 
   const handleClick = useCallback(() => {
-    onClick(id);
-  }, [onClick]);
+    const url = `/product/${id}`;
+
+    onClickItemList(url);
+  }, [onClickItemList]);
 
   return (
     <Layout
