@@ -1,8 +1,18 @@
 import styled from '@emotion/styled';
 
 const Container = styled.div({
-  height: '182px',
   backgroundColor: 'red',
+});
+
+const ImageList = styled.ul({
+  display: 'flex',
+  '& li': {
+    display: 'inline-block',
+  },
+  '& img': {
+    width: '235px',
+    height: '182px',
+  },
 });
 
 export default function SlideAlbum({
@@ -13,8 +23,7 @@ export default function SlideAlbum({
 
   return (
     <Container>
-      <p>SlideAlbum</p>
-      <ul data-testid="albumContainer">
+      <ImageList data-testid="albumContainer">
         {uniqueImageList.map(([url, key]) => (
           <li
             key={key}
@@ -23,7 +32,7 @@ export default function SlideAlbum({
             <img alt={title} src={url} />
           </li>
         ))}
-      </ul>
+      </ImageList>
     </Container>
   );
 }
