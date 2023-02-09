@@ -8,6 +8,7 @@ const { actions, reducer } = createSlice({
   name: 'productDetail',
   initialState: {
     product: {},
+    selectedImage: null,
   },
   reducers: {
     setProduct(state, { payload: product }) {
@@ -16,11 +17,19 @@ const { actions, reducer } = createSlice({
         product,
       };
     },
+
+    selectImage(state, { payload: selectedImage }) {
+      return {
+        ...state,
+        selectedImage,
+      };
+    },
   },
 });
 
 export const {
   setProduct,
+  selectImage,
 } = actions;
 
 export function loadProduct() {
