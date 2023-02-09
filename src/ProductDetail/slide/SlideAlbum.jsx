@@ -7,24 +7,20 @@ const Container = styled.div({
 
 export default function SlideAlbum({
   title,
-  banners,
+  imageList,
 }) {
-  if (!banners) return null;
-
-  const uniqueBanners = banners.slice(0, banners.length / 3);
+  const uniqueImageList = imageList.map((url, index) => [url, index + 1]);
 
   return (
     <Container>
       <p>SlideAlbum</p>
       <ul data-testid="albumContainer">
-        {uniqueBanners && uniqueBanners.map(({
-          key, imgUrl,
-        }) => (
+        {uniqueImageList.map(([url, key]) => (
           <li
             key={key}
             data-testid="detailImage"
           >
-            <img alt={title} src={imgUrl} />
+            <img alt={title} src={url} />
           </li>
         ))}
       </ul>

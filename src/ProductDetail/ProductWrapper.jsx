@@ -161,7 +161,7 @@ export default function ProductWrapper({
           />
           <SlideAlbum
             title={title}
-            banners={banners}
+            imageList={imageList}
           />
         </SlideWrapper>
         <ItemInfo />
