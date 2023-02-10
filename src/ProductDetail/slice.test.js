@@ -4,7 +4,6 @@ import configureStore from 'redux-mock-store';
 
 import reducer, {
   setProduct,
-  selectImage,
   loadProduct,
 } from './slice';
 
@@ -38,18 +37,6 @@ describe('reducer', () => {
       expect(state.product.id).toBe(1);
       expect(state.product.name)
         .toBe('Special Edition T-Shirt');
-    });
-  });
-
-  describe('selectImage', () => {
-    it('changes selected image', () => {
-      const initialState = {
-        selectedImage: null,
-      };
-
-      const state = reducer(initialState, selectImage(3));
-
-      expect(state.selectedImage).toBe(3);
     });
   });
 });
