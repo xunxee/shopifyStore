@@ -36,6 +36,7 @@ export default function ProductWrapper({
   isPassTheSlide,
   startNumber,
   endNumber,
+  onClickAlbum,
 }) {
   const [banners, setBanners] = useState([]);
 
@@ -162,6 +163,7 @@ export default function ProductWrapper({
           <SlideAlbum
             title={title}
             imageList={imageList}
+            onClickAlbum={onClickAlbum}
           />
         </SlideWrapper>
         <ItemInfo />

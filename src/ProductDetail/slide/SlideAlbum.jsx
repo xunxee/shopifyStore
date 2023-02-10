@@ -6,8 +6,9 @@ const Container = styled.div({
 
 const ImageList = styled.ul({
   display: 'flex',
-  '& li': {
+  '& button': {
     display: 'inline-block',
+    all: 'unset',
   },
   '& img': {
     width: '235px',
@@ -18,19 +19,26 @@ const ImageList = styled.ul({
 export default function SlideAlbum({
   title,
   imageList,
+  onClickAlbum,
 }) {
   const uniqueImageList = imageList.map((url, index) => [url, index + 1]);
+
+  function handleClick(number) {
+    onClickAlbum(number);
+  }
 
   return (
     <Container>
       <ImageList data-testid="albumContainer">
         {uniqueImageList.map(([url, key]) => (
-          <li
+          <button
+            type="button"
             key={key}
             data-testid="detailImage"
+            onClick={() => handleClick(key)}
           >
             <img alt={title} src={url} />
-          </li>
+          </button>
         ))}
       </ImageList>
     </Container>
