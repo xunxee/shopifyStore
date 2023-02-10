@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -8,7 +8,7 @@ import { get } from '../utils';
 
 import ProductWrapper from './ProductWrapper';
 
-import { loadProduct, selectImage } from './slice';
+import { loadProduct } from './slice';
 
 const RelatedProducts = styled.div({
 });
@@ -24,10 +24,6 @@ export default function ProductDetailContainer() {
     dispatch(loadProduct());
   }, []);
 
-  const handleClickAlbum = useCallback((number) => {
-    dispatch(selectImage(number));
-  }, [dispatch]);
-
   if (!product.imageList) {
     return null;
   }
@@ -36,7 +32,6 @@ export default function ProductDetailContainer() {
     <>
       <ProductWrapper
         product={product}
-        onClickAlbum={handleClickAlbum}
       />
       <RelatedProducts />
     </>

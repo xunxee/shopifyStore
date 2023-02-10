@@ -1,10 +1,8 @@
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import ProductDetailContainer from './ProductDetailContainer';
-
-import { selectImage } from './slice';
 
 describe('ProductDetailContainer', () => {
   const dispatch = jest.fn();
@@ -44,16 +42,6 @@ describe('ProductDetailContainer', () => {
       expect(container).toHaveTextContent(
         'Special Edition T-Shirt',
       );
-    });
-
-    it('clicks the slide album', () => {
-      const { getAllByTestId } = render((
-        <ProductDetailContainer />
-      ));
-
-      fireEvent.click(getAllByTestId('detailImage')[0]);
-
-      expect(dispatch).toBeCalledWith(selectImage(1));
     });
   });
 
