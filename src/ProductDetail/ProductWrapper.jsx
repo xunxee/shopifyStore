@@ -36,7 +36,6 @@ export default function ProductWrapper({
   isPassTheSlide,
   startNumber,
   endNumber,
-  onClickAlbum,
 }) {
   const [banners, setBanners] = useState([]);
 
@@ -61,7 +60,8 @@ export default function ProductWrapper({
 
   const TOTAL_BANNERS_COUNT = BANNERS_COUNT * 3;
 
-  const START = startNumber || (TOTAL_BANNERS_COUNT * 1) / 3 + 1;
+  const START = startNumber
+    || (TOTAL_BANNERS_COUNT * 1) / 3 + 1;
 
   const END = endNumber || (TOTAL_BANNERS_COUNT * 2) / 3;
 
@@ -163,7 +163,8 @@ export default function ProductWrapper({
           <SlideAlbum
             title={title}
             imageList={imageList}
-            onClickAlbum={onClickAlbum}
+            currentSlideNumber={slide.number}
+            setSlide={setSlide}
           />
         </SlideWrapper>
         <ItemInfo />

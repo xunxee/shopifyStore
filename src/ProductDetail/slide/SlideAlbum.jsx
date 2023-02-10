@@ -19,12 +19,20 @@ const ImageList = styled.ul({
 export default function SlideAlbum({
   title,
   imageList,
-  onClickAlbum,
+  currentSlideNumber,
+  setSlide,
 }) {
   const uniqueImageList = imageList.map((url, index) => [url, index + 1]);
 
   function handleClick(number) {
-    onClickAlbum(number);
+    const selectedNumber = number + 4;
+
+    if (selectedNumber === currentSlideNumber) return;
+
+    setSlide({
+      number: selectedNumber,
+      isMotion: true,
+    });
   }
 
   return (
