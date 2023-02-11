@@ -15,3 +15,16 @@ export function updateSlide({ targetName, isMotion }) {
     isMotion,
   });
 }
+
+export function makeSelectedNumber({
+  length,
+  slideNumber,
+}) {
+  const initialNumber = slideNumber - length;
+
+  if (initialNumber === 0) return length;
+
+  if (initialNumber === length + 1) return 1;
+
+  return initialNumber;
+}

@@ -1,4 +1,8 @@
-import { get, updateSlide } from './utils';
+import {
+  get,
+  updateSlide,
+  makeSelectedNumber,
+} from './utils';
 
 test('get', () => {
   const state = {
@@ -45,6 +49,30 @@ describe('updateSlide', () => {
         number: 4,
         isMotion: true,
       });
+    });
+  });
+});
+
+describe('makeSelectedNumber', () => {
+  context('when click the next button to go to the replicated slide', () => {
+    it('moves to the first picture on the main slide', () => {
+      const number = makeSelectedNumber({
+        length: 4,
+        slideNumber: 9,
+      });
+
+      expect(number).toBe(1);
+    });
+  });
+
+  context('when click the previous button to go to the replicated slide', () => {
+    it('moves to the last picture on the main slide', () => {
+      const number = makeSelectedNumber({
+        length: 4,
+        slideNumber: 4,
+      });
+
+      expect(number).toBe(4);
     });
   });
 });
