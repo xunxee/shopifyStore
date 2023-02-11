@@ -1,28 +1,45 @@
 import styled from '@emotion/styled';
 
-const Container = styled.div({
-  backgroundColor: 'red',
+import Palette from '../../styles/Palette';
+
+import { makeSelectedNumber } from '../../utils';
+
+const {
+  darkPurple,
+  palePurple,
+} = Palette;
+
+const AlbumLayout = styled.ul({
+  display: 'flex',
+  backgroundColor: darkPurple,
 });
 
-const ImageList = styled.ul({
-  display: 'flex',
-  '& button': {
-    display: 'inline-block',
-    all: 'unset',
-  },
+const AlbumImage = styled.button(({
+  uniqueNumber,
+  selectedSlideNumber,
+}) => ({
+  all: 'unset',
+  display: 'inline-block',
+  backgroundColor: `${uniqueNumber === selectedSlideNumber
+    ? palePurple
+    : darkPurple}`,
   '& img': {
     width: '235px',
     height: '182px',
   },
-});
+}));
 
 export default function SlideAlbum({
   title,
   imageList,
   currentSlideNumber,
   setSlide,
+  BANNERS_COUNT,
 }) {
-  const uniqueImageList = imageList.map((url, index) => [url, index + 1]);
+  const uniqueImageList = imageList.map((
+    url,
+    index,
+  ) => [url, index + 1]);
 
   function handleClick(number) {
     const selectedNumber = number + 4;
@@ -36,19 +53,22 @@ export default function SlideAlbum({
   }
 
   return (
-    <Container>
-      <ImageList data-testid="albumContainer">
-        {uniqueImageList.map(([url, key]) => (
-          <button
-            type="button"
-            key={key}
-            data-testid="detailImage"
-            onClick={() => handleClick(key)}
-          >
-            <img alt={title} src={url} />
-          </button>
-        ))}
-      </ImageList>
-    </Container>
+    <AlbumLayout data-testid="albumContainer">
+      {uniqueImageList.map(([url, key]) => (
+        <AlbumImage
+          type="button"
+          key={key}
+          data-testid="detailImage"
+          uniqueNumber={key}
+          selectedSlideNumber={makeSelectedNumber({
+            length: BANNERS_COUNT,
+            slideNumber: currentSlideNumber,
+          })}
+          onClick={() => handleClick(key)}
+        >
+          <img alt={title} src={url} />
+        </AlbumImage>
+      ))}
+    </AlbumLayout>
   );
 }

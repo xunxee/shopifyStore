@@ -165,6 +165,7 @@ export default function ProductWrapper({
             imageList={imageList}
             currentSlideNumber={slide.number}
             setSlide={setSlide}
+            BANNERS_COUNT={BANNERS_COUNT}
           />
         </SlideWrapper>
         <ItemInfo />

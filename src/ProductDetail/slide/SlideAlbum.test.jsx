@@ -10,6 +10,7 @@ describe('SlideAlbum', () => {
   function renderSlideAlbum({
     title = PRODUCT.title,
     imageList = PRODUCT.imageList,
+    BANNERS_COUNT = PRODUCT.imageList.length,
   } = {}) {
     return render((
       <SlideAlbum
@@ -17,6 +18,7 @@ describe('SlideAlbum', () => {
         imageList={imageList}
         currentSlideNumber={5}
         setSlide={handleSetState}
+        BANNERS_COUNT={BANNERS_COUNT}
       />
     ));
   }
