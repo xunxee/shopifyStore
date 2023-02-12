@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import Palette from '../../styles/Palette';
+import Palette from '../../styles/palette';
 
 import { makeSelectedNumber } from '../../utils';
 
@@ -9,7 +9,7 @@ const {
   palePurple,
 } = Palette;
 
-const AlbumLayout = styled.ul({
+const Layout = styled.ul({
   display: 'flex',
   backgroundColor: darkPurple,
 });
@@ -53,7 +53,7 @@ export default function SlideAlbum({
   }
 
   return (
-    <AlbumLayout data-testid="albumContainer">
+    <Layout data-testid="albumContainer">
       {uniqueImageList.map(([url, key]) => (
         <AlbumImage
           type="button"
@@ -69,6 +69,6 @@ export default function SlideAlbum({
           <img alt={title} src={url} />
         </AlbumImage>
       ))}
-    </AlbumLayout>
+    </Layout>
   );
 }
