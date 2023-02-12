@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
-import PALETTE from '../../styles/Palette';
+import PALETTE from '../../styles/palette';
+import PRODUCT_TAG from '../../styles/productTag';
 
 const {
   basicWhite,
   paleWhite,
   itemCardHoverList,
 } = PALETTE;
+const { productName, priceName } = PRODUCT_TAG;
 
 const Layout = styled.div(({ hoverColor }) => ({
   position: 'relative',
@@ -28,7 +30,7 @@ const Layout = styled.div(({ hoverColor }) => ({
   },
 }));
 
-const TitleBox = styled.div({
+const ProductTag = styled.div({
   position: 'absolute',
   top: '0',
   left: '0',
@@ -36,27 +38,19 @@ const TitleBox = styled.div({
   overflow: 'hidden',
   paddingRight: '4rem',
   '& h3': {
+    ...productName,
     display: 'inline',
-    padding: '1rem 1.5rem',
     fontSize: '18px',
     lineHeight: '40px',
-    fontWeight: '700',
     transition: '0.5s',
     transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
-    letterSpacing: '.4px',
-    backgroundColor: basicWhite,
     boxDecorationBreak: 'clone',
   },
   '& span': {
+    ...priceName,
     display: 'inline-block',
-    padding: '.5rem 1.5rem 1rem',
-    fontSize: '14px',
-    lineHeight: '20px',
-    fontWeight: '600',
     transition: '0.5s',
     transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
-    letterSpacing: '.35px',
-    backgroundColor: basicWhite,
   },
 });
 
@@ -95,12 +89,12 @@ export default function ItemCard(
       hoverColor={makeHoverColor()}
       onClick={handleClick}
     >
-      <TitleBox>
+      <ProductTag>
         <h3>
           {title}
         </h3>
         <span>{price}</span>
-      </TitleBox>
+      </ProductTag>
       <ImgBox>
         <img alt={title} src={mainImage} />
       </ImgBox>
