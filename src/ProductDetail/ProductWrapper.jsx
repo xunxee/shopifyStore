@@ -11,7 +11,7 @@ import SlideAlbum from './slide/SlideAlbum';
 
 import { updateSlide } from '../utils';
 
-const ItemLayout = styled.div({
+const Layout = styled.div({
   display: 'flex',
 });
 
@@ -148,7 +148,7 @@ export default function ProductWrapper({
 
   return (
     <>
-      <ItemLayout>
+      <Layout>
         <SlideWrapper>
           <Slide
             banners={banners}
@@ -169,7 +169,7 @@ export default function ProductWrapper({
           />
         </SlideWrapper>
         <ItemInfo />
-      </ItemLayout>
+      </Layout>
       <div>{title}</div>
       <div>Product Info</div>
     </>

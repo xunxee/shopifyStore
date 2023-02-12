@@ -11,6 +11,7 @@ import PALETTE from '../../styles/Palette';
 const {
   basicWhite,
   basicPurple,
+  darkPurple,
 } = PALETTE;
 
 const Layout = styled.div(({ slideLength }) => ({
@@ -43,6 +44,9 @@ const SlideControlButton = styled.div({
   border: `1px solid ${basicWhite}`,
   borderWidth: '1px',
   '& button': {
+    ':hover': {
+      backgroundColor: darkPurple,
+    },
     all: 'unset',
     display: 'flex',
     justifyContent: 'center',
