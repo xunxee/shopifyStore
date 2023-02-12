@@ -6,7 +6,7 @@ import {
   faArrowLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
-import PALETTE from '../../styles/Palette';
+import PALETTE from '../../styles/palette';
 
 const {
   basicWhite,
@@ -39,7 +39,7 @@ const SlideControlButton = styled.div({
   position: 'absolute',
   right: '2.5rem',
   bottom: '2.5rem',
-  zIndex: '30',
+  zIndex: '20',
   width: '194px',
   border: `1px solid ${basicWhite}`,
   borderWidth: '1px',
