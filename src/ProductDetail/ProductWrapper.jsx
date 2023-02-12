@@ -6,13 +6,33 @@ import styled from '@emotion/styled';
 
 import { v4 } from 'uuid';
 
+import PRODUCT_TAG from '../styles/productTag';
+
 import Slide from './slide/Slide';
 import SlideAlbum from './slide/SlideAlbum';
 
 import { updateSlide } from '../utils';
 
+const { productName, priceName } = PRODUCT_TAG;
+
 const Layout = styled.div({
   display: 'flex',
+  position: 'relative',
+});
+
+const ProductTag = styled.div({
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  zIndex: '20',
+  '& h3': {
+    fontSize: '32px',
+    lineHeight: '32px',
+    ...productName,
+  },
+  '& span': {
+    ...priceName,
+  },
 });
 
 const SlideWrapper = styled.div({
@@ -28,6 +48,7 @@ const ItemInfo = styled.div({
 export default function ProductWrapper({
   product: {
     title,
+    price,
     imageList,
     // TODO:
     // size,
@@ -149,6 +170,10 @@ export default function ProductWrapper({
   return (
     <>
       <Layout>
+        <ProductTag>
+          <h3>{title}</h3>
+          <span>{price}</span>
+        </ProductTag>
         <SlideWrapper>
           <Slide
             banners={banners}
