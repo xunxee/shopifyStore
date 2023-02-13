@@ -28,3 +28,24 @@ export function makeSelectedNumber({
 
   return initialNumber;
 }
+
+export function setAlbumPosition({ index, length }) {
+  const DISTANCE = 65 / 4;
+
+  if (index === length + 1
+    || index === 1) {
+    return `translateX(-${0}vw)`;
+  }
+
+  if (index === 0) {
+    return `translateX(-${(length - 4) * DISTANCE}vw)`;
+  }
+
+  if (index >= 4) {
+    return `translateX(-${
+      (index - 3) * DISTANCE
+    }vw)`;
+  }
+
+  return `translateX(-${0}vw)`;
+}

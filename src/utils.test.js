@@ -2,6 +2,7 @@ import {
   get,
   updateSlide,
   makeSelectedNumber,
+  setAlbumPosition,
 } from './utils';
 
 test('get', () => {
@@ -73,6 +74,30 @@ describe('makeSelectedNumber', () => {
       });
 
       expect(number).toBe(4);
+    });
+  });
+});
+
+describe('setAlbumPosition', () => {
+  context('when the image reaches the album slide', () => {
+    it('moves the slide one step to the right', () => {
+      const location = setAlbumPosition({
+        index: 4,
+        length: 6,
+      });
+
+      expect(location).toBe('translateX(-16.25vw)');
+    });
+  });
+
+  context('when the slide moves to the left and reaches the last slide', () => {
+    it('moves the last image of the album to be visible', () => {
+      const location = setAlbumPosition({
+        index: 0,
+        length: 6,
+      });
+
+      expect(location).toBe('translateX(-32.5vw)');
     });
   });
 });
