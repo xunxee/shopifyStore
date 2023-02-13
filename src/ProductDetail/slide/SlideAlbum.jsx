@@ -20,12 +20,19 @@ const AlbumImage = styled.button(({
 }) => ({
   all: 'unset',
   display: 'inline-block',
+  overflow: 'hidden',
   backgroundColor: `${uniqueNumber === selectedSlideNumber
     ? palePurple
     : darkPurple}`,
   '& img': {
     width: '235px',
     height: '182px',
+    transition: '0.5s',
+  },
+  '&: hover': {
+    '& img': {
+      transform: 'scale(1.2)',
+    },
   },
 }));
 
