@@ -11,7 +11,10 @@ import PRODUCT_TAG from '../styles/productTag';
 import Slide from './slide/Slide';
 import SlideAlbum from './slide/SlideAlbum';
 
-import { updateSlide } from '../utils';
+import {
+  updateSlide,
+  setAlbumPosition,
+} from '../utils';
 
 const { productName, priceName } = PRODUCT_TAG;
 
@@ -61,6 +64,7 @@ export default function ProductWrapper({
   const [banners, setBanners] = useState([]);
 
   const slideRef = useRef();
+  const slideAlbumRef = useRef();
 
   useEffect(() => {
     setBanners([...imageList, ...imageList, ...imageList]);
@@ -119,6 +123,14 @@ export default function ProductWrapper({
 
     slideRef.current.style
       .transition = slide.isMotion ? 'all 0.5s ease-in' : '';
+
+    const albumImageIndex = slide.number - BANNERS_COUNT;
+
+    slideAlbumRef.current.style
+      .transform = setAlbumPosition({
+        index: albumImageIndex,
+        length: BANNERS_COUNT,
+      });
   }, [slide, SLIDE_WIDTH]);
 
   const isPassTheFirstSlide = isPassTheSlide
@@ -191,6 +203,7 @@ export default function ProductWrapper({
             currentSlideNumber={slide.number}
             setSlide={setSlide}
             BANNERS_COUNT={BANNERS_COUNT}
+            slideAlbumRef={slideAlbumRef}
           />
         </SlideWrapper>
         <ItemInfo />

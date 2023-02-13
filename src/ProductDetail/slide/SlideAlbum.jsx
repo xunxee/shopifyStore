@@ -9,24 +9,27 @@ const {
   palePurple,
 } = Palette;
 
-const Layout = styled.ul({
+const Layout = styled.div({
   display: 'flex',
   backgroundColor: darkPurple,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
 });
+
+const ImageList = styled.div();
 
 const AlbumImage = styled.button(({
   uniqueNumber,
   selectedSlideNumber,
 }) => ({
   all: 'unset',
-  display: 'inline-block',
-  overflow: 'hidden',
   backgroundColor: `${uniqueNumber === selectedSlideNumber
     ? palePurple
     : darkPurple}`,
   '& img': {
     width: '235px',
     height: '182px',
+    objectFit: 'cover',
     transition: '0.5s',
   },
   '&: hover': {
@@ -42,6 +45,7 @@ export default function SlideAlbum({
   currentSlideNumber,
   setSlide,
   BANNERS_COUNT,
+  slideAlbumRef,
 }) {
   const uniqueImageList = imageList.map((
     url,
@@ -49,7 +53,7 @@ export default function SlideAlbum({
   ) => [url, index + 1]);
 
   function handleClick(number) {
-    const selectedNumber = number + 4;
+    const selectedNumber = number + BANNERS_COUNT;
 
     if (selectedNumber === currentSlideNumber) return;
 
@@ -60,22 +64,28 @@ export default function SlideAlbum({
   }
 
   return (
-    <Layout data-testid="albumContainer">
-      {uniqueImageList.map(([url, key]) => (
-        <AlbumImage
-          type="button"
-          key={key}
-          data-testid="detailImage"
-          uniqueNumber={key}
-          selectedSlideNumber={makeSelectedNumber({
-            length: BANNERS_COUNT,
-            slideNumber: currentSlideNumber,
-          })}
-          onClick={() => handleClick(key)}
-        >
-          <img alt={title} src={url} />
-        </AlbumImage>
-      ))}
+    <Layout
+      data-testid="albumContainer"
+    >
+      <ImageList
+        ref={slideAlbumRef}
+      >
+        {uniqueImageList.map(([url, key]) => (
+          <AlbumImage
+            type="button"
+            key={key}
+            data-testid="detailImage"
+            uniqueNumber={key}
+            selectedSlideNumber={makeSelectedNumber({
+              length: BANNERS_COUNT,
+              slideNumber: currentSlideNumber,
+            })}
+            onClick={() => handleClick(key)}
+          >
+            <img alt={title} src={url} />
+          </AlbumImage>
+        ))}
+      </ImageList>
     </Layout>
   );
 }
