@@ -10,6 +10,16 @@
     "https://user-images.githubusercontent.com/87808288/218358801-0ad605a6-9760-4f13-8c82-26b0abda077c.png",
     "https://user-images.githubusercontent.com/87808288/218358841-a3b04df4-1dec-40bb-9ea6-217a1a6d7e1d.png"
   ],
-  "size": ["S", "M", "L"],
-  "details": "Show off your love for Next.js and Vercel with this unique, limited edition t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made! All proceeds will be donated to charity."
+  "size": ["XS", "S", "M", "L", "XL"],
+  "color": ["white", "grey", "darkturquoise", "lightsalmon"],
+  "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.",
+  "evaluation": {
+    "starRating": 5,
+    "review": [
+      "I'd love to.",
+      "It's neat",
+      "The quality is good",
+      "It's good to wear"
+    ]
+  }
 }
