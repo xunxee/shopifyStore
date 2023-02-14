@@ -8,8 +8,13 @@ const product = {
     'https://user-images.githubusercontent.com/87808288/210361485-b0962306-1e80-4390-ac12-55b891900240.png',
     'https://user-images.githubusercontent.com/87808288/210361523-88a96ee5-b8c6-42a7-877d-135534e9afdc.png',
   ],
-  size: ['S', 'M', 'L'],
+  size: ['XS', 'S', 'M', 'L', 'XL'],
+  color: ['white', 'grey', 'darkturquoise', 'lightsalmon'],
   details: 'Show off your love for Next.js and Vercel with this unique, limited edition t-shirt. This design is part of a limited run, numbered drop at the June 2021 Next.js Conf. It features a unique, handcrafted triangle design. Get it while supplies last – only 200 of these shirts will be made! All proceeds will be donated to charity.',
+  evaluation: {
+    starRating: 5,
+    review: ["I'd love to.", "It's neat", 'The quality is good', "It's good to wear"],
+  },
   banners: [
     {
       key: 1,
