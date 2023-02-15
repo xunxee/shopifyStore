@@ -4,56 +4,54 @@ import { fireEvent, render } from '@testing-library/react';
 
 import ProductWrapper from './ProductWrapper';
 
-import PRODUCT from '../../fixtures/MockData/product';
+import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-const { title: TITLE, imageList: IMAGE_LIST } = PRODUCT;
+const { title, price, imageList, size, color, details, evaluation, banners } =
+  PRODUCT_DETAIL;
 
 describe('ProductWrapper', () => {
   const setState = jest.fn();
 
-  jest.spyOn(React, 'useState')
-    .mockImplementation((initialState) => [
-      initialState, setState,
-    ]);
+  jest
+    .spyOn(React, 'useState')
+    .mockImplementation((initialState) => [initialState, setState]);
 
   beforeEach(() => {
     setState.mockClear();
   });
 
   function renderProductWrapper({
-    title = TITLE,
-    imageList = IMAGE_LIST,
     isPassTheSlide = false,
     startNumber = 4,
     endNumber = 8,
   } = {}) {
-    return render((
+    return render(
       <ProductWrapper
         product={{
           title,
+          price,
           imageList,
+          size,
+          color,
+          details,
+          evaluation,
         }}
         isPassTheSlide={isPassTheSlide}
         startNumber={startNumber}
         endNumber={endNumber}
-      />
-    ));
+        banners={banners}
+      />,
+    );
   }
 
   it('renders the title', () => {
-    const { title } = PRODUCT;
-
-    const { container } = render((
-      <ProductWrapper product={PRODUCT} />
-    ));
+    const { container } = renderProductWrapper();
 
     expect(container).toHaveTextContent(title);
   });
 
   it('renders the arrow icon', () => {
-    const { getByTitle } = render((
-      <ProductWrapper product={PRODUCT} />
-    ));
+    const { getByTitle } = renderProductWrapper();
 
     expect(getByTitle('nextArrow')).not.toBeNull();
   });
@@ -68,7 +66,7 @@ describe('ProductWrapper', () => {
         jest.useFakeTimers();
         fireEvent.click(getByTitle('previousArrow'));
 
-        expect(setState).toBeCalledTimes(4);
+        expect(setState).toBeCalledTimes(2);
 
         jest.runAllTimers();
 
@@ -87,10 +85,10 @@ describe('ProductWrapper', () => {
         jest.useFakeTimers();
         fireEvent.click(getByTitle('nextArrow'));
 
-        expect(setState).toHaveBeenNthCalledWith(
-          3,
-          { isMotion: false, number: 4 },
-        );
+        expect(setState).toHaveBeenNthCalledWith(2, {
+          isMotion: false,
+          number: 4,
+        });
 
         jest.runAllTimers();
 
