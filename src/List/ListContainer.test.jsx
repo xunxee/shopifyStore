@@ -1,12 +1,12 @@
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from "@testing-library/react";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import ListContainer from './ListContainer';
+import ListContainer from "./ListContainer";
 
-jest.mock('react-redux');
+jest.mock("react-redux");
 
-describe('ListContainer', () => {
+describe("ListContainer", () => {
   const dispatch = jest.fn();
 
   const handleClickCategories = jest.fn();
@@ -34,7 +34,7 @@ describe('ListContainer', () => {
     );
   });
 
-  function renderListContainer({ urlPathname = '/search', urlSearch } = {}) {
+  function renderListContainer({ urlPathname = "/search", urlSearch } = {}) {
     return render(
       <ListContainer
         onClickCategories={handleClickCategories}
@@ -45,47 +45,47 @@ describe('ListContainer', () => {
     );
   }
 
-  it('renders categories', () => {
+  it("renders categories", () => {
     const { getByText } = renderListContainer();
 
-    fireEvent.click(getByText('New Arrivals'));
+    fireEvent.click(getByText("New Arrivals"));
 
     expect(handleClickCategories).toBeCalled();
   });
 
-  describe('changeUrlData', () => {
+  describe("changeUrlData", () => {
     const scenarios = [
       {
-        situation: 'when only urlPathname exists',
-        described: 'saves the data of pathname',
-        urlPathname: 'search/product/beds/new',
-        payload: { category: 'new', product: 'beds' },
+        situation: "when only urlPathname exists",
+        described: "saves the data of pathname",
+        urlPathname: "search/product/beds/new",
+        payload: { category: "new", product: "beds" },
       },
       {
-        situation: 'when urlPathname and urlSearch exist',
-        described: 'saves the data of urlPathname and urlSearch',
-        urlPathname: '/search/product/beds/new',
-        urlSearch: '?sort=trending',
+        situation: "when urlPathname and urlSearch exist",
+        described: "saves the data of urlPathname and urlSearch",
+        urlPathname: "/search/product/beds/new",
+        urlSearch: "?sort=trending",
         payload: {
-          category: 'new',
-          product: 'beds',
-          sort: 'trending',
+          category: "new",
+          product: "beds",
+          sort: "trending",
         },
       },
       {
         situation: "when urlPathname has 'search' and urlSearch doesn't exist",
         described: "saves 'all' in category",
-        urlPathname: '/search',
-        payload: { category: 'all' },
+        urlPathname: "/search",
+        payload: { category: "all" },
       },
       {
         situation: "when urlPathname has 'search' and urlSearch",
         described: "saves 'all' and 'trending'",
-        urlPathname: '/search',
-        urlSearch: '?sort=trending',
+        urlPathname: "/search",
+        urlSearch: "?sort=trending",
         payload: {
-          category: 'all',
-          sort: 'trending',
+          category: "all",
+          sort: "trending",
         },
       },
     ];
@@ -100,17 +100,17 @@ describe('ListContainer', () => {
 
             expect(dispatch).toBeCalledWith({
               payload,
-              type: 'list/changeUrlAllDataFields',
+              type: "list/changeUrlAllDataFields",
             });
           });
         });
       },
     );
 
-    context('when not a valid pathname', () => {
+    context("when not a valid pathname", () => {
       it("doesn't call dispatch", () => {
         renderListContainer({
-          urlPathname: '/search/',
+          urlPathname: "/search/",
         });
 
         expect(dispatch).toBeCalledTimes(1);
@@ -118,53 +118,53 @@ describe('ListContainer', () => {
     });
   });
 
-  describe('makeUrl', () => {
-    context('when it clicks New Arrivals', () => {
-      it('changes url to /search/new', () => {
+  describe("makeUrl", () => {
+    context("when it clicks New Arrivals", () => {
+      it("changes url to /search/new", () => {
         const { getByText } = renderListContainer();
 
-        fireEvent.click(getByText('New Arrivals'));
+        fireEvent.click(getByText("New Arrivals"));
 
-        expect(handleClickCategories).toBeCalledWith('/search/new');
+        expect(handleClickCategories).toBeCalledWith("/search/new");
       });
     });
 
-    context('when it clicks Sofas', () => {
-      it('changes url to /search/product/sofas', () => {
+    context("when it clicks Sofas", () => {
+      it("changes url to /search/product/sofas", () => {
         const { getByText } = renderListContainer({
-          urlPathname: '/search/product/sofas',
+          urlPathname: "/search/product/sofas",
         });
 
-        fireEvent.click(getByText('Sofas'));
+        fireEvent.click(getByText("Sofas"));
 
-        expect(handleClickCategories).toBeCalledWith('/search/product/sofas');
+        expect(handleClickCategories).toBeCalledWith("/search/product/sofas");
       });
     });
 
-    context('when it clicks Trending', () => {
-      it('changes url to /search?sort=trending', () => {
+    context("when it clicks Trending", () => {
+      it("changes url to /search?sort=trending", () => {
         const { getByText } = renderListContainer({
-          urlPathname: '/search/new',
+          urlPathname: "/search/new",
         });
 
-        fireEvent.click(getByText('Trending'));
+        fireEvent.click(getByText("Trending"));
 
-        expect(handleClickCategories).toBeCalledWith('/search?sort=trending');
+        expect(handleClickCategories).toBeCalledWith("/search?sort=trending");
       });
     });
 
-    context('when it clicks Fabric', () => {
-      given('sort', () => 'trending');
+    context("when it clicks Fabric", () => {
+      given("sort", () => "trending");
 
-      it('changes url to /search?sort=trending', () => {
+      it("changes url to /search?sort=trending", () => {
         const { getByText } = renderListContainer({
-          urlPathname: '/search/product/beds/new',
+          urlPathname: "/search/product/beds/new",
         });
 
-        fireEvent.click(getByText('Fabric'));
+        fireEvent.click(getByText("Fabric"));
 
         expect(handleClickCategories).toBeCalledWith(
-          '/search?sort=trending&material=fabric',
+          "/search?sort=trending&material=fabric",
         );
       });
     });

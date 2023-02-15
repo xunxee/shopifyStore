@@ -1,8 +1,8 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from "react-router-dom";
 
-import ListContainer from './ListContainer';
+import ListContainer from "./ListContainer";
 
 export default function ListPage() {
   const navigate = useNavigate();

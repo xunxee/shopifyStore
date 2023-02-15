@@ -1,29 +1,29 @@
-import thunk from 'redux-thunk';
+import thunk from "redux-thunk";
 
-import configureStore from 'redux-mock-store';
+import configureStore from "redux-mock-store";
 
 import reducer, {
   changeUrlDataField,
   changeUrlAllDataFields,
   setProductList,
   loadProductList,
-} from './slice';
+} from "./slice";
 
-import { fetchMockProductList } from '../services/api';
+import { fetchMockProductList } from "../services/api";
 
-import MOCK_PRODUCT_LIST_DATA from '../../fixtures/List/productList';
+import MOCK_PRODUCT_LIST_DATA from "../../fixtures/List/productList";
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 
-jest.mock('../services/api');
+jest.mock("../services/api");
 
-describe('reducer', () => {
-  describe('changeUrlDataField', () => {
-    it('change url data field', () => {
+describe("reducer", () => {
+  describe("changeUrlDataField", () => {
+    it("change url data field", () => {
       const initialState = {
         url: {
-          category: '',
+          category: "",
         },
       };
 
@@ -32,47 +32,47 @@ describe('reducer', () => {
       } = reducer(
         initialState,
         changeUrlDataField({
-          name: 'new',
-          belong: 'category',
+          name: "new",
+          belong: "category",
         }),
       );
 
-      expect(category).toBe('new');
+      expect(category).toBe("new");
     });
   });
 
-  describe('changeUrlAllDataFields', () => {
-    it('change url all data field', () => {
+  describe("changeUrlAllDataFields", () => {
+    it("change url all data field", () => {
       const initialState = {
         url: {
-          product: '',
-          category: '',
-          sort: '',
-          material: '',
+          product: "",
+          category: "",
+          sort: "",
+          material: "",
         },
       };
 
       const { url } = reducer(
         initialState,
         changeUrlAllDataFields({
-          product: 'beds',
-          category: 'new',
-          sort: 'trending',
-          material: 'fabric',
+          product: "beds",
+          category: "new",
+          sort: "trending",
+          material: "fabric",
         }),
       );
 
       expect(url).toEqual({
-        product: 'beds',
-        category: 'new',
-        sort: 'trending',
-        material: 'fabric',
+        product: "beds",
+        category: "new",
+        sort: "trending",
+        material: "fabric",
       });
     });
   });
 
-  describe('setProductList', () => {
-    it('changes productList', () => {
+  describe("setProductList", () => {
+    it("changes productList", () => {
       const initialState = {
         productList: [],
       };
@@ -87,7 +87,7 @@ describe('reducer', () => {
   });
 });
 
-describe('actions', () => {
+describe("actions", () => {
   let store;
 
   function makeMockStore({ productList = [], product = {} } = {}) {
@@ -99,14 +99,14 @@ describe('actions', () => {
     });
   }
 
-  describe('loadProductList', () => {
+  describe("loadProductList", () => {
     beforeEach(() => {
       store = makeMockStore();
 
       fetchMockProductList.mockResolvedValue([]);
     });
 
-    it('runs setProductList', async () => {
+    it("runs setProductList", async () => {
       await store.dispatch(loadProductList());
 
       const actions = store.getActions();
