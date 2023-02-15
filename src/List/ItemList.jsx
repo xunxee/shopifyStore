@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import ItemCard from './Component/ItemCard';
+import ItemCard from './ItemCard';
 
 const Layout = styled.div({
   display: 'flex',

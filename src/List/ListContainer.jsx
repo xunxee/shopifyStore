@@ -10,7 +10,7 @@ import {
   loadProductList,
 } from './slice';
 
-import CategoryBar from './Component/CategoryBar';
+import CategoryBar from './CategoryBar';
 import ItemList from './ItemList';
 
 import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
