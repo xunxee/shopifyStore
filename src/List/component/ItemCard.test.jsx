@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import ItemCard from './ItemCard';
 
-import PRODUCT_DETAIL from '../../../fixtures/List/productDetail';
+import PRODUCT_DETAIL from '../../../fixtures/ProductDetail/productDetail';
 
 describe('ItemCard', () => {
   const handleClick = jest.fn();
@@ -12,12 +12,9 @@ describe('ItemCard', () => {
   });
 
   function renderItemCard() {
-    return render((
-      <ItemCard
-        product={PRODUCT_DETAIL}
-        onClickItemList={handleClick}
-      />
-    ));
+    return render(
+      <ItemCard product={PRODUCT_DETAIL} onClickItemList={handleClick} />,
+    );
   }
 
   it('renders the title', () => {

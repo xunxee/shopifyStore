@@ -20,20 +20,26 @@ import {
 export default function MembershipContainer() {
   const dispatch = useDispatch();
 
-  const isLogin = useSelector(get({
-    page: 'membership',
-    key: 'isLogin',
-  }));
+  const isLogin = useSelector(
+    get({
+      page: 'membership',
+      key: 'isLogin',
+    }),
+  );
 
-  const accountFields = useSelector(get({
-    page: 'membership',
-    key: 'accountFields',
-  }));
+  const accountFields = useSelector(
+    get({
+      page: 'membership',
+      key: 'accountFields',
+    }),
+  );
 
-  const isButtonActive = useSelector(get({
-    page: 'membership',
-    key: 'isButtonActive',
-  }));
+  const isButtonActive = useSelector(
+    get({
+      page: 'membership',
+      key: 'isButtonActive',
+    }),
+  );
 
   const handleClickToggle = useCallback(() => {
     dispatch(setIsLogin());
@@ -41,20 +47,22 @@ export default function MembershipContainer() {
     dispatch(setButtonActive(false));
   }, [dispatch]);
 
-  const handleChange = useCallback(({
-    name, value,
-  }) => {
-    dispatch(changeAccountFields({ name, value }));
-    dispatch(checkMemberInfo({ name, value }));
-  }, [dispatch]);
+  const handleChange = useCallback(
+    ({ name, value }) => {
+      dispatch(changeAccountFields({ name, value }));
+      dispatch(checkMemberInfo({ name, value }));
+    },
+    [dispatch],
+  );
 
-  const handleBlur = useCallback(({
-    name, value,
-  }) => {
-    if (isButtonActive) return;
+  const handleBlur = useCallback(
+    ({ name, value }) => {
+      if (isButtonActive) return;
 
-    dispatch(checkInputValue({ name, value }));
-  }, [dispatch, isButtonActive]);
+      dispatch(checkInputValue({ name, value }));
+    },
+    [dispatch, isButtonActive],
+  );
 
   const handleSubmit = useCallback(() => {
     if (isLogin) {
@@ -75,11 +83,8 @@ export default function MembershipContainer() {
         onBlur={handleBlur}
         onSubmit={handleSubmit}
       />
-      <button
-        type="button"
-        onClick={handleClickToggle}
-      >
-        {isLogin ? 'Sign Up' : 'Log In' }
+      <button type="button" onClick={handleClickToggle}>
+        {isLogin ? 'Sign Up' : 'Log In'}
       </button>
     </div>
   );

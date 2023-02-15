@@ -4,9 +4,7 @@ import { useRef, useEffect, useLayoutEffect } from 'react';
 
 import MembershipContainer from './MembershipContainer';
 
-const DeleteAll = styled.div((
-  { 'data-testid': name },
-) => ({
+const DeleteAll = styled.div(({ 'data-testid': name }) => ({
   position: 'fixed',
   top: 0,
   left: 0,
@@ -17,9 +15,7 @@ const DeleteAll = styled.div((
   }),
 }));
 
-const Container = styled.div((
-  { 'data-testid': name },
-) => {
+const Container = styled.div(({ 'data-testid': name }) => {
   const LoginPageLocation = {
     top: '50%',
     left: '50%',
@@ -40,8 +36,7 @@ const Container = styled.div((
     color: '#EAEAEA',
     backgroundColor: '#000',
 
-    ...(name === 'LoginPage'
-      ? LoginPageLocation : LogoutPageLocation),
+    ...(name === 'LoginPage' ? LoginPageLocation : LogoutPageLocation),
   };
 });
 
@@ -74,32 +69,22 @@ export default function MembershipPage({
   }, []);
 
   return (
-    <DeleteAll
-      data-testid={refreshToken ? null : 'outsideTheModal'}
-    >
+    <DeleteAll data-testid={refreshToken ? null : 'outsideTheModal'}>
       <Container
-        data-testid={refreshToken
-          ? 'LogoutPage' : 'LoginPage'}
+        data-testid={refreshToken ? 'LogoutPage' : 'LoginPage'}
         ref={refLogin}
       >
-        <button
-          type="button"
-          onClick={onClickToggle}
-        >
+        <button type="button" onClick={onClickToggle}>
           X
         </button>
         <div>{refreshToken ? 'LogoutPage' : 'Logo'}</div>
-        {
-          refreshToken ? (
-            <button
-              type="button"
-              onClick={onClickLogout}
-            >
-              Log out
-            </button>
-          )
-            : <MembershipContainer />
-        }
+        {refreshToken ? (
+          <button type="button" onClick={onClickLogout}>
+            Log out
+          </button>
+        ) : (
+          <MembershipContainer />
+        )}
       </Container>
     </DeleteAll>
   );

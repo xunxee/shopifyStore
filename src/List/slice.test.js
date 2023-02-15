@@ -9,11 +9,9 @@ import reducer, {
   loadProductList,
 } from './slice';
 
-import {
-  fetchMockProductList,
-} from '../services/api';
+import { fetchMockProductList } from '../services/api';
 
-import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
+import MOCK_PRODUCT_LIST_DATA from '../../fixtures/List/productList';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -29,7 +27,9 @@ describe('reducer', () => {
         },
       };
 
-      const { url: { category } } = reducer(
+      const {
+        url: { category },
+      } = reducer(
         initialState,
         changeUrlDataField({
           name: 'new',
@@ -90,10 +90,7 @@ describe('reducer', () => {
 describe('actions', () => {
   let store;
 
-  function makeMockStore({
-    productList = [],
-    product = {},
-  } = {}) {
+  function makeMockStore({ productList = [], product = {} } = {}) {
     return mockStore({
       list: {
         productList,
