@@ -1,58 +1,50 @@
-import {
-  useState, useRef, useEffect, useCallback,
-} from 'react';
+import { useState, useRef, useEffect, useCallback } from "react";
 
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-import { v4 } from 'uuid';
+import PRODUCT_TAG from "./styles/ProductTag";
 
-import Slide from './slide/Slide';
-import SlideAlbum from './slide/SlideAlbum';
+import Slide from "./Slide";
+import SlideAlbum from "./SlideAlbum";
+import ItemInfo from "./ItemInfo";
 
-import { updateSlide } from '../utils';
+import { updateSlide, setAlbumPosition } from "../utils";
 
-const ItemLayout = styled.div({
-  display: 'flex',
+const { productName, priceName } = PRODUCT_TAG;
+
+const Layout = styled.div({
+  display: "flex",
+  position: "relative",
+});
+
+const ProductTag = styled.div({
+  position: "absolute",
+  top: "0",
+  left: "0",
+  zIndex: "20",
+  "& h3": {
+    fontSize: "32px",
+    lineHeight: "32px",
+    ...productName,
+  },
+  "& span": {
+    ...priceName,
+  },
 });
 
 const SlideWrapper = styled.div({
-  width: '65%',
-});
-
-const ItemInfo = styled.div({
-  width: '35%',
-  height: '782px',
-  backgroundColor: 'orange',
+  width: "65%",
 });
 
 export default function ProductWrapper({
-  product: {
-    title,
-    imageList,
-    // TODO:
-    // size,
-    // details,
-  },
+  product: { title, price, imageList, size, color, details, evaluation },
+  banners,
   isPassTheSlide,
   startNumber,
   endNumber,
 }) {
-  const [banners, setBanners] = useState([]);
-
   const slideRef = useRef();
-
-  useEffect(() => {
-    setBanners([...imageList, ...imageList, ...imageList]);
-
-    setBanners((bannerList) => {
-      const result = bannerList.map((imgUrl) => ({
-        key: v4(),
-        imgUrl,
-      }));
-
-      return result;
-    });
-  }, []);
+  const slideAlbumRef = useRef();
 
   const SLIDE_WIDTH = 65;
 
@@ -75,10 +67,9 @@ export default function ProductWrapper({
 
   useEffect(() => {
     function setInitialPosition() {
-      slideRef.current.style
-        .transform = `translateX(-${
-          SLIDE_WIDTH * (START - 1)
-        }vw)`;
+      slideRef.current.style.transform = `translateX(-${
+        SLIDE_WIDTH * (START - 1)
+      }vw)`;
 
       setSlide({
         number: START,
@@ -90,64 +81,70 @@ export default function ProductWrapper({
   }, [banners]);
 
   useEffect(() => {
-    slideRef.current.style
-      .transform = `translateX(-${
-        SLIDE_WIDTH * (slide.number - 1)
-      }vw)`;
+    slideRef.current.style.transform = `translateX(-${
+      SLIDE_WIDTH * (slide.number - 1)
+    }vw)`;
 
-    slideRef.current.style
-      .transition = slide.isMotion ? 'all 0.5s ease-in' : '';
+    slideRef.current.style.transition = slide.isMotion
+      ? "all 0.5s ease-in"
+      : "";
+
+    const albumImageIndex = slide.number - BANNERS_COUNT;
+
+    slideAlbumRef.current.style.transform = setAlbumPosition({
+      index: albumImageIndex,
+      length: BANNERS_COUNT,
+    });
   }, [slide, SLIDE_WIDTH]);
 
-  const isPassTheFirstSlide = isPassTheSlide
-    || slide.number === PREVIOUS_END;
-  const isPassTheLastSlide = isPassTheSlide
-    || slide.number === NEXT_START;
+  const isPassTheFirstSlide = isPassTheSlide || slide.number === PREVIOUS_END;
+  const isPassTheLastSlide = isPassTheSlide || slide.number === NEXT_START;
 
-  const goToBanner = useCallback(({
-    targetName,
-    isMotion,
-  }) => {
+  const goToBanner = useCallback(({ targetName, isMotion }) => {
     setSlide(updateSlide({ targetName, isMotion }));
   });
 
-  const goToMainEndSlide = useCallback(({
-    targetName,
-    isMotion,
-  }) => {
-    setSlide({
-      number: END,
-      isMotion,
-    });
-
-    setTimeout(() => {
-      goToBanner({
-        targetName,
-        isMotion: true,
+  const goToMainEndSlide = useCallback(
+    ({ targetName, isMotion }) => {
+      setSlide({
+        number: END,
+        isMotion,
       });
-    }, 50);
-  }, [slide]);
 
-  const goToMainStartSlide = useCallback(({
-    targetName,
-    isMotion,
-  }) => {
-    setSlide({
-      number: START,
-      isMotion,
-    });
+      setTimeout(() => {
+        goToBanner({
+          targetName,
+          isMotion: true,
+        });
+      }, 50);
+    },
+    [slide],
+  );
 
-    setTimeout(() => {
-      goToBanner({
-        targetName,
-        isMotion: true,
+  const goToMainStartSlide = useCallback(
+    ({ targetName, isMotion }) => {
+      setSlide({
+        number: START,
+        isMotion,
       });
-    }, 50);
-  }, [slide]);
+
+      setTimeout(() => {
+        goToBanner({
+          targetName,
+          isMotion: true,
+        });
+      }, 50);
+    },
+    [slide],
+  );
 
   return (
     <>
-      <ItemLayout>
+      <Layout>
+        <ProductTag>
+          <h3>{title}</h3>
+          <span>{price}</span>
+        </ProductTag>
         <SlideWrapper>
           <Slide
             banners={banners}
@@ -161,11 +158,20 @@ export default function ProductWrapper({
           />
           <SlideAlbum
             title={title}
-            banners={banners}
+            imageList={imageList}
+            currentSlideNumber={slide.number}
+            setSlide={setSlide}
+            BANNERS_COUNT={BANNERS_COUNT}
+            slideAlbumRef={slideAlbumRef}
           />
         </SlideWrapper>
-        <ItemInfo />
-      </ItemLayout>
+        <ItemInfo
+          size={size}
+          color={color}
+          details={details}
+          evaluation={evaluation}
+        />
+      </Layout>
       <div>{title}</div>
       <div>Product Info</div>
     </>

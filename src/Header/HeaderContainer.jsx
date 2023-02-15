@@ -6,7 +6,7 @@ import { useCallback } from 'react';
 
 import { get } from '../utils';
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 import {
   setIsAccountModalOpen,
@@ -15,13 +15,9 @@ import {
   setButtonActive,
 } from '../Membership/slice';
 
-import {
-  changeUrlAllDataFields,
-} from '../List/slice';
+import { changeUrlAllDataFields } from '../List/slice';
 
-import {
-  changeSearchBarFields,
-} from './slice';
+import { changeSearchBarFields } from './slice';
 
 import MembershipPage from '../Membership/MemberShipPage';
 import TitleBar from './TitleBar';
@@ -36,7 +32,7 @@ const Container = styled.div({
   left: '0',
   zIndex: '30',
   width: '100%',
-  minWidth: '950px',
+  minWidth: '990px',
   backgroundColor: '#000',
 });
 
@@ -51,33 +47,33 @@ const NavBarLayout = styled.div({
   backgroundColor: '#000',
 });
 
-export default function HeaderContainer({
-  onClick,
-  onKeyDown,
-}) {
+export default function HeaderContainer({ onClick, onKeyDown }) {
   const dispatch = useDispatch();
 
-  const handleClickCategories = useCallback(({
-    pathname,
-    name,
-  }) => {
-    onClick(pathname);
+  const handleClickCategories = useCallback(
+    ({ pathname, name }) => {
+      onClick(pathname);
 
-    dispatch(changeUrlAllDataFields({
-      ...initialCategoryList,
-      category: name,
-    }));
-  }, [onClick, dispatch]);
+      dispatch(
+        changeUrlAllDataFields({
+          ...initialCategoryList,
+          category: name,
+        }),
+      );
+    },
+    [onClick, dispatch],
+  );
 
-  const {
-    refreshToken,
-    isAccountModalOpen,
-  } = useSelector(({ membership }) => membership);
+  const { refreshToken, isAccountModalOpen } = useSelector(
+    ({ membership }) => membership,
+  );
 
-  const { value: searchBarValue } = useSelector(get({
-    page: 'header',
-    key: 'searchBarFields',
-  }));
+  const { value: searchBarValue } = useSelector(
+    get({
+      page: 'header',
+      key: 'searchBarFields',
+    }),
+  );
 
   const handleToggle = useCallback(() => {
     dispatch(setIsAccountModalOpen());
@@ -87,15 +83,20 @@ export default function HeaderContainer({
 
   const handleLogout = useCallback(() => {
     dispatch(logout());
-    dispatch(clearAccountFields({
-      name: 'password',
-      value: '',
-    }));
+    dispatch(
+      clearAccountFields({
+        name: 'password',
+        value: '',
+      }),
+    );
   }, [dispatch]);
 
-  const handleChange = useCallback(({ value }) => {
-    dispatch(changeSearchBarFields({ value }));
-  }, [dispatch]);
+  const handleChange = useCallback(
+    ({ value }) => {
+      dispatch(changeSearchBarFields({ value }));
+    },
+    [dispatch],
+  );
 
   const handleKeyDown = useCallback(() => {
     const url = `/search?q=${searchBarValue}`;
@@ -115,16 +116,9 @@ export default function HeaderContainer({
         />
       )}
       <NavBarLayout>
-        <TitleBar
-          onClick={handleClickCategories}
-        />
-        <SearchBar
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-        />
-        <UserBar
-          onClick={handleToggle}
-        />
+        <TitleBar onClick={handleClickCategories} />
+        <SearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
+        <UserBar onClick={handleToggle} />
       </NavBarLayout>
     </Container>
   );

@@ -1,32 +1,25 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-import ItemCard from './component/ItemCard';
+import ItemCard from "./ItemCard";
 
-const Container = styled.div(({ length }) => ({
-  '@media (max-width: 1152px)': {
-    height: `${(length / 2) * 256 + ((length / 2) * 25)}px`,
-  },
-  display: 'flex',
-  flexWrap: 'wrap',
-  flexGrow: 1,
-  justifyContent: 'space-evenly',
-  alignContent: 'space-around',
-  height: `${(length / 3) * 256 + ((length / 3) * 40)}px`,
-  marginTop: '.75rem',
-  marginBottom: '5rem',
-}));
+const Layout = styled.div({
+  display: "flex",
+  flexWrap: "wrap",
+  justifyContent: "center",
+  marginTop: "1.5rem",
+  marginBottom: "5rem",
+});
 
-export default function ItemList({ productList }) {
+export default function ItemList({ onClickItemList, productList }) {
   return (
-    <Container
-      length={productList.length}
-    >
+    <Layout>
       {productList.map((product) => (
         <ItemCard
           key={product.id}
           product={product}
+          onClickItemList={onClickItemList}
         />
       ))}
-    </Container>
+    </Layout>
   );
 }

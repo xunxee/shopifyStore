@@ -1,17 +1,11 @@
 import styled from '@emotion/styled';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faArrowRight,
-  faArrowLeft,
-} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import PALETTE from '../../styles/Palette';
+import PALETTE from '../styles/Palette';
 
-const {
-  basicWhite,
-  basicPurple,
-} = PALETTE;
+const { basicWhite, basicPurple, darkPurple } = PALETTE;
 
 const Layout = styled.div(({ slideLength }) => ({
   display: 'flex',
@@ -38,11 +32,14 @@ const SlideControlButton = styled.div({
   position: 'absolute',
   right: '2.5rem',
   bottom: '2.5rem',
-  zIndex: '30',
+  zIndex: '20',
   width: '194px',
   border: `1px solid ${basicWhite}`,
   borderWidth: '1px',
   '& button': {
+    ':hover': {
+      backgroundColor: darkPurple,
+    },
     all: 'unset',
     display: 'flex',
     justifyContent: 'center',
@@ -68,66 +65,43 @@ export default function Slide({
   goToMainStartSlide,
   goToBanner,
 }) {
-  function handleClickArrowButtons({
-    currentTarget: {
-      title: targetName,
-    },
-  }) {
+  function handleClickArrowButtons({ currentTarget: { title: targetName } }) {
     if (targetName === 'previousArrow') {
       return isPassTheFirstSlide
-        ? goToMainEndSlide({
-          targetName,
-          isMotion: false,
-        }) : goToBanner({
-          targetName,
-          isMotion: true,
-        });
+        ? goToMainEndSlide({ targetName, isMotion: false })
+        : goToBanner({ targetName, isMotion: true });
     }
 
     return isPassTheLastSlide
-      ? goToMainStartSlide({
-        targetName,
-        isMotion: false,
-      }) : goToBanner({
-        targetName,
-        isMotion: true,
-      });
+      ? goToMainStartSlide({ targetName, isMotion: false })
+      : goToBanner({ targetName, isMotion: true });
   }
 
   return (
-    <Layout
-      slideLength={banners.length}
-    >
+    <Layout slideLength={banners.length}>
       <SlideControlButton>
         <button
           type="button"
           title="previousArrow"
           onClick={handleClickArrowButtons}
         >
-          <FontAwesomeIcon
-            icon={faArrowLeft}
-            size="2x"
-            color={basicWhite}
-          />
+          <FontAwesomeIcon icon={faArrowLeft} size="2x" color={basicWhite} />
         </button>
         <button
           title="nextArrow"
           type="button"
           onClick={handleClickArrowButtons}
         >
-          <FontAwesomeIcon
-            icon={faArrowRight}
-            size="2x"
-            color={basicWhite}
-          />
+          <FontAwesomeIcon icon={faArrowRight} size="2x" color={basicWhite} />
         </button>
       </SlideControlButton>
       <ul ref={slideRef}>
-        {banners && banners.map(({ key, imgUrl }) => (
-          <li key={key}>
-            <img alt={title} src={imgUrl} />
-          </li>
-        ))}
+        {banners &&
+          banners.map(({ key, imgUrl }) => (
+            <li key={key}>
+              <img alt={title} src={imgUrl} />
+            </li>
+          ))}
       </ul>
     </Layout>
   );

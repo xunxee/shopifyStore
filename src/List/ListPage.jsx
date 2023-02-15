@@ -1,31 +1,34 @@
-import styled from '@emotion/styled';
+import { useCallback } from "react";
 
-import { useCallback } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { useLocation, useNavigate } from 'react-router-dom';
-
-import ListContainer from './ListContainer';
-
-const Container = styled.div({
-  width: '100%',
-});
+import ListContainer from "./ListContainer";
 
 export default function ListPage() {
   const navigate = useNavigate();
 
   const { pathname, search } = useLocation();
 
-  const handleClickCategories = useCallback((url) => {
-    navigate(url);
-  }, [navigate]);
+  const handleClickCategories = useCallback(
+    (url) => {
+      navigate(url);
+    },
+    [navigate],
+  );
+
+  const handleClickItemList = useCallback(
+    (url) => {
+      navigate(url);
+    },
+    [navigate],
+  );
 
   return (
-    <Container>
-      <ListContainer
-        onClickCategories={handleClickCategories}
-        urlPathname={pathname}
-        urlSearch={search}
-      />
-    </Container>
+    <ListContainer
+      onClickCategories={handleClickCategories}
+      onClickItemList={handleClickItemList}
+      urlPathname={pathname}
+      urlSearch={search}
+    />
   );
 }

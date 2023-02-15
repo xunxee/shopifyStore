@@ -9,10 +9,8 @@ const Container = styled.div({
   gridTemplateColumns: 'repeat(12, 1fr)',
   width: '90%',
   maxWidth: '1920px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
-  paddingTop: '3rem',
-  paddingBottom: '3rem',
+  margin: '0 auto',
+  padding: '3rem 0',
 });
 
 export default function FooterTopLayout() {

@@ -1,9 +1,6 @@
 import styled from '@emotion/styled';
 
-import {
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import HomePage from './HomePage/HomePage';
 import NotFoundPage from './NotFoundPage/NotFoundPage';
@@ -15,7 +12,6 @@ import ProductDetailPage from './ProductDetail/ProductDetailPage';
 const Container = styled.div({
   display: 'flex',
   flexDirection: 'column',
-  minWidth: '950px',
   minHeight: '100vh',
   paddingTop: '74px',
 });

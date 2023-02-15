@@ -1,74 +1,72 @@
-import React from 'react';
+import React from "react";
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from "@testing-library/react";
 
-import ProductWrapper from './ProductWrapper';
+import ProductWrapper from "./ProductWrapper";
 
-import PRODUCT from '../../fixtures/MockData/product';
+import PRODUCT_DETAIL from "../../fixtures/ProductDetail/productDetail";
 
-const { title: TITLE, imageList: IMAGE_LIST } = PRODUCT;
+const { title, price, imageList, size, color, details, evaluation, banners } =
+  PRODUCT_DETAIL;
 
-describe('ProductWrapper', () => {
+describe("ProductWrapper", () => {
   const setState = jest.fn();
 
-  jest.spyOn(React, 'useState')
-    .mockImplementation((initialState) => [
-      initialState, setState,
-    ]);
+  jest
+    .spyOn(React, "useState")
+    .mockImplementation((initialState) => [initialState, setState]);
 
   beforeEach(() => {
     setState.mockClear();
   });
 
   function renderProductWrapper({
-    title = TITLE,
-    imageList = IMAGE_LIST,
     isPassTheSlide = false,
     startNumber = 4,
     endNumber = 8,
   } = {}) {
-    return render((
+    return render(
       <ProductWrapper
         product={{
           title,
+          price,
           imageList,
+          size,
+          color,
+          details,
+          evaluation,
         }}
         isPassTheSlide={isPassTheSlide}
         startNumber={startNumber}
         endNumber={endNumber}
-      />
-    ));
+        banners={banners}
+      />,
+    );
   }
 
-  it('renders the title', () => {
-    const { title } = PRODUCT;
-
-    const { container } = render((
-      <ProductWrapper product={PRODUCT} />
-    ));
+  it("renders the title", () => {
+    const { container } = renderProductWrapper();
 
     expect(container).toHaveTextContent(title);
   });
 
-  it('renders the arrow icon', () => {
-    const { getByTitle } = render((
-      <ProductWrapper product={PRODUCT} />
-    ));
+  it("renders the arrow icon", () => {
+    const { getByTitle } = renderProductWrapper();
 
-    expect(getByTitle('nextArrow')).not.toBeNull();
+    expect(getByTitle("nextArrow")).not.toBeNull();
   });
 
-  describe('click the previous button', () => {
-    context('when reaches the previous slide', () => {
-      it('moves without motion', () => {
+  describe("click the previous button", () => {
+    context("when reaches the previous slide", () => {
+      it("moves without motion", () => {
         const { getByTitle } = renderProductWrapper({
           isPassTheSlide: true,
         });
 
         jest.useFakeTimers();
-        fireEvent.click(getByTitle('previousArrow'));
+        fireEvent.click(getByTitle("previousArrow"));
 
-        expect(setState).toBeCalledTimes(4);
+        expect(setState).toBeCalledTimes(2);
 
         jest.runAllTimers();
 
@@ -77,20 +75,20 @@ describe('ProductWrapper', () => {
     });
   });
 
-  describe('click the next button', () => {
-    context('when reaches the next slide', () => {
-      it('moves without motion', () => {
+  describe("click the next button", () => {
+    context("when reaches the next slide", () => {
+      it("moves without motion", () => {
         const { getByTitle } = renderProductWrapper({
           isPassTheSlide: true,
         });
 
         jest.useFakeTimers();
-        fireEvent.click(getByTitle('nextArrow'));
+        fireEvent.click(getByTitle("nextArrow"));
 
-        expect(setState).toHaveBeenNthCalledWith(
-          3,
-          { isMotion: false, number: 4 },
-        );
+        expect(setState).toHaveBeenNthCalledWith(2, {
+          isMotion: false,
+          number: 4,
+        });
 
         jest.runAllTimers();
 

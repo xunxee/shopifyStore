@@ -4,8 +4,8 @@ import { postLogin, postSignUp } from '../services/api';
 
 import { saveItem } from '../services/storage';
 
-import INPUT_LIST from '../../fixtures/inputList';
-import VALID_FIELDS from '../../fixtures/validFields';
+import INPUT_LIST from '../../fixtures/Membership/inputList';
+import VALID_FIELDS from '../../fixtures/Membership/validFields';
 
 const initialLoginFields = {
   email: {
@@ -54,10 +54,7 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    changeAccountFields(
-      state,
-      { payload: { name, value } },
-    ) {
+    changeAccountFields(state, { payload: { name, value } }) {
       const { accountFields } = state;
 
       return {
@@ -66,17 +63,13 @@ const { actions, reducer } = createSlice({
           ...accountFields,
           [name]: {
             value,
-            validationMessage:
-              accountFields[name].validationMessage,
+            validationMessage: accountFields[name].validationMessage,
           },
         },
       };
     },
 
-    changeInvalidCheckMessage(
-      state,
-      { payload: { name, validationMessage } },
-    ) {
+    changeInvalidCheckMessage(state, { payload: { name, validationMessage } }) {
       const { accountFields } = state;
 
       return {
@@ -91,10 +84,7 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    changeAccountErrorMessage(
-      state,
-      { payload: { name, value } },
-    ) {
+    changeAccountErrorMessage(state, { payload: { name, value } }) {
       const { accountFields } = state;
 
       return {
@@ -165,9 +155,12 @@ export const {
 
 export function requestLogin() {
   return async (dispatch, getState) => {
-    dispatch(changeAccountErrorMessage({
-      name: 'error', value: 'Loading......',
-    }));
+    dispatch(
+      changeAccountErrorMessage({
+        name: 'error',
+        value: 'Loading......',
+      }),
+    );
 
     const {
       membership: {
@@ -179,28 +172,31 @@ export function requestLogin() {
     } = getState();
 
     try {
-      const {
-        refreshToken,
-      } = await postLogin({ email, password });
+      const { refreshToken } = await postLogin({ email, password });
 
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
-      dispatch(changeAccountErrorMessage({
-        name: 'error',
-        value: 'Check your ID or password',
-      }));
+      dispatch(
+        changeAccountErrorMessage({
+          name: 'error',
+          value: 'Check your ID or password',
+        }),
+      );
     }
   };
 }
 
 export function requestSignUp() {
   return async (dispatch, getState) => {
-    dispatch(changeAccountErrorMessage({
-      name: 'error', value: 'Loading......',
-    }));
+    dispatch(
+      changeAccountErrorMessage({
+        name: 'error',
+        value: 'Loading......',
+      }),
+    );
 
     const {
       membership: {
@@ -212,18 +208,19 @@ export function requestSignUp() {
     } = getState();
 
     try {
-      const {
-        refreshToken,
-      } = await postSignUp({ email, password });
+      const { refreshToken } = await postSignUp({ email, password });
 
       saveItem('refreshToken', refreshToken);
 
       dispatch(setRefreshToken(refreshToken));
       dispatch(setIsAccountModalOpen());
     } catch (error) {
-      dispatch(changeAccountErrorMessage({
-        name: 'error', value: '이미 존재하는 아이디입니다.',
-      }));
+      dispatch(
+        changeAccountErrorMessage({
+          name: 'error',
+          value: '이미 존재하는 아이디입니다.',
+        }),
+      );
     }
   };
 }
@@ -236,10 +233,7 @@ export function checkInputValue({ name, value }) {
 
     if (!VALID_FIELDS[name]) return '';
 
-    const {
-      regexps,
-      invalidMessage,
-    } = VALID_FIELDS[name];
+    const { regexps, invalidMessage } = VALID_FIELDS[name];
 
     const isValid = regexps.test(value);
 
@@ -249,17 +243,14 @@ export function checkInputValue({ name, value }) {
   return (dispatch) => {
     const validationMessage = makeValidationMessage();
 
-    dispatch(changeInvalidCheckMessage(
-      { name, validationMessage },
-    ));
+    dispatch(changeInvalidCheckMessage({ name, validationMessage }));
   };
 }
 
 export function checkMemberInfo({ name, value }) {
   return (dispatch, getState) => {
     const {
-      membership:
-      { isLogin, accountFields, isButtonActive },
+      membership: { isLogin, accountFields, isButtonActive },
     } = getState();
 
     function validateRestSignUpFields() {
@@ -267,13 +258,11 @@ export function checkMemberInfo({ name, value }) {
 
       delete restSignUpFields[name];
 
-      const restSignUpFieldsEntries = Object
-        .entries(restSignUpFields);
+      const restSignUpFieldsEntries = Object.entries(restSignUpFields);
 
       for (let i = 0; i < restSignUpFieldsEntries.length; i += 1) {
-        const [
-          , { value: restSignUpFieldValue, validationMessage },
-        ] = restSignUpFieldsEntries[i];
+        const [, { value: restSignUpFieldValue, validationMessage }] =
+          restSignUpFieldsEntries[i];
 
         if (!restSignUpFieldValue) return false;
 

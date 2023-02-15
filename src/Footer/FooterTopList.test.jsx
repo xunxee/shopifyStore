@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import FooterTopList from './FooterTopList';
 
-import FOOTER_MENU_LIST from '../../fixtures/footerMenuList';
+import FOOTER_MENU_LIST from '../../fixtures/Footer/footerMenuList';
 
 describe('FooterTopList', () => {
   it('renders the list', () => {
@@ -10,8 +10,8 @@ describe('FooterTopList', () => {
 
     expect(container).toHaveTextContent('Privacy Policy');
 
-    FOOTER_MENU_LIST.map((item) => (
-      expect(container).toHaveTextContent(item.title)
-    ));
+    FOOTER_MENU_LIST.map((item) =>
+      expect(container).toHaveTextContent(item.title),
+    );
   });
 });

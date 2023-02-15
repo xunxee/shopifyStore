@@ -12,20 +12,15 @@ describe('SearchBar', () => {
   });
 
   function renderSearchBar() {
-    return render((
-      <SearchBar
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-      />
-    ));
+    return render(
+      <SearchBar onChange={handleChange} onKeyDown={handleKeyDown} />,
+    );
   }
 
   it('renders the search bar of the input tag', () => {
     const { queryByPlaceholderText } = renderSearchBar();
 
-    expect(queryByPlaceholderText(
-      'Search for products...',
-    )).not.toBeNull();
+    expect(queryByPlaceholderText('Search for products...')).not.toBeNull();
   });
 
   it('renders the Magnifying Glass icon', () => {
@@ -39,9 +34,7 @@ describe('SearchBar', () => {
       it('listens change events for "search bar"', () => {
         const { getByPlaceholderText } = renderSearchBar();
 
-        fireEvent.change(getByPlaceholderText(
-          'Search for products...',
-        ), {
+        fireEvent.change(getByPlaceholderText('Search for products...'), {
           target: { value: 'bed' },
         });
 
@@ -57,9 +50,9 @@ describe('SearchBar', () => {
       it('execute the onKeyDown function', () => {
         const { getByPlaceholderText } = renderSearchBar();
 
-        fireEvent.keyDown(getByPlaceholderText(
-          'Search for products...',
-        ), { code: 'Enter' });
+        fireEvent.keyDown(getByPlaceholderText('Search for products...'), {
+          code: 'Enter',
+        });
 
         expect(handleKeyDown).toBeCalled();
       });
@@ -69,9 +62,9 @@ describe('SearchBar', () => {
       it("doesn't execute the onKeyDown function", () => {
         const { getByPlaceholderText } = renderSearchBar();
 
-        fireEvent.keyDown(getByPlaceholderText(
-          'Search for products...',
-        ), { code: 'a' });
+        fireEvent.keyDown(getByPlaceholderText('Search for products...'), {
+          code: 'a',
+        });
 
         expect(handleKeyDown).not.toBeCalled();
       });

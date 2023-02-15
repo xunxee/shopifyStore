@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import MembershipForm from './MemberShipForm';
 
-import INPUT_LIST from '../../fixtures/inputList';
+import INPUT_LIST from '../../fixtures/Membership/inputList';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();
@@ -29,7 +29,7 @@ describe('LoginForm', () => {
     error,
     isButtonActive = false,
   } = {}) {
-    return render((
+    return render(
       <MembershipForm
         isLogin={isLogin}
         fields={{
@@ -43,22 +43,20 @@ describe('LoginForm', () => {
         onChange={handleChange}
         onBlur={handleBlur}
         onSubmit={handleSubmit}
-      />
-    ));
+      />,
+    );
   }
 
   context('when logging in', () => {
     it('renders the login fields', () => {
-      const {
-        queryByPlaceholderText,
-        container,
-      } = renderLoginForm({ error: 'not found' });
+      const { queryByPlaceholderText, container } = renderLoginForm({
+        error: 'not found',
+      });
 
       expect(queryByPlaceholderText('First')).toBeNull();
       expect(queryByPlaceholderText('Last')).toBeNull();
 
-      expect(container)
-        .toHaveTextContent('have an account?');
+      expect(container).toHaveTextContent('have an account?');
     });
 
     it('listens change events for "Log In"', () => {
@@ -93,28 +91,22 @@ describe('LoginForm', () => {
           },
         });
 
-        expect(queryByText(
-          'email is a required field.',
-        )).toBeNull();
+        expect(queryByText('email is a required field.')).toBeNull();
       });
     });
   });
 
   context('when registering a member', () => {
     it('renders the sign up fields', () => {
-      const {
-        queryByPlaceholderText,
-        container,
-      } = renderLoginForm({ isLogin: false });
+      const { queryByPlaceholderText, container } = renderLoginForm({
+        isLogin: false,
+      });
 
-      expect(queryByPlaceholderText('성(Last Name)'))
-        .not.toBeNull();
+      expect(queryByPlaceholderText('성(Last Name)')).not.toBeNull();
 
-      expect(queryByPlaceholderText('이름(First Name)'))
-        .not.toBeNull();
+      expect(queryByPlaceholderText('이름(First Name)')).not.toBeNull();
 
-      expect(container)
-        .toHaveTextContent('Passwords must be longer than 7');
+      expect(container).toHaveTextContent('Passwords must be longer than 7');
     });
 
     describe('handleChange', () => {
@@ -246,9 +238,7 @@ describe('LoginForm', () => {
     });
 
     it('renders "Sign Up" button', () => {
-      const { getByText } = renderLoginForm(
-        { isLogin: false },
-      );
+      const { getByText } = renderLoginForm({ isLogin: false });
 
       fireEvent.submit(getByText('Sign Up'));
 
@@ -260,9 +250,7 @@ describe('LoginForm', () => {
         isLogin: false,
       });
 
-      const inputBox = getByPlaceholderText(
-        '성(Last Name)',
-      );
+      const inputBox = getByPlaceholderText('성(Last Name)');
 
       inputBox.focus();
       inputBox.blur();
@@ -273,12 +261,7 @@ describe('LoginForm', () => {
       });
     });
 
-    const inputs = [
-      'lastName',
-      'firstName',
-      'email',
-      'password',
-    ];
+    const inputs = ['lastName', 'firstName', 'email', 'password'];
 
     inputs.forEach((input) => {
       describe(`${input} invalid check message`, () => {
@@ -288,9 +271,9 @@ describe('LoginForm', () => {
               isLogin: false,
             });
 
-            expect(queryByText(
-              `${INPUT_LIST[input]} 필수 입력란입니다.`,
-            )).toBeNull();
+            expect(
+              queryByText(`${INPUT_LIST[input]} 필수 입력란입니다.`),
+            ).toBeNull();
           });
         });
 
@@ -300,14 +283,13 @@ describe('LoginForm', () => {
               isLogin: false,
               [input]: {
                 value: '',
-                validationMessage:
-                  `${INPUT_LIST[input]} 필수 입력란입니다.`,
+                validationMessage: `${INPUT_LIST[input]} 필수 입력란입니다.`,
               },
             });
 
-            expect(queryByText(
-              `${INPUT_LIST[input]} 필수 입력란입니다.`,
-            )).not.toBeNull();
+            expect(
+              queryByText(`${INPUT_LIST[input]} 필수 입력란입니다.`),
+            ).not.toBeNull();
           });
         });
       });

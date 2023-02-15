@@ -20,30 +20,32 @@ jest.mock('react-router-dom', () => ({
 describe('HeaderPage', () => {
   const dispatch = jest.fn();
 
-  beforeEach((() => {
+  beforeEach(() => {
     dispatch.mockClear();
     mockUsedNavigate.mockClear();
 
-    useSelector.mockImplementation((selector) => selector({
-      membership: {
-        refreshToken: '',
-      },
-      header: {
-        searchBarFields: {
-          value: given.value,
+    useSelector.mockImplementation((selector) =>
+      selector({
+        membership: {
+          refreshToken: '',
         },
-      },
-    }));
-  }));
+        header: {
+          searchBarFields: {
+            value: given.value,
+          },
+        },
+      }),
+    );
+  });
 
   useDispatch.mockImplementation(() => dispatch);
 
   function renderHeaderPage() {
-    return render((
+    return render(
       <MemoryRouter>
         <HeaderPage />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
   }
 
   it('renders the Title bar', () => {
@@ -61,13 +63,11 @@ describe('HeaderPage', () => {
       it('test', () => {
         const { getByPlaceholderText } = renderHeaderPage();
 
-        fireEvent.keyDown(getByPlaceholderText(
-          'Search for products...',
-        ), { code: 'Enter' });
+        fireEvent.keyDown(getByPlaceholderText('Search for products...'), {
+          code: 'Enter',
+        });
 
-        expect(mockUsedNavigate).toBeCalledWith(
-          '/search?q=test',
-        );
+        expect(mockUsedNavigate).toBeCalledWith('/search?q=test');
       });
     });
   });

@@ -4,11 +4,12 @@ import { fireEvent, render } from '@testing-library/react';
 
 import Slide from './Slide';
 
-import PRODUCT from '../../../fixtures/MockData/product';
+import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+
+const { banners, title } = PRODUCT_DETAIL;
 
 describe('Slide', () => {
-  jest.spyOn(React, 'useRef')
-    .mockReturnValueOnce({ current: 'ul' });
+  jest.spyOn(React, 'useRef').mockReturnValueOnce({ current: 'ul' });
 
   const goToMainEndSlide = jest.fn();
   const goToMainStartSlide = jest.fn();
@@ -21,12 +22,10 @@ describe('Slide', () => {
   });
 
   function renderSlide({
-    banners = PRODUCT.banners,
-    title = PRODUCT.title,
     isPassTheFirstSlide = false,
     isPassTheLastSlide = false,
   } = {}) {
-    return render((
+    return render(
       <Slide
         banners={banners}
         title={title}
@@ -35,8 +34,8 @@ describe('Slide', () => {
         isPassTheLastSlide={isPassTheLastSlide}
         goToMainStartSlide={goToMainStartSlide}
         goToBanner={goToBanner}
-      />
-    ));
+      />,
+    );
   }
 
   describe('click the next button', () => {

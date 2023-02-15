@@ -1,29 +1,31 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from "react-router-dom";
 
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from "@testing-library/react";
 
-import ListPage from './ListPage';
+import ListPage from "./ListPage";
 
-jest.mock('react-redux');
+import PRODUCT_LIST from "../../fixtures/List/productList";
+
+jest.mock("react-redux");
 
 const dispatch = jest.fn();
 
 const mockUseNavigate = jest.fn();
 
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
   useNavigate() {
     return mockUseNavigate;
   },
   useLocation: () => ({
-    pathname: '/search/featured',
-    search: '',
+    pathname: "/search/featured",
+    search: "",
   }),
 }));
 
-describe('ListPage', () => {
+describe("ListPage", () => {
   beforeEach(() => {
     dispatch.mockClear();
 
@@ -31,39 +33,48 @@ describe('ListPage', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation(
-      (selector) => (selector({
+    useSelector.mockImplementation((selector) =>
+      selector({
         list: {
           url: {
-            category: '',
-            product: '',
-            sort: '',
-            material: '',
+            category: "",
+            product: "",
+            sort: "",
+            material: "",
           },
-          productList: [],
+          productList: PRODUCT_LIST,
         },
-      })),
+      }),
     );
   });
 
   function renderListPage() {
-    return render((
+    return render(
       <MemoryRouter>
         <ListPage />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
   }
 
-  it('renders title', () => {
+  it("renders title", () => {
     const { queryByText } = renderListPage();
 
-    expect(queryByText('All Categories'))
-      .not.toBeNull();
+    expect(queryByText("All Categories")).not.toBeNull();
   });
 
-  it('clicks New Arrivals', () => {
+  it("clicks New Arrivals", () => {
     const { getByText } = renderListPage();
 
-    fireEvent.click(getByText('New Arrivals'));
+    fireEvent.click(getByText("New Arrivals"));
+  });
+
+  context('when click a "Plan T-Shirt" in the product list', () => {
+    it('changes URL address to "product/1"', () => {
+      const { getByText } = renderListPage();
+
+      fireEvent.click(getByText("Plain T-Shirt"));
+
+      expect(mockUseNavigate).toBeCalledWith("/product/1");
+    });
   });
 });

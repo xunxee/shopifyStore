@@ -1,24 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
-import {
-  fetchMockProductList,
-} from '../services/api';
+import { fetchMockProductList } from "../services/api";
 
-import LIST_CATEGORIES from '../../fixtures/listCategoriesCollection';
+import LIST_CATEGORIES from "../../fixtures/List/listCategoriesCollection";
 
 const { initialCategoryList } = LIST_CATEGORIES;
 
 const { actions, reducer } = createSlice({
-  name: 'list',
+  name: "list",
   initialState: {
     url: initialCategoryList,
     productList: [],
   },
   reducers: {
-    changeUrlDataField(
-      state,
-      { payload: { name, belong } },
-    ) {
+    changeUrlDataField(state, { payload: { name, belong } }) {
       const { url } = state;
       return {
         ...state,
@@ -29,9 +24,7 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    changeUrlAllDataFields(state, {
-      payload: object,
-    }) {
+    changeUrlAllDataFields(state, { payload: object }) {
       const { url } = state;
       return {
         ...state,
@@ -51,11 +44,8 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const {
-  changeUrlDataField,
-  changeUrlAllDataFields,
-  setProductList,
-} = actions;
+export const { changeUrlDataField, changeUrlAllDataFields, setProductList } =
+  actions;
 
 export function loadProductList() {
   return async (dispatch) => {
