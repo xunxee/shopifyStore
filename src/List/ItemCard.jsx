@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useCallback } from "react";
 
 import PALETTE from "../styles/Palette";
-import PRODUCT_TAG from "../styles/ProductTag";
+import PRODUCT_TAG from "./styles/ProductTag";
 
 const { basicWhite, paleWhite, itemCardHoverList } = PALETTE;
 const { productName, priceName } = PRODUCT_TAG;
