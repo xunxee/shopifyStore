@@ -9,13 +9,15 @@ import LOGIN_TOKENS from '../../fixtures/Membership/loginTokens';
 import POST_LOGIN_DATA from '../../fixtures/Membership/postLoginData';
 import LOGIN_FAIL_DATA from '../../fixtures/Membership/loginFailData';
 import SIGNUP_FAIL_DATA from '../../fixtures/Membership/signUpFailData';
-import MOCK_PRODUCT_LIST_DATA from '../../fixtures/MockData/productList';
-import MOCK_PRODUCT_DATA from '../../fixtures/MockData/product';
+import PRODUCT_LIST_DATA from '../../fixtures/List/productList';
+import PRODUCT_DATA from '../../fixtures/ProductDetail/productDetail';
 
 describe('api', () => {
   const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({
-      async json() { return data; },
+      async json() {
+        return data;
+      },
     });
   };
 
@@ -73,25 +75,25 @@ describe('api', () => {
 
   describe('fetchMockProductList', () => {
     beforeEach(() => {
-      mockFetch(MOCK_PRODUCT_LIST_DATA);
+      mockFetch(PRODUCT_LIST_DATA);
     });
 
     it('returns mock data', async () => {
       const mockData = await fetchMockProductList();
 
-      expect(mockData).toBe(MOCK_PRODUCT_LIST_DATA);
+      expect(mockData).toBe(PRODUCT_LIST_DATA);
     });
   });
 
   describe('fetchMockProduct', () => {
     beforeEach(() => {
-      mockFetch(MOCK_PRODUCT_DATA);
+      mockFetch(PRODUCT_DATA);
     });
 
     it('returns mock data', async () => {
       const mockData = await fetchMockProduct();
 
-      expect(mockData).toBe(MOCK_PRODUCT_DATA);
+      expect(mockData).toBe(PRODUCT_DATA);
     });
   });
 });
