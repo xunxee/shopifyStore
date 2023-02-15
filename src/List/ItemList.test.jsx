@@ -19,14 +19,8 @@ describe('ItemList', () => {
   ];
 
   it('renders the title', () => {
-    const { container } = render((
-      <ItemList
-        productList={productList}
-      />
-    ));
+    const { container } = render(<ItemList productList={productList} />);
 
-    expect(container).toHaveTextContent(
-      'Special Edition T-Shirt',
-    );
+    expect(container).toHaveTextContent('Special Edition T-Shirt');
   });
 });

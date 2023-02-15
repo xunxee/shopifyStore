@@ -4,10 +4,7 @@ import Palette from '../../styles/palette';
 
 import { makeSelectedNumber } from '../../utils';
 
-const {
-  darkPurple,
-  palePurple,
-} = Palette;
+const { darkPurple, palePurple } = Palette;
 
 const Layout = styled.div({
   backgroundColor: darkPurple,
@@ -17,14 +14,11 @@ const Layout = styled.div({
 
 const ImageList = styled.div();
 
-const AlbumImage = styled.button(({
-  uniqueNumber,
-  selectedSlideNumber,
-}) => ({
+const AlbumImage = styled.button(({ uniqueNumber, selectedSlideNumber }) => ({
   all: 'unset',
-  backgroundColor: `${uniqueNumber === selectedSlideNumber
-    ? palePurple
-    : darkPurple}`,
+  backgroundColor: `${
+    uniqueNumber === selectedSlideNumber ? palePurple : darkPurple
+  }`,
   '& img': {
     width: '235px',
     height: '182px',
@@ -46,10 +40,7 @@ export default function SlideAlbum({
   BANNERS_COUNT,
   slideAlbumRef,
 }) {
-  const uniqueImageList = imageList.map((
-    url,
-    index,
-  ) => [url, index + 1]);
+  const uniqueImageList = imageList.map((url, index) => [url, index + 1]);
 
   function handleClick(number) {
     const selectedNumber = number + BANNERS_COUNT;
@@ -63,12 +54,8 @@ export default function SlideAlbum({
   }
 
   return (
-    <Layout
-      data-testid="albumContainer"
-    >
-      <ImageList
-        ref={slideAlbumRef}
-      >
+    <Layout data-testid="albumContainer">
+      <ImageList ref={slideAlbumRef}>
         {uniqueImageList.map(([url, key]) => (
           <AlbumImage
             type="button"

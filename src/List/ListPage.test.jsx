@@ -33,8 +33,8 @@ describe('ListPage', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation(
-      (selector) => (selector({
+    useSelector.mockImplementation((selector) =>
+      selector({
         list: {
           url: {
             category: '',
@@ -44,23 +44,22 @@ describe('ListPage', () => {
           },
           productList: PRODUCT_LIST,
         },
-      })),
+      }),
     );
   });
 
   function renderListPage() {
-    return render((
+    return render(
       <MemoryRouter>
         <ListPage />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
   }
 
   it('renders title', () => {
     const { queryByText } = renderListPage();
 
-    expect(queryByText('All Categories'))
-      .not.toBeNull();
+    expect(queryByText('All Categories')).not.toBeNull();
   });
 
   it('clicks New Arrivals', () => {

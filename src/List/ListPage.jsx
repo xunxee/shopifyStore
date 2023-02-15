@@ -9,13 +9,19 @@ export default function ListPage() {
 
   const { pathname, search } = useLocation();
 
-  const handleClickCategories = useCallback((url) => {
-    navigate(url);
-  }, [navigate]);
+  const handleClickCategories = useCallback(
+    (url) => {
+      navigate(url);
+    },
+    [navigate],
+  );
 
-  const handleClickItemList = useCallback((url) => {
-    navigate(url);
-  }, [navigate]);
+  const handleClickItemList = useCallback(
+    (url) => {
+      navigate(url);
+    },
+    [navigate],
+  );
 
   return (
     <ListContainer

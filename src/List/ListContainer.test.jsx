@@ -19,8 +19,8 @@ describe('ListContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation(
-      (selector) => (selector({
+    useSelector.mockImplementation((selector) =>
+      selector({
         list: {
           url: {
             category: given.category,
@@ -30,22 +30,19 @@ describe('ListContainer', () => {
           },
           productList: [],
         },
-      })),
+      }),
     );
   });
 
-  function renderListContainer({
-    urlPathname = '/search',
-    urlSearch,
-  } = {}) {
-    return render((
+  function renderListContainer({ urlPathname = '/search', urlSearch } = {}) {
+    return render(
       <ListContainer
         onClickCategories={handleClickCategories}
         onClickItemList={handleClickItemList}
         urlPathname={urlPathname}
         urlSearch={urlSearch}
-      />
-    ));
+      />,
+    );
   }
 
   it('renders categories', () => {
@@ -93,26 +90,22 @@ describe('ListContainer', () => {
       },
     ];
 
-    scenarios.forEach(({
-      situation,
-      described,
-      urlPathname,
-      urlSearch,
-      payload,
-    }) => {
-      context(situation, () => {
-        it(described, () => {
-          renderListContainer({ urlPathname, urlSearch });
+    scenarios.forEach(
+      ({ situation, described, urlPathname, urlSearch, payload }) => {
+        context(situation, () => {
+          it(described, () => {
+            renderListContainer({ urlPathname, urlSearch });
 
-          expect(dispatch).toBeCalledTimes(2);
+            expect(dispatch).toBeCalledTimes(2);
 
-          expect(dispatch).toBeCalledWith({
-            payload,
-            type: 'list/changeUrlAllDataFields',
+            expect(dispatch).toBeCalledWith({
+              payload,
+              type: 'list/changeUrlAllDataFields',
+            });
           });
         });
-      });
-    });
+      },
+    );
 
     context('when not a valid pathname', () => {
       it("doesn't call dispatch", () => {
@@ -144,9 +137,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(getByText('Sofas'));
 
-        expect(handleClickCategories).toBeCalledWith(
-          '/search/product/sofas',
-        );
+        expect(handleClickCategories).toBeCalledWith('/search/product/sofas');
       });
     });
 
@@ -158,9 +149,7 @@ describe('ListContainer', () => {
 
         fireEvent.click(getByText('Trending'));
 
-        expect(handleClickCategories).toBeCalledWith(
-          '/search?sort=trending',
-        );
+        expect(handleClickCategories).toBeCalledWith('/search?sort=trending');
       });
     });
 

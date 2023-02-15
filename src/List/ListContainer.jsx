@@ -10,7 +10,7 @@ import {
   loadProductList,
 } from './slice';
 
-import CategoryBar from './component/CategoryBar';
+import CategoryBar from './Component/CategoryBar';
 import ItemList from './ItemList';
 
 import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
@@ -41,14 +41,15 @@ export default function ListContainer({
 
   const listStates = useSelector(({ list }) => list);
 
-  const productList = useSelector(get({
-    page: 'list', key: 'productList',
-  }));
+  const productList = useSelector(
+    get({
+      page: 'list',
+      key: 'productList',
+    }),
+  );
 
   const {
-    url: {
-      category, product, sort, material,
-    },
+    url: { category, product, sort, material },
   } = listStates;
 
   useEffect(() => {
@@ -62,8 +63,7 @@ export default function ListContainer({
       const queryStringList = [];
 
       if (pathnameList.length === 1) {
-        return `${urlSearch
-          ? `${urlSearch}&category=all` : '?category=all'}`;
+        return `${urlSearch ? `${urlSearch}&category=all` : '?category=all'}`;
       }
 
       for (let i = 1; i < pathnameList.length; i += 1) {
@@ -92,12 +92,12 @@ export default function ListContainer({
 
     if (!isValidAddress) return;
 
-    const apiDataObject = JSON.parse(`{"${
-      isValidAddress
+    const apiDataObject = JSON.parse(
+      `{"${isValidAddress
         .substring(1)
         .replace(/&/g, '","')
-        .replace(/=/g, '":"')
-    }"}`);
+        .replace(/=/g, '":"')}"}`,
+    );
 
     const isClickAccess = category || product || sort || material;
 
@@ -109,16 +109,15 @@ export default function ListContainer({
   }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {
-    const { url: { ...urlStates } } = listStates;
+    const {
+      url: { ...urlStates },
+    } = listStates;
     urlStates[belong] = name;
 
     function makePathname() {
       const pathname = ['/search'];
 
-      const {
-        product: productValue,
-        category: categoryValue,
-      } = urlStates;
+      const { product: productValue, category: categoryValue } = urlStates;
 
       if (productValue) pathname.push(`/product/${productValue}`);
 
@@ -132,14 +131,11 @@ export default function ListContainer({
 
       const search = [];
 
-      const searchEntries = Object.entries(urlStates)
-        .filter(([categoryName]) => url.searches
-          .includes(categoryName));
+      const searchEntries = Object.entries(urlStates).filter(([categoryName]) =>
+        url.searches.includes(categoryName),
+      );
 
-      searchEntries.forEach(([
-        categoryName,
-        categoryValue,
-      ]) => {
+      searchEntries.forEach(([categoryName, categoryValue]) => {
         if (!categoryValue) return;
 
         if (search.length) {
@@ -157,21 +153,16 @@ export default function ListContainer({
     return [...makePathname(), ...makeSearch()].join('');
   }
 
-  const handleClickCategories = useCallback(({
-    name,
-    belong,
-  }) => {
-    dispatch(changeUrlDataField({ name, belong }));
+  const handleClickCategories = useCallback(
+    ({ name, belong }) => {
+      dispatch(changeUrlDataField({ name, belong }));
 
-    const url = makeUrl({ name, belong });
+      const url = makeUrl({ name, belong });
 
-    onClickCategories(url);
-  }, [
-    dispatch,
-    onClickCategories,
-    listStates,
-    makeUrl,
-  ]);
+      onClickCategories(url);
+    },
+    [dispatch, onClickCategories, listStates, makeUrl],
+  );
 
   return (
     <Container>
@@ -187,10 +178,7 @@ export default function ListContainer({
           onClick={handleClickCategories}
         />
       </Layout>
-      <ItemList
-        onClickItemList={onClickItemList}
-        productList={productList}
-      />
+      <ItemList onClickItemList={onClickItemList} productList={productList} />
       <Layout>
         <CategoryBar
           field="sort"

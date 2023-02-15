@@ -11,20 +11,18 @@ const Container = styled.div(container);
 
 const Button = styled.button(({ underLine, name }) => ({
   ...button,
-  textDecoration: underLine === name
-    ? 'underLine' : 'none',
+  textDecoration: underLine === name ? 'underLine' : 'none',
 }));
 
-export default function CategoryBar({
-  field,
-  selectedItem,
-  onClick,
-}) {
+export default function CategoryBar({ field, selectedItem, onClick }) {
   const { title, belong, data } = LIST_CATEGORIES[field];
 
-  const handleClick = useCallback(({ target: { name } }) => {
-    onClick({ name, belong });
-  }, [onClick]);
+  const handleClick = useCallback(
+    ({ target: { name } }) => {
+      onClick({ name, belong });
+    },
+    [onClick],
+  );
 
   return (
     <Container>
