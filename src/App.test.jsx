@@ -8,20 +8,22 @@ import App from './App';
 
 describe('App', () => {
   beforeEach(() => {
-    useSelector.mockImplementation((selection) => selection({
-      membership: {},
-      header: {
-        searchBarFields: {},
-      },
-    }));
+    useSelector.mockImplementation((selection) =>
+      selection({
+        membership: {},
+        header: {
+          searchBarFields: {},
+        },
+      }),
+    );
   });
 
   function renderApp({ path }) {
-    return render((
+    return render(
       <MemoryRouter initialEntries={[path]}>
         <App />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
   }
 
   context('with path /', () => {
