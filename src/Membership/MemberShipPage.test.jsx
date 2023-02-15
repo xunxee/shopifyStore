@@ -10,13 +10,15 @@ jest.mock('react-redux');
 
 describe('MembershipPage', () => {
   beforeEach(() => {
-    useSelector.mockImplementation((selector) => selector({
-      membership: {
-        isLogin: true,
-        accountFields: INITIAL_LOGIN_FIELDS,
-        isButtonActive: false,
-      },
-    }));
+    useSelector.mockImplementation((selector) =>
+      selector({
+        membership: {
+          isLogin: true,
+          accountFields: INITIAL_LOGIN_FIELDS,
+          isButtonActive: false,
+        },
+      }),
+    );
   });
 
   it('renders the MembershipContainer', () => {
@@ -37,13 +39,13 @@ describe('MembershipPage', () => {
     const mockEvents = () => {
       const events = {};
 
-      EventTarget.prototype.addEventListener = jest.fn(
-        (event, callback) => { events[event] = callback; },
-      );
+      EventTarget.prototype.addEventListener = jest.fn((event, callback) => {
+        events[event] = callback;
+      });
 
-      EventTarget.prototype.removeEventListener = jest.fn(
-        (event) => { delete events[event]; },
-      );
+      EventTarget.prototype.removeEventListener = jest.fn((event) => {
+        delete events[event];
+      });
 
       return events;
     };
@@ -52,11 +54,9 @@ describe('MembershipPage', () => {
       it("doesn't run onClick function", () => {
         const events = mockEvents();
 
-        const { getByTestId } = render((
-          <MembershipPage
-            onClick={handleClick}
-          />
-        ));
+        const { getByTestId } = render(
+          <MembershipPage onClick={handleClick} />,
+        );
 
         events.mousedown({
           target: getByTestId('LoginPage'),
@@ -70,11 +70,9 @@ describe('MembershipPage', () => {
       it('run onClick function', () => {
         const events = mockEvents();
 
-        const { getByTestId } = render((
-          <MembershipPage
-            onClickToggle={handleClick}
-          />
-        ));
+        const { getByTestId } = render(
+          <MembershipPage onClickToggle={handleClick} />,
+        );
 
         events.mousedown({
           target: getByTestId('outsideTheModal'),

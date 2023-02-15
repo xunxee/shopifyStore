@@ -5,11 +5,11 @@ import HomePage from './HomePage';
 
 describe('Homepage', () => {
   it('renders the home page', () => {
-    const { container } = render((
+    const { container } = render(
       <MemoryRouter>
         <HomePage />
-      </MemoryRouter>
-    ));
+      </MemoryRouter>,
+    );
 
     expect(container).toHaveTextContent('HomePage');
   });

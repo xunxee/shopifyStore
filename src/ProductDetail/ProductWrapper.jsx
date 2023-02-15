@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 
 import styled from '@emotion/styled';
 
-import PRODUCT_TAG from '../styles/productTag';
+import PRODUCT_TAG from '../styles/ProductTag';
 
 import Slide from './Slide';
 import SlideAlbum from './SlideAlbum';

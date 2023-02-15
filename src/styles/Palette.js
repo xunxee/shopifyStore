@@ -1,4 +1,4 @@
-const palette = {
+const Palette = {
   basicWhite: '#FFF',
   paleWhite: '#F8F8F8',
   basicPurple: '#7928CA',
@@ -18,4 +18,4 @@ const palette = {
   },
 };
 
-export default palette;
+export default Palette;

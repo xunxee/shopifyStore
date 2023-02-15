@@ -1,4 +1,4 @@
-const productTag = {
+const ProductTag = {
   productName: {
     padding: '1rem 1.5rem',
     fontWeight: '700',
@@ -15,4 +15,4 @@ const productTag = {
   },
 };
 
-export default productTag;
+export default ProductTag;

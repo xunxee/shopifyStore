@@ -2,10 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  setIsAccountModalOpen,
-  logout,
-} from '../Membership/slice';
+import { setIsAccountModalOpen, logout } from '../Membership/slice';
 
 import { changeSearchBarFields } from './slice';
 
@@ -29,36 +26,35 @@ describe('HeaderContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({
-      membership: {
-        isAccountModalOpen: given.isAccountModalOpen,
-        accountFields: {
-          email: '',
-          password: '',
-          firstName: '',
-          lastName: '',
-          error: '',
+    useSelector.mockImplementation((selector) =>
+      selector({
+        membership: {
+          isAccountModalOpen: given.isAccountModalOpen,
+          accountFields: {
+            email: '',
+            password: '',
+            firstName: '',
+            lastName: '',
+            error: '',
+          },
+          refreshToken: given.refreshToken,
         },
-        refreshToken: given.refreshToken,
-      },
-      list: {
-        category: '',
-      },
-      header: {
-        searchBarFields: {
-          value: '',
+        list: {
+          category: '',
         },
-      },
-    }));
+        header: {
+          searchBarFields: {
+            value: '',
+          },
+        },
+      }),
+    );
   });
 
   function renderHeaderContainer() {
-    return render((
-      <HeaderContainer
-        onClick={handleClick}
-        onKeyDown={handleKeyDown}
-      />
-    ));
+    return render(
+      <HeaderContainer onClick={handleClick} onKeyDown={handleKeyDown} />,
+    );
   }
 
   it('renders the categories list', () => {
@@ -70,8 +66,7 @@ describe('HeaderContainer', () => {
   it('renders the search bar', () => {
     const { queryByPlaceholderText } = renderHeaderContainer();
 
-    expect(queryByPlaceholderText('Search for products...'))
-      .not.toBeNull();
+    expect(queryByPlaceholderText('Search for products...')).not.toBeNull();
   });
 
   it('renders the shopping cart', () => {
@@ -83,14 +78,9 @@ describe('HeaderContainer', () => {
   it('renders "circleUser" icon', () => {
     const { getByRole } = renderHeaderContainer();
 
-    fireEvent.click(getByRole(
-      'button',
-      { name: 'circleUser' },
-    ));
+    fireEvent.click(getByRole('button', { name: 'circleUser' }));
 
-    expect(dispatch).toBeCalledWith(
-      setIsAccountModalOpen(),
-    );
+    expect(dispatch).toBeCalledWith(setIsAccountModalOpen());
   });
 
   context('when click on "All"', () => {
@@ -126,9 +116,7 @@ describe('HeaderContainer', () => {
         target: { value: 'beds' },
       });
 
-      expect(dispatch).toBeCalledWith(
-        changeSearchBarFields({ value: 'beds' }),
-      );
+      expect(dispatch).toBeCalledWith(changeSearchBarFields({ value: 'beds' }));
     });
   });
 
@@ -137,12 +125,9 @@ describe('HeaderContainer', () => {
 
     context('when logged in', () => {
       it('renders MembershipPage', () => {
-        const {
-          queryByPlaceholderText,
-        } = renderHeaderContainer();
+        const { queryByPlaceholderText } = renderHeaderContainer();
 
-        expect(queryByPlaceholderText('Email'))
-          .not.toBeNull();
+        expect(queryByPlaceholderText('Email')).not.toBeNull();
       });
     });
 

@@ -1,25 +1,17 @@
-import {
-  saveItem,
-  TODO,
-} from './storage';
+import { saveItem, TODO } from './storage';
 
 describe('storage', () => {
-  jest.spyOn(
-    Object.getPrototypeOf(localStorage),
-    'setItem',
-  );
+  jest.spyOn(Object.getPrototypeOf(localStorage), 'setItem');
 
   beforeEach(() => {
-    Object.getPrototypeOf(localStorage)
-      .setItem = jest.fn();
+    Object.getPrototypeOf(localStorage).setItem = jest.fn();
   });
 
   describe('saveItem', () => {
     it('calls localStorage setItem', () => {
       saveItem('key', 'value');
 
-      expect(localStorage.setItem)
-        .toBeCalledWith('key', 'value');
+      expect(localStorage.setItem).toBeCalledWith('key', 'value');
     });
   });
 

@@ -23,14 +23,8 @@ const Container = styled.div({
 export default function FooterTopTitle() {
   return (
     <Container>
-      <button
-        type="button"
-      >
-        <FontAwesomeIcon
-          icon={faChair}
-          size="2x"
-          color="#EAEAEA"
-        />
+      <button type="button">
+        <FontAwesomeIcon icon={faChair} size="2x" color="#EAEAEA" />
         <div>Shopify</div>
       </button>
     </Container>

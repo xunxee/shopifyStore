@@ -1,6 +1,4 @@
-import reducer, {
-  changeSearchBarFields,
-} from './slice';
+import reducer, { changeSearchBarFields } from './slice';
 
 describe('reducer', () => {
   context('when previous state is undefined', () => {
@@ -26,7 +24,9 @@ describe('reducer', () => {
           },
         };
 
-        const { searchBarFields: { value } } = reducer(
+        const {
+          searchBarFields: { value },
+        } = reducer(
           initialState,
           changeSearchBarFields({
             value: 'beds',

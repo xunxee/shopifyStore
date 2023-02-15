@@ -10,14 +10,11 @@ describe('TitleBar', () => {
   const handleClick = jest.fn();
 
   function renderTitleBar() {
-    return render((
+    return render(
       <MemoryRouter>
-        <TitleBar
-          category="new"
-          onClickCategories={handleClick}
-        />
-      </MemoryRouter>
-    ));
+        <TitleBar category="new" onClickCategories={handleClick} />
+      </MemoryRouter>,
+    );
   }
 
   it('renders the title logo', () => {
@@ -29,9 +26,8 @@ describe('TitleBar', () => {
   it('renders the title list', () => {
     const { container } = renderTitleBar();
 
-    LIST_CATEGORIES.headerCategories
-      .forEach(({ title }) => {
-        expect(container).toHaveTextContent(title);
-      });
+    LIST_CATEGORIES.headerCategories.forEach(({ title }) => {
+      expect(container).toHaveTextContent(title);
+    });
   });
 });

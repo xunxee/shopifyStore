@@ -51,9 +51,7 @@ export default function FooterBottomLayout() {
             size="lg"
             color="#EAEAEA"
           />
-          <button type="button">
-            gunhee
-          </button>
+          <button type="button">gunhee</button>
         </div>
       </Creator>
     </Container>

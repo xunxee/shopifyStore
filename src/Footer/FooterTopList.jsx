@@ -31,9 +31,7 @@ export default function FooterTopList() {
           rowStart={item.rowStart}
           rowEnd={item.rowEnd}
         >
-          <button type="button">
-            {item.title}
-          </button>
+          <button type="button">{item.title}</button>
         </Item>
       ))}
     </Container>

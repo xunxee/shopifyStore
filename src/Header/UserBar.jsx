@@ -20,9 +20,7 @@ const Container = styled.div({
 export default function UserBar({ onClick }) {
   return (
     <Container>
-      <button
-        type="button"
-      >
+      <button type="button">
         <FontAwesomeIcon
           title="shoppingCart"
           icon={faCartShopping}
@@ -30,10 +28,7 @@ export default function UserBar({ onClick }) {
           color="#EAEAEA"
         />
       </button>
-      <button
-        type="button"
-        onClick={onClick}
-      >
+      <button type="button" onClick={onClick}>
         <FontAwesomeIcon
           title="circleUser"
           icon={faCircleUser}

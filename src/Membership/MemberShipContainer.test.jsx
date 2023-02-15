@@ -14,28 +14,30 @@ describe('MembershipContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) => selector({
-      membership: {
-        isLogin: given.isLogin,
-        accountFields: {
-          email: {
-            value: 'tester@example.co',
-            validationMessage: '',
+    useSelector.mockImplementation((selector) =>
+      selector({
+        membership: {
+          isLogin: given.isLogin,
+          accountFields: {
+            email: {
+              value: 'tester@example.co',
+              validationMessage: '',
+            },
+            password: {
+              value: 'Tester123@',
+              validationMessage: '',
+            },
+            firstName: {
+              value: given.firstName,
+            },
+            lastName: {
+              value: given.lastName,
+            },
           },
-          password: {
-            value: 'Tester123@',
-            validationMessage: '',
-          },
-          firstName: {
-            value: given.firstName,
-          },
-          lastName: {
-            value: given.lastName,
-          },
+          isButtonActive: given.isButtonActive,
         },
-        isButtonActive: given.isButtonActive,
-      },
-    }));
+      }),
+    );
   });
 
   context('with logged in', () => {
@@ -43,17 +45,13 @@ describe('MembershipContainer', () => {
     given('isButtonActive', () => true);
 
     it('renders the login fields', () => {
-      const { container } = render((
-        <MembershipContainer />
-      ));
+      const { container } = render(<MembershipContainer />);
 
       expect(container).toHaveTextContent("Don't have an account?");
     });
 
     it('listens change events', () => {
-      const { getByPlaceholderText } = render((
-        <MembershipContainer />
-      ));
+      const { getByPlaceholderText } = render(<MembershipContainer />);
 
       fireEvent.change(getByPlaceholderText('Email'), {
         target: { value: 'new email' },
@@ -63,9 +61,7 @@ describe('MembershipContainer', () => {
     });
 
     it('renders "Log In" button', () => {
-      const { getByText } = render((
-        <MembershipContainer />
-      ));
+      const { getByText } = render(<MembershipContainer />);
 
       fireEvent.click(getByText('Log In'));
 
@@ -79,21 +75,15 @@ describe('MembershipContainer', () => {
     given('lastName', () => '정');
 
     it('renders the sign up fields', () => {
-      const { container } = render((
-        <MembershipContainer />
-      ));
+      const { container } = render(<MembershipContainer />);
 
-      expect(container).toHaveTextContent(
-        'Passwords must be longer than 7',
-      );
+      expect(container).toHaveTextContent('Passwords must be longer than 7');
     });
 
     it('renders "Sing Up" button', () => {
       given('isButtonActive', () => true);
 
-      const { getByText } = render((
-        <MembershipContainer />
-      ));
+      const { getByText } = render(<MembershipContainer />);
 
       fireEvent.click(getByText('Sign Up'));
 
@@ -101,9 +91,7 @@ describe('MembershipContainer', () => {
     });
 
     it('renders "Log In" button', () => {
-      const { getByText } = render((
-        <MembershipContainer />
-      ));
+      const { getByText } = render(<MembershipContainer />);
 
       fireEvent.click(getByText('Log In'));
 
@@ -113,9 +101,7 @@ describe('MembershipContainer', () => {
     });
 
     it('listens change events', () => {
-      const { getByPlaceholderText } = render((
-        <MembershipContainer />
-      ));
+      const { getByPlaceholderText } = render(<MembershipContainer />);
 
       fireEvent.change(getByPlaceholderText('Email'), {
         target: { value: 'tester@example.com' },
@@ -127,13 +113,9 @@ describe('MembershipContainer', () => {
     it('listens blur events', () => {
       given('isButtonActive', () => false);
 
-      const { getByPlaceholderText } = render((
-        <MembershipContainer />
-      ));
+      const { getByPlaceholderText } = render(<MembershipContainer />);
 
-      const inputBox = getByPlaceholderText(
-        '성(Last Name)',
-      );
+      const inputBox = getByPlaceholderText('성(Last Name)');
 
       inputBox.focus();
       inputBox.blur();
@@ -145,13 +127,9 @@ describe('MembershipContainer', () => {
       given('isButtonActive', () => true);
 
       it("doesn't fire onBlur event", () => {
-        const { getByPlaceholderText } = render((
-          <MembershipContainer />
-        ));
+        const { getByPlaceholderText } = render(<MembershipContainer />);
 
-        const inputBox = getByPlaceholderText(
-          '성(Last Name)',
-        );
+        const inputBox = getByPlaceholderText('성(Last Name)');
 
         inputBox.focus();
         inputBox.blur();

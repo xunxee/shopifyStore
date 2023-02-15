@@ -26,10 +26,7 @@ const Container = styled.div({
   },
 });
 
-export default function SearchBar({
-  onChange,
-  onKeyDown,
-}) {
+export default function SearchBar({ onChange, onKeyDown }) {
   function handleChange({ target: { value } }) {
     onChange({ value });
   }

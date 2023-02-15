@@ -48,7 +48,9 @@ export default function TitleBar({ onClick }) {
     return (event) => {
       event.preventDefault();
 
-      const { currentTarget: { pathname, name } } = event;
+      const {
+        currentTarget: { pathname, name },
+      } = event;
 
       onClick({ pathname, name });
     };
@@ -56,10 +58,7 @@ export default function TitleBar({ onClick }) {
 
   return (
     <Container>
-      <a
-        href="/"
-        onClick={handleClick()}
-      >
+      <a href="/" onClick={handleClick()}>
         <Logo>
           <LogoScale>
             <FontAwesomeIcon
@@ -72,16 +71,11 @@ export default function TitleBar({ onClick }) {
         </Logo>
       </a>
       <List>
-        {LIST_CATEGORIES.headerCategories.map(({
-          title, name,
-        }) => (
-          <Item
-            key={title}
-          >
+        {LIST_CATEGORIES.headerCategories.map(({ title, name }) => (
+          <Item key={title}>
             <a
               name={name}
-              href={name === 'all'
-                ? '/search' : `/search/${name}`}
+              href={name === 'all' ? '/search' : `/search/${name}`}
               onClick={handleClick()}
             >
               {title}

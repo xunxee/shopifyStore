@@ -8,10 +8,7 @@ const { actions, reducer } = createSlice({
     },
   },
   reducers: {
-    changeSearchBarFields(
-      state,
-      { payload: { value } },
-    ) {
+    changeSearchBarFields(state, { payload: { value } }) {
       return {
         ...state,
         searchBarFields: {
@@ -22,8 +19,6 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const {
-  changeSearchBarFields,
-} = actions;
+export const { changeSearchBarFields } = actions;
 
 export default reducer;

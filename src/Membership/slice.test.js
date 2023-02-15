@@ -66,10 +66,7 @@ describe('reducer', () => {
         isLogin: true,
       };
 
-      const { isLogin } = reducer(
-        initialState,
-        setIsLogin(),
-      );
+      const { isLogin } = reducer(initialState, setIsLogin());
 
       expect(isLogin).toBe(false);
     });
@@ -87,7 +84,9 @@ describe('reducer', () => {
           },
         };
 
-        const { accountFields: { email } } = reducer(
+        const {
+          accountFields: { email },
+        } = reducer(
           initialState,
           changeAccountFields({
             name: 'email',
@@ -110,17 +109,19 @@ describe('reducer', () => {
           },
         };
 
-        const { accountFields: { lastName } } = reducer(
+        const {
+          accountFields: { lastName },
+        } = reducer(
           initialState,
           changeInvalidCheckMessage({
             name: 'lastName',
-            validationMessage:
-              'Last name is a required field.',
+            validationMessage: 'Last name is a required field.',
           }),
         );
 
-        expect(lastName.validationMessage)
-          .toBe('Last name is a required field.');
+        expect(lastName.validationMessage).toBe(
+          'Last name is a required field.',
+        );
       });
     });
 
@@ -132,7 +133,9 @@ describe('reducer', () => {
           },
         };
 
-        const { accountFields: { error } } = reducer(
+        const {
+          accountFields: { error },
+        } = reducer(
           initialState,
           changeAccountErrorMessage({
             name: 'error',
@@ -157,7 +160,9 @@ describe('reducer', () => {
           },
         };
 
-        const { accountFields: { firstName } } = reducer(
+        const {
+          accountFields: { firstName },
+        } = reducer(
           initialState,
           changeAccountFields({
             name: 'firstName',
@@ -185,10 +190,9 @@ describe('reducer', () => {
         },
       };
 
-      const { accountFields: { email } } = reducer(
-        initialState,
-        clearAccountFields(),
-      );
+      const {
+        accountFields: { email },
+      } = reducer(initialState, clearAccountFields());
 
       expect(email.value).toBe('');
     });
@@ -204,10 +208,9 @@ describe('reducer', () => {
         },
       };
 
-      const { accountFields: { email } } = reducer(
-        initialState,
-        clearInvalidCheckMessage('email'),
-      );
+      const {
+        accountFields: { email },
+      } = reducer(initialState, clearInvalidCheckMessage('email'));
 
       expect(email.validationMessage).toBe('');
     });
@@ -221,10 +224,9 @@ describe('reducer', () => {
         },
       };
 
-      const { accountFields: { password } } = reducer(
-        initialState,
-        clearInvalidCheckMessage('password'),
-      );
+      const {
+        accountFields: { password },
+      } = reducer(initialState, clearInvalidCheckMessage('password'));
 
       expect(password.validationMessage).toBe('');
     });
@@ -236,10 +238,7 @@ describe('reducer', () => {
         refreshToken: '',
       };
 
-      const state = reducer(
-        initialState,
-        setRefreshToken('TOKEN'),
-      );
+      const state = reducer(initialState, setRefreshToken('TOKEN'));
 
       expect(state.refreshToken).toBe('TOKEN');
     });
@@ -251,10 +250,7 @@ describe('reducer', () => {
         refreshToken: 'REFRESH_TOKEN',
       };
 
-      const state = reducer(
-        initialState,
-        logout(),
-      );
+      const state = reducer(initialState, logout());
 
       expect(state.refreshToken).toBe('');
     });
@@ -266,10 +262,7 @@ describe('reducer', () => {
         isButtonActive: false,
       };
 
-      const state = reducer(
-        initialState,
-        setButtonActive(true),
-      );
+      const state = reducer(initialState, setButtonActive(true));
 
       expect(state.isButtonActive).toBe(true);
     });
@@ -334,9 +327,7 @@ describe('actions', () => {
       beforeEach(() => {
         store = makeMockStore();
 
-        postLogin.mockRejectedValue(
-          new Error('INVALID_PASSWORD'),
-        );
+        postLogin.mockRejectedValue(new Error('INVALID_PASSWORD'));
       });
 
       it('dispatch changeAccountErrorMessage', async () => {
@@ -344,10 +335,12 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(changeAccountErrorMessage({
-          name: 'error',
-          value: 'Check your ID or password',
-        }));
+        expect(actions[1]).toEqual(
+          changeAccountErrorMessage({
+            name: 'error',
+            value: 'Check your ID or password',
+          }),
+        );
       });
     });
   });
@@ -373,9 +366,7 @@ describe('actions', () => {
       beforeEach(() => {
         store = makeMockStore();
 
-        postSignUp.mockRejectedValue(
-          new Error('EMAIL_EXISTS'),
-        );
+        postSignUp.mockRejectedValue(new Error('EMAIL_EXISTS'));
       });
 
       it('dispatch changeAccountErrorMessage', async () => {
@@ -383,10 +374,12 @@ describe('actions', () => {
 
         const actions = store.getActions();
 
-        expect(actions[1]).toEqual(changeAccountErrorMessage({
-          name: 'error',
-          value: '이미 존재하는 아이디입니다.',
-        }));
+        expect(actions[1]).toEqual(
+          changeAccountErrorMessage({
+            name: 'error',
+            value: '이미 존재하는 아이디입니다.',
+          }),
+        );
       });
     });
   });
@@ -396,97 +389,79 @@ describe('actions', () => {
       {
         name: 'lastName',
         value: '정',
-        validationMessage:
-          'Last Name은 필수 입력란입니다.',
+        validationMessage: 'Last Name은 필수 입력란입니다.',
       },
       {
         name: 'firstName',
         value: '건희',
-        validationMessage:
-          'First Name은 필수 입력란입니다.',
+        validationMessage: 'First Name은 필수 입력란입니다.',
       },
     ];
 
-    profileInputs.forEach(({
-      name, value, validationMessage,
-    }) => {
+    profileInputs.forEach(({ name, value, validationMessage }) => {
       describe(name, () => {
-        context(
-          `when the length of ${name} value is 0`,
-          () => {
-            beforeEach(() => {
-              store = makeMockStore();
-            });
+        context(`when the length of ${name} value is 0`, () => {
+          beforeEach(() => {
+            store = makeMockStore();
+          });
 
-            it(
-              `changes validationMessage of ${name}`,
-              () => {
-                store.dispatch(checkInputValue({
-                  name: `${name}`,
-                  value: '',
-                }));
-
-                const actions = store.getActions();
-
-                expect(actions[0]).toEqual(
-                  changeInvalidCheckMessage({
-                    name: `${name}`,
-                    validationMessage:
-                      `${validationMessage}`,
-                  }),
-                );
-              },
+          it(`changes validationMessage of ${name}`, () => {
+            store.dispatch(
+              checkInputValue({
+                name: `${name}`,
+                value: '',
+              }),
             );
-          },
-        );
-        context(
-          `when the length of ${name} value is 1`,
-          () => {
-            beforeEach(() => {
-              store = makeMockStore();
-            });
 
-            it(
-              `doesn't changes validationMessage of ${name}`,
-              () => {
-                store.dispatch(checkInputValue({
-                  name: `${name}`,
-                  value: `${value}`,
-                }));
+            const actions = store.getActions();
 
-                const actions = store.getActions();
-
-                expect(actions[0]).toEqual(
-                  changeInvalidCheckMessage({
-                    name: `${name}`,
-                    validationMessage:
-                      '',
-                  }),
-                );
-              },
+            expect(actions[0]).toEqual(
+              changeInvalidCheckMessage({
+                name: `${name}`,
+                validationMessage: `${validationMessage}`,
+              }),
             );
-          },
-        );
+          });
+        });
+        context(`when the length of ${name} value is 1`, () => {
+          beforeEach(() => {
+            store = makeMockStore();
+          });
+
+          it(`doesn't changes validationMessage of ${name}`, () => {
+            store.dispatch(
+              checkInputValue({
+                name: `${name}`,
+                value: `${value}`,
+              }),
+            );
+
+            const actions = store.getActions();
+
+            expect(actions[0]).toEqual(
+              changeInvalidCheckMessage({
+                name: `${name}`,
+                validationMessage: '',
+              }),
+            );
+          });
+        });
       });
     });
 
     const loginInputs = [
       {
         name: 'email',
-        defaultMessage:
-          'Email은 필수 입력란입니다.',
+        defaultMessage: 'Email은 필수 입력란입니다.',
         invalidValue: 'tester',
-        inValidMessage:
-          VALID_FIELDS.email.invalidMessage,
+        inValidMessage: VALID_FIELDS.email.invalidMessage,
         validValue: 'tester@example.com',
       },
       {
         name: 'password',
-        defaultMessage:
-          'Password는 필수 입력란입니다.',
+        defaultMessage: 'Password는 필수 입력란입니다.',
         invalidValue: '123',
-        inValidMessage:
-          VALID_FIELDS.password.invalidMessage,
+        inValidMessage: VALID_FIELDS.password.invalidMessage,
         validValue: 'Tester1234@',
       },
     ];
@@ -497,24 +472,23 @@ describe('actions', () => {
           beforeEach(() => {
             store = makeMockStore();
 
-            postSignUp.mockRejectedValue(
-              new Error('EMAIL_EXISTS'),
-            );
+            postSignUp.mockRejectedValue(new Error('EMAIL_EXISTS'));
           });
 
           it(`changes validationMessage of ${input.name}`, () => {
-            store.dispatch(checkInputValue({
-              name: `${input.name}`,
-              value: '',
-            }));
+            store.dispatch(
+              checkInputValue({
+                name: `${input.name}`,
+                value: '',
+              }),
+            );
 
             const actions = store.getActions();
 
             expect(actions[0]).toEqual(
               changeInvalidCheckMessage({
                 name: `${input.name}`,
-                validationMessage:
-                  `${input.defaultMessage}`,
+                validationMessage: `${input.defaultMessage}`,
               }),
             );
           });
@@ -526,18 +500,19 @@ describe('actions', () => {
           });
 
           it(`changes validationMessage of ${input.name}`, () => {
-            store.dispatch(checkInputValue({
-              name: `${input.name}`,
-              value: `${input.invalidValue}`,
-            }));
+            store.dispatch(
+              checkInputValue({
+                name: `${input.name}`,
+                value: `${input.invalidValue}`,
+              }),
+            );
 
             const actions = store.getActions();
 
             expect(actions[0]).toEqual(
               changeInvalidCheckMessage({
                 name: `${input.name}`,
-                validationMessage:
-                  `${input.inValidMessage}`,
+                validationMessage: `${input.inValidMessage}`,
               }),
             );
           });
@@ -549,18 +524,19 @@ describe('actions', () => {
           });
 
           it(`changes validationMessage of ${input.name}`, () => {
-            store.dispatch(checkInputValue({
-              name: `${input.name}`,
-              value: `${input.validValue}`,
-            }));
+            store.dispatch(
+              checkInputValue({
+                name: `${input.name}`,
+                value: `${input.validValue}`,
+              }),
+            );
 
             const actions = store.getActions();
 
             expect(actions[0]).toEqual(
               changeInvalidCheckMessage({
                 name: `${input.name}`,
-                validationMessage:
-                  '',
+                validationMessage: '',
               }),
             );
           });
@@ -580,16 +556,16 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkMemberInfo({
-          name: 'email',
-          value: 'tester@example.com',
-        }));
+        store.dispatch(
+          checkMemberInfo({
+            name: 'email',
+            value: 'tester@example.com',
+          }),
+        );
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(
-          setButtonActive(true),
-        );
+        expect(actions[0]).toEqual(setButtonActive(true));
       });
     });
 
@@ -599,10 +575,12 @@ describe('actions', () => {
       });
 
       it('terminates the function', () => {
-        store.dispatch(checkMemberInfo({
-          name: 'email',
-          value: '',
-        }));
+        store.dispatch(
+          checkMemberInfo({
+            name: 'email',
+            value: '',
+          }),
+        );
 
         const actions = store.getActions();
 
@@ -621,16 +599,16 @@ describe('actions', () => {
       });
 
       it('conveys true to setButtonActive', () => {
-        store.dispatch(checkMemberInfo({
-          name: 'firstName',
-          value: '정',
-        }));
+        store.dispatch(
+          checkMemberInfo({
+            name: 'firstName',
+            value: '정',
+          }),
+        );
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(
-          setButtonActive(true),
-        );
+        expect(actions[0]).toEqual(setButtonActive(true));
       });
     });
 
@@ -648,16 +626,16 @@ describe('actions', () => {
       });
 
       it('clears validationMessage', async () => {
-        await store.dispatch(checkMemberInfo({
-          name: 'password',
-          value: 'Tester@123',
-        }));
+        await store.dispatch(
+          checkMemberInfo({
+            name: 'password',
+            value: 'Tester@123',
+          }),
+        );
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(
-          clearInvalidCheckMessage('password'),
-        );
+        expect(actions[0]).toEqual(clearInvalidCheckMessage('password'));
       });
     });
 
@@ -675,16 +653,16 @@ describe('actions', () => {
       });
 
       it('conveys false to setButtonActive', async () => {
-        await store.dispatch(checkMemberInfo({
-          name: 'password',
-          value: 'Tester@',
-        }));
+        await store.dispatch(
+          checkMemberInfo({
+            name: 'password',
+            value: 'Tester@',
+          }),
+        );
 
         const actions = store.getActions();
 
-        expect(actions[0]).toEqual(
-          setButtonActive(false),
-        );
+        expect(actions[0]).toEqual(setButtonActive(false));
       });
     });
 
@@ -704,10 +682,12 @@ describe('actions', () => {
       });
 
       it('terminates the function', async () => {
-        await store.dispatch(checkMemberInfo({
-          name: 'password',
-          value: 'Tester@',
-        }));
+        await store.dispatch(
+          checkMemberInfo({
+            name: 'password',
+            value: 'Tester@',
+          }),
+        );
 
         const actions = store.getActions();
 

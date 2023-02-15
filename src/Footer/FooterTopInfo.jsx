@@ -14,11 +14,7 @@ const Container = styled.div({
 export default function FooterTopInfo() {
   return (
     <Container>
-      <button
-        type="button"
-      >
-        GitHub
-      </button>
+      <button type="button">GitHub</button>
     </Container>
   );
 }
