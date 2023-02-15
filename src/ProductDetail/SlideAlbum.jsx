@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-import Palette from '../../styles/palette';
+import Palette from '../styles/palette';
 
-import { makeSelectedNumber } from '../../utils';
+import { makeSelectedNumber } from '../utils';
 
 const { darkPurple, palePurple } = Palette;
 

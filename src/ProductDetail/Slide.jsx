@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import PALETTE from '../../styles/palette';
+import PALETTE from '../styles/palette';
 
 const { basicWhite, basicPurple, darkPurple } = PALETTE;
 
