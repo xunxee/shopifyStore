@@ -1,39 +1,39 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback } from "react";
 
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-import PRODUCT_TAG from '../styles/ProductTag';
+import PRODUCT_TAG from "../styles/ProductTag";
 
-import Slide from './Slide';
-import SlideAlbum from './SlideAlbum';
-import ItemInfo from './ItemInfo';
+import Slide from "./Slide";
+import SlideAlbum from "./SlideAlbum";
+import ItemInfo from "./ItemInfo";
 
-import { updateSlide, setAlbumPosition } from '../utils';
+import { updateSlide, setAlbumPosition } from "../utils";
 
 const { productName, priceName } = PRODUCT_TAG;
 
 const Layout = styled.div({
-  display: 'flex',
-  position: 'relative',
+  display: "flex",
+  position: "relative",
 });
 
 const ProductTag = styled.div({
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  zIndex: '20',
-  '& h3': {
-    fontSize: '32px',
-    lineHeight: '32px',
+  position: "absolute",
+  top: "0",
+  left: "0",
+  zIndex: "20",
+  "& h3": {
+    fontSize: "32px",
+    lineHeight: "32px",
     ...productName,
   },
-  '& span': {
+  "& span": {
     ...priceName,
   },
 });
 
 const SlideWrapper = styled.div({
-  width: '65%',
+  width: "65%",
 });
 
 export default function ProductWrapper({
@@ -86,8 +86,8 @@ export default function ProductWrapper({
     }vw)`;
 
     slideRef.current.style.transition = slide.isMotion
-      ? 'all 0.5s ease-in'
-      : '';
+      ? "all 0.5s ease-in"
+      : "";
 
     const albumImageIndex = slide.number - BANNERS_COUNT;
 

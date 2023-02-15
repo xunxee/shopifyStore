@@ -1,19 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from "@testing-library/react";
 
-import ProductWrapper from './ProductWrapper';
+import ProductWrapper from "./ProductWrapper";
 
-import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from "../../fixtures/ProductDetail/productDetail";
 
 const { title, price, imageList, size, color, details, evaluation, banners } =
   PRODUCT_DETAIL;
 
-describe('ProductWrapper', () => {
+describe("ProductWrapper", () => {
   const setState = jest.fn();
 
   jest
-    .spyOn(React, 'useState')
+    .spyOn(React, "useState")
     .mockImplementation((initialState) => [initialState, setState]);
 
   beforeEach(() => {
@@ -44,27 +44,27 @@ describe('ProductWrapper', () => {
     );
   }
 
-  it('renders the title', () => {
+  it("renders the title", () => {
     const { container } = renderProductWrapper();
 
     expect(container).toHaveTextContent(title);
   });
 
-  it('renders the arrow icon', () => {
+  it("renders the arrow icon", () => {
     const { getByTitle } = renderProductWrapper();
 
-    expect(getByTitle('nextArrow')).not.toBeNull();
+    expect(getByTitle("nextArrow")).not.toBeNull();
   });
 
-  describe('click the previous button', () => {
-    context('when reaches the previous slide', () => {
-      it('moves without motion', () => {
+  describe("click the previous button", () => {
+    context("when reaches the previous slide", () => {
+      it("moves without motion", () => {
         const { getByTitle } = renderProductWrapper({
           isPassTheSlide: true,
         });
 
         jest.useFakeTimers();
-        fireEvent.click(getByTitle('previousArrow'));
+        fireEvent.click(getByTitle("previousArrow"));
 
         expect(setState).toBeCalledTimes(2);
 
@@ -75,15 +75,15 @@ describe('ProductWrapper', () => {
     });
   });
 
-  describe('click the next button', () => {
-    context('when reaches the next slide', () => {
-      it('moves without motion', () => {
+  describe("click the next button", () => {
+    context("when reaches the next slide", () => {
+      it("moves without motion", () => {
         const { getByTitle } = renderProductWrapper({
           isPassTheSlide: true,
         });
 
         jest.useFakeTimers();
-        fireEvent.click(getByTitle('nextArrow'));
+        fireEvent.click(getByTitle("nextArrow"));
 
         expect(setState).toHaveBeenNthCalledWith(2, {
           isMotion: false,
