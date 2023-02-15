@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 
 import PRODUCT_TAG from '../styles/productTag';
 
-import Slide from './Slide/Slide';
-import SlideAlbum from './Slide/SlideAlbum';
+import Slide from './Slider/Slide';
+import SlideAlbum from './Slider/SlideAlbum';
 import ItemInfo from './ItemInfo';
 
 import { updateSlide, setAlbumPosition } from '../utils';
