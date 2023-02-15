@@ -66,16 +66,19 @@ describe('makeSelectedNumber', () => {
     });
   });
 
-  context('when click the previous button to go to the replicated slide', () => {
-    it('moves to the last picture on the main slide', () => {
-      const number = makeSelectedNumber({
-        length: 4,
-        slideNumber: 4,
-      });
+  context(
+    'when click the previous button to go to the replicated slide',
+    () => {
+      it('moves to the last picture on the main slide', () => {
+        const number = makeSelectedNumber({
+          length: 4,
+          slideNumber: 4,
+        });
 
-      expect(number).toBe(4);
-    });
-  });
+        expect(number).toBe(4);
+      });
+    },
+  );
 });
 
 describe('setAlbumPosition', () => {

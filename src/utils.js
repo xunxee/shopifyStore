@@ -16,10 +16,7 @@ export function updateSlide({ targetName, isMotion }) {
   });
 }
 
-export function makeSelectedNumber({
-  length,
-  slideNumber,
-}) {
+export function makeSelectedNumber({ length, slideNumber }) {
   const initialNumber = slideNumber - length;
 
   if (initialNumber === 0) return length;
@@ -32,8 +29,7 @@ export function makeSelectedNumber({
 export function setAlbumPosition({ index, length }) {
   const DISTANCE = 65 / 4;
 
-  if (index === length + 1
-    || index === 1) {
+  if (index === length + 1 || index === 1) {
     return `translateX(-${0}vw)`;
   }
 
@@ -42,9 +38,7 @@ export function setAlbumPosition({ index, length }) {
   }
 
   if (index >= 4) {
-    return `translateX(-${
-      (index - 3) * DISTANCE
-    }vw)`;
+    return `translateX(-${(index - 3) * DISTANCE}vw)`;
   }
 
   return `translateX(-${0}vw)`;
