@@ -10,10 +10,7 @@ const Layout = styled.div({
   marginBottom: '5rem',
 });
 
-export default function ItemList({
-  onClickItemList,
-  productList,
-}) {
+export default function ItemList({ onClickItemList, productList }) {
   return (
     <Layout>
       {productList.map((product) => (

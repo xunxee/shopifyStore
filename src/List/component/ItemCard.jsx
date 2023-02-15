@@ -4,11 +4,7 @@ import { useCallback } from 'react';
 import PALETTE from '../../styles/palette';
 import PRODUCT_TAG from '../../styles/productTag';
 
-const {
-  basicWhite,
-  paleWhite,
-  itemCardHoverList,
-} = PALETTE;
+const { basicWhite, paleWhite, itemCardHoverList } = PALETTE;
 const { productName, priceName } = PRODUCT_TAG;
 
 const Layout = styled.div(({ hoverColor }) => ({
@@ -64,14 +60,10 @@ const ImgBox = styled.div({
   },
 });
 
-export default function ItemCard(
-  {
-    product: {
-      id, title, price, mainImage,
-    },
-    onClickItemList,
-  },
-) {
+export default function ItemCard({
+  product: { id, title, price, mainImage },
+  onClickItemList,
+}) {
   function makeHoverColor() {
     const number = id % 10;
 
@@ -85,14 +77,9 @@ export default function ItemCard(
   }, [onClickItemList]);
 
   return (
-    <Layout
-      hoverColor={makeHoverColor()}
-      onClick={handleClick}
-    >
+    <Layout hoverColor={makeHoverColor()} onClick={handleClick}>
       <ProductTag>
-        <h3>
-          {title}
-        </h3>
+        <h3>{title}</h3>
         <span>{price}</span>
       </ProductTag>
       <ImgBox>
