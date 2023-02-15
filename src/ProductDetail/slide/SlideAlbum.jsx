@@ -10,7 +10,6 @@ const {
 } = Palette;
 
 const Layout = styled.div({
-  display: 'flex',
   backgroundColor: darkPurple,
   whiteSpace: 'nowrap',
   overflow: 'hidden',
