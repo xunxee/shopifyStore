@@ -2,25 +2,23 @@ import { fireEvent, render } from '@testing-library/react';
 
 import SlideAlbum from './SlideAlbum';
 
-import PRODUCT from '../../../fixtures/MockData/product';
+import PRODUCT_DETAIL from '../../../fixtures/ProductDetail/productDetail';
+
+const { title, imageList } = PRODUCT_DETAIL;
 
 describe('SlideAlbum', () => {
   const handleSetState = jest.fn();
 
-  function renderSlideAlbum({
-    title = PRODUCT.title,
-    imageList = PRODUCT.imageList,
-    BANNERS_COUNT = PRODUCT.imageList.length,
-  } = {}) {
-    return render((
+  function renderSlideAlbum() {
+    return render(
       <SlideAlbum
         title={title}
         imageList={imageList}
-        currentSlideNumber={5}
+        currentSlideNumber={7}
         setSlide={handleSetState}
-        BANNERS_COUNT={BANNERS_COUNT}
-      />
-    ));
+        BANNERS_COUNT={imageList.length}
+      />,
+    );
   }
 
   it('renders a list of product detail images', () => {
@@ -47,7 +45,7 @@ describe('SlideAlbum', () => {
       fireEvent.click(getAllByTestId('detailImage')[2]);
 
       expect(handleSetState).toBeCalledWith({
-        number: 7,
+        number: 9,
         isMotion: true,
       });
     });
