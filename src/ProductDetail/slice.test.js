@@ -2,14 +2,9 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
-import reducer, {
-  setProduct,
-  loadProduct,
-} from './slice';
+import reducer, { setProduct, loadProduct } from './slice';
 
-import {
-  fetchMockProduct,
-} from '../services/api';
+import { fetchMockProduct } from '../services/api';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
@@ -29,14 +24,10 @@ describe('reducer', () => {
         price: '$50.00 USD',
       };
 
-      const state = reducer(
-        initialState,
-        setProduct(product),
-      );
+      const state = reducer(initialState, setProduct(product));
 
       expect(state.product.id).toBe(1);
-      expect(state.product.name)
-        .toBe('Special Edition T-Shirt');
+      expect(state.product.name).toBe('Special Edition T-Shirt');
     });
   });
 });
@@ -44,10 +35,7 @@ describe('reducer', () => {
 describe('actions', () => {
   let store;
 
-  function makeMockStore({
-    productList = [],
-    product = {},
-  } = {}) {
+  function makeMockStore({ productList = [], product = {} } = {}) {
     return mockStore({
       list: {
         productList,

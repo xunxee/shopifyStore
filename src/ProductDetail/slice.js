@@ -1,13 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import {
-  fetchMockProduct,
-} from '../services/api';
+import { fetchMockProduct } from '../services/api';
 
 const { actions, reducer } = createSlice({
   name: 'productDetail',
   initialState: {
-    product: {},
+    product: {
+      id: '',
+      title: '',
+      price: '',
+      imageList: [],
+      size: [],
+      color: [],
+      detail: '',
+      evaluation: {
+        starRating: '',
+        review: [],
+      },
+      banners: [],
+    },
     selectedImage: null,
   },
   reducers: {
@@ -20,9 +31,7 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const {
-  setProduct,
-} = actions;
+export const { setProduct } = actions;
 
 export function loadProduct() {
   return async (dispatch) => {
