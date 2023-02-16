@@ -14,30 +14,28 @@ describe('MembershipContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) =>
-      selector({
-        membership: {
-          isLogin: given.isLogin,
-          accountFields: {
-            email: {
-              value: 'tester@example.co',
-              validationMessage: '',
-            },
-            password: {
-              value: 'Tester123@',
-              validationMessage: '',
-            },
-            firstName: {
-              value: given.firstName,
-            },
-            lastName: {
-              value: given.lastName,
-            },
+    useSelector.mockImplementation((selector) => selector({
+      membership: {
+        isLogin: given.isLogin,
+        accountFields: {
+          email: {
+            value: 'tester@example.co',
+            validationMessage: '',
           },
-          isButtonActive: given.isButtonActive,
+          password: {
+            value: 'Tester123@',
+            validationMessage: '',
+          },
+          firstName: {
+            value: given.firstName,
+          },
+          lastName: {
+            value: given.lastName,
+          },
         },
-      }),
-    );
+        isButtonActive: given.isButtonActive,
+      },
+    }));
   });
 
   context('with logged in', () => {

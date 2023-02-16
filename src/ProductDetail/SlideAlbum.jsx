@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import Palette from '../styles/Palette';
+import Palette from '../styles/palette';
 
 import { makeSelectedNumber } from '../utils';
 

@@ -1,13 +1,13 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import ItemCard from "./ItemCard";
+import ItemCard from './ItemCard';
 
 const Layout = styled.div({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "center",
-  marginTop: "1.5rem",
-  marginBottom: "5rem",
+  display: 'flex',
+  flexWrap: 'wrap',
+  justifyContent: 'center',
+  marginTop: '1.5rem',
+  marginBottom: '5rem',
 });
 
 export default function ItemList({ onClickItemList, productList }) {

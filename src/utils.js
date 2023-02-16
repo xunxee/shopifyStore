@@ -3,7 +3,7 @@ export function get({ page, key }) {
 }
 
 export function updateSlide({ targetName, isMotion }) {
-  if (targetName === "previousArrow") {
+  if (targetName === 'previousArrow') {
     return ({ number }) => ({
       number: number - 1,
       isMotion,

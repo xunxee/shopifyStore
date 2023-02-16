@@ -10,7 +10,9 @@ const Container = styled.form({
 export default memo(
   ({
     isLogin,
-    fields: { email, password, firstName, lastName, error },
+    fields: {
+      email, password, firstName, lastName, error,
+    },
     isButtonActive,
     onChange,
     onBlur,

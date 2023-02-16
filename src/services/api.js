@@ -1,9 +1,8 @@
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export async function postLogin({ email, password }) {
-  const url =
-    'https://identitytoolkit.googleapis.com/' +
-    `v1/accounts:signInWithPassword?key=${API_KEY}`;
+  const url = 'https://identitytoolkit.googleapis.com/'
+    + `v1/accounts:signInWithPassword?key=${API_KEY}`;
 
   const response = await fetch(url, {
     method: 'POST',
@@ -32,9 +31,8 @@ export async function postLogin({ email, password }) {
 }
 
 export async function postSignUp({ email, password }) {
-  const url =
-    'https://identitytoolkit.googleapis.com/' +
-    `v1/accounts:signUp?key=${API_KEY}`;
+  const url = 'https://identitytoolkit.googleapis.com/'
+    + `v1/accounts:signUp?key=${API_KEY}`;
 
   const response = await fetch(url, {
     method: 'POST',

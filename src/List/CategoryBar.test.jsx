@@ -1,11 +1,11 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from '@testing-library/react';
 
-import CategoryBar from "./CategoryBar";
+import CategoryBar from './CategoryBar';
 
-describe("CategoryBar", () => {
+describe('CategoryBar', () => {
   const handleClickCategories = jest.fn();
 
-  it("renders the categories", () => {
+  it('renders the categories', () => {
     const { getByText } = render(
       <CategoryBar
         field="categories"
@@ -14,11 +14,11 @@ describe("CategoryBar", () => {
       />,
     );
 
-    fireEvent.click(getByText("New Arrivals"));
+    fireEvent.click(getByText('New Arrivals'));
 
     expect(handleClickCategories).toBeCalledWith({
-      name: "new",
-      belong: "category",
+      name: 'new',
+      belong: 'category',
     });
   });
 });

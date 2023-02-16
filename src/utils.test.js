@@ -3,32 +3,32 @@ import {
   updateSlide,
   makeSelectedNumber,
   setAlbumPosition,
-} from "./utils";
+} from './utils';
 
-test("get", () => {
+test('get', () => {
   const state = {
     person: {
-      name: "gunhee",
+      name: 'gunhee',
     },
   };
 
-  const a = get({ page: "person", key: "name" });
-  const b = get({ page: "person", key: "age" });
+  const a = get({ page: 'person', key: 'name' });
+  const b = get({ page: 'person', key: 'age' });
 
-  expect(a(state)).toBe("gunhee");
+  expect(a(state)).toBe('gunhee');
   expect(b(state)).toBeUndefined();
 });
 
-describe("updateSlide", () => {
+describe('updateSlide', () => {
   const slide = {
     number: 3,
     isMotion: false,
   };
 
   context("when targetName is 'previousArrow'", () => {
-    it("decreases the slide number", () => {
+    it('decreases the slide number', () => {
       const a = updateSlide({
-        targetName: "previousArrow",
+        targetName: 'previousArrow',
         isMotion: true,
       });
 
@@ -40,9 +40,9 @@ describe("updateSlide", () => {
   });
 
   context("when targetName is 'nextArrow'", () => {
-    it("increases the slide number", () => {
+    it('increases the slide number', () => {
       const b = updateSlide({
-        targetName: "nextArrow",
+        targetName: 'nextArrow',
         isMotion: true,
       });
 
@@ -54,9 +54,9 @@ describe("updateSlide", () => {
   });
 });
 
-describe("makeSelectedNumber", () => {
-  context("when click the next button to go to the replicated slide", () => {
-    it("moves to the first picture on the main slide", () => {
+describe('makeSelectedNumber', () => {
+  context('when click the next button to go to the replicated slide', () => {
+    it('moves to the first picture on the main slide', () => {
       const number = makeSelectedNumber({
         length: 4,
         slideNumber: 9,
@@ -67,9 +67,9 @@ describe("makeSelectedNumber", () => {
   });
 
   context(
-    "when click the previous button to go to the replicated slide",
+    'when click the previous button to go to the replicated slide',
     () => {
-      it("moves to the last picture on the main slide", () => {
+      it('moves to the last picture on the main slide', () => {
         const number = makeSelectedNumber({
           length: 4,
           slideNumber: 4,
@@ -81,26 +81,26 @@ describe("makeSelectedNumber", () => {
   );
 });
 
-describe("setAlbumPosition", () => {
-  context("when the image reaches the album slide", () => {
-    it("moves the slide one step to the right", () => {
+describe('setAlbumPosition', () => {
+  context('when the image reaches the album slide', () => {
+    it('moves the slide one step to the right', () => {
       const location = setAlbumPosition({
         index: 4,
         length: 6,
       });
 
-      expect(location).toBe("translateX(-16.25vw)");
+      expect(location).toBe('translateX(-16.25vw)');
     });
   });
 
-  context("when the slide moves to the left and reaches the last slide", () => {
-    it("moves the last image of the album to be visible", () => {
+  context('when the slide moves to the left and reaches the last slide', () => {
+    it('moves the last image of the album to be visible', () => {
       const location = setAlbumPosition({
         index: 0,
         length: 6,
       });
 
-      expect(location).toBe("translateX(-32.5vw)");
+      expect(location).toBe('translateX(-32.5vw)');
     });
   });
 });

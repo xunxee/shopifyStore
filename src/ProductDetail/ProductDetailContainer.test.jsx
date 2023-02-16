@@ -14,13 +14,11 @@ describe('ProductDetailContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((state) =>
-      state({
-        productDetail: {
-          product: given.product,
-        },
-      }),
-    );
+    useSelector.mockImplementation((state) => state({
+      productDetail: {
+        product: given.product,
+      },
+    }));
   });
 
   context('with product', () => {

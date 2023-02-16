@@ -4,7 +4,9 @@ import ItemInfo from './ItemInfo';
 
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-const { size, color, details, evaluation } = PRODUCT_DETAIL;
+const {
+  size, color, details, evaluation,
+} = PRODUCT_DETAIL;
 
 describe('ItemInfo', () => {
   function renderItemInfo() {

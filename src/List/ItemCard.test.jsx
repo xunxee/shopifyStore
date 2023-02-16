@@ -1,10 +1,10 @@
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent } from '@testing-library/react';
 
-import ItemCard from "./ItemCard";
+import ItemCard from './ItemCard';
 
-import PRODUCT_DETAIL from "../../fixtures/ProductDetail/productDetail";
+import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-describe("ItemCard", () => {
+describe('ItemCard', () => {
   const handleClick = jest.fn();
 
   beforeEach(() => {
@@ -17,12 +17,12 @@ describe("ItemCard", () => {
     );
   }
 
-  it("renders the title", () => {
+  it('renders the title', () => {
     const { container, getByText } = renderItemCard();
 
-    expect(container).toHaveTextContent("Special Edition T-Shirt");
+    expect(container).toHaveTextContent('Special Edition T-Shirt');
 
-    fireEvent.click(getByText("Special Edition T-Shirt"));
+    fireEvent.click(getByText('Special Edition T-Shirt'));
 
     expect(handleClick).toBeCalled();
   });

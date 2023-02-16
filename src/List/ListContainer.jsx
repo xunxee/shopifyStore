@@ -1,34 +1,35 @@
-import styled from "@emotion/styled";
+import styled from '@emotion/styled';
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from 'react';
 
 import {
   changeUrlAllDataFields,
   changeUrlDataField,
   loadProductList,
-} from "./slice";
+} from './slice';
 
-import CategoryBar from "./CategoryBar";
-import ItemList from "./ItemList";
+import CategoryBar from './CategoryBar';
+import ItemList from './ItemList';
 
-import LIST_CATEGORIES from "../../fixtures/List/listCategoriesCollection";
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
-import { get } from "../utils";
+import { get } from '../utils';
 
 const Container = styled.div({
-  display: "flex",
-  minWidth: "990px",
-  maxWidth: "1300px",
-  minHeight: "calc(100vh - 110px)",
-  margin: "0 auto",
+  display: 'flex',
+  minWidth: '990px',
+  maxWidth: '1300px',
+  minHeight: 'calc(100vh - 110px)',
+  margin: '0 auto',
 });
 
 const Layout = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  minWidth: "192px",
+  display: 'flex',
+  flexDirection: 'column',
+  minWidth: '192px',
+  test: '',
 });
 
 export default function ListContainer({
@@ -43,13 +44,15 @@ export default function ListContainer({
 
   const productList = useSelector(
     get({
-      page: "list",
-      key: "productList",
+      page: 'list',
+      key: 'productList',
     }),
   );
 
   const {
-    url: { category, product, sort, material },
+    url: {
+      category, product, sort, material,
+    },
   } = listStates;
 
   useEffect(() => {
@@ -57,24 +60,24 @@ export default function ListContainer({
   }, []);
 
   useEffect(() => {
-    const pathnameList = urlPathname.substring(1).split("/");
+    const pathnameList = urlPathname.substring(1).split('/');
 
     function makeQueryString() {
       const queryStringList = [];
 
       if (pathnameList.length === 1) {
-        return `${urlSearch ? `${urlSearch}&category=all` : "?category=all"}`;
+        return `${urlSearch ? `${urlSearch}&category=all` : '?category=all'}`;
       }
 
       for (let i = 1; i < pathnameList.length; i += 1) {
         const pathname = pathnameList[i];
 
-        if (pathname === "product") {
+        if (pathname === 'product') {
           const productName = pathnameList[i + 1];
           queryStringList.push(`product=${productName}`);
         }
 
-        if (pathname === "new" || pathname === "featured") {
+        if (pathname === 'new' || pathname === 'featured') {
           queryStringList.push(`category=${pathname}`);
         }
       }
@@ -84,8 +87,8 @@ export default function ListContainer({
       }
 
       return urlSearch
-        ? `${urlSearch}&${queryStringList.join("&")}`
-        : `?${queryStringList.join("&")}`;
+        ? `${urlSearch}&${queryStringList.join('&')}`
+        : `?${queryStringList.join('&')}`;
     }
 
     const isValidAddress = makeQueryString();
@@ -115,7 +118,7 @@ export default function ListContainer({
     urlStates[belong] = name;
 
     function makePathname() {
-      const pathname = ["/search"];
+      const pathname = ['/search'];
 
       const { product: productValue, category: categoryValue } = urlStates;
 
@@ -131,9 +134,8 @@ export default function ListContainer({
 
       const search = [];
 
-      const searchEntries = Object.entries(urlStates).filter(([categoryName]) =>
-        url.searches.includes(categoryName),
-      );
+      const searchEntries = Object.entries(urlStates)
+        .filter(([categoryName]) => url.searches.includes(categoryName));
 
       searchEntries.forEach(([categoryName, categoryValue]) => {
         if (!categoryValue) return;
@@ -150,7 +152,7 @@ export default function ListContainer({
       return search;
     }
 
-    return [...makePathname(), ...makeSearch()].join("");
+    return [...makePathname(), ...makeSearch()].join('');
   }
 
   const handleClickCategories = useCallback(

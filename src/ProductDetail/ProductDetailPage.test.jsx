@@ -12,13 +12,11 @@ describe('ProductDetailPage', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((state) =>
-      state({
-        productDetail: {
-          product: PRODUCT_DETAIL,
-        },
-      }),
-    );
+    useSelector.mockImplementation((state) => state({
+      productDetail: {
+        product: PRODUCT_DETAIL,
+      },
+    }));
   });
 
   it('renders product name', () => {
