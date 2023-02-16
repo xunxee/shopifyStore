@@ -134,7 +134,8 @@ export default function ListContainer({
 
       const search = [];
 
-      const searchEntries = Object.entries(urlStates).filter(([categoryName]) => url.searches.includes(categoryName));
+      const searchEntries = Object.entries(urlStates)
+        .filter(([categoryName]) => url.searches.includes(categoryName));
 
       searchEntries.forEach(([categoryName, categoryValue]) => {
         if (!categoryValue) return;
