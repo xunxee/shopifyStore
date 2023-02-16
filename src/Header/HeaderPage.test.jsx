@@ -24,18 +24,16 @@ describe('HeaderPage', () => {
     dispatch.mockClear();
     mockUsedNavigate.mockClear();
 
-    useSelector.mockImplementation((selector) =>
-      selector({
-        membership: {
-          refreshToken: '',
+    useSelector.mockImplementation((selector) => selector({
+      membership: {
+        refreshToken: '',
+      },
+      header: {
+        searchBarFields: {
+          value: given.value,
         },
-        header: {
-          searchBarFields: {
-            value: given.value,
-          },
-        },
-      }),
-    );
+      },
+    }));
   });
 
   useDispatch.mockImplementation(() => dispatch);

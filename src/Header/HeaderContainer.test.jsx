@@ -26,29 +26,27 @@ describe('HeaderContainer', () => {
 
     useDispatch.mockImplementation(() => dispatch);
 
-    useSelector.mockImplementation((selector) =>
-      selector({
-        membership: {
-          isAccountModalOpen: given.isAccountModalOpen,
-          accountFields: {
-            email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            error: '',
-          },
-          refreshToken: given.refreshToken,
+    useSelector.mockImplementation((selector) => selector({
+      membership: {
+        isAccountModalOpen: given.isAccountModalOpen,
+        accountFields: {
+          email: '',
+          password: '',
+          firstName: '',
+          lastName: '',
+          error: '',
         },
-        list: {
-          category: '',
+        refreshToken: given.refreshToken,
+      },
+      list: {
+        category: '',
+      },
+      header: {
+        searchBarFields: {
+          value: '',
         },
-        header: {
-          searchBarFields: {
-            value: '',
-          },
-        },
-      }),
-    );
+      },
+    }));
   });
 
   function renderHeaderContainer() {

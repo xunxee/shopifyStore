@@ -10,15 +10,13 @@ jest.mock('react-redux');
 
 describe('MembershipPage', () => {
   beforeEach(() => {
-    useSelector.mockImplementation((selector) =>
-      selector({
-        membership: {
-          isLogin: true,
-          accountFields: INITIAL_LOGIN_FIELDS,
-          isButtonActive: false,
-        },
-      }),
-    );
+    useSelector.mockImplementation((selector) => selector({
+      membership: {
+        isLogin: true,
+        accountFields: INITIAL_LOGIN_FIELDS,
+        isButtonActive: false,
+      },
+    }));
   });
 
   it('renders the MembershipContainer', () => {

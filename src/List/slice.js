@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-import { fetchMockProductList } from "../services/api";
+import { fetchMockProductList } from '../services/api';
 
-import LIST_CATEGORIES from "../../fixtures/List/listCategoriesCollection";
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
 
 const { initialCategoryList } = LIST_CATEGORIES;
 
 const { actions, reducer } = createSlice({
-  name: "list",
+  name: 'list',
   initialState: {
     url: initialCategoryList,
     productList: [],
@@ -44,8 +44,7 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const { changeUrlDataField, changeUrlAllDataFields, setProductList } =
-  actions;
+export const { changeUrlDataField, changeUrlAllDataFields, setProductList } = actions;
 
 export function loadProductList() {
   return async (dispatch) => {

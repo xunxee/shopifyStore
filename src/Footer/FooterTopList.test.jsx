@@ -10,8 +10,7 @@ describe('FooterTopList', () => {
 
     expect(container).toHaveTextContent('Privacy Policy');
 
-    FOOTER_MENU_LIST.map((item) =>
-      expect(container).toHaveTextContent(item.title),
-    );
+    FOOTER_MENU_LIST.map((item) => expect(container)
+      .toHaveTextContent(item.title));
   });
 });

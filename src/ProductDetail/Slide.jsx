@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import PALETTE from '../styles/Palette';
+import PALETTE from '../styles/palette';
 
 const { basicWhite, basicPurple, darkPurple } = PALETTE;
 
@@ -96,8 +96,8 @@ export default function Slide({
         </button>
       </SlideControlButton>
       <ul ref={slideRef}>
-        {banners &&
-          banners.map(({ key, imgUrl }) => (
+        {banners
+          && banners.map(({ key, imgUrl }) => (
             <li key={key}>
               <img alt={title} src={imgUrl} />
             </li>
