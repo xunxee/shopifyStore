@@ -10,7 +10,7 @@ import {
   loadProductList,
 } from './slice';
 
-import CategoryBar from './CategoryBar';
+import CategoryBar from './CategoryBar/CategoryBar';
 import ItemList from './ItemList';
 
 import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
