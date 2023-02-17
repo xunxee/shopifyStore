@@ -172,7 +172,9 @@ export function requestLogin() {
     } = getState();
 
     try {
-      const { refreshToken } = await postLogin({ email, password });
+      const { refreshToken } = await postLogin(
+        { email, password },
+      );
 
       saveItem('refreshToken', refreshToken);
 
@@ -261,7 +263,10 @@ export function checkMemberInfo({ name, value }) {
       const restSignUpFieldsEntries = Object.entries(restSignUpFields);
 
       for (let i = 0; i < restSignUpFieldsEntries.length; i += 1) {
-        const [, { value: restSignUpFieldValue, validationMessage }] = restSignUpFieldsEntries[i];
+        const [
+          ,
+          { value: restSignUpFieldValue, validationMessage },
+        ] = restSignUpFieldsEntries[i];
 
         if (!restSignUpFieldValue) return false;
 
