@@ -5,14 +5,14 @@ import styled from '@emotion/styled';
 
 import ProductDetailContainer from './ProductDetailContainer';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   minHeight: 'calc(100vh - 110px)',
 });
 
 export default function ProductDetailPage() {
   return (
-    <Container>
+    <Wrapper>
       <ProductDetailContainer />
-    </Container>
+    </Wrapper>
   );
 }
