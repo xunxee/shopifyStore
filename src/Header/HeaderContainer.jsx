@@ -36,7 +36,7 @@ const Wrapper = styled.div({
   backgroundColor: '#000',
 });
 
-const NavBarLayout = styled.div({
+const NavBarWrapper = styled.div({
   display: 'flex',
   alignItems: 'center',
   width: '90%',
@@ -115,11 +115,11 @@ export default function HeaderContainer({ onClick, onKeyDown }) {
           onClickLogout={handleLogout}
         />
       )}
-      <NavBarLayout>
+      <NavBarWrapper>
         <TitleBar onClick={handleClickCategories} />
         <SearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
         <UserBar onClick={handleToggle} />
-      </NavBarLayout>
+      </NavBarWrapper>
     </Wrapper>
   );
 }
