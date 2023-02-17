@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   display: 'flex',
   alignItems: 'flex-start',
   gridColumn: '1 / span 2',
@@ -22,11 +22,11 @@ const Container = styled.div({
 
 export default function FooterTopTitle() {
   return (
-    <Container>
+    <Wrapper>
       <button type="button">
         <FontAwesomeIcon icon={faChair} size="2x" color="#EAEAEA" />
         <div>Shopify</div>
       </button>
-    </Container>
+    </Wrapper>
   );
 }
