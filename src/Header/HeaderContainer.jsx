@@ -20,9 +20,9 @@ import { changeUrlAllDataFields } from '../List/slice';
 import { changeSearchBarFields } from './slice';
 
 import MembershipPage from '../Membership/MemberShipPage';
-import TitleBar from './TitleBar';
-import SearchBar from './SearchBar';
-import UserBar from './UserBar';
+import TitleBar from './NavBar/TitleBar';
+import SearchBar from './NavBar/SearchBar';
+import UserBar from './NavBar/UserBar';
 
 const { initialCategoryList } = LIST_CATEGORIES;
 
