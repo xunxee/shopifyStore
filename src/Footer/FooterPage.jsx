@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 import FooterTopContainer from './FooterTopContainer/FooterTopContainer';
-import FooterBottomLayout from './FooterBottomLayout/FooterBottomLayout';
+import FooterBottomLayout from './FooterBottomLayout/FooterBottomContainer';
 
 const Wrapper = styled.div({
   width: '100%',
