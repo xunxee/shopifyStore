@@ -4,18 +4,20 @@ import { useRef, useEffect, useLayoutEffect } from 'react';
 
 import MembershipContainer from './MembershipContainer';
 
-const DeleteAll = styled.div(({ 'data-testid': name }) => ({
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  ...(name === 'outsideTheModal' && {
-    backdropFilter: 'blur(0.8px)',
+const StyledDeleteAll = styled.div(
+  ({ 'data-testid': name }) => ({
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    ...(name === 'outsideTheModal' && {
+      backdropFilter: 'blur(0.8px)',
+    }),
   }),
-}));
+);
 
-const Container = styled.div(({ 'data-testid': name }) => {
+const Wrapper = styled.div(({ 'data-testid': name }) => {
   const LoginPageLocation = {
     top: '50%',
     left: '50%',
@@ -69,8 +71,8 @@ export default function MembershipPage({
   }, []);
 
   return (
-    <DeleteAll data-testid={refreshToken ? null : 'outsideTheModal'}>
-      <Container
+    <StyledDeleteAll data-testid={refreshToken ? null : 'outsideTheModal'}>
+      <Wrapper
         data-testid={refreshToken ? 'LogoutPage' : 'LoginPage'}
         ref={refLogin}
       >
@@ -85,7 +87,7 @@ export default function MembershipPage({
         ) : (
           <MembershipContainer />
         )}
-      </Container>
-    </DeleteAll>
+      </Wrapper>
+    </StyledDeleteAll>
   );
 }
