@@ -14,12 +14,12 @@ import { updateSlide, setAlbumPosition } from '../utils';
 
 const { productName, priceName } = PRODUCT_TAG;
 
-const Layout = styled.div({
+const Wrapper = styled.div({
   display: 'flex',
   position: 'relative',
 });
 
-const ProductTag = styled.div({
+const StyledProductTag = styled.div({
   position: 'absolute',
   top: '0',
   left: '0',
@@ -34,7 +34,7 @@ const ProductTag = styled.div({
   },
 });
 
-const SlideWrapper = styled.div({
+const StyledSlideWrapper = styled.div({
   width: '65%',
 });
 
@@ -144,12 +144,12 @@ export default function ProductWrapper({
 
   return (
     <>
-      <Layout>
-        <ProductTag>
+      <Wrapper>
+        <StyledProductTag>
           <h3>{title}</h3>
           <span>{price}</span>
-        </ProductTag>
-        <SlideWrapper>
+        </StyledProductTag>
+        <StyledSlideWrapper>
           <Slide
             banners={banners}
             slideRef={slideRef}
@@ -168,14 +168,14 @@ export default function ProductWrapper({
             BANNERS_COUNT={BANNERS_COUNT}
             slideAlbumRef={slideAlbumRef}
           />
-        </SlideWrapper>
+        </StyledSlideWrapper>
         <ItemInfo
           size={size}
           color={color}
           details={details}
           evaluation={evaluation}
         />
-      </Layout>
+      </Wrapper>
       <div>{title}</div>
       <div>Product Info</div>
     </>
