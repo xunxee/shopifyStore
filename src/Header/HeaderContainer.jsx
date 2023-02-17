@@ -26,7 +26,7 @@ import UserBar from './UserBar';
 
 const { initialCategoryList } = LIST_CATEGORIES;
 
-const Container = styled.div({
+const Wrapper = styled.div({
   position: 'fixed',
   top: '0',
   left: '0',
@@ -107,7 +107,7 @@ export default function HeaderContainer({ onClick, onKeyDown }) {
   }, [searchBarValue]);
 
   return (
-    <Container>
+    <Wrapper>
       {isAccountModalOpen && (
         <MembershipPage
           refreshToken={refreshToken}
@@ -120,6 +120,6 @@ export default function HeaderContainer({ onClick, onKeyDown }) {
         <SearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
         <UserBar onClick={handleToggle} />
       </NavBarLayout>
-    </Container>
+    </Wrapper>
   );
 }
