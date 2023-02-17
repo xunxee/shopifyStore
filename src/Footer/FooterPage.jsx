@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import FooterTopContainer from './FooterTopContainer';
 import FooterBottomLayout from './FooterBottomLayout';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   width: '100%',
   minWidth: '990px',
   borderTop: '1px solid #999',
@@ -13,9 +13,9 @@ const Container = styled.div({
 
 export default function FooterPage() {
   return (
-    <Container>
+    <Wrapper>
       <FooterTopContainer />
       <FooterBottomLayout />
-    </Container>
+    </Wrapper>
   );
 }
