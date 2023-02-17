@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   flex: '1',
 });
 
 export default function HomePage() {
   return (
-    <Container>
+    <Wrapper>
       <div>HomePage</div>
-    </Container>
+    </Wrapper>
   );
 }
