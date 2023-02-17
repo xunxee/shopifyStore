@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 import ItemCard from './ItemCard';
 
-const Layout = styled.div({
+const Wrapper = styled.div({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
@@ -12,7 +12,7 @@ const Layout = styled.div({
 
 export default function ItemList({ onClickItemList, productList }) {
   return (
-    <Layout>
+    <Wrapper>
       {productList.map((product) => (
         <ItemCard
           key={product.id}
@@ -20,6 +20,6 @@ export default function ItemList({ onClickItemList, productList }) {
           onClickItemList={onClickItemList}
         />
       ))}
-    </Layout>
+    </Wrapper>
   );
 }
