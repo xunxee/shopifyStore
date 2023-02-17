@@ -14,11 +14,13 @@ import PRODUCT_DATA from '../../fixtures/ProductDetail/productDetail';
 
 describe('api', () => {
   const mockFetch = (data) => {
-    global.fetch = jest.fn().mockResolvedValue({
-      async json() {
-        return data;
+    global.fetch = jest.fn().mockResolvedValue(
+      {
+        async json() {
+          return data;
+        },
       },
-    });
+    );
   };
 
   describe('postLogin', () => {
