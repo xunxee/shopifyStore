@@ -4,13 +4,13 @@ import {
 
 import styled from '@emotion/styled';
 
-import PRODUCT_TAG from '../styles/productTag';
+import PRODUCT_TAG from '../../styles/productTag';
 
-import Slide from './ProductWrapper/Slide';
-import SlideAlbum from './ProductWrapper/SlideAlbum';
-import ItemInfo from './ItemInfo';
+import Slide from './Slide';
+import SlideAlbum from './SlideAlbum';
+import ItemInfo from '../ItemInfo';
 
-import { updateSlide, setAlbumPosition } from '../utils';
+import { updateSlide, setAlbumPosition } from '../../utils';
 
 const { productName, priceName } = PRODUCT_TAG;
 

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
 
-import ProductWrapper from './ProductWrapper';
+import ProductWrapper from './ProductWrapper/ProductWrapper';
 
 import { loadProduct } from './slice';
 
