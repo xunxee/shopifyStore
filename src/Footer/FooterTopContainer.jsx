@@ -13,7 +13,7 @@ const Container = styled.div({
   padding: '3rem 0',
 });
 
-export default function FooterTopLayout() {
+export default function FooterTopContainer() {
   return (
     <Container>
       <FooterTopTitle />

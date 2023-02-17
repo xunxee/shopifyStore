@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import FooterTopContainer from './FooterTopLayout';
+import FooterTopContainer from './FooterTopContainer';
 import FooterBottomLayout from './FooterBottomLayout';
 
 const Container = styled.div({
