@@ -40,7 +40,13 @@ const StyledSlideWrapper = styled.div({
 
 export default function ProductWrapper({
   product: {
-    title, price, imageList, size, color, details, evaluation,
+    title,
+    price,
+    imageList,
+    sizes,
+    colors,
+    details,
+    evaluation,
   },
   banners,
   isPassTheSlide,
@@ -170,8 +176,8 @@ export default function ProductWrapper({
           />
         </StyledSlideWrapper>
         <ItemInfo
-          size={size}
-          color={color}
+          sizes={sizes}
+          colors={colors}
           details={details}
           evaluation={evaluation}
         />
