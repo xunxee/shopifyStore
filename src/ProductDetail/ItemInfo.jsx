@@ -2,9 +2,14 @@ import styled from '@emotion/styled';
 
 import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
 
-const Layout = styled.div({
+import PALETTE from '../styles/palette';
+
+const { basicWhite } = PALETTE;
+
+const Wrapper = styled.div({
   width: '35%',
-  backgroundColor: 'orange',
+  padding: '1.5rem',
+  backgroundColor: basicWhite,
 });
 
 export default function ItemInfo({
@@ -14,14 +19,13 @@ export default function ItemInfo({
   evaluation: { starRating },
 }) {
   return (
-    <Layout>
+    <Wrapper>
       <DetailOptionButton
         sizes={sizes}
       />
-      <div>{sizes}</div>
       <div>{colors}</div>
       <div>{details}</div>
       <div>{starRating}</div>
-    </Layout>
+    </Wrapper>
   );
 }
