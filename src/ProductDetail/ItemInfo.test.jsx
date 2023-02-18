@@ -5,15 +5,15 @@ import ItemInfo from './ItemInfo';
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
 const {
-  size, color, details, evaluation,
+  sizes, colors, details, evaluation,
 } = PRODUCT_DETAIL;
 
 describe('ItemInfo', () => {
   function renderItemInfo() {
     return render(
       <ItemInfo
-        size={size}
-        color={color}
+        sizes={sizes}
+        colors={colors}
         details={details}
         evaluation={evaluation}
       />,
