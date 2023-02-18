@@ -10,8 +10,8 @@ const productDetail = {
     'https://user-images.githubusercontent.com/87808288/218358801-0ad605a6-9760-4f13-8c82-26b0abda077c.png',
     'https://user-images.githubusercontent.com/87808288/218358841-a3b04df4-1dec-40bb-9ea6-217a1a6d7e1d.png',
   ],
-  size: ['XS', 'S', 'M', 'L', 'XL'],
-  color: ['white', 'grey', 'darkturquoise', 'lightsalmon'],
+  sizes: ['XS', 'S', 'M', 'L', 'XL'],
+  colors: ['white', 'grey', 'darkturquoise', 'lightsalmon'],
   details:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.',
   evaluation: {
