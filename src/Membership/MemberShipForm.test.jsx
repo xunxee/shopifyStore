@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import MembershipForm from './MemberShipForm';
 
-import INPUT_LIST from '../../fixtures/Membership/inputList';
+import INPUT_LIST from '@fixtures/Membership/inputList';
 
 describe('LoginForm', () => {
   const handleChange = jest.fn();

@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import DetailOptionButton from './DetailOptionButton';
 
-import PRODUCT_DETAIL from '../../../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '@fixtures/ProductDetail/productDetail';
 
 const { sizes } = PRODUCT_DETAIL;
 

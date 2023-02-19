@@ -5,12 +5,12 @@ import {
   fetchMockProduct,
 } from './api';
 
-import LOGIN_TOKENS from '../../fixtures/Membership/loginTokens';
-import POST_LOGIN_DATA from '../../fixtures/Membership/postLoginData';
-import LOGIN_FAIL_DATA from '../../fixtures/Membership/loginFailData';
-import SIGNUP_FAIL_DATA from '../../fixtures/Membership/signUpFailData';
-import PRODUCT_LIST_DATA from '../../fixtures/List/productList';
-import PRODUCT_DATA from '../../fixtures/ProductDetail/productDetail';
+import LOGIN_TOKENS from '@fixtures/Membership/loginTokens';
+import POST_LOGIN_DATA from '@fixtures/Membership/postLoginData';
+import LOGIN_FAIL_DATA from '@fixtures/Membership/loginFailData';
+import SIGNUP_FAIL_DATA from '@fixtures/Membership/signUpFailData';
+import PRODUCT_LIST_DATA from '@fixtures/List/productList';
+import PRODUCT_DATA from '@fixtures/ProductDetail/productDetail';
 
 describe('api', () => {
   const mockFetch = (data) => {

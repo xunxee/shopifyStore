@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProductDetailContainer from './ProductDetailContainer';
 
-import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '@fixtures/ProductDetail/productDetail';
 
 describe('ProductDetailContainer', () => {
   const dispatch = jest.fn();

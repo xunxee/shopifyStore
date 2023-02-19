@@ -11,7 +11,7 @@ import reducer, {
 
 import { fetchMockProductList } from '../services/api';
 
-import MOCK_PRODUCT_LIST_DATA from '../../fixtures/List/productList';
+import MOCK_PRODUCT_LIST_DATA from '@fixtures/List/productList';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

@@ -8,7 +8,7 @@ import { changeSearchBarFields } from './slice';
 
 import HeaderContainer from './HeaderContainer';
 
-import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+import LIST_CATEGORIES from '@fixtures/List/listCategoriesCollection';
 import { changeUrlAllDataFields } from '../List/slice';
 
 const { initialCategoryList } = LIST_CATEGORIES;

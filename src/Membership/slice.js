@@ -4,8 +4,8 @@ import { postLogin, postSignUp } from '../services/api';
 
 import { saveItem } from '../services/storage';
 
-import INPUT_LIST from '../../fixtures/Membership/inputList';
-import VALID_FIELDS from '../../fixtures/Membership/validFields';
+import INPUT_LIST from '@fixtures/Membership/inputList';
+import VALID_FIELDS from '@fixtures/Membership/validFields';
 
 const initialLoginFields = {
   email: {

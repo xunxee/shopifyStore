@@ -4,7 +4,7 @@ import { render } from '@testing-library/react';
 
 import MembershipPage from './MemberShipPage';
 
-import INITIAL_LOGIN_FIELDS from '../../fixtures/Membership/initialLoginFields';
+import INITIAL_LOGIN_FIELDS from '@fixtures/Membership/initialLoginFields';
 
 jest.mock('react-redux');
 

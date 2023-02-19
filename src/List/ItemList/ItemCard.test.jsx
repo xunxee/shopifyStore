@@ -2,7 +2,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import ItemCard from './ItemCard';
 
-import PRODUCT_DETAIL from '../../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '@fixtures/ProductDetail/productDetail';
 
 describe('ItemCard', () => {
   const handleClick = jest.fn();

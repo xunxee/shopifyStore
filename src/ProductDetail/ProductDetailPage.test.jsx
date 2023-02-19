@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import ProductDetailPage from './ProductDetailPage';
 
-import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '@fixtures/ProductDetail/productDetail';
 
 describe('ProductDetailPage', () => {
   beforeEach(() => {

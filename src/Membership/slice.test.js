@@ -21,9 +21,9 @@ import reducer, {
 
 import { postLogin, postSignUp } from '../services/api';
 
-import INITIAL_LOGIN_FIELDS from '../../fixtures/Membership/initialLoginFields';
-import VALID_FIELDS from '../../fixtures/Membership/validFields';
-import FIELDS_STATE from '../../fixtures/Membership/fieldState';
+import INITIAL_LOGIN_FIELDS from '@fixtures/Membership/initialLoginFields';
+import VALID_FIELDS from '@fixtures/Membership/validFields';
+import FIELDS_STATE from '@fixtures/Membership/fieldState';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
