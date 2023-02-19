@@ -26,6 +26,15 @@ module.exports = {
     given: 'readonly', // given 사용시 설정
   },
   rules: {
+    'import/extensions': [
+      'error',
+      'ignorePackage',
+      // JavaScript 파일 또는 JSX 파일을 import 할 때, 확장자를 붙이지 않도록 함
+      {
+        js: 'never',
+        jsx: 'never',
+      },
+    ],
     'react/jsx-uses-react': 'off',
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
