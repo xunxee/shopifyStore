@@ -10,7 +10,7 @@ describe('DetailOptionButton', () => {
   it('renders the Button', () => {
     const { container } = render(
       <DetailOptionButton
-        sizes={sizes}
+      options={sizes}
       />,
     );
 
