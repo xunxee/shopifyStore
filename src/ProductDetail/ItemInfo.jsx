@@ -10,7 +10,7 @@ const Wrapper = styled.div({
   display: 'flex',
   flexDirection: 'column',
   width: '35%',
-  padding: '1.5rem',
+  padding: '2rem',
   backgroundColor: basicWhite,
 });
 
@@ -19,12 +19,15 @@ const StyledSelectOptionsWrapper = styled.div({
 });
 
 const StyledOptionWrapper = styled.div({
-
+  paddingBottom: '1.5rem',
 });
 
 const StyledTitle = styled.h2({
-  letterSpacing: '.025em',
+  fontSize: '16px',
+  lineHeight: '20px',
+  fontWeight: 500,
   textTransform: 'uppercase',
+  letterSpacing: '.035em',
 });
 
 export default function ItemInfo({
@@ -39,7 +42,8 @@ export default function ItemInfo({
         <StyledOptionWrapper>
           <StyledTitle>SIZE</StyledTitle>
           <DetailOptionButton
-            sizes={sizes}
+            name='size'
+            options={sizes}
           />
         </StyledOptionWrapper>
 
