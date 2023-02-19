@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import ItemInfo from './ItemInfo';
 
-import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '@fixtures/ProductDetail/productDetail';
 
 const {
   sizes, colors, details, evaluation,
