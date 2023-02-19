@@ -2,7 +2,11 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
-import reducer, { setProduct, loadProduct } from './slice';
+import reducer, { 
+  setProduct,
+  selectSize,
+  loadProduct,
+} from './slice';
 
 import { fetchMockProduct } from '../services/api';
 
@@ -28,6 +32,18 @@ describe('reducer', () => {
 
       expect(state.product.id).toBe(1);
       expect(state.product.name).toBe('Special Edition T-Shirt');
+    });
+  });
+
+  describe('selectSize', () => {
+    it('changes selected size', () => {
+      const initialState = {
+        selectedSize: 'null'
+      };
+
+      const state = reducer(initialState, selectSize('XL'));
+
+      expect(state.selectedSize).toBe('XL');
     });
   });
 });
