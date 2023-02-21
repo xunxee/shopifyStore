@@ -28,12 +28,12 @@ export default function ProductDetailContainer() {
   );
 
   // TODO: DetailOptionButton 컴포넌트에서 사용 예정
-  // const selectedSize = useSelector(
-  //   get({
-  //     page: 'productDetail',
-  //     key: 'selectedSize',
-  //   }),
-  // );
+  const selectedSize = useSelector(
+    get({
+      page: 'productDetail',
+      key: 'selectedSize',
+    }),
+  );
 
   const { imageList } = product;
 
@@ -69,6 +69,7 @@ export default function ProductDetailContainer() {
       <ProductWrapper
         product={product}
         banners={banners}
+        selectedSize={selectedSize}
         onClickSize={handleClickSize}
       />
       <RelatedProducts />

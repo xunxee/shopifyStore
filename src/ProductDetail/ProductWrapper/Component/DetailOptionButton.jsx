@@ -10,11 +10,15 @@ const Wrapper = styled.div({
   padding: '1rem 0',
 });
 
-const StyledButton = styled.button({
+const StyledButton = styled.button((
+  { selectedSize, name },
+) => ({
   width: '48px',
   height: '48px',
   marginRight: '1rem',
-  border: '1px solid #999',
+  border: selectedSize === name
+    ? '2px solid #000'
+    : '2px solid #999',
   borderRadius: '50%',
   fontSize: '.875rem',
   fontWeight: 600,
@@ -22,10 +26,16 @@ const StyledButton = styled.button({
   letterSpacing: '.025em',
   backgroundColor: basicWhite,
   cursor: 'pointer',
-});
+  '&:nth-of-type(1)': {
+    borderColor: selectedSize === null || selectedSize === name
+      ? '#000'
+      : '#999',
+  },
+}));
 
 export default function DetailOptionButton({
   options,
+  selectedSize,
   onClickSize,
 }) {
   const handleClick = useCallback(({ target: { name } }) => {
@@ -39,6 +49,7 @@ export default function DetailOptionButton({
           type="button"
           key={size}
           name={size}
+          selectedSize={selectedSize}
           onClick={handleClick}
         >
           {size}

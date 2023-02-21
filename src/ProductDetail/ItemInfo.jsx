@@ -34,6 +34,7 @@ export default function ItemInfo({
   sizes,
   colors,
   details,
+  selectedSize,
   onClickSize,
   evaluation: { starRating },
 }) {
@@ -45,6 +46,7 @@ export default function ItemInfo({
           <DetailOptionButton
             name="size"
             options={sizes}
+            selectedSize={selectedSize}
             onClickSize={onClickSize}
           />
         </StyledOptionWrapper>
