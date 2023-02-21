@@ -4,10 +4,7 @@ module.exports = {
     es2021: true,
     jest: true,
   },
-  extends: [
-    'plugin:react/recommended',
-    'airbnb',
-  ],
+  extends: ['plugin:react/recommended', 'airbnb'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -22,20 +19,10 @@ module.exports = {
     actor: 'readonly',
     Feature: 'readonly',
     Scenario: 'readonly',
-    context: 'readonly', // context 사용시 설정
-    given: 'readonly', // given 사용시 설정
+    context: 'readonly',
+    given: 'readonly',
   },
   rules: {
-    'import/extensions': [
-      'error',
-      'ignorePackage',
-      // JavaScript 파일 또는 JSX 파일을 import 할 때, 확장자를 붙이지 않도록 함
-      {
-        js: 'never',
-        jsx: 'never',
-      },
-    ],
-    'react/jsx-uses-react': 'off',
     indent: ['error', 2],
     'no-trailing-spaces': 'error',
     curly: 'error',
@@ -58,6 +45,7 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'linebreak-style': 'off',
+    'no-proto': 'off',
 
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
