@@ -34,12 +34,12 @@ const { actions, reducer } = createSlice({
       return {
         ...state,
         selectedSize,
-      }
-    }
+      };
+    },
   },
 });
 
-export const { 
+export const {
   setProduct,
   selectSize,
 } = actions;

@@ -34,6 +34,7 @@ export default function ItemInfo({
   sizes,
   colors,
   details,
+  onClickSize,
   evaluation: { starRating },
 }) {
   return (
@@ -42,8 +43,9 @@ export default function ItemInfo({
         <StyledOptionWrapper>
           <StyledTitle>SIZE</StyledTitle>
           <DetailOptionButton
-            name='size'
+            name="size"
             options={sizes}
+            onClickSize={onClickSize}
           />
         </StyledOptionWrapper>
 

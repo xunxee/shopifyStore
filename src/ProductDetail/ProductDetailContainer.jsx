@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { v4 } from 'uuid';
 
@@ -10,7 +10,10 @@ import { get } from '../utils';
 
 import ProductWrapper from './ProductWrapper/ProductWrapper';
 
-import { loadProduct } from './slice';
+import {
+  loadProduct,
+  selectSize,
+} from './slice';
 
 const RelatedProducts = styled.div({});
 
@@ -23,6 +26,14 @@ export default function ProductDetailContainer() {
       key: 'product',
     }),
   );
+
+  // TODO: DetailOptionButton 컴포넌트에서 사용 예정
+  // const selectedSize = useSelector(
+  //   get({
+  //     page: 'productDetail',
+  //     key: 'selectedSize',
+  //   }),
+  // );
 
   const { imageList } = product;
 
@@ -45,13 +56,21 @@ export default function ProductDetailContainer() {
     });
   }, [product]);
 
+  const handleClickSize = useCallback((name) => {
+    dispatch(selectSize(name));
+  }, [dispatch]);
+
   if (banners.length === 0) {
     return null;
   }
 
   return (
     <>
-      <ProductWrapper product={product} banners={banners} />
+      <ProductWrapper
+        product={product}
+        banners={banners}
+        onClickSize={handleClickSize}
+      />
       <RelatedProducts />
     </>
   );
