@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback, useEffect } from 'react';
 
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+
 import {
   changeUrlAllDataFields,
   changeUrlDataField,
@@ -12,8 +14,6 @@ import {
 
 import CategoryBar from './CategoryBar/CategoryBar';
 import ItemList from './ItemList/ItemList';
-
-import LIST_CATEGORIES from '@fixtures/List/listCategoriesCollection';
 
 import { get } from '../utils';
 

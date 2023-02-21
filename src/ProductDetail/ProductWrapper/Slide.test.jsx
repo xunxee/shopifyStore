@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import Slide from './Slide';
 
-import PRODUCT_DETAIL from '@fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '../../../fixtures/ProductDetail/productDetail';
 
 const { banners, title } = PRODUCT_DETAIL;
 

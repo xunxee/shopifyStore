@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import FOOTER_MENU_LIST from '@fixtures/Footer/footerMenuList';
+import FOOTER_MENU_LIST from '../../../fixtures/Footer/footerMenuList';
 
 const Wrapper = styled.div({
   display: 'grid',

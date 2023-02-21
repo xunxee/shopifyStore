@@ -2,13 +2,14 @@ import { render, fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+
 import { setIsAccountModalOpen, logout } from '../Membership/slice';
 
 import { changeSearchBarFields } from './slice';
 
 import HeaderContainer from './HeaderContainer';
 
-import LIST_CATEGORIES from '@fixtures/List/listCategoriesCollection';
 import { changeUrlAllDataFields } from '../List/slice';
 
 const { initialCategoryList } = LIST_CATEGORIES;

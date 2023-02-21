@@ -2,8 +2,8 @@ import styled from '@emotion/styled';
 
 import { useCallback } from 'react';
 
-import LIST_CATEGORIES_STYLE from '@fixtures/List/style/listCategoriesStyle';
-import LIST_CATEGORIES from '@fixtures/List/listCategoriesCollection';
+import LIST_CATEGORIES from '../../../fixtures/List/listCategoriesCollection';
+import LIST_CATEGORIES_STYLE from '../../../fixtures/List/style/listCategoriesStyle';
 
 const { container, button } = LIST_CATEGORIES_STYLE;
 

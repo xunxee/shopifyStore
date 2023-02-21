@@ -2,6 +2,11 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import FIELDS_STATE from '../../fixtures/Membership/fieldState';
+import VALID_FIELDS from '../../fixtures/Membership/validFields';
+import INITIAL_LOGIN_FIELDS from '../../fixtures/Membership/initialLoginFields';
+import { postLogin, postSignUp } from '../services/api';
+
 import reducer, {
   setIsAccountModalOpen,
   setIsLogin,
@@ -18,12 +23,6 @@ import reducer, {
   checkMemberInfo,
   setButtonActive,
 } from './slice';
-
-import { postLogin, postSignUp } from '../services/api';
-
-import INITIAL_LOGIN_FIELDS from '@fixtures/Membership/initialLoginFields';
-import VALID_FIELDS from '@fixtures/Membership/validFields';
-import FIELDS_STATE from '@fixtures/Membership/fieldState';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

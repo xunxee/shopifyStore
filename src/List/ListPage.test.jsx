@@ -6,7 +6,7 @@ import { render, fireEvent } from '@testing-library/react';
 
 import ListPage from './ListPage';
 
-import PRODUCT_LIST from '@fixtures/List/productList';
+import PRODUCT_LIST from '../../fixtures/List/productList';
 
 jest.mock('react-redux');
 

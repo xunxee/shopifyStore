@@ -2,9 +2,9 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
-import TitleBar from './TitleBar';
+import LIST_CATEGORIES from '../../../fixtures/List/listCategoriesCollection';
 
-import LIST_CATEGORIES from '@fixtures/List/listCategoriesCollection';
+import TitleBar from './TitleBar';
 
 const { headerCategories } = LIST_CATEGORIES;
 
