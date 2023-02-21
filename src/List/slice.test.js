@@ -2,6 +2,8 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
+import MOCK_PRODUCT_LIST_DATA from '../../fixtures/List/productList';
+
 import reducer, {
   changeUrlDataField,
   changeUrlAllDataFields,
@@ -10,8 +12,6 @@ import reducer, {
 } from './slice';
 
 import { fetchMockProductList } from '../services/api';
-
-import MOCK_PRODUCT_LIST_DATA from '../../fixtures/List/productList';
 
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);

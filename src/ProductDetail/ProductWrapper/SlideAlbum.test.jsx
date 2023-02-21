@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import SlideAlbum from './SlideAlbum';
 
-import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '../../../fixtures/ProductDetail/productDetail';
 
 const { title, imageList } = PRODUCT_DETAIL;
 

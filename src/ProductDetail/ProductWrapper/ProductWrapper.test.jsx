@@ -4,10 +4,17 @@ import { fireEvent, render } from '@testing-library/react';
 
 import ProductWrapper from './ProductWrapper';
 
-import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
+import PRODUCT_DETAIL from '../../../fixtures/ProductDetail/productDetail';
 
 const {
-  title, price, imageList, size, color, details, evaluation, banners,
+  title,
+  price,
+  imageList,
+  sizes,
+  colors,
+  details,
+  evaluation,
+  banners,
 } = PRODUCT_DETAIL;
 
 describe('ProductWrapper', () => {
@@ -32,8 +39,8 @@ describe('ProductWrapper', () => {
           title,
           price,
           imageList,
-          size,
-          color,
+          sizes,
+          colors,
           details,
           evaluation,
         }}

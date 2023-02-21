@@ -2,14 +2,14 @@ import styled from '@emotion/styled';
 
 import { useCallback } from 'react';
 
-import LIST_CATEGORIES_STYLE from '../../fixtures/List/style/listCategoriesStyle';
-import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+import LIST_CATEGORIES from '../../../fixtures/List/listCategoriesCollection';
+import LIST_CATEGORIES_STYLE from '../../../fixtures/List/style/listCategoriesStyle';
 
 const { container, button } = LIST_CATEGORIES_STYLE;
 
-const Container = styled.div(container);
+const Wrapper = styled.div(container);
 
-const Button = styled.button(({ underLine, name }) => ({
+const StyledButton = styled.button(({ underLine, name }) => ({
   ...button,
   textDecoration: underLine === name ? 'underLine' : 'none',
 }));
@@ -25,12 +25,12 @@ export default function CategoryBar({ field, selectedItem, onClick }) {
   );
 
   return (
-    <Container>
+    <Wrapper>
       <div>
         <h1>{title}</h1>
         <ul>
           {data.map(({ value, subHeading }) => (
-            <Button
+            <StyledButton
               type="button"
               key={value}
               name={value}
@@ -38,10 +38,10 @@ export default function CategoryBar({ field, selectedItem, onClick }) {
               onClick={handleClick}
             >
               {subHeading}
-            </Button>
+            </StyledButton>
           ))}
         </ul>
       </div>
-    </Container>
+    </Wrapper>
   );
 }

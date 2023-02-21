@@ -2,9 +2,11 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { render } from '@testing-library/react';
 
+import LIST_CATEGORIES from '../../../fixtures/List/listCategoriesCollection';
+
 import TitleBar from './TitleBar';
 
-import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+const { headerCategories } = LIST_CATEGORIES;
 
 describe('TitleBar', () => {
   const handleClick = jest.fn();
@@ -26,7 +28,7 @@ describe('TitleBar', () => {
   it('renders the title list', () => {
     const { container } = renderTitleBar();
 
-    LIST_CATEGORIES.headerCategories.forEach(({ title }) => {
+    headerCategories.forEach(({ title }) => {
       expect(container).toHaveTextContent(title);
     });
   });

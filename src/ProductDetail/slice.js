@@ -19,7 +19,8 @@ const { actions, reducer } = createSlice({
       },
       banners: [],
     },
-    selectedImage: null,
+    selectedSize: null,
+    selectedColor: null,
   },
   reducers: {
     setProduct(state, { payload: product }) {
@@ -28,10 +29,20 @@ const { actions, reducer } = createSlice({
         product,
       };
     },
+
+    selectSize(state, { payload: selectedSize }) {
+      return {
+        ...state,
+        selectedSize,
+      };
+    },
   },
 });
 
-export const { setProduct } = actions;
+export const {
+  setProduct,
+  selectSize,
+} = actions;
 
 export function loadProduct() {
   return async (dispatch) => {

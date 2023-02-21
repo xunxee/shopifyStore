@@ -4,20 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback, useEffect } from 'react';
 
+import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+
 import {
   changeUrlAllDataFields,
   changeUrlDataField,
   loadProductList,
 } from './slice';
 
-import CategoryBar from './CategoryBar';
-import ItemList from './ItemList';
-
-import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+import CategoryBar from './CategoryBar/CategoryBar';
+import ItemList from './ItemList/ItemList';
 
 import { get } from '../utils';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   display: 'flex',
   minWidth: '990px',
   maxWidth: '1300px',
@@ -25,7 +25,7 @@ const Container = styled.div({
   margin: '0 auto',
 });
 
-const Layout = styled.div({
+const StyledBar = styled.div({
   display: 'flex',
   flexDirection: 'column',
   minWidth: '192px',
@@ -167,8 +167,8 @@ export default function ListContainer({
   );
 
   return (
-    <Container>
-      <Layout>
+    <Wrapper>
+      <StyledBar>
         <CategoryBar
           field="categories"
           selectedItem={category}
@@ -179,9 +179,9 @@ export default function ListContainer({
           selectedItem={product}
           onClick={handleClickCategories}
         />
-      </Layout>
+      </StyledBar>
       <ItemList onClickItemList={onClickItemList} productList={productList} />
-      <Layout>
+      <StyledBar>
         <CategoryBar
           field="sort"
           selectedItem={sort}
@@ -192,7 +192,7 @@ export default function ListContainer({
           selectedItem={material}
           onClick={handleClickCategories}
         />
-      </Layout>
-    </Container>
+      </StyledBar>
+    </Wrapper>
   );
 }

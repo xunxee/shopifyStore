@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   gridColumn: '11 / span 2',
   '& button': {
     border: '0',
@@ -13,8 +13,8 @@ const Container = styled.div({
 
 export default function FooterTopInfo() {
   return (
-    <Container>
+    <Wrapper>
       <button type="button">GitHub</button>
-    </Container>
+    </Wrapper>
   );
 }

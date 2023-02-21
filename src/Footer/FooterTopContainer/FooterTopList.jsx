@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 
-import FOOTER_MENU_LIST from '../../fixtures/Footer/footerMenuList';
+import FOOTER_MENU_LIST from '../../../fixtures/Footer/footerMenuList';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, 1fr)',
   gridTemplateRows: 'repeat(4, 1fr)',
@@ -23,7 +23,7 @@ const Item = styled.div(({ column, rowStart, rowEnd }) => ({
 
 export default function FooterTopList() {
   return (
-    <Container>
+    <Wrapper>
       {FOOTER_MENU_LIST.map((item) => (
         <Item
           key={item.id}
@@ -34,6 +34,6 @@ export default function FooterTopList() {
           <button type="button">{item.title}</button>
         </Item>
       ))}
-    </Container>
+    </Wrapper>
   );
 }

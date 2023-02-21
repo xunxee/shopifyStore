@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
 
-import FooterTopList from './FooterTopList';
+import FOOTER_MENU_LIST from '../../../fixtures/Footer/footerMenuList';
 
-import FOOTER_MENU_LIST from '../../fixtures/Footer/footerMenuList';
+import FooterTopList from './FooterTopList';
 
 describe('FooterTopList', () => {
   it('renders the list', () => {

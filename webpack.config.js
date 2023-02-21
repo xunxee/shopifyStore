@@ -20,6 +20,9 @@ module.exports = () => {
     },
     resolve: {
       extensions: ['.js', '.jsx'],
+      alias: {
+        '@fixtures': path.resolve(__dirname, 'fixtures'),
+      },
     },
     devServer: {
       historyApiFallback: {

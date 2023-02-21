@@ -74,7 +74,7 @@ export default function MembershipContainer() {
   }, [dispatch, isLogin]);
 
   return (
-    <div>
+    <>
       <MembershipForm
         isLogin={isLogin}
         fields={accountFields}
@@ -86,6 +86,6 @@ export default function MembershipContainer() {
       <button type="button" onClick={handleClickToggle}>
         {isLogin ? 'Sign Up' : 'Log In'}
       </button>
-    </div>
+    </>
   );
 }

@@ -4,7 +4,7 @@ import FooterTopTitle from './FooterTopTitle';
 import FooterTopList from './FooterTopList';
 import FooterTopInfo from './FooterTopInfo';
 
-const Container = styled.div({
+const Wrapper = styled.div({
   display: 'grid',
   gridTemplateColumns: 'repeat(12, 1fr)',
   width: '90%',
@@ -13,12 +13,12 @@ const Container = styled.div({
   padding: '3rem 0',
 });
 
-export default function FooterTopLayout() {
+export default function FooterTopContainer() {
   return (
-    <Container>
+    <Wrapper>
       <FooterTopTitle />
       <FooterTopList />
       <FooterTopInfo />
-    </Container>
+    </Wrapper>
   );
 }

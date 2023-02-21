@@ -4,22 +4,22 @@ import {
 
 import styled from '@emotion/styled';
 
-import PRODUCT_TAG from '../styles/productTag';
+import PRODUCT_TAG from '../../styles/productTag';
 
 import Slide from './Slide';
 import SlideAlbum from './SlideAlbum';
-import ItemInfo from './ItemInfo';
+import ItemInfo from '../ItemInfo';
 
-import { updateSlide, setAlbumPosition } from '../utils';
+import { updateSlide, setAlbumPosition } from '../../utils';
 
 const { productName, priceName } = PRODUCT_TAG;
 
-const Layout = styled.div({
+const Wrapper = styled.div({
   display: 'flex',
   position: 'relative',
 });
 
-const ProductTag = styled.div({
+const StyledProductTag = styled.div({
   position: 'absolute',
   top: '0',
   left: '0',
@@ -34,18 +34,26 @@ const ProductTag = styled.div({
   },
 });
 
-const SlideWrapper = styled.div({
+const StyledSlideWrapper = styled.div({
   width: '65%',
 });
 
 export default function ProductWrapper({
   product: {
-    title, price, imageList, size, color, details, evaluation,
+    title,
+    price,
+    imageList,
+    sizes,
+    colors,
+    details,
+    evaluation,
   },
   banners,
   isPassTheSlide,
   startNumber,
   endNumber,
+  selectedSize,
+  onClickSize,
 }) {
   const slideRef = useRef();
   const slideAlbumRef = useRef();
@@ -144,12 +152,12 @@ export default function ProductWrapper({
 
   return (
     <>
-      <Layout>
-        <ProductTag>
+      <Wrapper>
+        <StyledProductTag>
           <h3>{title}</h3>
           <span>{price}</span>
-        </ProductTag>
-        <SlideWrapper>
+        </StyledProductTag>
+        <StyledSlideWrapper>
           <Slide
             banners={banners}
             slideRef={slideRef}
@@ -168,14 +176,16 @@ export default function ProductWrapper({
             BANNERS_COUNT={BANNERS_COUNT}
             slideAlbumRef={slideAlbumRef}
           />
-        </SlideWrapper>
+        </StyledSlideWrapper>
         <ItemInfo
-          size={size}
-          color={color}
+          sizes={sizes}
+          colors={colors}
           details={details}
           evaluation={evaluation}
+          selectedSize={selectedSize}
+          onClickSize={onClickSize}
         />
-      </Layout>
+      </Wrapper>
       <div>{title}</div>
       <div>Product Info</div>
     </>

@@ -20,13 +20,13 @@ import { changeUrlAllDataFields } from '../List/slice';
 import { changeSearchBarFields } from './slice';
 
 import MembershipPage from '../Membership/MemberShipPage';
-import TitleBar from './TitleBar';
-import SearchBar from './SearchBar';
-import UserBar from './UserBar';
+import TitleBar from './NavBar/TitleBar';
+import SearchBar from './NavBar/SearchBar';
+import UserBar from './NavBar/UserBar';
 
 const { initialCategoryList } = LIST_CATEGORIES;
 
-const Container = styled.div({
+const Wrapper = styled.div({
   position: 'fixed',
   top: '0',
   left: '0',
@@ -36,7 +36,7 @@ const Container = styled.div({
   backgroundColor: '#000',
 });
 
-const NavBarLayout = styled.div({
+const NavBarWrapper = styled.div({
   display: 'flex',
   alignItems: 'center',
   width: '90%',
@@ -107,7 +107,7 @@ export default function HeaderContainer({ onClick, onKeyDown }) {
   }, [searchBarValue]);
 
   return (
-    <Container>
+    <Wrapper>
       {isAccountModalOpen && (
         <MembershipPage
           refreshToken={refreshToken}
@@ -115,11 +115,11 @@ export default function HeaderContainer({ onClick, onKeyDown }) {
           onClickLogout={handleLogout}
         />
       )}
-      <NavBarLayout>
+      <NavBarWrapper>
         <TitleBar onClick={handleClickCategories} />
         <SearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
         <UserBar onClick={handleToggle} />
-      </NavBarLayout>
-    </Container>
+      </NavBarWrapper>
+    </Wrapper>
   );
 }

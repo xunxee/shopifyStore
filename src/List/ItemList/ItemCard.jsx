@@ -1,13 +1,13 @@
 import styled from '@emotion/styled';
 import { useCallback } from 'react';
 
-import PALETTE from '../styles/palette';
-import PRODUCT_TAG from '../styles/productTag';
+import PALETTE from '../../styles/palette';
+import PRODUCT_TAG from '../../styles/productTag';
 
 const { basicWhite, paleWhite, itemCardHoverList } = PALETTE;
 const { productName, priceName } = PRODUCT_TAG;
 
-const Layout = styled.div(({ hoverColor }) => ({
+const Wrapper = styled.div(({ hoverColor }) => ({
   position: 'relative',
   width: '256px',
   height: '267px',
@@ -26,7 +26,7 @@ const Layout = styled.div(({ hoverColor }) => ({
   },
 }));
 
-const ProductTag = styled.div({
+const StyledProductTag = styled.div({
   position: 'absolute',
   top: '0',
   left: '0',
@@ -50,7 +50,7 @@ const ProductTag = styled.div({
   },
 });
 
-const ImgBox = styled.div({
+const StyledImgBox = styled.div({
   overflow: 'hidden',
   '& img': {
     transition: '0.5s',
@@ -79,14 +79,17 @@ export default function ItemCard({
   }, [onClickItemList]);
 
   return (
-    <Layout hoverColor={makeHoverColor()} onClick={handleClick}>
-      <ProductTag>
+    <Wrapper
+      hoverColor={makeHoverColor()}
+      onClick={handleClick}
+    >
+      <StyledProductTag>
         <h3>{title}</h3>
         <span>{price}</span>
-      </ProductTag>
-      <ImgBox>
+      </StyledProductTag>
+      <StyledImgBox>
         <img alt={title} src={mainImage} />
-      </ImgBox>
-    </Layout>
+      </StyledImgBox>
+    </Wrapper>
   );
 }

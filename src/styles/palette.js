@@ -1,9 +1,10 @@
 const palette = {
+  dark: '#000',
   basicWhite: '#FFF',
   paleWhite: '#F8F8F8',
   basicPurple: '#7928CA',
-  darkPurple: '#4c2889',
   palePurple: '#8369AD',
+  darkPurple: '#4c2889',
   itemCardHoverList: {
     1: '#7928ca',
     2: '#eb367f',

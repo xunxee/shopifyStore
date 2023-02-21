@@ -3,11 +3,11 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
-import PALETTE from '../styles/palette';
+import PALETTE from '../../styles/palette';
 
 const { basicWhite, basicPurple, darkPurple } = PALETTE;
 
-const Layout = styled.div(({ slideLength }) => ({
+const Wrapper = styled.div(({ slideLength }) => ({
   display: 'flex',
   position: 'relative',
   overflow: 'hidden',
@@ -27,7 +27,7 @@ const Layout = styled.div(({ slideLength }) => ({
   },
 }));
 
-const SlideControlButton = styled.div({
+const StyledSlideControlButton = styled.div({
   display: 'flex',
   position: 'absolute',
   right: '2.5rem',
@@ -78,8 +78,8 @@ export default function Slide({
   }
 
   return (
-    <Layout slideLength={banners.length}>
-      <SlideControlButton>
+    <Wrapper slideLength={banners.length}>
+      <StyledSlideControlButton>
         <button
           type="button"
           title="previousArrow"
@@ -94,7 +94,7 @@ export default function Slide({
         >
           <FontAwesomeIcon icon={faArrowRight} size="2x" color={basicWhite} />
         </button>
-      </SlideControlButton>
+      </StyledSlideControlButton>
       <ul ref={slideRef}>
         {banners
           && banners.map(({ key, imgUrl }) => (
@@ -103,6 +103,6 @@ export default function Slide({
             </li>
           ))}
       </ul>
-    </Layout>
+    </Wrapper>
   );
 }
