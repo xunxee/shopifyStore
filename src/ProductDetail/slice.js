@@ -19,8 +19,8 @@ const { actions, reducer } = createSlice({
       },
       banners: [],
     },
-    selectedSize: 'null',
-    selectedColor: 'null',
+    selectedSize: null,
+    selectedColor: null,
   },
   reducers: {
     setProduct(state, { payload: product }) {
