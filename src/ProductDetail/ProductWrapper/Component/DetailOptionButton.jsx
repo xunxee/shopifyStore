@@ -4,7 +4,7 @@ import { useCallback } from 'react';
 
 import PALETTE from '../../../styles/palette';
 
-const { basicWhite } = PALETTE;
+const { basicWhite, paleGray } = PALETTE;
 
 const Wrapper = styled.div({
   padding: '1rem 0',
@@ -26,6 +26,12 @@ const StyledButton = styled.button((
   letterSpacing: '.025em',
   backgroundColor: basicWhite,
   cursor: 'pointer',
+  transition: '0.2s',
+  transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
+  '&:hover': {
+    backgroundColor: paleGray,
+    transform: 'scale(1.2)',
+  },
   '&:nth-of-type(1)': {
     borderColor: selectedSize === null || selectedSize === children
       ? '#000'
