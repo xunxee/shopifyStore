@@ -36,18 +36,18 @@
 ```jsx
 // MembershipPage.test.jsx
 describe('MembershipPage', () => {
-	beforeEach(() => {
-		useSelector.mockImplementation((selector) => selector({
-			// ......
-		}));
-	});
+  beforeEach(() => {
+    useSelector.mockImplementation((selector) => selector({
+      // ......
+    }));
+  });
 
-	describe('addEventListener', () => {
-		const handleClick = jest.fn();
+  describe('addEventListener', () => {
+    const handleClick = jest.fn();
 
-		beforeEach(() => {
-			handleClick.mockClear();
-		});
+    beforeEach(() => {
+      handleClick.mockClear();
+    });
 
     const mockEvents = () => {
       const events = {};
@@ -67,7 +67,7 @@ describe('MembershipPage', () => {
       return events;
     };
 
-		context('when clicked inside the modal', () => {
+    context('when clicked inside the modal', () => {
       it("doesn't close the modal window", () => {
         const events = mockEvents();
 
@@ -82,7 +82,7 @@ describe('MembershipPage', () => {
         expect(handleClick).toBeCalledTimes(0);
       });
     });
-	});
+  });
 });
 ```
 
@@ -98,28 +98,28 @@ describe('MembershipPage', () => {
 // api.test.js
 
 describe('api', () => {
-	const mockFetch = (data) => {
+  const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({
       async json() { return data; },
     });
   };
 
-	describe('postLogin', () => {
-		context('when login fails', () => {
-			beforeEach(() => {
-				mockFetch(LOGIN_FAIL_DATA);
-			});
+  describe('postLogin', () => {
+    context('when login fails', () => {
+      beforeEach(() => {
+        mockFetch(LOGIN_FAIL_DATA);
+      });
 
-			it('throw an error', async () => {
-				await expect(async () => {
-					await postLogin({
-						email: 'tester@example.com',
-						password: '',
-					});
-				}).rejects.toThrowError(new Error('INVALID_PASSWORD'));
-			});
-		});
-	});
+      it('throw an error', async () => {
+        await expect(async () => {
+          await postLogin({
+            email: 'tester@example.com',
+            password: '',
+          });
+        }).rejects.toThrowError(new Error('INVALID_PASSWORD'));
+      });
+    });
+  });
 });
 ```
 
@@ -134,15 +134,15 @@ expect.rejects.toThrowError() matcher를 사용하여, 비동기 함수에서 �
 ```jsx
 // MembershipContainer.jsx
 export default function MembershipContainer() {
-	const handleChange = useCallback(
+  const handleChange = useCallback(
     ({ name, value }) => {
       dispatch(changeAccountFields({ name, value }));
       dispatch(checkMemberInfo({ name, value }));
     },
     [dispatch],
   );
-	
-	const handleBlur = useCallback(
+
+  const handleBlur = useCallback(
     ({ name, value }) => {
       if (isButtonActive) return;
 
@@ -151,15 +151,15 @@ export default function MembershipContainer() {
     [dispatch, isButtonActive],
   );
 
-	return (
-		<>
-			<MembershipForm
+  return (
+    <>
+      <MembershipForm
         onChange={handleChange}
         onBlur={handleBlur}
       />
-			// ......
-		</>
-	);
+      // ......
+    </>
+  );
 }
 ```
 
@@ -177,33 +177,33 @@ export default function MembershipContainer() {
 ```jsx
 // ItemCard.jsx
 const Wrapper = styled.div(({ hoverColor }) => ({
-	position: 'relative',
-	// ......
-	marginLeft: '3%',
-	marginBottom: '3%',
-	'&:hover': {
-		'h3, span': {
-			backgroundColor: hoverColor
-		},
-	},
+  position: 'relative',
+  // ......
+  marginLeft: '3%',
+  marginBottom: '3%',
+  '&:hover': {
+    'h3, span': {
+      backgroundColor: hoverColor
+    },
+  },
 }));
 
 export default function ItemCard({
-	product: {
-		id, title, // .......
-	},
+  product: {
+    id, title, // .......
+  },
 }) {
-	function makeHoverColor() {
+  function makeHoverColor() {
     const number = id % 10;
 
     return itemCardHoverList[number];
   }
 
-	return (
-		<Wrapper hoverColor={makeHoverColor()}>
-			// ......
-		</Wrapper>
-	);
+  return (
+    <Wrapper hoverColor={makeHoverColor()}>
+      // ......
+    </Wrapper>
+  );
 };
 ```
 
@@ -234,19 +234,19 @@ export default function ItemCard({
     // };
     
     function makeSearch() {
-    	const searchEntries = Object.entries(urlStates)
-    		.filter(([categoryName]) => url.searches.includes(categoryName));
-    	
-    	searchEntries.forEach(([categoryName, categoryValue]) => {
-    	  if (!categoryValue) return;
-    	
-    	  if (search.length) {
-    			search.push(`&${categoryName}=${categoryValue}`);
-    	
-    		  return;
-    	  }
-    	
-    	  search.push(`?${categoryName}=${categoryValue}`);
-    	});
+      const searchEntries = Object.entries(urlStates)
+        .filter(([categoryName]) => url.searches.includes(categoryName));
+      
+      searchEntries.forEach(([categoryName, categoryValue]) => {
+        if (!categoryValue) return;
+      
+        if (search.length) {
+          search.push(`&${categoryName}=${categoryValue}`);
+      
+          return;
+        }
+      
+        search.push(`?${categoryName}=${categoryValue}`);
+      });
     }
     ```
