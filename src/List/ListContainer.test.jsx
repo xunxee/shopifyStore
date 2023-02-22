@@ -141,7 +141,7 @@ describe('ListContainer', () => {
       });
     });
 
-    context('when it clicks Trending', () => {
+    context('when the user clicks on Trending', () => {
       it('changes url to /search?sort=trending', () => {
         const { getByText } = renderListContainer({
           urlPathname: '/search/new',
