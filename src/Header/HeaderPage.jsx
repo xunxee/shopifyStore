@@ -14,12 +14,14 @@ export default function HeaderPage() {
     [navigate],
   );
 
-  const handleKeyDown = useCallback(
-    (url) => {
-      navigate(url);
-    },
-    [navigate],
-  );
+  const handleKeyDown = useCallback((url) => {
+    navigate(url);
+  }, [navigate]);
 
-  return <HeaderContainer onClick={handleClick} onKeyDown={handleKeyDown} />;
+  return (
+    <HeaderContainer
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+    />
+  );
 }
