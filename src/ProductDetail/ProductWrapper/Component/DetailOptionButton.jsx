@@ -11,12 +11,12 @@ const Wrapper = styled.div({
 });
 
 const StyledButton = styled.button((
-  { selectedSize, name },
+  { selectedSize, children },
 ) => ({
   width: '48px',
   height: '48px',
   marginRight: '1rem',
-  border: selectedSize === name
+  border: selectedSize === children
     ? '2px solid #000'
     : '2px solid #999',
   borderRadius: '50%',
@@ -27,7 +27,7 @@ const StyledButton = styled.button((
   backgroundColor: basicWhite,
   cursor: 'pointer',
   '&:nth-of-type(1)': {
-    borderColor: selectedSize === null || selectedSize === name
+    borderColor: selectedSize === null || selectedSize === children
       ? '#000'
       : '#999',
   },
@@ -38,8 +38,8 @@ export default function DetailOptionButton({
   selectedSize,
   onClickSize,
 }) {
-  const handleClick = useCallback(({ target: { name } }) => {
-    onClickSize(name);
+  const handleClick = useCallback(({ currentTarget }) => {
+    onClickSize(currentTarget.textContent);
   }, [onClickSize]);
 
   return (
@@ -48,7 +48,6 @@ export default function DetailOptionButton({
         <StyledButton
           type="button"
           key={size}
-          name={size}
           selectedSize={selectedSize}
           onClick={handleClick}
         >
