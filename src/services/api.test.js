@@ -24,7 +24,7 @@ describe('api', () => {
   };
 
   describe('postLogin', () => {
-    context('when login successful', () => {
+    context('when the login is successful', () => {
       beforeEach(() => {
         mockFetch(LOGIN_TOKENS);
       });
@@ -50,7 +50,7 @@ describe('api', () => {
   });
 
   describe('postSignUp', () => {
-    context('when "sign up" successful', () => {
+    context('when the sign-up is successful', () => {
       beforeEach(() => {
         mockFetch(LOGIN_TOKENS);
       });
@@ -62,7 +62,7 @@ describe('api', () => {
       });
     });
 
-    context('when "sign up" fails', () => {
+    context('when the sign-up fails', () => {
       beforeEach(() => {
         mockFetch(SIGNUP_FAIL_DATA);
       });
@@ -80,7 +80,7 @@ describe('api', () => {
       mockFetch(PRODUCT_LIST_DATA);
     });
 
-    it('returns mock data', async () => {
+    it('returns mock-data', async () => {
       const mockData = await fetchMockProductList();
 
       expect(mockData).toBe(PRODUCT_LIST_DATA);
@@ -92,7 +92,7 @@ describe('api', () => {
       mockFetch(PRODUCT_DATA);
     });
 
-    it('returns mock data', async () => {
+    it('returns mock-data', async () => {
       const mockData = await fetchMockProduct();
 
       expect(mockData).toBe(PRODUCT_DATA);
