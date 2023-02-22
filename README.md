@@ -96,7 +96,6 @@ describe('MembershipPage', () => {
 
 ```jsx
 // api.test.js
-
 describe('api', () => {
   const mockFetch = (data) => {
     global.fetch = jest.fn().mockResolvedValue({
@@ -127,7 +126,7 @@ expect.rejects.toThrowError() matcher를 사용하여, 비동기 함수에서 �
 
 ### 📍 정규 표현식을 사용한 회원가입 유효성 검사
 
-<img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="80%" style='margin: auto; display:block;'>
+<img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="70%">
 
 🔗 **onblur와 onChange를 사용한 유효성 검사**
 
@@ -170,7 +169,7 @@ export default function MembershipContainer() {
 
 ### 📍 제품 리스트 페이지
 
-<img src="https://user-images.githubusercontent.com/87808288/220569835-fe7780c8-4991-4fad-aa8e-0d468c89c38d.gif" width="80%" style="margin:auto; display: block;">
+<img src="https://user-images.githubusercontent.com/87808288/220569835-fe7780c8-4991-4fad-aa8e-0d468c89c38d.gif" width="80%">
 
 🔗 **리스트 페이지에서 공용으로 적용되는 Card 컴포넌트 제작**
 
@@ -210,24 +209,24 @@ export default function ItemCard({
 - hoverColor를 만들고, Wrapper 객체에 props로 전달하여 hover 시 지정된 color로 변경되도록 구현
 - Wrapper 객체에 left와 bottom에 margin 값을 넣어서, map 메서드로 화면에 렌더링 될 때 자동으로 좌우 간격이 맞도록 스타일을 적용
 
-<img src="https://user-images.githubusercontent.com/87808288/220570311-98c1576e-e274-4fd2-b244-f2e387cfb324.png" width="80%" style="margin:auto; display: block;">
+<img src="https://user-images.githubusercontent.com/87808288/220570311-98c1576e-e274-4fd2-b244-f2e387cfb324.png" width="80%">
 
 ### 📍 라이브러리 사용하지 않고, 무한 슬라이드 만들기
 
-<img src="https://user-images.githubusercontent.com/87808288/220570521-7db2c304-9847-4fbc-badf-70df6bba097f.gif" width="70%" style="margin: auto; display: block;">
+<img src="https://user-images.githubusercontent.com/87808288/220570521-7db2c304-9847-4fbc-badf-70df6bba097f.gif" width="70%">
 
 💡 *gunhee’s coding blog: [라이브러리 없이, 무한 슬라이드 구현하기](https://xunxee.github.io/react/%EB%AC%B4%ED%95%9C%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/)*
 
 ### 📍 동적 쿼리 스트링 만들기
 
-<img src="https://user-images.githubusercontent.com/87808288/220570955-72ae2cb4-3f4a-45bd-a373-49237ab3ad7e.gif" width="80%" style="margin: auto; display: block;">
+<img src="https://user-images.githubusercontent.com/87808288/220570955-72ae2cb4-3f4a-45bd-a373-49237ab3ad7e.gif" width="80%">
 
 - 반복문을 사용하여 중복되는 코드를 제거하기 위해 노력했습니다.
     
     ```jsx
     // urlStates의 예시
     // const urlState= {
-    // 	 product: 'sofoas',
+    // 	 product: 'sofas',
     //	 category: 'new',
     //	 sort: 'trending',
     //	 material: 'fabric',
