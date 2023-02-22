@@ -554,7 +554,7 @@ describe('actions', () => {
         });
       });
 
-      it('conveys true to setButtonActive', () => {
+      it('passes true to setButtonActive', () => {
         store.dispatch(
           checkMemberInfo({
             name: 'email',
@@ -597,7 +597,7 @@ describe('actions', () => {
         });
       });
 
-      it('conveys true to setButtonActive', () => {
+      it('passes true to setButtonActive', () => {
         store.dispatch(
           checkMemberInfo({
             name: 'firstName',
@@ -611,7 +611,7 @@ describe('actions', () => {
       });
     });
 
-    context('when enter password for sign up', () => {
+    context('when entering password for sign up', () => {
       beforeEach(() => {
         store = makeMockStore({
           email: { value: 'tester@example.com' },
@@ -638,7 +638,7 @@ describe('actions', () => {
       });
     });
 
-    context('when enter an invalid password', () => {
+    context('when an invalid password is entered', () => {
       beforeEach(() => {
         store = makeMockStore({
           email: { value: 'tester@example.com' },
@@ -651,7 +651,7 @@ describe('actions', () => {
         });
       });
 
-      it('conveys false to setButtonActive', async () => {
+      it('passes false to setButtonActive', async () => {
         await store.dispatch(
           checkMemberInfo({
             name: 'password',

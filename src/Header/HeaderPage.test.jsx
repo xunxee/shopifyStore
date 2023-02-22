@@ -46,7 +46,7 @@ describe('HeaderPage', () => {
     );
   }
 
-  it('renders the Title bar', () => {
+  it('renders the title bar', () => {
     const { getByText } = renderHeaderPage();
 
     fireEvent.click(getByText('New Arrivals'));
@@ -55,10 +55,10 @@ describe('HeaderPage', () => {
   });
 
   describe('handleKeyDown', () => {
-    context('when enter the Enter key', () => {
+    context('when the Enter key is pressed', () => {
       given('value', () => 'test');
 
-      it('test', () => {
+      it('updates the URL address with the content of the search bar', () => {
         const { getByPlaceholderText } = renderHeaderPage();
 
         fireEvent.keyDown(getByPlaceholderText('Search for products...'), {

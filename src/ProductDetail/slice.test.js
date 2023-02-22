@@ -2,7 +2,7 @@ import thunk from 'redux-thunk';
 
 import configureStore from 'redux-mock-store';
 
-import reducer, { 
+import reducer, {
   setProduct,
   selectSize,
   loadProduct,
@@ -38,7 +38,7 @@ describe('reducer', () => {
   describe('selectSize', () => {
     it('changes selected size', () => {
       const initialState = {
-        selectedSize: 'null'
+        selectedSize: 'null',
       };
 
       const state = reducer(initialState, selectSize('XL'));

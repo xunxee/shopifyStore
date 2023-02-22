@@ -54,7 +54,7 @@ describe('ListContainer', () => {
   describe('changeUrlData', () => {
     const scenarios = [
       {
-        situation: 'when only urlPathname exists',
+        situation: 'when only urlPathname is present',
         described: 'saves the data of pathname',
         urlPathname: 'search/product/beds/new',
         payload: { category: 'new', product: 'beds' },
@@ -119,7 +119,7 @@ describe('ListContainer', () => {
   });
 
   describe('makeUrl', () => {
-    context('when it clicks New Arrivals', () => {
+    context('when "New Arrivals" is clicked', () => {
       it('changes url to /search/new', () => {
         const { getByText } = renderListContainer();
 
@@ -129,7 +129,7 @@ describe('ListContainer', () => {
       });
     });
 
-    context('when it clicks Sofas', () => {
+    context('when the user clicks Sofas', () => {
       it('changes url to /search/product/sofas', () => {
         const { getByText } = renderListContainer({
           urlPathname: '/search/product/sofas',
@@ -141,7 +141,7 @@ describe('ListContainer', () => {
       });
     });
 
-    context('when it clicks Trending', () => {
+    context('when the user clicks on Trending', () => {
       it('changes url to /search?sort=trending', () => {
         const { getByText } = renderListContainer({
           urlPathname: '/search/new',

@@ -17,7 +17,7 @@ describe('reducer', () => {
 
   describe('changeSearchBarFields', () => {
     context('when searchBar is changed', () => {
-      it('changes searchBar value', () => {
+      it('updates the searchBar value', () => {
         const initialState = {
           searchBarFields: {
             value: '',

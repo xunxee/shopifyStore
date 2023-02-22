@@ -20,7 +20,7 @@ jest.mock('../services/api');
 
 describe('reducer', () => {
   describe('changeUrlDataField', () => {
-    it('change url data field', () => {
+    it('update the query string/path of the URL', () => {
       const initialState = {
         url: {
           category: '',
@@ -42,7 +42,7 @@ describe('reducer', () => {
   });
 
   describe('changeUrlAllDataFields', () => {
-    it('change url all data field', () => {
+    it('update all the URL data fields', () => {
       const initialState = {
         url: {
           product: '',
@@ -90,7 +90,9 @@ describe('reducer', () => {
 describe('actions', () => {
   let store;
 
-  function makeMockStore({ productList = [], product = {} } = {}) {
+  function makeMockStore(
+    { productList = [], product = {} } = {},
+  ) {
     return mockStore({
       list: {
         productList,

@@ -66,7 +66,7 @@ describe('ListPage', () => {
     fireEvent.click(getByText('New Arrivals'));
   });
 
-  context('when click a "Plan T-Shirt" in the product list', () => {
+  context('when a "Plan T-Shirt" in the product list is clicked', () => {
     it('changes URL address to "product/1"', () => {
       const { getByText } = renderListPage();
 

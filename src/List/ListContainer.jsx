@@ -112,9 +112,8 @@ export default function ListContainer({
   }, [urlPathname, urlSearch]);
 
   function makeUrl({ name, belong }) {
-    const {
-      url: { ...urlStates },
-    } = listStates;
+    const { url: { ...urlStates } } = listStates;
+
     urlStates[belong] = name;
 
     function makePathname() {

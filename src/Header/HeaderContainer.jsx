@@ -47,7 +47,9 @@ const NavBarWrapper = styled.div({
   backgroundColor: '#000',
 });
 
-export default function HeaderContainer({ onClick, onKeyDown }) {
+export default function HeaderContainer(
+  { onClick, onKeyDown },
+) {
   const dispatch = useDispatch();
 
   const handleClickCategories = useCallback(
@@ -117,7 +119,10 @@ export default function HeaderContainer({ onClick, onKeyDown }) {
       )}
       <NavBarWrapper>
         <TitleBar onClick={handleClickCategories} />
-        <SearchBar onChange={handleChange} onKeyDown={handleKeyDown} />
+        <SearchBar
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+        />
         <UserBar onClick={handleToggle} />
       </NavBarWrapper>
     </Wrapper>
