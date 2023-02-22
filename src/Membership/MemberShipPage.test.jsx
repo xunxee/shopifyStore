@@ -52,8 +52,8 @@ describe('MembershipPage', () => {
       return events;
     };
 
-    context('when click inside the modal', () => {
-      it("doesn't closed the modal window", () => {
+    context('when clicked inside the modal', () => {
+      it("doesn't close the modal window", () => {
         const events = mockEvents();
 
         const { getByTestId } = render(
@@ -68,8 +68,8 @@ describe('MembershipPage', () => {
       });
     });
 
-    context('when click outside the modal', () => {
-      it('run onClick function', () => {
+    context('when clicked outside the modal', () => {
+      it('close the modal window', () => {
         const events = mockEvents();
 
         const { getByTestId } = render(
