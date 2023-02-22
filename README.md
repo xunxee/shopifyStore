@@ -162,8 +162,8 @@ export default function MembershipContainer() {
 }
 ```
 
-- handleChange() 함수에서는 회원가입 시, 4가지 항목(성, 이름, Email, Password)의 value를 확인하여 모두 유효성을 통과한다면 buttonActive의 값은 true로 변경하여 ‘Sign Up’ 버튼을 활성화한다.
-- handleBlur() 함수에서는 blur 이벤트가 발생 시, focus가 잡혀있던 input의 value를 확인하여 유효성이 맞지 않다면 그에 맞는 validation message를 생성한다.
+- handleChange() 함수에서는 회원가입 시, 4가지 항목(성, 이름, Email, Password)의 value를 확인하여 모두 유효성을 통과한다면 buttonActive의 값은 true로 변경하여 ‘Sign Up’ 버튼을 활성화합니다.
+- handleBlur() 함수에서는 blur 이벤트가 발생 시, focus가 잡혀있던 input의 value를 확인하여 유효성이 맞지 않다면 그에 맞는 validation message를 생성합니다.
 
 💡 *gunhee’s Notion: [Login 유효성 검사 함수 리팩터링](https://www.notion.so/5e4b4181d28c46a79d140cb7d1f0ef30)*
 
@@ -206,8 +206,8 @@ export default function ItemCard({
 };
 ```
 
-- hoverColor를 만들고, Wrapper 객체에 props로 전달하여 hover 시 지정된 color로 변경되도록 구현
-- Wrapper 객체에 left와 bottom에 margin 값을 넣어서, map 메서드로 화면에 렌더링 될 때 자동으로 좌우 간격이 맞도록 스타일을 적용
+- hoverColor를 만들고, Wrapper 객체에 props로 전달하여 hover 시 지정된 color로 변경되도록 구현했습니다.
+- Wrapper 객체에 left와 bottom에 margin 값을 넣어서, map 메서드로 화면에 렌더링 될 때 자동으로 좌우 간격이 맞춰지도록 스타일을 적용했습니다.
 
 <img src="https://user-images.githubusercontent.com/87808288/220570311-98c1576e-e274-4fd2-b244-f2e387cfb324.png" width="80%">
 
