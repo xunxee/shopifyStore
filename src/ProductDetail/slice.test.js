@@ -5,6 +5,7 @@ import configureStore from 'redux-mock-store';
 import reducer, {
   setProduct,
   selectSize,
+  selectColor,
   loadProduct,
 } from './slice';
 
@@ -44,6 +45,18 @@ describe('reducer', () => {
       const state = reducer(initialState, selectSize('XL'));
 
       expect(state.selectedSize).toBe('XL');
+    });
+  });
+
+  describe('selectColor', () => {
+    it('changes selected color', () => {
+      const initialState = {
+        selectedSize: 'null',
+      };
+
+      const state = reducer(initialState, selectColor('black'));
+
+      expect(state.selectedColor).toBe('black');
     });
   });
 });

@@ -36,12 +36,20 @@ const { actions, reducer } = createSlice({
         selectedSize,
       };
     },
+
+    selectColor(state, { payload: selectedColor }) {
+      return {
+        ...state,
+        selectedColor,
+      };
+    },
   },
 });
 
 export const {
   setProduct,
   selectSize,
+  selectColor,
 } = actions;
 
 export function loadProduct() {
