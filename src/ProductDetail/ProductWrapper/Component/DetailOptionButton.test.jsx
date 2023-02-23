@@ -4,46 +4,60 @@ import PRODUCT_DETAIL from '../../../../fixtures/ProductDetail/productDetail';
 
 import DetailOptionButton from './DetailOptionButton';
 
-const { sizes } = PRODUCT_DETAIL;
+const { sizes, colors } = PRODUCT_DETAIL;
 
 describe('DetailOptionButton', () => {
   const handleClick = jest.fn();
 
   function renderDetailOptionButton(
-    { selectedSize = null } = {},
+    { options = '', selectedOption = null } = {},
   ) {
     return render(
       <DetailOptionButton
-        options={sizes}
-        selectedSize={selectedSize}
-        onClickSize={handleClick}
+        options={options}
+        selectedOption={selectedOption}
+        onClickOption={handleClick}
       />,
     );
   }
 
   context('when rendered for the first time', () => {
+    it('renders the Button', () => {
+      const { container } = renderDetailOptionButton(
+        { options: sizes },
+      );
+
+      expect(container).toHaveTextContent('XL');
+    });
+
+    it('listens click event', () => {
+      const { getByText } = renderDetailOptionButton(
+        { options: sizes },
+      );
+
+      fireEvent.click(getByText('S'));
+    });
+
     it('checked for the XS size', () => {
-      renderDetailOptionButton();
+      renderDetailOptionButton(
+        { options: sizes },
+      );
     });
   });
 
   context('when click on the M size button', () => {
     it('checked for the M size', () => {
       renderDetailOptionButton(
-        { selectedSize: 'M' },
+        { options: sizes, selectedOption: 'M' },
       );
     });
   });
 
-  it('renders the Button', () => {
-    const { container } = renderDetailOptionButton();
-
-    expect(container).toHaveTextContent('XL');
-  });
-
-  it('listens click event', () => {
-    const { getByText } = renderDetailOptionButton();
-
-    fireEvent.click(getByText('S'));
+  context('when click on the white color button', () => {
+    it('checked for the white color', () => {
+      renderDetailOptionButton(
+        { options: colors, selectedOption: 'white' },
+      );
+    });
   });
 });

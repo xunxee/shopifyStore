@@ -13,6 +13,7 @@ import ProductWrapper from './ProductWrapper/ProductWrapper';
 import {
   loadProduct,
   selectSize,
+  selectColor,
 } from './slice';
 
 const RelatedProducts = styled.div({});
@@ -27,13 +28,13 @@ export default function ProductDetailContainer() {
     }),
   );
 
-  // TODO: DetailOptionButton 컴포넌트에서 사용 예정
-  const selectedSize = useSelector(
-    get({
-      page: 'productDetail',
-      key: 'selectedSize',
-    }),
-  );
+  const selectedSize = useSelector(get(
+    { page: 'productDetail', key: 'selectedSize' },
+  ));
+
+  const selectedColor = useSelector(get(
+    { page: 'productDetail', key: 'selectedColor' },
+  ));
 
   const { imageList } = product;
 
@@ -60,6 +61,10 @@ export default function ProductDetailContainer() {
     dispatch(selectSize(name));
   }, [dispatch]);
 
+  const handleClickColor = useCallback((name) => {
+    dispatch(selectColor(name));
+  }, [dispatch]);
+
   if (banners.length === 0) {
     return null;
   }
@@ -71,6 +76,8 @@ export default function ProductDetailContainer() {
         banners={banners}
         selectedSize={selectedSize}
         onClickSize={handleClickSize}
+        selectedColor={selectedColor}
+        onClickColor={handleClickColor}
       />
       <RelatedProducts />
     </>
