@@ -54,6 +54,8 @@ export default function ProductWrapper({
   endNumber,
   selectedSize,
   onClickSize,
+  selectedColor,
+  onClickColor,
 }) {
   const slideRef = useRef();
   const slideAlbumRef = useRef();
@@ -184,6 +186,8 @@ export default function ProductWrapper({
           evaluation={evaluation}
           selectedSize={selectedSize}
           onClickSize={onClickSize}
+          selectedColor={selectedColor}
+          onClickColor={onClickColor}
         />
       </Wrapper>
       <div>{title}</div>

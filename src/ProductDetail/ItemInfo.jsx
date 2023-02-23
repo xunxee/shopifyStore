@@ -14,9 +14,7 @@ const Wrapper = styled.div({
   backgroundColor: basicWhite,
 });
 
-const StyledSelectOptionsWrapper = styled.div({
-
-});
+const StyledSelectOptionsWrapper = styled.div({});
 
 const StyledOptionWrapper = styled.div({
   paddingBottom: '1.5rem',
@@ -36,6 +34,8 @@ export default function ItemInfo({
   details,
   selectedSize,
   onClickSize,
+  selectedColor,
+  onClickColor,
   evaluation: { starRating },
 }) {
   return (
@@ -46,14 +46,19 @@ export default function ItemInfo({
           <DetailOptionButton
             name="size"
             options={sizes}
-            selectedSize={selectedSize}
-            onClickSize={onClickSize}
+            selectedOption={selectedSize}
+            onClickOption={onClickSize}
           />
         </StyledOptionWrapper>
 
         <StyledOptionWrapper>
           <StyledTitle>COLOR</StyledTitle>
-          <div>{colors}</div>
+          <DetailOptionButton
+            name="color"
+            options={colors}
+            selectedOption={selectedColor}
+            onClickOption={onClickColor}
+          />
         </StyledOptionWrapper>
       </StyledSelectOptionsWrapper>
 

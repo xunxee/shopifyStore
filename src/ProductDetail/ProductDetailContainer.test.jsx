@@ -6,7 +6,7 @@ import ProductDetailContainer from './ProductDetailContainer';
 
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-import { selectSize } from './slice';
+import { selectColor, selectSize } from './slice';
 
 describe('ProductDetailContainer', () => {
   const dispatch = jest.fn();
@@ -39,13 +39,20 @@ describe('ProductDetailContainer', () => {
     });
 
     it('listens click event', () => {
-      const { getByText } = renderProductDetailContainer();
+      const { getByText, getByTitle } = renderProductDetailContainer();
 
       fireEvent.click(getByText('S'));
 
       expect(dispatch).toHaveBeenNthCalledWith(
         2,
         selectSize('S'),
+      );
+
+      fireEvent.click(getByTitle('white'));
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        3,
+        selectColor('white'),
       );
     });
   });

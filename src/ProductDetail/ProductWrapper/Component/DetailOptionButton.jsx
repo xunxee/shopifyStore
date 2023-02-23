@@ -4,19 +4,19 @@ import { useCallback } from 'react';
 
 import PALETTE from '../../../styles/palette';
 
-const { basicWhite, paleGray } = PALETTE;
+const { basicWhite, paleGray, dark } = PALETTE;
 
 const Wrapper = styled.div({
   padding: '1rem 0',
 });
 
 const StyledButton = styled.button((
-  { selectedSize, children },
+  { name, title, selectedOption },
 ) => ({
   width: '48px',
   height: '48px',
   marginRight: '1rem',
-  border: selectedSize === children
+  border: selectedOption === title
     ? '2px solid #000'
     : '2px solid #999',
   borderRadius: '50%',
@@ -24,40 +24,55 @@ const StyledButton = styled.button((
   fontWeight: 600,
   textTransform: 'uppercase',
   letterSpacing: '.025em',
-  backgroundColor: basicWhite,
+  backgroundColor: name === 'color' ? title : basicWhite,
   cursor: 'pointer',
-  transition: '0.2s',
+  transitionProperty: 'backgroundColor, transform',
+  transitionDuration: '0.4s, 0.4s',
   transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
   '&:hover': {
-    backgroundColor: paleGray,
+    border: '1px solid #000',
+    backgroundColor: name === 'color' ? title : paleGray,
     transform: 'scale(1.2)',
   },
+  '&:focus': {
+    border: '2px solid #000',
+  },
   '&:nth-of-type(1)': {
-    borderColor: selectedSize === null || selectedSize === children
+    borderColor: selectedOption === null || selectedOption === title
       ? '#000'
       : '#999',
+    '&:hover': {
+      borderColor: dark,
+    },
   },
 }));
 
 export default function DetailOptionButton({
+  name,
   options,
-  selectedSize,
-  onClickSize,
+  selectedOption,
+  onClickOption,
 }) {
-  const handleClick = useCallback(({ currentTarget }) => {
-    onClickSize(currentTarget.textContent);
-  }, [onClickSize]);
+  const handleClick = useCallback((option) => {
+    onClickOption(option);
+  }, [onClickOption]);
 
   return (
     <Wrapper>
-      {options.map((size) => (
+      {options.map((option) => (
         <StyledButton
           type="button"
-          key={size}
-          selectedSize={selectedSize}
-          onClick={handleClick}
+          key={option}
+          name={name}
+          title={option}
+          selectedOption={selectedOption}
+          onClick={() => handleClick(option)}
         >
-          {size}
+          {
+            name === 'color'
+              ? null
+              : option
+          }
         </StyledButton>
       ))}
     </Wrapper>
