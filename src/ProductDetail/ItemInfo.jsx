@@ -28,6 +28,15 @@ const StyledTitle = styled.h2({
   letterSpacing: '.035em',
 });
 
+const StyledDetailText = styled.div({
+  marginBottom: '1rem',
+  fontSize: '1rem',
+  lineHeight: '1.75rem',
+  '& p': {
+    marginBottom: '1rem',
+  },
+});
+
 export default function ItemInfo({
   sizes,
   colors,
@@ -62,7 +71,9 @@ export default function ItemInfo({
         </StyledOptionWrapper>
       </StyledSelectOptionsWrapper>
 
-      <div>{details}</div>
+      <StyledDetailText>
+        <p>{details}</p>
+      </StyledDetailText>
       <div>{starRating}</div>
     </Wrapper>
   );
