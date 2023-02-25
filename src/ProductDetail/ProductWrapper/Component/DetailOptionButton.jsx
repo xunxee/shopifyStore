@@ -7,6 +7,8 @@ import PALETTE from '../../../styles/palette';
 const { basicWhite, paleGray, dark } = PALETTE;
 
 const Wrapper = styled.div({
+  display: 'flex',
+  alignItems: 'center',
   padding: '1rem 0',
 });
 
