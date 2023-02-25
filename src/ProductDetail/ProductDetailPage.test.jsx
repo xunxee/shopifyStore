@@ -7,9 +7,9 @@ import ProductDetailPage from './ProductDetailPage';
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
 describe('ProductDetailPage', () => {
-  beforeEach(() => {
-    const dispatch = jest.fn();
+  const dispatch = jest.fn();
 
+  beforeEach(() => {
     useDispatch.mockImplementation(() => dispatch);
 
     useSelector.mockImplementation((state) => state({

@@ -38,21 +38,25 @@ describe('ProductDetailContainer', () => {
       expect(container).toHaveTextContent('Special Edition T-Shirt');
     });
 
-    it('listens click event', () => {
-      const { getByText, getByTitle } = renderProductDetailContainer();
-
-      fireEvent.click(getByText('S'));
-
-      expect(dispatch).toHaveBeenNthCalledWith(
-        2,
-        selectSize('S'),
-      );
+    it('listens color click event', () => {
+      const { getByTitle } = renderProductDetailContainer();
 
       fireEvent.click(getByTitle('white'));
 
       expect(dispatch).toHaveBeenNthCalledWith(
         3,
         selectColor('white'),
+      );
+    });
+
+    it('listens size click event', () => {
+      const { getByText } = renderProductDetailContainer();
+
+      fireEvent.click(getByText('L'));
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        4,
+        selectSize('L'),
       );
     });
   });

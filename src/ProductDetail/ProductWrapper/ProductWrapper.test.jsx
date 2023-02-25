@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import { fireEvent, render } from '@testing-library/react';
 
 import ProductWrapper from './ProductWrapper';
@@ -18,6 +20,8 @@ const {
 } = PRODUCT_DETAIL;
 
 describe('ProductWrapper', () => {
+  const dispatch = jest.fn();
+
   const setState = jest.fn();
 
   jest
@@ -25,6 +29,8 @@ describe('ProductWrapper', () => {
     .mockImplementation((initialState) => [initialState, setState]);
 
   beforeEach(() => {
+    useDispatch.mockImplementation(() => dispatch);
+
     setState.mockClear();
   });
 

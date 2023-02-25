@@ -1,19 +1,37 @@
 import { render, fireEvent } from '@testing-library/react';
 
+import { useDispatch } from 'react-redux';
+
 import PRODUCT_DETAIL from '../../../../fixtures/ProductDetail/productDetail';
 
 import DetailOptionButton from './DetailOptionButton';
 
-const { sizes, colors } = PRODUCT_DETAIL;
+const {
+  sizes,
+  colors,
+} = PRODUCT_DETAIL;
 
 describe('DetailOptionButton', () => {
+  const dispatch = jest.fn();
+
   const handleClick = jest.fn();
 
+  beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+  });
+
   function renderDetailOptionButton(
-    { options = '', selectedOption = null } = {},
+    {
+      name = '',
+      options = '',
+      selectedOption = '',
+    } = {},
   ) {
     return render(
       <DetailOptionButton
+        name={name}
         options={options}
         selectedOption={selectedOption}
         onClickOption={handleClick}
@@ -24,7 +42,10 @@ describe('DetailOptionButton', () => {
   context('when rendered for the first time', () => {
     it('renders the Button', () => {
       const { container } = renderDetailOptionButton(
-        { options: sizes },
+        {
+          name: 'size',
+          options: sizes,
+        },
       );
 
       expect(container).toHaveTextContent('XL');
@@ -41,6 +62,16 @@ describe('DetailOptionButton', () => {
     it('checked for the XS size', () => {
       renderDetailOptionButton(
         { options: sizes },
+      );
+    });
+
+    it('checked for the white button', () => {
+      renderDetailOptionButton(
+        {
+          name: 'color',
+          options: colors,
+          selectedOption: 'white',
+        },
       );
     });
   });
