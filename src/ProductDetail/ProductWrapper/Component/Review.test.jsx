@@ -7,7 +7,7 @@ import PRODUCT_DETAIL from '../../../../fixtures/ProductDetail/productDetail';
 const { evaluation } = PRODUCT_DETAIL;
 
 describe('Review', () => {
-  it('renders the review score', () => {
+  it('renders the review', () => {
     function renderReview() {
       return render(
         <Review
@@ -18,6 +18,6 @@ describe('Review', () => {
 
     const { container } = renderReview();
 
-    expect(container).toHaveTextContent('5');
+    expect(container).toHaveTextContent('4');
   });
 });

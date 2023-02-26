@@ -15,7 +15,7 @@ const productDetail = {
   details:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Praesent elementum facilisis leo vel fringilla est ullamcorper eget. At imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Praesent elementum facilisis leo vel fringilla. Congue mauris rhoncus aenean vel. Egestas sed tempus urna et pharetra pharetra massa massa ultricies.',
   evaluation: {
-    starRating: 5,
+    starRating: '4.5',
     review: [
       "I'd love to.",
       "It's neat",
