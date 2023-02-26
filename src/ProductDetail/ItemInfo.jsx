@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
 
 import PALETTE from '../styles/palette';
+import Review from './ProductWrapper/Component/Review';
 
 const { basicWhite } = PALETTE;
 
@@ -45,7 +46,7 @@ export default function ItemInfo({
   onClickSize,
   selectedColor,
   onClickColor,
-  evaluation: { starRating },
+  evaluation,
 }) {
   return (
     <Wrapper>
@@ -74,7 +75,10 @@ export default function ItemInfo({
       <StyledDetailText>
         <p>{details}</p>
       </StyledDetailText>
-      <div>{starRating}</div>
+
+      <Review
+        evaluation={evaluation}
+      />
     </Wrapper>
   );
 }
