@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
-import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
-
 import PALETTE from '../styles/palette';
-import Review from './ProductWrapper/Component/Review';
+
+import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
+import Review from './ProductWrapper/ItemInfo/Review';
+import AddCartButton from './ProductWrapper/ItemInfo/AddCartButton';
 
 const { basicWhite } = PALETTE;
 
@@ -79,6 +80,8 @@ export default function ItemInfo({
       <Review
         evaluation={evaluation}
       />
+
+      <AddCartButton />
     </Wrapper>
   );
 }
