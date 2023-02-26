@@ -5,6 +5,14 @@ import { faStar, faStarHalf } from '@fortawesome/free-solid-svg-icons';
 
 const Wrapper = styled.div({
   display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  '& div': {
+    paddingRight: '.25rem',
+    fontSize: '.875rem',
+    lineHeight: '1.25rem',
+    fontWeight: 500,
+  },
 });
 
 const StyledReviewWrapper = styled.div({
@@ -53,7 +61,7 @@ export default function Review(
       <StyledReviewWrapper>
         {makeStar(starRating)}
       </StyledReviewWrapper>
-      <div>{review.length}</div>
+      <div>{`${review.length} reviews`}</div>
     </Wrapper>
   );
 }
