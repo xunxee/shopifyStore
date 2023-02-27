@@ -6,6 +6,6 @@ describe('AddCartButton', () => {
   it('renders the title', () => {
     const { container } = render(<AddCartButton />);
 
-    expect(container).toHaveTextContent('AddCartButton');
+    expect(container).toHaveTextContent('ADD TO CART');
   });
 });
