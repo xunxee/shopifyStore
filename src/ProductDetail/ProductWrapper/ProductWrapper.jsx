@@ -39,15 +39,7 @@ const StyledSlideWrapper = styled.div({
 });
 
 export default function ProductWrapper({
-  product: {
-    title,
-    price,
-    imageList,
-    sizes,
-    colors,
-    details,
-    evaluation,
-  },
+  product,
   banners,
   isPassTheSlide,
   startNumber,
@@ -57,6 +49,8 @@ export default function ProductWrapper({
   selectedColor,
   onClickColor,
 }) {
+  const { title, price, imageList } = product;
+
   const slideRef = useRef();
   const slideAlbumRef = useRef();
 
@@ -180,10 +174,7 @@ export default function ProductWrapper({
           />
         </StyledSlideWrapper>
         <ItemInfo
-          sizes={sizes}
-          colors={colors}
-          details={details}
-          evaluation={evaluation}
+          product={product}
           selectedSize={selectedSize}
           onClickSize={onClickSize}
           selectedColor={selectedColor}

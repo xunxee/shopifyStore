@@ -45,15 +45,16 @@ const StyledAdditionalInfoWrapper = styled.div({
 });
 
 export default function ItemInfo({
-  sizes,
-  colors,
-  details,
+  product,
   selectedSize,
   onClickSize,
   selectedColor,
   onClickColor,
-  evaluation,
 }) {
+  const {
+    sizes, colors, details, evaluation,
+  } = product;
+
   return (
     <Wrapper>
       <StyledSelectOptionsWrapper>

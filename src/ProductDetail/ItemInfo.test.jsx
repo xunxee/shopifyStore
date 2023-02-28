@@ -6,9 +6,7 @@ import ItemInfo from './ItemInfo';
 
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-const {
-  sizes, colors, details, evaluation,
-} = PRODUCT_DETAIL;
+const product = PRODUCT_DETAIL;
 
 describe('ItemInfo', () => {
   const dispatch = jest.fn();
@@ -20,10 +18,7 @@ describe('ItemInfo', () => {
   function renderItemInfo() {
     return render(
       <ItemInfo
-        sizes={sizes}
-        colors={colors}
-        details={details}
-        evaluation={evaluation}
+        product={product}
       />,
     );
   }
