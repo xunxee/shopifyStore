@@ -40,10 +40,6 @@ const StyledDetailText = styled.div({
   },
 });
 
-const StyledAdditionalInfoWrapper = styled.div({
-  marginTop: '1.5rem',
-});
-
 export default function ItemInfo({
   product,
   selectedSize,
@@ -89,9 +85,7 @@ export default function ItemInfo({
 
       <AddCartButton />
 
-      <StyledAdditionalInfoWrapper>
-        <AdditionalInfo />
-      </StyledAdditionalInfoWrapper>
+      <AdditionalInfo product={product} />
     </Wrapper>
   );
 }
