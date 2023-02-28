@@ -5,6 +5,7 @@ import PALETTE from '../styles/palette';
 import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
 import Review from './ProductWrapper/ItemInfo/Review';
 import AddCartButton from './ProductWrapper/ItemInfo/AddCartButton';
+import AdditionalInfo from './ProductWrapper/ItemInfo/AdditionalInfo';
 
 const { basicWhite } = PALETTE;
 
@@ -37,6 +38,10 @@ const StyledDetailText = styled.div({
   '& p': {
     marginBottom: '1rem',
   },
+});
+
+const StyledAdditionalInfoWrapper = styled.div({
+  marginTop: '1.5rem',
 });
 
 export default function ItemInfo({
@@ -82,6 +87,10 @@ export default function ItemInfo({
       />
 
       <AddCartButton />
+
+      <StyledAdditionalInfoWrapper>
+        <AdditionalInfo />
+      </StyledAdditionalInfoWrapper>
     </Wrapper>
   );
 }
