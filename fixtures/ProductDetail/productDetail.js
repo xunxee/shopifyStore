@@ -23,6 +23,8 @@ const productDetail = {
       "It's good to wear",
     ],
   },
+  care: 'This is a limited edition production run. Printing starts when the drop ends.',
+  extraInfo: 'This is a limited edition production run. Printing starts when the drop ends. Reminder: Bad Boys For Life. Shipping may take 10+ days due to COVID-19.',
   banners: [
     {
       key: 1,
