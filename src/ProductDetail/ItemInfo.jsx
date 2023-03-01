@@ -46,6 +46,8 @@ export default function ItemInfo({
   onClickSize,
   selectedColor,
   onClickColor,
+  isCareModalOpen,
+  onClickAdditionalInfo,
 }) {
   const {
     sizes, colors, details, evaluation,
@@ -85,7 +87,12 @@ export default function ItemInfo({
 
       <AddCartButton />
 
-      <AdditionalInfo product={product} />
+      <AdditionalInfo
+        name="care"
+        product={product}
+        isCareModalOpen={isCareModalOpen}
+        onClickAdditionalInfo={onClickAdditionalInfo}
+      />
     </Wrapper>
   );
 }

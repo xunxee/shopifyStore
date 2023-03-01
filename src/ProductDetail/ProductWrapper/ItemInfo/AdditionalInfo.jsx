@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useCallback } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,21 +29,38 @@ const StyledCollapseHeader = styled.div({
 
 const StyledCollapseContent = styled.div({});
 
-export default function AdditionalInfo({ product }) {
+export default function AdditionalInfo(
+  {
+    name,
+    product,
+    isCareModalOpen,
+    onClickAdditionalInfo,
+  },
+) {
   const { care } = product;
+
+  const handleClick = useCallback((category) => {
+    onClickAdditionalInfo(category);
+  }, [onClickAdditionalInfo]);
 
   return (
     <Wrapper>
       <StyledCollapseRoot>
-        <StyledCollapseHeader>
+        <StyledCollapseHeader
+          onClick={() => handleClick(name)}
+        >
           <div>
             <FontAwesomeIcon icon={faGreaterThan} size="xs" />
           </div>
           <span>Care</span>
         </StyledCollapseHeader>
-        <StyledCollapseContent>
-          {care}
-        </StyledCollapseContent>
+        {isCareModalOpen
+          ? (
+            <StyledCollapseContent>
+              {care}
+            </StyledCollapseContent>
+          )
+          : null}
       </StyledCollapseRoot>
     </Wrapper>
   );
