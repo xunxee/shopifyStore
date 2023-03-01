@@ -1,8 +1,11 @@
 import styled from '@emotion/styled';
 
-import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
-
 import PALETTE from '../styles/palette';
+
+import DetailOptionButton from './ProductWrapper/Component/DetailOptionButton';
+import Review from './ProductWrapper/ItemInfo/Review';
+import AddCartButton from './ProductWrapper/ItemInfo/AddCartButton';
+import AdditionalInfo from './ProductWrapper/ItemInfo/AdditionalInfo';
 
 const { basicWhite } = PALETTE;
 
@@ -28,16 +31,28 @@ const StyledTitle = styled.h2({
   letterSpacing: '.035em',
 });
 
+const StyledDetailText = styled.div({
+  marginBottom: '1rem',
+  fontSize: '1rem',
+  lineHeight: '1.75rem',
+  '& p': {
+    marginBottom: '1rem',
+  },
+});
+
 export default function ItemInfo({
-  sizes,
-  colors,
-  details,
+  product,
   selectedSize,
   onClickSize,
   selectedColor,
   onClickColor,
-  evaluation: { starRating },
+  isCareModalOpen,
+  onClickAdditionalInfo,
 }) {
+  const {
+    sizes, colors, details, evaluation,
+  } = product;
+
   return (
     <Wrapper>
       <StyledSelectOptionsWrapper>
@@ -62,8 +77,22 @@ export default function ItemInfo({
         </StyledOptionWrapper>
       </StyledSelectOptionsWrapper>
 
-      <div>{details}</div>
-      <div>{starRating}</div>
+      <StyledDetailText>
+        <p>{details}</p>
+      </StyledDetailText>
+
+      <Review
+        evaluation={evaluation}
+      />
+
+      <AddCartButton />
+
+      <AdditionalInfo
+        name="care"
+        product={product}
+        isCareModalOpen={isCareModalOpen}
+        onClickAdditionalInfo={onClickAdditionalInfo}
+      />
     </Wrapper>
   );
 }

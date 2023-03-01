@@ -7,6 +7,7 @@ import reducer, {
   selectSize,
   selectColor,
   loadProduct,
+  setIsModalOpen,
 } from './slice';
 
 import { fetchMockProduct } from '../services/api';
@@ -57,6 +58,42 @@ describe('reducer', () => {
       const state = reducer(initialState, selectColor('black'));
 
       expect(state.selectedColor).toBe('black');
+    });
+  });
+
+  describe('setIsModalOpen', () => {
+    it('changes isCareModalOpen', () => {
+      const initialState = {
+        isCareModalOpen: false,
+      };
+
+      const { isCareModalOpen } = reducer(
+        initialState,
+        setIsModalOpen(
+          {
+            name: 'care',
+          },
+        ),
+      );
+
+      expect(isCareModalOpen).toBe(true);
+    });
+
+    it('changes isDetailsModalOpen', () => {
+      const initialState = {
+        isDetailsModalOpen: false,
+      };
+
+      const { isDetailsModalOpen } = reducer(
+        initialState,
+        setIsModalOpen(
+          {
+            name: 'details',
+          },
+        ),
+      );
+
+      expect(isDetailsModalOpen).toBe(true);
     });
   });
 });

@@ -6,7 +6,11 @@ import ProductDetailContainer from './ProductDetailContainer';
 
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-import { selectColor, selectSize } from './slice';
+import {
+  selectColor,
+  selectSize,
+  setIsModalOpen,
+} from './slice';
 
 describe('ProductDetailContainer', () => {
   const dispatch = jest.fn();
@@ -38,21 +42,36 @@ describe('ProductDetailContainer', () => {
       expect(container).toHaveTextContent('Special Edition T-Shirt');
     });
 
-    it('listens click event', () => {
-      const { getByText, getByTitle } = renderProductDetailContainer();
-
-      fireEvent.click(getByText('S'));
-
-      expect(dispatch).toHaveBeenNthCalledWith(
-        2,
-        selectSize('S'),
-      );
+    it('listens color click event', () => {
+      const { getByTitle } = renderProductDetailContainer();
 
       fireEvent.click(getByTitle('white'));
 
       expect(dispatch).toHaveBeenNthCalledWith(
         3,
         selectColor('white'),
+      );
+    });
+
+    it('listens size click event', () => {
+      const { getByText } = renderProductDetailContainer();
+
+      fireEvent.click(getByText('L'));
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        4,
+        selectSize('L'),
+      );
+    });
+
+    it('listens "Additional Info" click event', () => {
+      const { getByText } = renderProductDetailContainer();
+
+      fireEvent.click(getByText('Care'));
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        4,
+        setIsModalOpen({ name: 'care' }),
       );
     });
   });
