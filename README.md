@@ -225,6 +225,8 @@ export default function ItemCard({
 - 첫 렌더링 시, 각 옵션의 첫 번째 버튼이 자동 선택되도록 구현
 - 공용 컴포넌트로 사용하기 위해, emotion 객체에 props를 전달하여, value에 따라 각각 다르게 스타일링이 적용되도록 구현
 
+💡 *GitHub 코드 바로가기: [DetailOptionButton.jsx](https://github.com/xunxee/shopifyStore/blob/main/src/ProductDetail/ProductWrapper/Component/DetailOptionButton.jsx)*
+
 ### 📍 동적 쿼리 스트링 만들기
 
 <img src="https://user-images.githubusercontent.com/87808288/220570955-72ae2cb4-3f4a-45bd-a373-49237ab3ad7e.gif" width="80%">
