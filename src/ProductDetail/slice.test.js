@@ -64,7 +64,7 @@ describe('reducer', () => {
   describe('setIsModalOpen', () => {
     it('changes isCareModalOpen', () => {
       const initialState = {
-        isCareModalOpen: 'false',
+        isCareModalOpen: false,
       };
 
       const { isCareModalOpen } = reducer(
@@ -81,7 +81,7 @@ describe('reducer', () => {
 
     it('changes isDetailsModalOpen', () => {
       const initialState = {
-        isDetailsModalOpen: 'false',
+        isDetailsModalOpen: false,
       };
 
       const { isDetailsModalOpen } = reducer(

@@ -21,8 +21,8 @@ const { actions, reducer } = createSlice({
     },
     selectedSize: null,
     selectedColor: null,
-    isCareModalOpen: 'false',
-    isDetailsModalOpen: 'false',
+    isCareModalOpen: false,
+    isDetailsModalOpen: false,
   },
   reducers: {
     setProduct(state, { payload: product }) {
@@ -54,7 +54,7 @@ const { actions, reducer } = createSlice({
 
       return {
         ...state,
-        [key[name]]: !state[name],
+        [key[name]]: !state[key[name]],
       };
     },
   },
