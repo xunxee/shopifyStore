@@ -1,3 +1,4 @@
+
 # ✏️ shopifyStore
 
 ## 📌 소개
@@ -92,7 +93,7 @@ describe('MembershipPage', () => {
 
 🔗 **Jest로 error 검증하기**
 
- 💡 *gunhee’s coding blog: [Jest로 error 검증하기](https://xunxee.github.io/fedevenvironment/jest%EB%A1%9Cerror%EA%B2%80%EC%A6%9D%ED%95%98%EA%B8%B0/)*
+ 💡 *gunhee’s coding blog: [Jest로 error 검증하기](https://www.gunhee.co.kr/9a50537a-b739-4189-a759-6f796a2332c9)*
 
 ```jsx
 // api.test.js
@@ -215,7 +216,14 @@ export default function ItemCard({
 
 <img src="https://user-images.githubusercontent.com/87808288/220570521-7db2c304-9847-4fbc-badf-70df6bba097f.gif" width="70%">
 
-💡 *gunhee’s coding blog: [라이브러리 없이, 무한 슬라이드 구현하기](https://xunxee.github.io/react/%EB%AC%B4%ED%95%9C%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0/)*
+💡 *gunhee’s coding blog: [라이브러리 없이, 무한 슬라이드 구현하기](https://www.gunhee.co.kr/8d1510e2-6fda-4a59-9d4b-7881fb8c96d8)*
+
+### 📍 옵션 버튼을 하나의 공용 컴포넌트로 제작
+
+<img src="https://user-images.githubusercontent.com/87808288/222161955-fca37138-2114-4a82-93e4-35f9923aff71.gif" width="50%">
+
+- 첫 렌더링 시, 각 옵션의 첫 번째 버튼이 자동 선택되도록 구현
+- 공용 컴포넌트로 사용하기 위해, emotion 객체에 props를 전달하여, value에 따라 각각 다르게 스타일링이 적용되도록 구현
 
 ### 📍 동적 쿼리 스트링 만들기
 
