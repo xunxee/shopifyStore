@@ -14,6 +14,7 @@ import {
   loadProduct,
   selectSize,
   selectColor,
+  setIsModalOpen,
 } from './slice';
 
 const RelatedProducts = styled.div({});
@@ -28,13 +29,11 @@ export default function ProductDetailContainer() {
     }),
   );
 
-  const selectedSize = useSelector(get(
-    { page: 'productDetail', key: 'selectedSize' },
-  ));
-
-  const selectedColor = useSelector(get(
-    { page: 'productDetail', key: 'selectedColor' },
-  ));
+  const {
+    selectedSize,
+    selectedColor,
+    isCareModalOpen,
+  } = useSelector((selector) => selector.productDetail);
 
   const { imageList } = product;
 
@@ -65,6 +64,10 @@ export default function ProductDetailContainer() {
     dispatch(selectColor(name));
   }, [dispatch]);
 
+  const handleClickAdditionalInfo = useCallback((name) => {
+    dispatch(setIsModalOpen({ name }));
+  }, [dispatch]);
+
   if (banners.length === 0) {
     return null;
   }
@@ -78,6 +81,8 @@ export default function ProductDetailContainer() {
         onClickSize={handleClickSize}
         selectedColor={selectedColor}
         onClickColor={handleClickColor}
+        isCareModalOpen={isCareModalOpen}
+        onClickAdditionalInfo={handleClickAdditionalInfo}
       />
       <RelatedProducts />
     </>

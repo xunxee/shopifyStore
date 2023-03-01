@@ -6,7 +6,11 @@ import ProductDetailContainer from './ProductDetailContainer';
 
 import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 
-import { selectColor, selectSize } from './slice';
+import {
+  selectColor,
+  selectSize,
+  setIsModalOpen,
+} from './slice';
 
 describe('ProductDetailContainer', () => {
   const dispatch = jest.fn();
@@ -57,6 +61,17 @@ describe('ProductDetailContainer', () => {
       expect(dispatch).toHaveBeenNthCalledWith(
         4,
         selectSize('L'),
+      );
+    });
+
+    it('listens "Additional Info" click event', () => {
+      const { getByText } = renderProductDetailContainer();
+
+      fireEvent.click(getByText('Care'));
+
+      expect(dispatch).toHaveBeenNthCalledWith(
+        4,
+        setIsModalOpen({ name: 'care' }),
       );
     });
   });
