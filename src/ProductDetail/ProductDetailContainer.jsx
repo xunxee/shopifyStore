@@ -33,6 +33,7 @@ export default function ProductDetailContainer() {
     selectedSize,
     selectedColor,
     isCareInfoOpen,
+    isDetailsInfoOpen,
   } = useSelector((selector) => selector.productDetail);
 
   const { imageList } = product;
@@ -82,6 +83,7 @@ export default function ProductDetailContainer() {
         selectedColor={selectedColor}
         onClickColor={handleClickColor}
         isCareInfoOpen={isCareInfoOpen}
+        isDetailsInfoOpen={isDetailsInfoOpen}
         onClickAdditionalInfo={handleClickAdditionalInfo}
       />
       <RelatedProducts />
