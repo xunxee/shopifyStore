@@ -14,20 +14,31 @@ const StyledCollapseRoot = styled.div({
   borderBottom: '1px solid #eaeaea',
 });
 
-const StyledCollapseHeader = styled.div({
+const StyledCollapseHeader = styled.div(({ isCareModalOpen }) => ({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
   '& div': {
     marginRight: '.75rem',
+    transition: 'all .3s',
+    transform: isCareModalOpen ? 'rotate(90deg)' : '',
   },
   '& span': {
     lineHeight: '1.5rem',
     fontWeight: '500',
   },
-});
+}));
 
-const StyledCollapseContent = styled.div({});
+const StyledCollapseContent = styled.div(({ isCareModalOpen }) => ({
+  overflow: 'hidden',
+  height: isCareModalOpen ? '60px' : 0,
+  opacity: isCareModalOpen ? 1 : 0,
+  transition: 'all .3s',
+  '& div': {
+    paddingTop: '.75rem',
+    paddingLeft: '2rem',
+  },
+}));
 
 export default function AdditionalInfo(
   {
@@ -47,6 +58,7 @@ export default function AdditionalInfo(
     <Wrapper>
       <StyledCollapseRoot>
         <StyledCollapseHeader
+          isCareModalOpen={isCareModalOpen}
           onClick={() => handleClick(name)}
         >
           <div>
@@ -54,13 +66,9 @@ export default function AdditionalInfo(
           </div>
           <span>Care</span>
         </StyledCollapseHeader>
-        {isCareModalOpen
-          ? (
-            <StyledCollapseContent>
-              {care}
-            </StyledCollapseContent>
-          )
-          : null}
+        <StyledCollapseContent isCareModalOpen={isCareModalOpen}>
+          <div>{care}</div>
+        </StyledCollapseContent>
       </StyledCollapseRoot>
     </Wrapper>
   );
