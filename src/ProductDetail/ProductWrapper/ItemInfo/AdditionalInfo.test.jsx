@@ -8,12 +8,12 @@ const { care } = PRODUCT_DETAIL;
 
 describe('AdditionalInfo', () => {
   function renderAdditionalInfo(
-    { isCareModalOpen = false } = {},
+    { isCareInfoOpen = false } = {},
   ) {
     return render(
       <AdditionalInfo
         product={PRODUCT_DETAIL}
-        isCareModalOpen={isCareModalOpen}
+        isCareInfoOpen={isCareInfoOpen}
       />,
     );
   }
@@ -27,7 +27,7 @@ describe('AdditionalInfo', () => {
   context('when you click on "Care" on the product detail page', () => {
     it('renders the info for "Care"', () => {
       const { container } = renderAdditionalInfo(
-        { isCareModalOpen: true },
+        { isCareInfoOpen: true },
       );
 
       expect(container).toHaveTextContent(care);

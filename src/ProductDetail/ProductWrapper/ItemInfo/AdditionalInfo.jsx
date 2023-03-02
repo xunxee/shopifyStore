@@ -14,14 +14,14 @@ const StyledCollapseRoot = styled.div({
   borderBottom: '1px solid #eaeaea',
 });
 
-const StyledCollapseHeader = styled.div(({ isCareModalOpen }) => ({
+const StyledCollapseHeader = styled.div(({ isCareInfoOpen }) => ({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
   '& div': {
     marginRight: '.75rem',
     transition: 'all .3s',
-    transform: isCareModalOpen ? 'rotate(90deg)' : '',
+    transform: isCareInfoOpen ? 'rotate(90deg)' : '',
   },
   '& span': {
     lineHeight: '1.5rem',
@@ -29,10 +29,10 @@ const StyledCollapseHeader = styled.div(({ isCareModalOpen }) => ({
   },
 }));
 
-const StyledCollapseContent = styled.div(({ isCareModalOpen }) => ({
+const StyledCollapseContent = styled.div(({ isCareInfoOpen }) => ({
   overflow: 'hidden',
-  height: isCareModalOpen ? '60px' : 0,
-  opacity: isCareModalOpen ? 1 : 0,
+  height: isCareInfoOpen ? '60px' : 0,
+  opacity: isCareInfoOpen ? 1 : 0,
   transition: 'all .3s',
   '& div': {
     paddingTop: '.75rem',
@@ -44,7 +44,7 @@ export default function AdditionalInfo(
   {
     name,
     product,
-    isCareModalOpen,
+    isCareInfoOpen,
     onClickAdditionalInfo,
   },
 ) {
@@ -58,7 +58,7 @@ export default function AdditionalInfo(
     <Wrapper>
       <StyledCollapseRoot>
         <StyledCollapseHeader
-          isCareModalOpen={isCareModalOpen}
+          isCareInfoOpen={isCareInfoOpen}
           onClick={() => handleClick(name)}
         >
           <div>
@@ -66,7 +66,7 @@ export default function AdditionalInfo(
           </div>
           <span>Care</span>
         </StyledCollapseHeader>
-        <StyledCollapseContent isCareModalOpen={isCareModalOpen}>
+        <StyledCollapseContent isCareInfoOpen={isCareInfoOpen}>
           <div>{care}</div>
         </StyledCollapseContent>
       </StyledCollapseRoot>

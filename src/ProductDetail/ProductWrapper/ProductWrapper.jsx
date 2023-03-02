@@ -48,7 +48,7 @@ export default function ProductWrapper({
   onClickSize,
   selectedColor,
   onClickColor,
-  isCareModalOpen,
+  isCareInfoOpen,
   onClickAdditionalInfo,
 }) {
   const { title, price, imageList } = product;
@@ -181,7 +181,7 @@ export default function ProductWrapper({
           onClickSize={onClickSize}
           selectedColor={selectedColor}
           onClickColor={onClickColor}
-          isCareModalOpen={isCareModalOpen}
+          isCareInfoOpen={isCareInfoOpen}
           onClickAdditionalInfo={onClickAdditionalInfo}
         />
       </Wrapper>

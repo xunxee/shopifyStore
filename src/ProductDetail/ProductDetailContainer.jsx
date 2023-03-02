@@ -14,7 +14,7 @@ import {
   loadProduct,
   selectSize,
   selectColor,
-  setIsModalOpen,
+  setIsInfoOpen,
 } from './slice';
 
 const RelatedProducts = styled.div({});
@@ -32,7 +32,7 @@ export default function ProductDetailContainer() {
   const {
     selectedSize,
     selectedColor,
-    isCareModalOpen,
+    isCareInfoOpen,
   } = useSelector((selector) => selector.productDetail);
 
   const { imageList } = product;
@@ -65,7 +65,7 @@ export default function ProductDetailContainer() {
   }, [dispatch]);
 
   const handleClickAdditionalInfo = useCallback((name) => {
-    dispatch(setIsModalOpen({ name }));
+    dispatch(setIsInfoOpen({ name }));
   }, [dispatch]);
 
   if (banners.length === 0) {
@@ -81,7 +81,7 @@ export default function ProductDetailContainer() {
         onClickSize={handleClickSize}
         selectedColor={selectedColor}
         onClickColor={handleClickColor}
-        isCareModalOpen={isCareModalOpen}
+        isCareInfoOpen={isCareInfoOpen}
         onClickAdditionalInfo={handleClickAdditionalInfo}
       />
       <RelatedProducts />
