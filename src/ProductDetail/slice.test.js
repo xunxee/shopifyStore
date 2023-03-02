@@ -88,7 +88,7 @@ describe('reducer', () => {
         initialState,
         setIsInfoOpen(
           {
-            name: 'details',
+            name: 'extraInfo',
           },
         ),
       );

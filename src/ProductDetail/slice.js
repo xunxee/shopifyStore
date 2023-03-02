@@ -49,7 +49,7 @@ const { actions, reducer } = createSlice({
     setIsInfoOpen(state, { payload: { name } }) {
       const key = {
         care: 'isCareInfoOpen',
-        details: 'isDetailsInfoOpen',
+        extraInfo: 'isDetailsInfoOpen',
       };
 
       return {
