@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useEffect, useState, useCallback } from 'react';
 
 import { v4 } from 'uuid';
-
-import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
 
@@ -17,7 +17,17 @@ import {
   setIsInfoOpen,
 } from './slice';
 
-const RelatedProducts = styled.div({});
+import PALETTE from '../styles/palette';
+
+const { paleGray } = PALETTE;
+
+const Horizon = styled.hr({
+  color: paleGray,
+});
+
+const RelatedProducts = styled.div({
+  borderColor: paleGray,
+});
 
 export default function ProductDetailContainer() {
   const dispatch = useDispatch();
@@ -86,6 +96,7 @@ export default function ProductDetailContainer() {
         isDetailsInfoOpen={isDetailsInfoOpen}
         onClickAdditionalInfo={handleClickAdditionalInfo}
       />
+      <Horizon />
       <RelatedProducts />
     </>
   );
