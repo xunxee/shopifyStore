@@ -22,7 +22,8 @@ import PALETTE from '../styles/palette';
 const { paleGray } = PALETTE;
 
 const Horizon = styled.hr({
-  color: paleGray,
+  marginTop: '1.75rem',
+  borderTop: `1px solid ${paleGray}`,
 });
 
 const RelatedProducts = styled.div({
