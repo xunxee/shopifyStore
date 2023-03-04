@@ -10,7 +10,10 @@ import Slide from './Slide';
 import SlideAlbum from './SlideAlbum';
 import ItemInfo from '../ItemInfo';
 
-import { updateSlide, setAlbumPosition } from '../../utils';
+import {
+  updateSlide,
+  changeAlbumPosition,
+} from '../../utils';
 
 const { productName, priceName } = PRODUCT_TAG;
 
@@ -59,17 +62,11 @@ export default function ProductWrapper({
   const slideAlbumRef = useRef();
 
   const SLIDE_IMAGE_VW = 65;
-
   const MAIN_SLIDE_LENGTH = banners.length / 3;
-
   const TOTAL_SLIDE_IMAGE_LENGTH = MAIN_SLIDE_LENGTH * 3;
-
   const START_MAIN_SLIDE_INDEX = startNumber || (TOTAL_SLIDE_IMAGE_LENGTH * 1) / 3 + 1;
-
   const END_MAIN_SLIDE_INDEX = endNumber || (TOTAL_SLIDE_IMAGE_LENGTH * 2) / 3;
-
   const END_PREVIOUS_SLIDE_INDEX = (TOTAL_SLIDE_IMAGE_LENGTH * 1) / 3;
-
   const START_NEXT_SLIDE_INDEX = (TOTAL_SLIDE_IMAGE_LENGTH * 2) / 3 + 1;
 
   const [slide, setSlide] = useState({
@@ -101,15 +98,17 @@ export default function ProductWrapper({
       ? 'all 0.5s ease-in'
       : '';
 
-    const albumImageIndex = slide.number - MAIN_SLIDE_LENGTH;
+    const ALBUM_IMAGE_INDEX = slide.number - MAIN_SLIDE_LENGTH;
 
-    const slideImageWidth = slideImageRef.current.clientWidth;
+    const CLIENT_SLIDE_WIDTH = slideImageRef.current.clientWidth;
 
-    slideAlbumRef.current.style.transform = setAlbumPosition({
-      index: albumImageIndex,
-      length: MAIN_SLIDE_LENGTH,
-      slideImageWidth,
-    });
+    slideAlbumRef.current.style.transform = changeAlbumPosition(
+      {
+        ALBUM_IMAGE_INDEX,
+        MAIN_SLIDE_LENGTH,
+        CLIENT_SLIDE_WIDTH,
+      },
+    );
   }, [slide, SLIDE_IMAGE_VW]);
 
   const isPassTheFirstSlide = isPassTheSlide || slide.number === END_PREVIOUS_SLIDE_INDEX;
