@@ -7,16 +7,14 @@
     {
       "source": "/api/:match*",
       "destination": "https://nextjsintro-flame.vercel.app/api/:match*"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/mockData/product.json",
-      "dest": "/public/mockData/product.json"
     },
     {
-      "src": "/mockData/productList.json",
-      "dest": "/public/mockData/productList.json"
+      "source": "/mockData/product.json",
+      "destination": "/public/mockData/product.json"
+    },
+    {
+      "source": "/mockData/productList.json",
+      "destination": "/public/mockData/productList.json"
     }
   ]
 }
