@@ -60,15 +60,33 @@ export async function postSignUp({ email, password }) {
   };
 }
 
+// export async function fetchMockProductList() {
+//   const url = '/mockData/productList.json';
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   return data;
+// }
+
+// export async function fetchMockProduct() {
+//   const url = '/mockData/product.json';
+//   const response = await fetch(url);
+//   const data = await response.json();
+//   return data;
+// }
+
 export async function fetchMockProductList() {
-  const url = '/mockData/productList.json';
+  const isServer = typeof window === 'undefined';
+  const prefix = isServer ? 'http://localhost:3000' : '';
+  const url = `${prefix}/mockData/productList.json`;
   const response = await fetch(url);
   const data = await response.json();
   return data;
 }
 
 export async function fetchMockProduct() {
-  const url = '/mockData/product.json';
+  const isServer = typeof window === 'undefined';
+  const prefix = isServer ? 'http://localhost:3000' : '';
+  const url = `${prefix}/mockData/product.json`;
   const response = await fetch(url);
   const data = await response.json();
   return data;
