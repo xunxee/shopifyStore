@@ -10,11 +10,11 @@
     },
     {
       "source": "/mockData/product.json",
-      "destination": "/public/mockData/product.json"
+      "destination": "/mockData/product.json"
     },
     {
       "source": "/mockData/productList.json",
-      "destination": "/public/mockData/productList.json"
+      "destination": "/mockData/productList.json"
     }
   ]
 }
