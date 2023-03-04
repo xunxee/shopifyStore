@@ -15,14 +15,6 @@
     {
       "source": "/mockData/productList.json",
       "destination": "/public/mockData/productList.json"
-    },
-    {
-      "source": "/public/mockData/product.json",
-      "destination": "/mockData/product.json"
-    },
-    {
-      "source": "/public/mockData/productList.json",
-      "destination": "/mockData/productList.json"
     }
   ]
 }
