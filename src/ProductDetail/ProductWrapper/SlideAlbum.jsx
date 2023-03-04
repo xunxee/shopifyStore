@@ -37,7 +37,7 @@ export default function SlideAlbum({
   imageList,
   currentSlideNumber,
   setSlide,
-  BANNERS_COUNT,
+  MAIN_SLIDE_LENGTH,
   slideAlbumRef,
 }) {
   const uniqueImageList = imageList.map(
@@ -45,7 +45,7 @@ export default function SlideAlbum({
   );
 
   function handleClick(number) {
-    const selectedNumber = number + BANNERS_COUNT;
+    const selectedNumber = number + MAIN_SLIDE_LENGTH;
 
     if (selectedNumber === currentSlideNumber) return;
 
@@ -65,7 +65,7 @@ export default function SlideAlbum({
             data-testid="detailImage"
             uniqueNumber={key}
             selectedSlideNumber={makeSelectedNumber({
-              length: BANNERS_COUNT,
+              length: MAIN_SLIDE_LENGTH,
               slideNumber: currentSlideNumber,
             })}
             onClick={() => handleClick(key)}

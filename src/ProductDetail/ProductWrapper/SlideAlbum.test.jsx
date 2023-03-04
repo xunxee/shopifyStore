@@ -16,7 +16,7 @@ describe('SlideAlbum', () => {
         imageList={imageList}
         currentSlideNumber={7}
         setSlide={handleSetState}
-        BANNERS_COUNT={imageList.length}
+        MAIN_SLIDE_LENGTH={imageList.length}
       />,
     );
   }
