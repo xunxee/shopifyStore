@@ -46,7 +46,8 @@ export default function ItemInfo({
   onClickSize,
   selectedColor,
   onClickColor,
-  isCareModalOpen,
+  isCareInfoOpen,
+  isDetailsInfoOpen,
   onClickAdditionalInfo,
 }) {
   const {
@@ -89,8 +90,16 @@ export default function ItemInfo({
 
       <AdditionalInfo
         name="care"
+        title="Care"
         product={product}
-        isCareModalOpen={isCareModalOpen}
+        isInfoOpen={isCareInfoOpen}
+        onClickAdditionalInfo={onClickAdditionalInfo}
+      />
+      <AdditionalInfo
+        name="extraInfo"
+        title="Details"
+        product={product}
+        isInfoOpen={isDetailsInfoOpen}
         onClickAdditionalInfo={onClickAdditionalInfo}
       />
     </Wrapper>

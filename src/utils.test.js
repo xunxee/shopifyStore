@@ -2,7 +2,7 @@ import {
   get,
   updateSlide,
   makeSelectedNumber,
-  setAlbumPosition,
+  changeAlbumPosition,
 } from './utils';
 
 test('get', () => {
@@ -81,26 +81,40 @@ describe('makeSelectedNumber', () => {
   );
 });
 
-describe('setAlbumPosition', () => {
-  context('when the image reaches the album slide', () => {
-    it('moves the slide one step to the right', () => {
-      const location = setAlbumPosition({
-        index: 4,
-        length: 6,
+describe('changeAlbumPosition', () => {
+  context('when the slide image being moved is in the album', () => {
+    it("doesn't move the album slide", () => {
+      const location = changeAlbumPosition({
+        ALBUM_IMAGE_INDEX: 4,
+        MAIN_SLIDE_LENGTH: 6,
+        CLIENT_SLIDE_WIDTH: 940,
       });
 
-      expect(location).toBe('translateX(-16.25vw)');
+      expect(location).toBe('translateX(-0vw)');
+    });
+  });
+
+  context('when the slide image being moved is not in the album', () => {
+    it('moves the album slide', () => {
+      const location = changeAlbumPosition({
+        ALBUM_IMAGE_INDEX: 5,
+        MAIN_SLIDE_LENGTH: 6,
+        CLIENT_SLIDE_WIDTH: 940,
+      });
+
+      expect(location).toBe('translateX(-235px)');
     });
   });
 
   context('when the slide moves to the left and reaches the last slide', () => {
     it('moves the last image of the album to be visible', () => {
-      const location = setAlbumPosition({
-        index: 0,
-        length: 6,
+      const location = changeAlbumPosition({
+        ALBUM_IMAGE_INDEX: 0,
+        MAIN_SLIDE_LENGTH: 6,
+        CLIENT_SLIDE_WIDTH: 940,
       });
 
-      expect(location).toBe('translateX(-32.5vw)');
+      expect(location).toBe('translateX(-470px)');
     });
   });
 });

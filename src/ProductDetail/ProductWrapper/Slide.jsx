@@ -58,6 +58,7 @@ const StyledSlideControlButton = styled.div({
 export default function Slide({
   banners,
   slideRef,
+  slideImageRef,
   title,
   isPassTheFirstSlide,
   goToMainEndSlide,
@@ -78,7 +79,7 @@ export default function Slide({
   }
 
   return (
-    <Wrapper slideLength={banners.length}>
+    <Wrapper slideLength={banners.length} ref={slideImageRef}>
       <StyledSlideControlButton>
         <button
           type="button"
@@ -88,8 +89,8 @@ export default function Slide({
           <FontAwesomeIcon icon={faArrowLeft} size="2x" color={basicWhite} />
         </button>
         <button
-          title="nextArrow"
           type="button"
+          title="nextArrow"
           onClick={handleClickArrowButtons}
         >
           <FontAwesomeIcon icon={faArrowRight} size="2x" color={basicWhite} />

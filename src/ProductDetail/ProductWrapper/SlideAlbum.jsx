@@ -14,7 +14,12 @@ const Wrapper = styled.div({
 
 const StyledImageList = styled.div();
 
-const StyledAlbumImage = styled.button(({ uniqueNumber, selectedSlideNumber }) => ({
+const StyledAlbumImage = styled.button((
+  {
+    uniqueNumber,
+    selectedSlideNumber,
+  },
+) => ({
   all: 'unset',
   backgroundColor: `${
     uniqueNumber === selectedSlideNumber ? palePurple : darkPurple
@@ -37,7 +42,7 @@ export default function SlideAlbum({
   imageList,
   currentSlideNumber,
   setSlide,
-  BANNERS_COUNT,
+  MAIN_SLIDE_LENGTH,
   slideAlbumRef,
 }) {
   const uniqueImageList = imageList.map(
@@ -45,7 +50,7 @@ export default function SlideAlbum({
   );
 
   function handleClick(number) {
-    const selectedNumber = number + BANNERS_COUNT;
+    const selectedNumber = number + MAIN_SLIDE_LENGTH;
 
     if (selectedNumber === currentSlideNumber) return;
 
@@ -64,10 +69,12 @@ export default function SlideAlbum({
             key={key}
             data-testid="detailImage"
             uniqueNumber={key}
-            selectedSlideNumber={makeSelectedNumber({
-              length: BANNERS_COUNT,
-              slideNumber: currentSlideNumber,
-            })}
+            selectedSlideNumber={makeSelectedNumber(
+              {
+                length: MAIN_SLIDE_LENGTH,
+                slideNumber: currentSlideNumber,
+              },
+            )}
             onClick={() => handleClick(key)}
           >
             <img alt={title} src={url} />

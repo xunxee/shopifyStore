@@ -1,10 +1,10 @@
 import styled from '@emotion/styled';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useEffect, useState, useCallback } from 'react';
 
 import { v4 } from 'uuid';
-
-import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from '../utils';
 
@@ -14,10 +14,21 @@ import {
   loadProduct,
   selectSize,
   selectColor,
-  setIsModalOpen,
+  setIsInfoOpen,
 } from './slice';
 
-const RelatedProducts = styled.div({});
+import PALETTE from '../styles/palette';
+
+const { paleGray } = PALETTE;
+
+const Horizon = styled.hr({
+  marginTop: '1.75rem',
+  borderTop: `1px solid ${paleGray}`,
+});
+
+const RelatedProducts = styled.div({
+  borderColor: paleGray,
+});
 
 export default function ProductDetailContainer() {
   const dispatch = useDispatch();
@@ -32,7 +43,8 @@ export default function ProductDetailContainer() {
   const {
     selectedSize,
     selectedColor,
-    isCareModalOpen,
+    isCareInfoOpen,
+    isDetailsInfoOpen,
   } = useSelector((selector) => selector.productDetail);
 
   const { imageList } = product;
@@ -65,7 +77,7 @@ export default function ProductDetailContainer() {
   }, [dispatch]);
 
   const handleClickAdditionalInfo = useCallback((name) => {
-    dispatch(setIsModalOpen({ name }));
+    dispatch(setIsInfoOpen({ name }));
   }, [dispatch]);
 
   if (banners.length === 0) {
@@ -81,9 +93,11 @@ export default function ProductDetailContainer() {
         onClickSize={handleClickSize}
         selectedColor={selectedColor}
         onClickColor={handleClickColor}
-        isCareModalOpen={isCareModalOpen}
+        isCareInfoOpen={isCareInfoOpen}
+        isDetailsInfoOpen={isDetailsInfoOpen}
         onClickAdditionalInfo={handleClickAdditionalInfo}
       />
+      <Horizon />
       <RelatedProducts />
     </>
   );

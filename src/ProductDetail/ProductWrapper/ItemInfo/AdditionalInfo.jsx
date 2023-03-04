@@ -7,6 +7,7 @@ import { faGreaterThan } from '@fortawesome/free-solid-svg-icons';
 
 const Wrapper = styled.div({
   marginTop: '1.5rem',
+  cursor: 'pointer',
 });
 
 const StyledCollapseRoot = styled.div({
@@ -14,30 +15,42 @@ const StyledCollapseRoot = styled.div({
   borderBottom: '1px solid #eaeaea',
 });
 
-const StyledCollapseHeader = styled.div({
+const StyledCollapseHeader = styled.div(({ isInfoOpen }) => ({
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
   '& div': {
     marginRight: '.75rem',
+    transition: 'all .3s',
+    transform: isInfoOpen ? 'rotate(90deg)' : '',
   },
   '& span': {
     lineHeight: '1.5rem',
     fontWeight: '500',
   },
-});
+}));
 
-const StyledCollapseContent = styled.div({});
+const StyledCollapseContent = styled.div(({ isInfoOpen }) => ({
+  overflow: 'hidden',
+  height: isInfoOpen ? '60px' : 0,
+  opacity: isInfoOpen ? 1 : 0,
+  transition: 'all .3s',
+  '& div': {
+    paddingTop: '.75rem',
+    paddingLeft: '2rem',
+  },
+}));
 
 export default function AdditionalInfo(
   {
     name,
+    title,
     product,
-    isCareModalOpen,
+    isInfoOpen,
     onClickAdditionalInfo,
   },
 ) {
-  const { care } = product;
+  const content = product[name];
 
   const handleClick = useCallback((category) => {
     onClickAdditionalInfo(category);
@@ -47,20 +60,17 @@ export default function AdditionalInfo(
     <Wrapper>
       <StyledCollapseRoot>
         <StyledCollapseHeader
+          isInfoOpen={isInfoOpen}
           onClick={() => handleClick(name)}
         >
           <div>
             <FontAwesomeIcon icon={faGreaterThan} size="xs" />
           </div>
-          <span>Care</span>
+          <span>{title}</span>
         </StyledCollapseHeader>
-        {isCareModalOpen
-          ? (
-            <StyledCollapseContent>
-              {care}
-            </StyledCollapseContent>
-          )
-          : null}
+        <StyledCollapseContent isInfoOpen={isInfoOpen}>
+          <div>{content}</div>
+        </StyledCollapseContent>
       </StyledCollapseRoot>
     </Wrapper>
   );

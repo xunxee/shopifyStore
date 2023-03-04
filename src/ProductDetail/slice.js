@@ -21,8 +21,8 @@ const { actions, reducer } = createSlice({
     },
     selectedSize: null,
     selectedColor: null,
-    isCareModalOpen: false,
-    isDetailsModalOpen: false,
+    isCareInfoOpen: false,
+    isDetailsInfoOpen: false,
   },
   reducers: {
     setProduct(state, { payload: product }) {
@@ -46,10 +46,10 @@ const { actions, reducer } = createSlice({
       };
     },
 
-    setIsModalOpen(state, { payload: { name } }) {
+    setIsInfoOpen(state, { payload: { name } }) {
       const key = {
-        care: 'isCareModalOpen',
-        details: 'isDetailsModalOpen',
+        care: 'isCareInfoOpen',
+        extraInfo: 'isDetailsInfoOpen',
       };
 
       return {
@@ -64,7 +64,7 @@ export const {
   setProduct,
   selectSize,
   selectColor,
-  setIsModalOpen,
+  setIsInfoOpen,
 } = actions;
 
 export function loadProduct() {

@@ -9,7 +9,7 @@ import PRODUCT_DETAIL from '../../fixtures/ProductDetail/productDetail';
 import {
   selectColor,
   selectSize,
-  setIsModalOpen,
+  setIsInfoOpen,
 } from './slice';
 
 describe('ProductDetailContainer', () => {
@@ -71,7 +71,7 @@ describe('ProductDetailContainer', () => {
 
       expect(dispatch).toHaveBeenNthCalledWith(
         4,
-        setIsModalOpen({ name: 'care' }),
+        setIsInfoOpen({ name: 'care' }),
       );
     });
   });
