@@ -1,16 +1,20 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/mockData/(product|productList)\\.json$",
-      "dest": "/public/mockData/:1.json"
+      "source": "/((?!api/.*).*)",
+      "destination": "/index.html"
     },
     {
-      "src": "/((?!api/.*).*)",
-      "dest": "/index.html"
+      "source": "/api/:match*",
+      "destination": "https://nextjsintro-flame.vercel.app/api/:match*"
     },
     {
-      "src": "/api/:match*",
-      "dest": "https://nextjsintro-flame.vercel.app/api/:match*"
+      "source": "/mockData/product.json",
+      "destination": "/public/mockData/product.json"
+    },
+    {
+      "source": "/mockData/productList.json",
+      "destination": "/public/mockData/productList.json"
     }
   ]
 }
