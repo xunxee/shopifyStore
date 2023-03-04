@@ -1,13 +1,22 @@
-{ 
-  "rewrites": [ 
+{
+  "rewrites": [
     {
       "source": "/((?!api/.*).*)",
-      "destination": "/index.html" 
+      "destination": "/index.html"
     },
     {
       "source": "/api/:match*",
       "destination": "https://nextjsintro-flame.vercel.app/api/:match*"
     }
+  ],
+  "routes": [
+    {
+      "src": "/mockData/product.json",
+      "dest": "/public/mockData/product.json"
+    },
+    {
+      "src": "/mockData/productList.json",
+      "dest": "/public/mockData/productList.json"
+    }
   ]
 }
-
