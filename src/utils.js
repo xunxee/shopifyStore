@@ -26,19 +26,29 @@ export function makeSelectedNumber({ length, slideNumber }) {
   return initialNumber;
 }
 
-export function setAlbumPosition({ index, length }) {
-  const DISTANCE = 65 / 4;
+export function changeAlbumPosition(
+  {
+    ALBUM_IMAGE_INDEX,
+    MAIN_SLIDE_LENGTH,
+    CLIENT_SLIDE_WIDTH,
+  },
+) {
+  const SLIDE_ITEM_WIDTH = 235;
 
-  if (index === length + 1 || index === 1) {
+  if (ALBUM_IMAGE_INDEX === 1
+      || ALBUM_IMAGE_INDEX === MAIN_SLIDE_LENGTH + 1
+  ) {
     return `translateX(-${0}vw)`;
   }
 
-  if (index === 0) {
-    return `translateX(-${(length - 4) * DISTANCE}vw)`;
+  if (ALBUM_IMAGE_INDEX * SLIDE_ITEM_WIDTH
+      >= CLIENT_SLIDE_WIDTH + SLIDE_ITEM_WIDTH
+  ) {
+    return `translateX(-${(ALBUM_IMAGE_INDEX * SLIDE_ITEM_WIDTH) - CLIENT_SLIDE_WIDTH}px)`;
   }
 
-  if (index >= 4) {
-    return `translateX(-${(index - 3) * DISTANCE}vw)`;
+  if (ALBUM_IMAGE_INDEX === 0) {
+    return `translateX(-${(MAIN_SLIDE_LENGTH * SLIDE_ITEM_WIDTH) - CLIENT_SLIDE_WIDTH}px)`;
   }
 
   return `translateX(-${0}vw)`;
