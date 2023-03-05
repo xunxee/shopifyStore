@@ -15,7 +15,3 @@ node_modules
 
 ## Jest
 coverage
-
-## EnviromentPlugin
-.env
-.vercel

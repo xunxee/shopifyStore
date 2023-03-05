@@ -36,6 +36,7 @@ const StyledSlideControlButton = styled.div({
   width: '194px',
   border: `1px solid ${basicWhite}`,
   borderWidth: '1px',
+  cursor: 'pointer',
   '& button': {
     ':hover': {
       backgroundColor: darkPurple,
