@@ -10,11 +10,11 @@
     },
     {
       "source": "/product.json",
-      "destination": "/public/product.json"
+      "destination": "/product.json"
     },
     {
       "source": "/productList.json",
-      "destination": "/public/productList.json"
+      "destination": "/productList.json"
     }
   ]
 }
