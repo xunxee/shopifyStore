@@ -9,11 +9,11 @@
       "destination": "https://nextjsintro-flame.vercel.app/api/:match*"
     },
     {
-      "source": "/mockData/product.json",
+      "source": "/product.json",
       "destination": "/public/mockData/product.json"
     },
     {
-      "source": "/mockData/productList.json",
+      "source": "/productList.json",
       "destination": "/public/mockData/productList.json"
     }
   ]
