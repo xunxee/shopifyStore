@@ -127,7 +127,7 @@ expect.rejects.toThrowError() matcher를 사용하여, 비동기 함수에서 �
 
 ### 📍 정규 표현식을 사용한 회원가입 유효성 검사
 
-<img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="70%">
+<img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="60%">
 
 🔗 **onblur와 onChange를 사용한 유효성 검사**
 
@@ -170,7 +170,7 @@ export default function MembershipContainer() {
 
 ### 📍 제품 리스트 페이지
 
-<img src="https://user-images.githubusercontent.com/87808288/220569835-fe7780c8-4991-4fad-aa8e-0d468c89c38d.gif" width="80%">
+<img src="https://user-images.githubusercontent.com/87808288/220569835-fe7780c8-4991-4fad-aa8e-0d468c89c38d.gif" width="60%">
 
 🔗 **리스트 페이지에서 공용으로 적용되는 Card 컴포넌트 제작**
 
@@ -220,7 +220,7 @@ export default function ItemCard({
 
 ### 📍 옵션 버튼을 하나의 공용 컴포넌트로 제작
 
-<img src="https://user-images.githubusercontent.com/87808288/222161955-fca37138-2114-4a82-93e4-35f9923aff71.gif" width="50%">
+<img src="https://user-images.githubusercontent.com/87808288/222161955-fca37138-2114-4a82-93e4-35f9923aff71.gif" width="40%">
 
 - 첫 렌더링 시, 각 옵션의 첫 번째 버튼이 자동 선택되도록 구현
 - 공용 컴포넌트로 사용하기 위해, emotion 객체에 props를 전달하여, value에 따라 각각 다르게 스타일링이 적용되도록 구현
