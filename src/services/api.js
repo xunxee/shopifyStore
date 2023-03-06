@@ -61,14 +61,18 @@ export async function postSignUp({ email, password }) {
 }
 
 export async function fetchMockProductList() {
-  const url = '/productList.json';
+  // TODO: mock_data와의 연결
+  // const url = '/productList.json';
+  const url = '/api/productList';
   const response = await fetch(url);
   const data = await response.json();
   return data;
 }
 
 export async function fetchMockProduct() {
-  const url = '/product.json';
+  // TODO: mock_data와의 연결
+  // const url = '/product.json';
+  const url = '/api/product';
   const response = await fetch(url);
   const data = await response.json();
   return data;
