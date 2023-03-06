@@ -214,7 +214,7 @@ export default function ItemCard({
 
 ### 📍 라이브러리 사용하지 않고, 무한 슬라이드 만들기
 
-<img src="https://user-images.githubusercontent.com/87808288/220570521-7db2c304-9847-4fbc-badf-70df6bba097f.gif" width="70%">
+<img src="https://user-images.githubusercontent.com/87808288/223116159-88957241-7ad6-4b41-b8ae-0eb7353783af.gif" width="70%">
 
 💡 *gunhee’s coding blog: [라이브러리 없이, 무한 슬라이드 구현하기](https://www.gunhee.co.kr/8d1510e2-6fda-4a59-9d4b-7881fb8c96d8)*
 
