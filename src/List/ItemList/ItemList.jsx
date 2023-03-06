@@ -10,7 +10,9 @@ const Wrapper = styled.div({
   marginBottom: '5rem',
 });
 
-export default function ItemList({ onClickItemList, productList }) {
+export default function ItemList(
+  { onClickItemList, productList },
+) {
   return (
     <Wrapper>
       {productList.map((product) => (

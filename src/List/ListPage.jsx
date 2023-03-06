@@ -17,9 +17,7 @@ export default function ListPage() {
   );
 
   const handleClickItemList = useCallback(
-    (url) => {
-      navigate(url);
-    },
+    (url) => navigate(url),
     [navigate],
   );
 

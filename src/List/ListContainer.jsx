@@ -179,7 +179,10 @@ export default function ListContainer({
           onClick={handleClickCategories}
         />
       </StyledBar>
-      <ItemList onClickItemList={onClickItemList} productList={productList} />
+      <ItemList
+        onClickItemList={onClickItemList}
+        productList={productList}
+      />
       <StyledBar>
         <CategoryBar
           field="sort"
