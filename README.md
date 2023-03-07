@@ -170,7 +170,7 @@ export default function MembershipContainer() {
 
 ### 📍 제품 리스트 페이지
 
-<img src="https://user-images.githubusercontent.com/87808288/220569835-fe7780c8-4991-4fad-aa8e-0d468c89c38d.gif" width="60%">
+<img src="https://user-images.githubusercontent.com/87808288/223317732-1f6f33b6-d81b-4d83-94dd-2fdcc058ff82.gif" width="60%">
 
 🔗 **리스트 페이지에서 공용으로 적용되는 Card 컴포넌트 제작**
 
