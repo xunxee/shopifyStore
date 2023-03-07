@@ -4,8 +4,9 @@ import ItemCard from './ItemCard';
 
 const Wrapper = styled.div({
   display: 'flex',
-  flexWrap: 'wrap',
   justifyContent: 'center',
+  alignContent: 'flex-start',
+  flexWrap: 'wrap',
   marginTop: '1.5rem',
   marginBottom: '5rem',
 });
@@ -13,9 +14,20 @@ const Wrapper = styled.div({
 export default function ItemList(
   { onClickItemList, productList },
 ) {
+  const newList = [...productList];
+
+  while (newList.length % 3 !== 0) {
+    newList.push(
+      {
+        id: newList[newList.length - 1].id + 1,
+        title: 'fake',
+      },
+    );
+  }
+
   return (
     <Wrapper>
-      {productList.map((product) => (
+      {newList.map((product) => (
         <ItemCard
           key={product.id}
           product={product}
