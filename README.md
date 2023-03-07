@@ -26,7 +26,7 @@
 
 - test coverage가 100%에 도달할 때만 commit을 하는 방식으로 프로젝트를 진행 중입니다.
 
-<img src="https://user-images.githubusercontent.com/87808288/220566153-e602f635-b032-4cf6-bff8-d6c42e204d4e.gif" width="80%" style='margin:auto; display: block;'>
+<img src="https://user-images.githubusercontent.com/87808288/220566153-e602f635-b032-4cf6-bff8-d6c42e204d4e.gif" width="60%" style='margin:auto; display: block;'>
 
 ## 📌 구현 사항
 
@@ -127,7 +127,7 @@ expect.rejects.toThrowError() matcher를 사용하여, 비동기 함수에서 �
 
 ### 📍 정규 표현식을 사용한 회원가입 유효성 검사
 
-<img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="60%">
+<img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="50%">
 
 🔗 **onblur와 onChange를 사용한 유효성 검사**
 
@@ -210,7 +210,7 @@ export default function ItemCard({
 - hoverColor를 만들고, Wrapper 객체에 props로 전달하여 hover 시 지정된 color로 변경되도록 구현했습니다.
 - Wrapper 객체에 left와 bottom에 margin 값을 넣어서, map 메서드로 화면에 렌더링 될 때 자동으로 좌우 간격이 맞춰지도록 스타일을 적용했습니다.
 
-<img src="https://user-images.githubusercontent.com/87808288/220570311-98c1576e-e274-4fd2-b244-f2e387cfb324.png" width="80%">
+<img src="https://user-images.githubusercontent.com/87808288/220570311-98c1576e-e274-4fd2-b244-f2e387cfb324.png" width="60%">
 
 ### 📍 라이브러리 사용하지 않고, 무한 슬라이드 만들기
 
@@ -229,7 +229,7 @@ export default function ItemCard({
 
 ### 📍 동적 쿼리 스트링 만들기
 
-<img src="https://user-images.githubusercontent.com/87808288/220570955-72ae2cb4-3f4a-45bd-a373-49237ab3ad7e.gif" width="80%">
+<img src="https://user-images.githubusercontent.com/87808288/220570955-72ae2cb4-3f4a-45bd-a373-49237ab3ad7e.gif" width="60%">
 
 - 반복문을 사용하여 중복되는 코드를 제거하기 위해 노력했습니다.
     
