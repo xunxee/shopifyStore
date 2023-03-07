@@ -7,58 +7,70 @@ import PRODUCT_TAG from '../../styles/productTag';
 const { basicWhite, paleWhite, itemCardHoverList } = PALETTE;
 const { productName, priceName } = PRODUCT_TAG;
 
-const Wrapper = styled.div(({ hoverColor }) => ({
+const Wrapper = styled.div(({ hoverColor, title }) => ({
   position: 'relative',
   width: '256px',
   height: '267px',
-  backgroundColor: paleWhite,
-  cursor: 'pointer',
   marginLeft: '3%',
   marginBottom: '3%',
-  '&:hover': {
-    'h3, span': {
-      backgroundColor: hoverColor,
-      color: basicWhite,
+  ...title === 'fake'
+    ? { pointerEvents: 'none' }
+    : {
+      backgroundColor: paleWhite,
+      cursor: 'pointer',
+      '&:hover': {
+        'h3, span': {
+          backgroundColor: hoverColor,
+          color: basicWhite,
+        },
+        '& img': {
+          transform: 'scale(1.2)',
+        },
+      },
     },
-    '& img': {
-      transform: 'scale(1.2)',
-    },
-  },
 }));
 
-const StyledProductTag = styled.div({
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  zIndex: '20',
-  overflow: 'hidden',
-  paddingRight: '4rem',
-  '& h3': {
-    ...productName,
-    display: 'inline',
-    fontSize: '18px',
-    lineHeight: '40px',
-    transition: '0.5s',
-    transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
-    boxDecorationBreak: 'clone',
-  },
-  '& span': {
-    ...priceName,
-    display: 'inline-block',
-    transition: '0.5s',
-    transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
-  },
-});
+const StyledProductTag = styled.div(({ title }) => ({
+  ...title === 'fake'
+    ? { opacity: 0 }
+    : {
+      position: 'absolute',
+      top: '0',
+      left: '0',
+      zIndex: '20',
+      overflow: 'hidden',
+      paddingRight: '4rem',
+      '& h3': {
+        ...productName,
+        display: 'inline',
+        fontSize: '18px',
+        lineHeight: '40px',
+        transition: '0.5s',
+        transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
+        boxDecorationBreak: 'clone',
+      },
+      '& span': {
+        ...priceName,
+        display: 'inline-block',
+        transition: '0.5s',
+        transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
+      },
+    },
+}));
 
-const StyledImgBox = styled.div({
-  overflow: 'hidden',
-  '& img': {
-    transition: '0.5s',
-    width: '100%',
-    height: '100%',
-    backgroundColor: paleWhite,
-  },
-});
+const StyledImgBox = styled.div(({ title }) => ({
+  ...title === 'fake'
+    ? { opacity: 0 }
+    : {
+      overflow: 'hidden',
+      '& img': {
+        transition: '0.5s',
+        width: '100%',
+        height: '100%',
+        backgroundColor: paleWhite,
+      },
+    },
+}));
 
 export default function ItemCard({
   product: {
@@ -81,13 +93,14 @@ export default function ItemCard({
   return (
     <Wrapper
       hoverColor={makeHoverColor()}
+      title={title}
       onClick={handleClick}
     >
-      <StyledProductTag>
+      <StyledProductTag title={title}>
         <h3>{title}</h3>
         <span>{price}</span>
       </StyledProductTag>
-      <StyledImgBox>
+      <StyledImgBox title={title}>
         <img alt={title} src={mainImage} />
       </StyledImgBox>
     </Wrapper>
