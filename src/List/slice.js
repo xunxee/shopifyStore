@@ -44,7 +44,11 @@ const { actions, reducer } = createSlice({
   },
 });
 
-export const { changeUrlDataField, changeUrlAllDataFields, setProductList } = actions;
+export const {
+  changeUrlDataField,
+  changeUrlAllDataFields,
+  setProductList,
+} = actions;
 
 export function loadProductList() {
   return async (dispatch) => {
