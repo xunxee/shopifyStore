@@ -1,15 +1,17 @@
+import LOGIN_TOKENS from '../../fixtures/Membership/loginTokens';
 import POST_LOGIN_DATA from '../../fixtures/Membership/postLoginData';
 import LOGIN_FAIL_DATA from '../../fixtures/Membership/loginFailData';
 import SIGNUP_FAIL_DATA from '../../fixtures/Membership/signUpFailData';
 import PRODUCT_LIST_DATA from '../../fixtures/List/productList';
 import PRODUCT_DATA from '../../fixtures/ProductDetail/productDetail';
-import LOGIN_TOKENS from '../../fixtures/Membership/loginTokens';
+import HOMEPAGE_PRODUCT_LIST from '../../fixtures/HomePage/homePageProductList';
 
 import {
   postLogin,
   postSignUp,
   fetchMockProductList,
   fetchMockProduct,
+  fetchMockHomePageProductList,
 } from './api';
 
 describe('api', () => {
@@ -96,6 +98,18 @@ describe('api', () => {
       const mockData = await fetchMockProduct();
 
       expect(mockData).toBe(PRODUCT_DATA);
+    });
+  });
+
+  describe('fetchMockHomePageProductList', () => {
+    beforeEach(() => {
+      mockFetch(HOMEPAGE_PRODUCT_LIST);
+    });
+
+    it('returns mock-data', async () => {
+      const mockData = await fetchMockHomePageProductList();
+
+      expect(mockData).toBe(HOMEPAGE_PRODUCT_LIST);
     });
   });
 });
