@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { fetchMockHomePageProductList } from '../services/api';
 
 const { actions, reducer } = createSlice({
   name: 'homePage',
@@ -19,5 +20,12 @@ const { actions, reducer } = createSlice({
 });
 
 export const { setHomePageProductList } = actions;
+
+export function loadHomePageProductList() {
+  return async (dispatch) => {
+    const homePageProductList = await fetchMockHomePageProductList();
+    dispatch(setHomePageProductList(homePageProductList));
+  };
+}
 
 export default reducer;
