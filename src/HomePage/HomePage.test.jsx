@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import HomePage from './HomePage';
 
@@ -12,6 +12,17 @@ describe('Homepage', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector(
+      {
+        homePage: {
+          homePageProductList: {
+            topProductList: [],
+            recommendedProductList: [],
+          },
+        },
+      },
+    ));
   });
 
   it('renders the home page', () => {

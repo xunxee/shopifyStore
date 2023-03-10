@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { loadHomePageProductList } from './slice';
 
 import { get } from '../utils';
+import RepresentativeProductList from './RepresentativeProductList';
 
 export default function HomePageContainer() {
   const dispatch = useDispatch();
@@ -16,14 +17,17 @@ export default function HomePageContainer() {
     },
   ));
 
+  const { topProductList } = homePageProductList;
+
   useEffect(() => {
     dispatch(loadHomePageProductList());
   }, []);
 
   return (
-    <>
-      <div>HomePageContainer</div>
-      <div>{JSON.stringify(homePageProductList)}</div>
-    </>
+    <div>
+      <RepresentativeProductList
+        productList={topProductList}
+      />
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
@@ -13,6 +13,17 @@ describe('HomePageContainer', () => {
     dispatch.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
+
+    useSelector.mockImplementation((selector) => selector(
+      {
+        homePage: {
+          homePageProductList: {
+            topProductList: [],
+            recommendedProductList: [],
+          },
+        },
+      },
+    ));
   });
 
   function renderHomePageContainer() {
@@ -24,6 +35,6 @@ describe('HomePageContainer', () => {
   it('renders the title', () => {
     const { container } = renderHomePageContainer();
 
-    expect(container).toHaveTextContent('HomePageContainer');
+    expect(container).toHaveTextContent('Special Edition T-Shirt');
   });
 });

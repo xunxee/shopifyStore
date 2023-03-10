@@ -4,10 +4,10 @@ import { fetchMockHomePageProductList } from '../services/api';
 const { actions, reducer } = createSlice({
   name: 'homePage',
   initialState: {
-    homePageProductList: [
-      { topProductList: [] },
-      { recommendProductList: [] },
-    ],
+    homePageProductList: {
+      topProductList: [],
+      recommendedProductList: [],
+    },
   },
   reducers: {
     setHomePageProductList(state, { payload: homePageProductList }) {
