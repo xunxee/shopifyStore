@@ -1,3 +1,5 @@
+import { useDispatch } from 'react-redux';
+
 import { render } from '@testing-library/react';
 
 import HomePageContainer from './HomePageContainer';
@@ -9,6 +11,8 @@ describe('HomePageContainer', () => {
 
   beforeEach(() => {
     dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
   });
 
   function renderHomePageContainer() {

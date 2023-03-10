@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { render } from '@testing-library/react';
 
@@ -6,12 +6,23 @@ import { MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
+jest.mock('react-redux');
+
 describe('App', () => {
+  const dispatch = jest.fn();
+
   beforeEach(() => {
+    dispatch.mockClear();
+
+    useDispatch.mockImplementation(() => dispatch);
+
     useSelector.mockImplementation((selection) => selection({
       membership: {},
       header: {
         searchBarFields: {},
+      },
+      homePage: {
+        homePageProductList: [],
       },
     }));
   });
