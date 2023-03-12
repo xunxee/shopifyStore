@@ -4,6 +4,10 @@ import { render } from '@testing-library/react';
 
 import HomePageContainer from './HomePageContainer';
 
+import HOME_PAGE_PRODUCT_LIST from '../../fixtures/HomePage/homePageProductList';
+
+const { topProductList } = HOME_PAGE_PRODUCT_LIST;
+
 jest.mock('react-redux');
 
 describe('HomePageContainer', () => {
@@ -18,7 +22,7 @@ describe('HomePageContainer', () => {
       {
         homePage: {
           homePageProductList: {
-            topProductList: [],
+            topProductList,
             recommendedProductList: [],
           },
         },
@@ -35,6 +39,6 @@ describe('HomePageContainer', () => {
   it('renders the title', () => {
     const { container } = renderHomePageContainer();
 
-    expect(container).toHaveTextContent('Special Edition T-Shirt');
+    expect(container).toHaveTextContent('ACME Cup');
   });
 });

@@ -22,7 +22,10 @@ describe('App', () => {
         searchBarFields: {},
       },
       homePage: {
-        homePageProductList: [],
+        homePageProductList: {
+          topProductList: [],
+          recommendedProductList: [],
+        },
       },
     }));
   });
