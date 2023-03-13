@@ -4,9 +4,7 @@ import SecondaryProduct from './RepresentativeProductList/SecondaryProduct';
 export default function RepresentativeProductList(
   { name, productList },
 ) {
-  const { topProductList } = productList;
-
-  const [main, ...secondary] = topProductList;
+  const [main, ...secondary] = productList;
 
   return (
     name === 'main'
