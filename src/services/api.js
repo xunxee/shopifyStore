@@ -62,8 +62,8 @@ export async function postSignUp({ email, password }) {
 
 export async function fetchMockProductList() {
   // TODO: mock_data와의 연결
-  // const url = '/productList.json';
-  const url = '/api/productList';
+  const url = '/productList.json';
+  // const url = '/api/productList';
   const response = await fetch(url);
   const data = await response.json();
   return data;
@@ -71,8 +71,17 @@ export async function fetchMockProductList() {
 
 export async function fetchMockProduct() {
   // TODO: mock_data와의 연결
-  // const url = '/product.json';
-  const url = '/api/product';
+  const url = '/product.json';
+  // const url = '/api/product';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchMockHomePageProductList() {
+  // TODO: mock_data와의 연결
+  const url = '/homePage.json';
+  // const url = '/api/product';
   const response = await fetch(url);
   const data = await response.json();
   return data;
