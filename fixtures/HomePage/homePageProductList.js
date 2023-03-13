@@ -19,6 +19,20 @@ const homePageProductList = {
       mainImage: 'https://user-images.githubusercontent.com/87808288/223033095-78dfeca7-4b04-425b-9d41-bfc6ea9b8a2a.png',
     },
   ],
+  secondary: [
+    {
+      id: 2,
+      title: 'Special Edition T-Shirt',
+      price: '$50.00 USD',
+      mainImage: 'https://user-images.githubusercontent.com/87808288/209490726-1626694c-35c8-49db-a082-0e6e1001310e.png',
+    },
+    {
+      id: 3,
+      title: 'New Short Sleeve T-Shirt',
+      price: '$25.00 USD',
+      mainImage: 'https://user-images.githubusercontent.com/87808288/223033095-78dfeca7-4b04-425b-9d41-bfc6ea9b8a2a.png',
+    },
+  ],
   recommendedProductList: [
     {
       id: 4,
