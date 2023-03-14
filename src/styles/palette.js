@@ -6,7 +6,7 @@ const palette = {
   basicPurple: '#7928CA',
   palePurple: '#8369AD',
   darkPurple: '#4c2889',
-  itemCardHoverList: {
+  colorByIdList: {
     1: '#7928ca',
     2: '#eb367f',
     3: '#22b8cf',
