@@ -1,3 +1,7 @@
+import PALETTE from './styles/palette';
+
+const { colorByIdList } = PALETTE;
+
 export function get({ page, key }) {
   return (obj) => obj[page][key];
 }
@@ -52,4 +56,10 @@ export function changeAlbumPosition(
   }
 
   return `translateX(-${0}vw)`;
+}
+
+export function setColorById(id) {
+  const number = id % 10;
+
+  return colorByIdList[number];
 }
