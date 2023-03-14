@@ -1,13 +1,39 @@
 import styled from '@emotion/styled';
 
-const Wrapper = styled.div({});
+import { setColorById } from '../../utils';
+
+const Wrapper = styled.div(({ backgroundColor }) => (
+  {
+    width: '65%',
+    backgroundColor,
+  }
+));
+
+const StyledProductTag = styled.div({});
+
+const StyledImgBox = styled.div({
+  '& img': {
+    maxWidth: '100%',
+    height: 'auto',
+  },
+});
 
 export default function MainProduct(
-  { productList },
+  {
+    productList: {
+      id, title, price, mainImage,
+    },
+  },
 ) {
   return (
-    <Wrapper>
-      <div>{JSON.stringify(productList)}</div>
+    <Wrapper backgroundColor={setColorById(id)}>
+      <StyledProductTag title={title}>
+        <h3>{title}</h3>
+        <span>{price}</span>
+      </StyledProductTag>
+      <StyledImgBox>
+        <img src={mainImage} alt={title} />
+      </StyledImgBox>
     </Wrapper>
   );
 }
