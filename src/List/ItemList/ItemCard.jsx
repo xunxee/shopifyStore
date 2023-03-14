@@ -1,10 +1,13 @@
 import styled from '@emotion/styled';
+
 import { useCallback } from 'react';
+
+import { setColorById } from '../../utils';
 
 import PALETTE from '../../styles/palette';
 import PRODUCT_TAG from '../../styles/productTag';
 
-const { basicWhite, paleWhite, itemCardHoverList } = PALETTE;
+const { basicWhite, paleWhite } = PALETTE;
 const { productName, priceName } = PRODUCT_TAG;
 
 const Wrapper = styled.div(({ hoverColor, title }) => ({
@@ -78,12 +81,6 @@ export default function ItemCard({
   },
   onClickItemList,
 }) {
-  function makeHoverColor() {
-    const number = id % 10;
-
-    return itemCardHoverList[number];
-  }
-
   const handleClick = useCallback(() => {
     const url = `/product/${id}`;
 
@@ -92,9 +89,9 @@ export default function ItemCard({
 
   return (
     <Wrapper
-      hoverColor={makeHoverColor()}
       title={title}
       onClick={handleClick}
+      hoverColor={setColorById(id)}
     >
       <StyledProductTag title={title}>
         <h3>{title}</h3>
