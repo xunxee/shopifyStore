@@ -2,9 +2,12 @@ import styled from '@emotion/styled';
 
 import { setColorById } from '../../utils';
 
-const Wrapper = styled.div(({ backgroundColor }) => (
+const Wrapper = styled.div({
+  width: '35%',
+});
+
+const StyledProductItem = styled.div(({ backgroundColor }) => (
   {
-    width: '35%',
     backgroundColor,
   }
 ));
@@ -22,12 +25,11 @@ export default function SecondaryProduct(
   { productList },
 ) {
   return (
-    <>
-      <div>{JSON.stringify(productList)}</div>
+    <Wrapper>
       {productList.map(({
         id, title, price, mainImage,
       }) => (
-        <Wrapper
+        <StyledProductItem
           key={id}
           backgroundColor={setColorById(id)}
         >
@@ -38,8 +40,8 @@ export default function SecondaryProduct(
           <StyledImgBox>
             <img src={mainImage} alt={title} />
           </StyledImgBox>
-        </Wrapper>
+        </StyledProductItem>
       ))}
-    </>
+    </Wrapper>
   );
 }
