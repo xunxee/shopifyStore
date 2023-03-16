@@ -5,6 +5,7 @@ import SecondaryProduct from './RepresentativeProductList/SecondaryProduct';
 
 const Wrapper = styled.div({
   display: 'flex',
+  maxHeight: '1080px',
 });
 
 export default function RepresentativeProductList(
