@@ -22,7 +22,7 @@ describe('HomePageContainer', () => {
       {
         homePage: {
           homePageProductList: {
-            topProductList,
+            topProductList: given.topProductList,
             recommendedProductList: [],
           },
         },
@@ -36,9 +36,23 @@ describe('HomePageContainer', () => {
     );
   }
 
-  it('renders the title', () => {
-    const { container } = renderHomePageContainer();
+  context('when initially rendered', () => {
+    given('topProductList', () => []);
 
-    expect(container).toHaveTextContent('ACME Cup');
+    it("doesn't render component", () => {
+      const { container } = renderHomePageContainer();
+
+      expect(container).toBeEmptyDOMElement();
+    });
+  });
+
+  context("when it's not the first rendering", () => {
+    given('topProductList', () => topProductList);
+
+    it("doesn't render component", () => {
+      const { container } = renderHomePageContainer();
+
+      expect(container).toHaveTextContent('ACME Cup');
+    });
   });
 });
