@@ -6,6 +6,13 @@ import { MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
+import HOME_PAGE_PRODUCT_LIST from '../fixtures/HomePage/homePageProductList';
+
+const {
+  topProductList,
+  recommendedProductList,
+} = HOME_PAGE_PRODUCT_LIST;
+
 jest.mock('react-redux');
 
 describe('App', () => {
@@ -23,8 +30,8 @@ describe('App', () => {
       },
       homePage: {
         homePageProductList: {
-          topProductList: [],
-          recommendedProductList: [],
+          topProductList,
+          recommendedProductList,
         },
       },
     }));
@@ -42,7 +49,7 @@ describe('App', () => {
     it('renders the home page', () => {
       const { container } = renderApp({ path: '/' });
 
-      expect(container).toHaveTextContent('HomePage');
+      expect(container).toHaveTextContent('ACME Cup');
     });
   });
 

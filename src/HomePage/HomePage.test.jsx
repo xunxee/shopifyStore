@@ -3,6 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import HomePage from './HomePage';
 
+import HOME_PAGE_PRODUCT_LIST from '../../fixtures/HomePage/homePageProductList';
+
+const {
+  topProductList,
+  recommendedProductList,
+} = HOME_PAGE_PRODUCT_LIST;
+
 jest.mock('react-redux');
 
 const dispatch = jest.fn();
@@ -17,8 +24,8 @@ describe('Homepage', () => {
       {
         homePage: {
           homePageProductList: {
-            topProductList: [],
-            recommendedProductList: [],
+            topProductList,
+            recommendedProductList,
           },
         },
       },
@@ -30,6 +37,6 @@ describe('Homepage', () => {
       <HomePage />,
     );
 
-    expect(container).toHaveTextContent('HomePage');
+    expect(container).toHaveTextContent('ACME Cup');
   });
 });
