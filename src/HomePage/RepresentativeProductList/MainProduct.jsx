@@ -9,7 +9,7 @@ const { productName, priceName } = PRODUCT_TAG;
 const Wrapper = styled.div(({ backgroundColor }) => (
   {
     position: 'relative',
-    width: '65%',
+    width: '70%',
     backgroundColor,
     cursor: 'pointer',
   }
@@ -17,9 +17,9 @@ const Wrapper = styled.div(({ backgroundColor }) => (
 
 const StyledProductTag = styled.div({
   position: 'absolute',
-  top: '0',
-  left: '0',
-  zIndex: '20',
+  top: 0,
+  left: 0,
+  zIndex: 20,
   paddingRight: '4rem',
   '& h3': {
     ...productName,
@@ -43,6 +43,7 @@ const StyledImgBox = styled.div({
     height: 'auto',
     transition: '0.5s',
     transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
+    objectFit: 'cover',
   },
   '&:hover': {
     '& img': {
