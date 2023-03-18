@@ -1,8 +1,10 @@
 const palette = {
   dark: '#000',
+  paleDark: '#666',
   basicWhite: '#FFF',
   paleWhite: '#F8F8F8',
   paleGray: '#eaeaea',
+  borderGray: '#E5E7EB',
   basicPurple: '#7928CA',
   palePurple: '#8369AD',
   darkPurple: '#4c2889',
