@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { useCallback } from 'react';
 
-import { get } from '../utils';
+import PALETTE from '../styles/palette';
 
 import LIST_CATEGORIES from '../../fixtures/List/listCategoriesCollection';
+
+import { get } from '../utils';
 
 import {
   setIsAccountModalOpen,
@@ -24,6 +26,8 @@ import TitleBar from './NavBar/TitleBar';
 import SearchBar from './NavBar/SearchBar';
 import UserBar from './NavBar/UserBar';
 
+const { basicWhite } = PALETTE;
+
 const { initialCategoryList } = LIST_CATEGORIES;
 
 const Wrapper = styled.div({
@@ -33,7 +37,7 @@ const Wrapper = styled.div({
   zIndex: '30',
   width: '100%',
   minWidth: '990px',
-  backgroundColor: '#000',
+  backgroundColor: basicWhite,
 });
 
 const NavBarWrapper = styled.div({
@@ -43,8 +47,7 @@ const NavBarWrapper = styled.div({
   maxWidth: '1920px',
   height: '74px',
   margin: '0 auto',
-  color: '#EAEAEA',
-  backgroundColor: '#000',
+  backgroundColor: basicWhite,
 });
 
 export default function HeaderContainer(
