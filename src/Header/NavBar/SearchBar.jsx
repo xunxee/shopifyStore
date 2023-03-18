@@ -3,6 +3,10 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
+import PALETTE from '../../styles/palette';
+
+const { basicWhite, borderGray } = PALETTE;
+
 const Container = styled.div({
   position: 'relative',
   width: '100%',
@@ -10,9 +14,8 @@ const Container = styled.div({
   '& input': {
     width: '100%',
     height: '40px',
-    border: '1px solid #333',
-    backgroundColor: '#000',
-    color: '#FFF',
+    border: `1px solid ${borderGray}`,
+    backgroundColor: basicWhite,
     fontSize: '15px',
     paddingLeft: '15px',
   },
@@ -22,7 +25,8 @@ const Container = styled.div({
   '& > div': {
     position: 'absolute',
     left: '92%',
-    bottom: '20%',
+    top: '50%',
+    transform: 'translateY(-50%)',
   },
 });
 
