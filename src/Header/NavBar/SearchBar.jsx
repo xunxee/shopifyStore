@@ -21,6 +21,7 @@ const Container = styled.div({
   },
   '& input:focus': {
     outline: 'none',
+    border: `2px solid ${borderGray}`,
   },
   '& > div': {
     position: 'absolute',
