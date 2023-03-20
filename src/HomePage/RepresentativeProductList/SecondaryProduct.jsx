@@ -2,10 +2,6 @@ import styled from '@emotion/styled';
 
 import { setColorById } from '../../utils';
 
-import PRODUCT_TAG from '../../styles/productTag';
-
-const { productName, priceName } = PRODUCT_TAG;
-
 const Wrapper = styled.div({
   width: '30%',
   cursor: 'pointer',
@@ -22,21 +18,34 @@ const StyledProductItem = styled.div(({ backgroundColor }) => (
 
 const StyledProductTag = styled.div({
   position: 'absolute',
-  top: 0,
-  left: 0,
-  zIndex: 0,
-  paddingRight: '4rem',
+  top: '0',
+  left: '0',
+  zIndex: '20',
   overflow: 'hidden',
-  '& h3': {
-    ...productName,
-    fontSize: '2rem',
-    lineHeight: '2rem',
+  paddingRight: '4rem',
+});
+
+const StyledProductTitle = styled.h3({
+  fontSize: '2rem',
+  lineHeight: '2.1em',
+  '& span': {
+    padding: '1rem 1.5rem',
+    fontSize: '32px',
+    fontWeight: '700',
+    letterSpacing: '.4px',
+    backgroundColor: '#FFF',
     boxDecorationBreak: 'clone',
   },
-  '& span': {
-    ...priceName,
-    display: 'inline-block',
-  },
+});
+
+const StyledProductPrice = styled.div({
+  display: 'inline-block',
+  padding: '.5rem 1.5rem 1rem',
+  fontSize: '.875rem',
+  fontWeight: '600',
+  letterSpacing: '.025em',
+  lineHeight: '20px',
+  backgroundColor: '#FFF',
 });
 
 const StyledImgBox = styled.div({
@@ -66,8 +75,10 @@ export default function SecondaryProduct(
           backgroundColor={setColorById(id)}
         >
           <StyledProductTag>
-            <h3>{title}</h3>
-            <span>{price}</span>
+            <StyledProductTitle>
+              <span>{title}</span>
+            </StyledProductTitle>
+            <StyledProductPrice>{price}</StyledProductPrice>
           </StyledProductTag>
           <StyledImgBox>
             <img src={mainImage} alt={title} />
