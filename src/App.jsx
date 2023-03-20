@@ -11,6 +11,8 @@ import ProductDetailPage from './ProductDetail/ProductDetailPage';
 
 const Container = styled.div({
   display: 'flex',
+  maxWidth: '2460px',
+  margin: '0 auto',
   flexDirection: 'column',
   minHeight: '100vh',
   paddingTop: '74px',

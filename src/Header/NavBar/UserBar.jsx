@@ -6,6 +6,10 @@ import {
   faCircleUser,
 } from '@fortawesome/free-solid-svg-icons';
 
+import PALETTE from '../../styles/palette';
+
+const { dark } = PALETTE;
+
 const Container = styled.div({
   display: 'flex',
   justifyContent: 'flex-end',
@@ -25,7 +29,7 @@ export default function UserBar({ onClick }) {
           title="shoppingCart"
           icon={faCartShopping}
           size="2x"
-          color="#EAEAEA"
+          color={dark}
         />
       </button>
       <button type="button" onClick={onClick}>
@@ -33,7 +37,7 @@ export default function UserBar({ onClick }) {
           title="circleUser"
           icon={faCircleUser}
           size="2x"
-          color="#EAEAEA"
+          color={dark}
         />
       </button>
     </Container>

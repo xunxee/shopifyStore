@@ -3,6 +3,7 @@ import {
   updateSlide,
   makeSelectedNumber,
   changeAlbumPosition,
+  setColorById,
 } from './utils';
 
 test('get', () => {
@@ -117,4 +118,12 @@ describe('changeAlbumPosition', () => {
       expect(location).toBe('translateX(-470px)');
     });
   });
+});
+
+describe('setColorById', () => {
+  const id = 1;
+
+  const color = setColorById(id);
+
+  expect(color).toBe('#7928ca');
 });

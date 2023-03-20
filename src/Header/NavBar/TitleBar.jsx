@@ -3,42 +3,46 @@ import styled from '@emotion/styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair } from '@fortawesome/free-solid-svg-icons';
 
+import PALETTE from '../../styles/palette';
+
 import LIST_CATEGORIES from '../../../fixtures/List/listCategoriesCollection';
 
-const Container = styled.div({
+const { dark, paleDark } = PALETTE;
+
+const StyledWrapper = styled.div({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
 });
 
-const Logo = styled.div({
+const StyledLogo = styled.div({
   fontSize: '25px',
 });
 
-const LogoScale = styled.div({
+const StyledLogoScale = styled.div({
   transition: 'transform 0.5s ease-out',
   ':hover': {
     transform: 'scale(1.3)',
   },
 });
 
-const List = styled.ul({
+const StyledList = styled.ul({
   display: 'flex',
 });
 
-const Item = styled.li({
+const StyledItem = styled.li({
   '& a': {
     marginLeft: '24px',
     fontSize: '18px',
     textDecoration: 'none',
-    color: '#888',
+    color: paleDark,
     cursor: 'pointer',
     transition: 'color 300ms ease-in-out',
     '&:focus': {
-      color: '#FFF',
+      color: dark,
     },
     '&:hover': {
-      color: '#FFF',
+      color: dark,
     },
   },
 });
@@ -57,22 +61,22 @@ export default function TitleBar({ onClick }) {
   }
 
   return (
-    <Container>
+    <StyledWrapper>
       <a href="/" onClick={handleClick()}>
-        <Logo>
-          <LogoScale>
+        <StyledLogo>
+          <StyledLogoScale>
             <FontAwesomeIcon
               className="logo"
               title="chair"
               icon={faChair}
-              color="#EAEAEA"
+              color={dark}
             />
-          </LogoScale>
-        </Logo>
+          </StyledLogoScale>
+        </StyledLogo>
       </a>
-      <List>
+      <StyledList>
         {LIST_CATEGORIES.headerCategories.map(({ title, name }) => (
-          <Item key={title}>
+          <StyledItem key={title}>
             <a
               name={name}
               href={name === 'all' ? '/search' : `/search/${name}`}
@@ -80,9 +84,9 @@ export default function TitleBar({ onClick }) {
             >
               {title}
             </a>
-          </Item>
+          </StyledItem>
         ))}
-      </List>
-    </Container>
+      </StyledList>
+    </StyledWrapper>
   );
 }

@@ -6,6 +6,8 @@ import { loadHomePageProductList } from './slice';
 
 import { get } from '../utils';
 
+import RepresentativeProductList from './RepresentativeProductList';
+
 export default function HomePageContainer() {
   const dispatch = useDispatch();
 
@@ -16,9 +18,7 @@ export default function HomePageContainer() {
     },
   ));
 
-  const {
-    topProductList,
-  } = homePageProductList;
+  const { topProductList } = homePageProductList;
 
   useEffect(() => {
     dispatch(loadHomePageProductList());
@@ -27,6 +27,15 @@ export default function HomePageContainer() {
   if (topProductList.length === 0) return null;
 
   return (
-    <div>{JSON.stringify(topProductList)}</div>
+    <>
+      <RepresentativeProductList
+        name="main"
+        productList={topProductList}
+      />
+      <RepresentativeProductList
+        name="secondary"
+        productList={topProductList}
+      />
+    </>
   );
 }

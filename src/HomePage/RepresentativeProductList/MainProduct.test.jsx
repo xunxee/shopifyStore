@@ -9,7 +9,7 @@ const { topProductList } = HOME_PAGE_PRODUCT_LIST;
 describe('MainProduct', () => {
   function renderMainProduct() {
     return render(
-      <MainProduct productList={topProductList} />,
+      <MainProduct productList={topProductList[0]} />,
     );
   }
 

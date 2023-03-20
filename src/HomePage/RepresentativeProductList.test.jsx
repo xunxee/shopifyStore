@@ -4,9 +4,11 @@ import RepresentativeProductList from './RepresentativeProductList';
 
 import HOME_PAGE_PRODUCT_LIST from '../../fixtures/HomePage/homePageProductList';
 
+const { topProductList } = HOME_PAGE_PRODUCT_LIST;
+
 describe('RepresentativeProductList', () => {
   function renderRepresentativeProductList(
-    { name, productList = HOME_PAGE_PRODUCT_LIST } = {},
+    { name, productList = topProductList } = {},
   ) {
     return render(
       <RepresentativeProductList
