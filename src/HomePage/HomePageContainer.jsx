@@ -33,7 +33,7 @@ export default function HomePageContainer() {
         name="main"
         productList={topProductList}
       />
-      <AutoSlide />
+      <AutoSlide productList={topProductList} />
       <RepresentativeProductList
         name="secondary"
         productList={topProductList}

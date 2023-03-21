@@ -1,5 +1,10 @@
-export default function AutoSlide() {
+import MarqueeWrapper from './MarqueeWrapper';
+
+export default function AutoSlide({ productList }) {
   return (
-    <div>AutoSlide</div>
+    <>
+      <MarqueeWrapper productList={productList} />
+      <MarqueeWrapper productList={productList} />
+    </>
   );
 }
