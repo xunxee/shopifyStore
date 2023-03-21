@@ -2,8 +2,12 @@ import styled from '@emotion/styled';
 
 import { setColorById } from '../../utils';
 
+import PRODUCT_TAG from '../../styles/productTag';
+
+const { productName, priceName } = PRODUCT_TAG;
+
 const Wrapper = styled.div({
-  width: '30%',
+  width: '33%',
   cursor: 'pointer',
 });
 
@@ -29,23 +33,13 @@ const StyledProductTitle = styled.h3({
   fontSize: '2rem',
   lineHeight: '2.1em',
   '& span': {
-    padding: '1rem 1.5rem',
+    ...productName,
     fontSize: '32px',
-    fontWeight: '700',
-    letterSpacing: '.4px',
-    backgroundColor: '#FFF',
-    boxDecorationBreak: 'clone',
   },
 });
 
 const StyledProductPrice = styled.div({
-  display: 'inline-block',
-  padding: '.5rem 1.5rem 1rem',
-  fontSize: '.875rem',
-  fontWeight: '600',
-  letterSpacing: '.025em',
-  lineHeight: '20px',
-  backgroundColor: '#FFF',
+  ...priceName,
 });
 
 const StyledImgBox = styled.div({

@@ -9,7 +9,7 @@ const { productName, priceName } = PRODUCT_TAG;
 const Wrapper = styled.div(({ backgroundColor }) => (
   {
     position: 'relative',
-    width: '70%',
+    width: '67%',
     backgroundColor,
     cursor: 'pointer',
   }
