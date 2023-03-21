@@ -7,6 +7,7 @@ import { loadHomePageProductList } from './slice';
 import { get } from '../utils';
 
 import RepresentativeProductList from './RepresentativeProductList';
+import AutoSlide from './InfiniteMarquee/AutoSlide';
 
 export default function HomePageContainer() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function HomePageContainer() {
         name="main"
         productList={topProductList}
       />
+      <AutoSlide />
       <RepresentativeProductList
         name="secondary"
         productList={topProductList}
