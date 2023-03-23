@@ -12,8 +12,11 @@ export default function MarqueeWrapper({ productList }) {
 
   const StyledProductLayout = styled.a({
     position: 'relative',
-    display: 'inline-block',
+    display: 'flex',
+    justifyContent: 'center',
     width: '100%',
+    padding: 'auto',
+    backgroundColor: dark,
     overflow: 'hidden',
     '& img': {
       display: 'block',
@@ -28,14 +31,9 @@ export default function MarqueeWrapper({ productList }) {
     display: 'flex',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
     zIndex: 20,
     width: '100%',
     height: '100%',
-    marginRight: '6rem',
     '& span': {
       display: 'inline-block',
       padding: '.75rem',

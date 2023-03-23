@@ -6,6 +6,7 @@ export default function AutoSlide({ productList }) {
   const Wrapper = styled.div({
     display: 'flex',
     width: '100%',
+    overflow: 'hidden',
   });
 
   return (
