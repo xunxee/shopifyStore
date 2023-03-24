@@ -5,7 +5,19 @@ import PALETTE from '../../styles/palette';
 const { dark, basicWhite } = PALETTE;
 
 export default function MarqueeWrapper({ productList }) {
+  const cloneProductList = [...productList];
+
   const Wrapper = styled.div({
+    display: 'flex',
+    width: '100%',
+  });
+
+  const StyledOriginWrapper = styled.div({
+    display: 'flex',
+    minWidth: '100%',
+  });
+
+  const StyledCloneWrapper = styled.div({
     display: 'flex',
     minWidth: '100%',
   });
@@ -17,7 +29,6 @@ export default function MarqueeWrapper({ productList }) {
     width: '100%',
     padding: 'auto',
     backgroundColor: dark,
-    overflow: 'hidden',
     '& img': {
       display: 'block',
       width: '320px',
@@ -47,19 +58,36 @@ export default function MarqueeWrapper({ productList }) {
 
   return (
     <Wrapper>
-      {productList.map(({
-        id, title, mainImage,
-      }) => (
-        <StyledProductLayout
-          key={id}
-          href={`product/${id}`}
-        >
-          <StyledProductTag>
-            <span>{title}</span>
-          </StyledProductTag>
-          <img src={mainImage} alt={title} />
-        </StyledProductLayout>
-      ))}
+      <StyledOriginWrapper>
+        {productList.map(({
+          id, title, mainImage,
+        }) => (
+          <StyledProductLayout
+            key={id}
+            href={`product/${id}`}
+          >
+            <StyledProductTag>
+              <span>{title}</span>
+            </StyledProductTag>
+            <img src={mainImage} alt={title} />
+          </StyledProductLayout>
+        ))}
+      </StyledOriginWrapper>
+      <StyledCloneWrapper>
+        {cloneProductList.map(({
+          id, title, mainImage,
+        }) => (
+          <StyledProductLayout
+            key={id}
+            href={`product/${id}`}
+          >
+            <StyledProductTag>
+              <span>{title}</span>
+            </StyledProductTag>
+            <img src={mainImage} alt={title} />
+          </StyledProductLayout>
+        ))}
+      </StyledCloneWrapper>
     </Wrapper>
   );
 }
