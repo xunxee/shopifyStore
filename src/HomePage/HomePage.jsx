@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+
 import HomePageContainer from './HomePageContainer';
 
 const Wrapper = styled.div({

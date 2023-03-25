@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { keyframes } from '@emotion/react';
+
 import PALETTE from '../../styles/palette';
 
 const { dark, basicWhite } = PALETTE;
@@ -10,16 +12,43 @@ export default function MarqueeWrapper({ productList }) {
   const Wrapper = styled.div({
     display: 'flex',
     width: '100%',
+    backgroundColor: dark,
   });
+
+  const rollingLeft1 = keyframes`
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-100%);
+    }
+    50.01%{
+        transform: translateX(100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+  `;
+
+  const rollingLeft2 = keyframes`
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+  `;
 
   const StyledOriginWrapper = styled.div({
     display: 'flex',
     minWidth: '100%',
+    animation: `${rollingLeft1} 20s linear 0s infinite normal none running`,
   });
 
   const StyledCloneWrapper = styled.div({
     display: 'flex',
     minWidth: '100%',
+    animation: `${rollingLeft2} 20s linear 0s infinite normal none running`,
   });
 
   const StyledProductLayout = styled.a({

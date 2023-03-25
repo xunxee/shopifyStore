@@ -12,7 +12,6 @@ export default function AutoSlide({ productList }) {
   return (
     <Wrapper>
       <MarqueeWrapper productList={productList} />
-      <MarqueeWrapper productList={productList} />
     </Wrapper>
   );
 }
