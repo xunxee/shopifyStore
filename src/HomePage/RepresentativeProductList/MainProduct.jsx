@@ -12,6 +12,11 @@ const Wrapper = styled.div(({ backgroundColor }) => (
     width: '67%',
     backgroundColor,
     cursor: 'pointer',
+    '&:hover': {
+      '& img': {
+        transform: 'scale(1.1)',
+      },
+    },
   }
 ));
 
@@ -44,11 +49,6 @@ const StyledImgBox = styled.div({
     transition: '0.5s',
     transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
     objectFit: 'cover',
-  },
-  '&:hover': {
-    '& img': {
-      transform: 'scale(1.1)',
-    },
   },
 });
 

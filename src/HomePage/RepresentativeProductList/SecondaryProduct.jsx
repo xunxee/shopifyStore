@@ -17,6 +17,11 @@ const StyledProductItem = styled.div(({ backgroundColor }) => (
     backgroundColor,
     width: '100%',
     height: '50%',
+    '&:hover': {
+      '& img': {
+        transform: 'scale(1.1)',
+      },
+    },
   }
 ));
 
@@ -55,11 +60,6 @@ const StyledImgBox = styled.div({
     transition: '0.5s',
     transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
     objectFit: 'cover',
-  },
-  '&:hover': {
-    '& img': {
-      transform: 'scale(1.1)',
-    },
   },
 });
 
