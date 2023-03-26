@@ -52,7 +52,14 @@ const StyledImgBox = styled.div({
   '& img': {
     width: '100%',
     height: '100%',
+    transition: '0.5s',
+    transitionTimingFunction: 'cubic-bezier(.4, 0, .2, 1)',
     objectFit: 'cover',
+  },
+  '&:hover': {
+    '& img': {
+      transform: 'scale(1.1)',
+    },
   },
 });
 
