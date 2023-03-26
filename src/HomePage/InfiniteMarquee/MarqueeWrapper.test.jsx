@@ -10,6 +10,7 @@ describe('MarqueeWrapper', () => {
   function renderMarqueeWrapper() {
     return render(
       <MarqueeWrapper
+        name="main"
         productList={topProductList}
       />,
     );

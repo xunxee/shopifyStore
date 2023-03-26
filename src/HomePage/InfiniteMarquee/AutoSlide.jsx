@@ -2,7 +2,12 @@ import styled from '@emotion/styled';
 
 import MarqueeWrapper from './MarqueeWrapper';
 
-export default function AutoSlide({ productList }) {
+export default function AutoSlide(
+  {
+    productList,
+    name,
+  },
+) {
   const Wrapper = styled.div({
     display: 'flex',
     width: '100%',
@@ -11,7 +16,10 @@ export default function AutoSlide({ productList }) {
 
   return (
     <Wrapper>
-      <MarqueeWrapper productList={productList} />
+      <MarqueeWrapper
+        name={name}
+        productList={productList}
+      />
     </Wrapper>
   );
 }

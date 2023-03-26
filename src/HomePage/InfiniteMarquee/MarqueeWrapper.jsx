@@ -6,13 +6,18 @@ import PALETTE from '../../styles/palette';
 
 const { dark, basicWhite } = PALETTE;
 
-export default function MarqueeWrapper({ productList }) {
+export default function MarqueeWrapper(
+  {
+    name,
+    productList,
+  },
+) {
   const cloneProductList = [...productList];
 
   const Wrapper = styled.div({
     display: 'flex',
     width: '100%',
-    backgroundColor: dark,
+    backgroundColor: name === 'main' ? dark : basicWhite,
   });
 
   const rollingLeft1 = keyframes`
@@ -42,13 +47,13 @@ export default function MarqueeWrapper({ productList }) {
   const StyledOriginWrapper = styled.div({
     display: 'flex',
     minWidth: '100%',
-    animation: `${rollingLeft1} 20s linear 0s infinite normal none running`,
+    animation: `${rollingLeft1} 65s linear 0s infinite normal none running`,
   });
 
   const StyledCloneWrapper = styled.div({
     display: 'flex',
     minWidth: '100%',
-    animation: `${rollingLeft2} 20s linear 0s infinite normal none running`,
+    animation: `${rollingLeft2} 65s linear 0s infinite normal none running`,
   });
 
   const StyledProductLayout = styled.a({
@@ -57,12 +62,12 @@ export default function MarqueeWrapper({ productList }) {
     justifyContent: 'center',
     width: '100%',
     padding: 'auto',
-    backgroundColor: dark,
+    backgroundColor: name === 'main' ? dark : basicWhite,
     '& img': {
       display: 'block',
       width: '320px',
       height: '320px',
-      backgroundColor: dark,
+      backgroundColor: name === 'main' ? dark : basicWhite,
     },
   });
 
@@ -80,8 +85,8 @@ export default function MarqueeWrapper({ productList }) {
       fontSize: '1.25rem',
       lineHeight: '1.75rem',
       fontWeight: '700',
-      backgroundColor: basicWhite,
-      color: dark,
+      color: name === 'main' ? dark : basicWhite,
+      backgroundColor: name === 'main' ? basicWhite : dark,
     },
   });
 

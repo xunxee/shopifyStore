@@ -10,6 +10,7 @@ describe('AutoSlide', () => {
   function renderAutoSlide() {
     return render(
       <AutoSlide
+        name="main"
         productList={topProductList}
       />,
     );

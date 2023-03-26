@@ -19,7 +19,10 @@ export default function HomePageContainer() {
     },
   ));
 
-  const { topProductList } = homePageProductList;
+  const {
+    topProductList,
+    recommendedProductList,
+  } = homePageProductList;
 
   useEffect(() => {
     dispatch(loadHomePageProductList());
@@ -33,10 +36,17 @@ export default function HomePageContainer() {
         name="main"
         productList={topProductList}
       />
-      <AutoSlide productList={topProductList} />
+      <AutoSlide
+        name="main"
+        productList={topProductList}
+      />
       <RepresentativeProductList
         name="secondary"
         productList={topProductList}
+      />
+      <AutoSlide
+        name="secondary"
+        productList={recommendedProductList}
       />
     </>
   );
