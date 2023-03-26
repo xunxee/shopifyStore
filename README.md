@@ -29,9 +29,9 @@
 
 ## 📌 구현 사항
 
-### 📍 181개의 test와 46개의 test suites를 작성하고 coverage 100% 달성
+### 📍 181개의 test와 46개의 test suites를 작성하고 coverage 100% 구현
 
-<img src="https://user-images.githubusercontent.com/87808288/227770172-ecd68347-62bd-4e6e-a483-39c4464f2b4a.png" width="60%">
+<img src="https://user-images.githubusercontent.com/87808288/227770172-ecd68347-62bd-4e6e-a483-39c4464f2b4a.png" width="65%">
 
 ### 📍 TDD 방식으로 테스트 작성
 
@@ -132,6 +132,8 @@ expect.rejects.toThrowError() matcher를 사용하여, 비동기 함수에서 �
 
 <img src="https://user-images.githubusercontent.com/87808288/220567543-259cb9d8-054a-44fb-b17d-25b7da28aae6.gif" width="50%">
 
+- 회원가입 시 14개의 조건문과 정규 표현식을 적용하여 4개의 input창을 관리하도록 구현
+
 🔗 **onblur와 onChange를 사용한 유효성 검사**
 
 ```jsx
@@ -169,7 +171,15 @@ export default function MembershipContainer() {
 - handleChange() 함수에서는 회원가입 시, 4가지 항목(성, 이름, Email, Password)의 value를 확인하여 모두 유효성을 통과한다면 buttonActive의 값은 true로 변경하여 ‘Sign Up’ 버튼을 활성화합니다.
 - handleBlur() 함수에서는 blur 이벤트가 발생 시, focus가 잡혀있던 input의 value를 확인하여 유효성이 맞지 않다면 그에 맞는 validation message를 생성합니다.
 
-💡 *gunhee’s Notion: [Login 유효성 검사 함수 리팩터링](https://www.notion.so/5e4b4181d28c46a79d140cb7d1f0ef30)*
+💡 *gunhee’s coding blog: [Login 유효성 검사 함수 리팩터링](https://www.gunhee.co.kr/191c760d-45f0-48bb-bfa1-bbba829801f3)*
+
+### 📍 더 나은 사용자 경험을 위해 라이브러리 사용하지 않고, 무한 슬라이드 만들기
+
+<img src="https://user-images.githubusercontent.com/87808288/223116159-88957241-7ad6-4b41-b8ae-0eb7353783af.gif" width="70%">
+
+- 사용자가 선택한 슬라이드의 data를 state로 관리하여 앨범이 자동으로 함께 움직이도록 구현
+
+💡 *gunhee’s coding blog: [라이브러리 없이, 무한 슬라이드 구현하기](https://www.gunhee.co.kr/8d1510e2-6fda-4a59-9d4b-7881fb8c96d8)*
 
 ### 📍 제품 리스트 페이지
 
@@ -215,12 +225,6 @@ export default function ItemCard({
 
 <img src="https://user-images.githubusercontent.com/87808288/220570311-98c1576e-e274-4fd2-b244-f2e387cfb324.png" width="60%">
 
-### 📍 라이브러리 사용하지 않고, 무한 슬라이드 만들기
-
-<img src="https://user-images.githubusercontent.com/87808288/223116159-88957241-7ad6-4b41-b8ae-0eb7353783af.gif" width="70%">
-
-💡 *gunhee’s coding blog: [라이브러리 없이, 무한 슬라이드 구현하기](https://www.gunhee.co.kr/8d1510e2-6fda-4a59-9d4b-7881fb8c96d8)*
-
 ### 📍 옵션 버튼을 하나의 공용 컴포넌트로 제작
 
 <img src="https://user-images.githubusercontent.com/87808288/222161955-fca37138-2114-4a82-93e4-35f9923aff71.gif" width="40%">
@@ -230,11 +234,19 @@ export default function ItemCard({
 
 💡 *GitHub 코드 바로가기: [DetailOptionButton.jsx](https://github.com/xunxee/shopifyStore/blob/main/src/ProductDetail/ProductWrapper/Component/DetailOptionButton.jsx)*
 
+### 📍 드롭다운 버튼
+
+<img src="https://user-images.githubusercontent.com/87808288/227776085-2affb579-53ef-4700-9a18-7e90df318ba0.gif" width="50%">
+
+### 📍 무한 Marquee 만들기
+
+<img src="https://user-images.githubusercontent.com/87808288/227780538-a1d0d58b-909d-4d71-9295-5cb326226ca2.gif" width="60%">
+
 ### 📍 동적 쿼리 스트링 만들기
 
 <img src="https://user-images.githubusercontent.com/87808288/220570955-72ae2cb4-3f4a-45bd-a373-49237ab3ad7e.gif" width="60%">
 
-- 반복문을 사용하여 중복되는 코드를 제거하기 위해 노력했습니다.
+- 함수 로직 추가 시에도 코드의 유지 보수성을 위해, 쿼리 스트링을 반복문으로 구현
     
     ```jsx
     // urlStates의 예시
