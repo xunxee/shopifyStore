@@ -3,7 +3,6 @@
 
 ## 📌 소개
 
-- Next에서 제공하는 [커머스 데모](https://github.com/vercel/commerce)를 모티브로 한 프로젝트
 - webpack과 babel을 활용한 기본적인 프론트엔드 개발 환경 구축
 - Redux를 사용한 상태 관리
 - Jest, React-Testing-Library를 사용한 TDD 방식으로 개발 진행 중
@@ -26,9 +25,13 @@
 
 - test coverage가 100%에 도달할 때만 commit을 하는 방식으로 프로젝트를 진행 중입니다.
 
-<img src="https://user-images.githubusercontent.com/87808288/220566153-e602f635-b032-4cf6-bff8-d6c42e204d4e.gif" width="60%" style='margin:auto; display: block;'>
+<img src="https://user-images.githubusercontent.com/87808288/227771431-281c49a1-9821-4fb4-b9c5-ba33727c52b8.gif" width="60%">
 
 ## 📌 구현 사항
+
+### 📍 181개의 test와 46개의 test suites를 작성하고 coverage 100% 달성
+
+<img src="https://user-images.githubusercontent.com/87808288/227770172-ecd68347-62bd-4e6e-a483-39c4464f2b4a.png" width="60%">
 
 ### 📍 TDD 방식으로 테스트 작성
 
