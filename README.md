@@ -23,7 +23,7 @@
 
 ### 📍 커밋 규칙
 
-- test coverage가 100%에 도달할 때만 commit을 하는 방식으로 프로젝트를 진행 중입니다.
+- test coverage가 100%에 도달할 때만 commit을 하는 방식으로 프로젝트를 진행 중
 
 <img src="https://user-images.githubusercontent.com/87808288/227771431-281c49a1-9821-4fb4-b9c5-ba33727c52b8.gif" width="60%">
 
