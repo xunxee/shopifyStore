@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useCallback } from 'react';
+
 import { setColorById } from '../../utils';
 
 import PRODUCT_TAG from '../../styles/productTag';
@@ -57,10 +59,18 @@ export default function MainProduct(
     productList: {
       id, title, price, mainImage,
     },
+    onClick,
   },
 ) {
+  const handleClick = useCallback(() => {
+    onClick(`product/${id}`);
+  }, [onClick]);
+
   return (
-    <Wrapper backgroundColor={setColorById(id)}>
+    <Wrapper
+      onClick={handleClick}
+      backgroundColor={setColorById(id)}
+    >
       <StyledProductTag title={title}>
         <h3>{title}</h3>
         <span>{price}</span>

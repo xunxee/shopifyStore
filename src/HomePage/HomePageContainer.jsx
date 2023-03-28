@@ -9,7 +9,7 @@ import { get } from '../utils';
 import RepresentativeProductList from './RepresentativeProductList';
 import AutoSlide from './InfiniteMarquee/AutoSlide';
 
-export default function HomePageContainer() {
+export default function HomePageContainer({ handleClick }) {
   const dispatch = useDispatch();
 
   const homePageProductList = useSelector(get(
@@ -35,6 +35,7 @@ export default function HomePageContainer() {
       <RepresentativeProductList
         name="main"
         productList={topProductList}
+        onClick={handleClick}
       />
       <AutoSlide
         name="main"

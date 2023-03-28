@@ -9,7 +9,7 @@ const Wrapper = styled.div({
 });
 
 export default function RepresentativeProductList(
-  { name, productList },
+  { name, productList, onClick },
 ) {
   const [main, ...secondary] = productList;
 
@@ -17,7 +17,10 @@ export default function RepresentativeProductList(
     name === 'main'
       ? (
         <Wrapper>
-          <MainProduct productList={main} />
+          <MainProduct
+            productList={main}
+            onClick={onClick}
+          />
           <SecondaryProduct productList={secondary} />
         </Wrapper>
       )
