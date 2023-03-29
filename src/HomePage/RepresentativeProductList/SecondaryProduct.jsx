@@ -1,5 +1,7 @@
 import styled from '@emotion/styled';
 
+import { useCallback } from 'react';
+
 import { setColorById } from '../../utils';
 
 import PRODUCT_TAG from '../../styles/productTag';
@@ -64,8 +66,15 @@ const StyledImgBox = styled.div({
 });
 
 export default function SecondaryProduct(
-  { productList },
+  {
+    productList,
+    onClick,
+  },
 ) {
+  const handleClick = useCallback((id) => {
+    onClick(`product/${id}`);
+  }, [onClick]);
+
   return (
     <Wrapper>
       {productList.map(({
@@ -74,6 +83,7 @@ export default function SecondaryProduct(
         <StyledProductItem
           key={id}
           backgroundColor={setColorById(id)}
+          onClick={() => handleClick(id)}
         >
           <StyledProductTag>
             <StyledProductTitle>

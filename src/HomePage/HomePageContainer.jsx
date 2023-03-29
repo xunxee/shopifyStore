@@ -44,6 +44,7 @@ export default function HomePageContainer({ handleClick }) {
       <RepresentativeProductList
         name="secondary"
         productList={topProductList}
+        onClick={handleClick}
       />
       <AutoSlide
         name="secondary"

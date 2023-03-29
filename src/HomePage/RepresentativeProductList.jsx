@@ -21,13 +21,22 @@ export default function RepresentativeProductList(
             productList={main}
             onClick={onClick}
           />
-          <SecondaryProduct productList={secondary} />
+          <SecondaryProduct
+            productList={secondary}
+            onClick={onClick}
+          />
         </Wrapper>
       )
       : (
         <Wrapper>
-          <SecondaryProduct productList={secondary} />
-          <MainProduct productList={main} />
+          <SecondaryProduct
+            productList={secondary}
+            onClick={onClick}
+          />
+          <MainProduct
+            productList={main}
+            onClick={onClick}
+          />
         </Wrapper>
       )
   );
