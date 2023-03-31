@@ -1,4 +1,7 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+
+import { MemoryRouter } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import HomePage from './HomePage';
@@ -14,9 +17,20 @@ jest.mock('react-redux');
 
 const dispatch = jest.fn();
 
+const mockUseNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate() {
+    return mockUseNavigate;
+  },
+}));
+
 describe('Homepage', () => {
   beforeEach(() => {
     dispatch.mockClear();
+
+    mockUseNavigate.mockClear();
 
     useDispatch.mockImplementation(() => dispatch);
 
@@ -32,11 +46,27 @@ describe('Homepage', () => {
     ));
   });
 
-  it('renders the home page', () => {
-    const { container } = render(
-      <HomePage />,
+  function renderHomePage() {
+    return render(
+      <MemoryRouter>
+        <HomePage />
+      </MemoryRouter>,
     );
+  }
+
+  it('renders the home page', () => {
+    const { container } = renderHomePage();
 
     expect(container).toHaveTextContent('ACME Cup');
+  });
+
+  context('when MainProduct is clicked', () => {
+    it('goes to MainProduct detail page', () => {
+      const { getAllByText } = renderHomePage();
+
+      fireEvent.click(getAllByText('ACME Cup')[0]);
+
+      expect(mockUseNavigate).toBeCalledWith('product/1');
+    });
   });
 });
